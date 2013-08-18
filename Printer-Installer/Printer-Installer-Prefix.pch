@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Printer-Installer' target in the 'Printer-Installer' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

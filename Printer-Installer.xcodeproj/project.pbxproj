@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
+		BE93C98F17BEC88400625DE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE93C98D17BEC88400625DE2 /* InfoPlist.strings */; };
+		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
+		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
+		BE93C99817BEC88400625DE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99717BEC88400625DE2 /* AppDelegate.m */; };
+		BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99917BEC88400625DE2 /* MainMenu.xib */; };
+		BE93C9A717BEC8CB00625DE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C9A617BEC8CB00625DE2 /* Foundation.framework */; };
+		BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C9A917BEC8CB00625DE2 /* main.m */; };
+		BE93C9B717BEC96900625DE2 /* helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C9B617BEC96900625DE2 /* helper.m */; };
+		BEAA87F417BECCB000D2BCAE /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
+		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
+		BEAA87F817BECCCF00D2BCAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F717BECCCF00D2BCAE /* Security.framework */; };
+		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
+		BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
+		BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
+		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE93C9B917BECBB300625DE2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				BEAA87F417BECCB000D2BCAE /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BE93C98817BEC88400625DE2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BE93C98917BEC88400625DE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Printer-Installer-Info.plist"; sourceTree = "<group>"; };
+		BE93C98E17BEC88400625DE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE93C99017BEC88400625DE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Printer-Installer-Prefix.pch"; sourceTree = "<group>"; };
+		BE93C99417BEC88400625DE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		BE93C99617BEC88400625DE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BE93C99717BEC88400625DE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE93C99A17BEC88400625DE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "edu.loyno.smc.Printer-Installer.helper"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE93C9A617BEC8CB00625DE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE93C9A917BEC8CB00625DE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE93C9AC17BEC8CB00625DE2 /* printer-installer-helper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "printer-installer-helper-Prefix.pch"; sourceTree = "<group>"; };
+		BE93C9B217BEC8EA00625DE2 /* helper-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "helper-Info.plist"; sourceTree = "<group>"; };
+		BE93C9B317BEC8EA00625DE2 /* helper-Launchd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "helper-Launchd.plist"; sourceTree = "<group>"; };
+		BE93C9B417BEC90300625DE2 /* Interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Interfaces.h; path = "Printer-Installer/Interfaces.h"; sourceTree = "<group>"; };
+		BE93C9B517BEC96900625DE2 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
+		BE93C9B617BEC96900625DE2 /* helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helper.m; sourceTree = "<group>"; };
+		BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		BEAA87F717BECCCF00D2BCAE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
+		BEBFB8DF17BFFFD50023B26C /* Printer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Printer.h; path = "Printer-Installer/Printer.h"; sourceTree = "<group>"; };
+		BEBFB8E017BFFFD50023B26C /* Printer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Printer.m; path = "Printer-Installer/Printer.m"; sourceTree = "<group>"; };
+		BEBFB8E417C027D40023B26C /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		BEBFB8E517C027D40023B26C /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE93C97E17BEC88400625DE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
+				BEAA87F817BECCCF00D2BCAE /* Security.framework in Frameworks */,
+				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
+				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE93C9A217BEC8CB00625DE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE93C9A717BEC8CB00625DE2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE93C97817BEC88400625DE2 = {
+			isa = PBXGroup;
+			children = (
+				BEBFB8E317C001F80023B26C /* Common */,
+				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
+				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
+				BE93C98317BEC88400625DE2 /* Frameworks */,
+				BE93C98217BEC88400625DE2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE93C98217BEC88400625DE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C98117BEC88400625DE2 /* Printer-Installer.app */,
+				BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE93C98317BEC88400625DE2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
+				BEAA87F717BECCCF00D2BCAE /* Security.framework */,
+				BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */,
+				BE93C98417BEC88400625DE2 /* Cocoa.framework */,
+				BE93C9A617BEC8CB00625DE2 /* Foundation.framework */,
+				BE93C98617BEC88400625DE2 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE93C98617BEC88400625DE2 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C98717BEC88400625DE2 /* AppKit.framework */,
+				BE93C98817BEC88400625DE2 /* CoreData.framework */,
+				BE93C98917BEC88400625DE2 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
+			isa = PBXGroup;
+			children = (
+				BEBFB8E417C027D40023B26C /* Server.h */,
+				BEBFB8E517C027D40023B26C /* Server.m */,
+				BE93C99617BEC88400625DE2 /* AppDelegate.h */,
+				BE93C99717BEC88400625DE2 /* AppDelegate.m */,
+				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
+				BE93C98B17BEC88400625DE2 /* Supporting Files */,
+			);
+			path = "Printer-Installer";
+			sourceTree = "<group>";
+		};
+		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
+				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
+				BE93C99017BEC88400625DE2 /* main.m */,
+				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
+				BE93C99317BEC88400625DE2 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C9B517BEC96900625DE2 /* helper.h */,
+				BE93C9B617BEC96900625DE2 /* helper.m */,
+				BE93C9B817BEC99200625DE2 /* Supporting Files */,
+			);
+			path = "printer-installer-helper";
+			sourceTree = "<group>";
+		};
+		BE93C9B817BEC99200625DE2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C9B217BEC8EA00625DE2 /* helper-Info.plist */,
+				BE93C9B317BEC8EA00625DE2 /* helper-Launchd.plist */,
+				BE93C9AC17BEC8CB00625DE2 /* printer-installer-helper-Prefix.pch */,
+				BE93C9A917BEC8CB00625DE2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEBFB8E317C001F80023B26C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BEBFB8DF17BFFFD50023B26C /* Printer.h */,
+				BEBFB8E017BFFFD50023B26C /* Printer.m */,
+				BE93C9B417BEC90300625DE2 /* Interfaces.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE93C98017BEC88400625DE2 /* Printer-Installer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE93C99E17BEC88400625DE2 /* Build configuration list for PBXNativeTarget "Printer-Installer" */;
+			buildPhases = (
+				BE93C97D17BEC88400625DE2 /* Sources */,
+				BE93C97E17BEC88400625DE2 /* Frameworks */,
+				BE93C97F17BEC88400625DE2 /* Resources */,
+				BE93C9B917BECBB300625DE2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Printer-Installer";
+			productName = "Printer-Installer";
+			productReference = BE93C98117BEC88400625DE2 /* Printer-Installer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BE93C9A417BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE93C9AF17BEC8CB00625DE2 /* Build configuration list for PBXNativeTarget "edu.loyno.smc.Printer-Installer.helper" */;
+			buildPhases = (
+				BE93C9A117BEC8CB00625DE2 /* Sources */,
+				BE93C9A217BEC8CB00625DE2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "edu.loyno.smc.Printer-Installer.helper";
+			productName = "printer-installer-helper";
+			productReference = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE93C97917BEC88400625DE2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Eldon Ahrold";
+			};
+			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE93C97817BEC88400625DE2;
+			productRefGroup = BE93C98217BEC88400625DE2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE93C98017BEC88400625DE2 /* Printer-Installer */,
+				BE93C9A417BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE93C97F17BEC88400625DE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE93C98F17BEC88400625DE2 /* InfoPlist.strings in Resources */,
+				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
+				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE93C97D17BEC88400625DE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE93C99117BEC88400625DE2 /* main.m in Sources */,
+				BE93C99817BEC88400625DE2 /* AppDelegate.m in Sources */,
+				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
+				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE93C9A117BEC8CB00625DE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */,
+				BE93C9B717BEC96900625DE2 /* helper.m in Sources */,
+				BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE93C98D17BEC88400625DE2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE93C98E17BEC88400625DE2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BE93C99317BEC88400625DE2 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE93C99417BEC88400625DE2 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		BE93C99917BEC88400625DE2 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE93C99A17BEC88400625DE2 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE93C99C17BEC88400625DE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BE93C99D17BEC88400625DE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BE93C99F17BEC88400625DE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
+				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BE93C9A017BEC88400625DE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
+				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BE93C9B017BEC8CB00625DE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
+				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"printer-installer-helper/helper-Info.plist",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"printer-installer-helper/helper-Launchd.plist",
+				);
+				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		BE93C9B117BEC8CB00625DE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
+				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"printer-installer-helper/helper-Info.plist",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"printer-installer-helper/helper-Launchd.plist",
+				);
+				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE93C99C17BEC88400625DE2 /* Debug */,
+				BE93C99D17BEC88400625DE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE93C99E17BEC88400625DE2 /* Build configuration list for PBXNativeTarget "Printer-Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE93C99F17BEC88400625DE2 /* Debug */,
+				BE93C9A017BEC88400625DE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE93C9AF17BEC8CB00625DE2 /* Build configuration list for PBXNativeTarget "edu.loyno.smc.Printer-Installer.helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE93C9B017BEC8CB00625DE2 /* Debug */,
+				BE93C9B117BEC8CB00625DE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE93C97917BEC88400625DE2 /* Project object */;
+}
