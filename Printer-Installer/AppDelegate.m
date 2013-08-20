@@ -20,6 +20,7 @@ NSError* initError;
         name = [NSMutableArray new];
         state = [NSMutableArray new];
         location = [NSMutableArray new];
+        model = [NSMutableArray new];
         
         [self setPrinterList];
     }
@@ -37,6 +38,10 @@ NSError* initError;
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     if ([[tableColumn identifier] isEqualTo:@"name"]) {
         return [name objectAtIndex:row];
+    }
+    
+    if ([[tableColumn identifier] isEqualTo:@"model"]) {
+        return [model objectAtIndex:row];
     }
     
     else if ([[tableColumn identifier] isEqualTo:@"check"]) {
@@ -183,6 +188,14 @@ NSError* initError;
         }else{
             [location addObject:@""];
         }
+        
+        NSString* mdl = [i objectForKey:@"model"];
+        if(mdl){
+            [model addObject:mdl];
+        }else{
+            [model addObject:@""];
+        }
+        
         
         if([set containsObject:[i objectForKey:@"printer"]]){
             [state addObject:@"1"];

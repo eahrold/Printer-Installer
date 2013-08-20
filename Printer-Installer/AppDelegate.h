@@ -20,6 +20,8 @@
     NSMutableArray *name;
     NSMutableArray *location;
     NSMutableArray *state;
+    NSMutableArray *model;
+
     
     NSArray* printerList;
 
