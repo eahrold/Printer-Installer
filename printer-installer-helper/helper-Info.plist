@@ -9,7 +9,7 @@
 	<key>CFBundleName</key>
 	<string>edu.loyno.smc.Printer-Installer.helper</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.4</string>
 	<key>SMAuthorizedClients</key>
 	<array>
 		<string>identifier &quot;edu.loyno.smc.Printer-Installer&quot; and certificate leaf = H&quot;f30730e7f976c288e6972913cae6e438e6df6ec3&quot;</string>

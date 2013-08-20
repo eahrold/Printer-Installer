@@ -26,7 +26,9 @@ NSError* initError;
     return self;
 }
 
-
+//-------------------------------------------
+//  Table Delegate
+//-------------------------------------------
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {    
     return [name count];
@@ -67,6 +69,10 @@ NSError* initError;
     [tableView reloadData];
 }
 
+//-------------------------------------------
+//  NSXPC Methods
+//-------------------------------------------
+
 -(void)addPrinter:(Printer*)printer{
     NSLog(@"Adding printer: %@",printer.name);
     
@@ -103,7 +109,16 @@ NSError* initError;
          }];
          [helperXPCConnection invalidate];
      }];
+}
 
+-(void)tellHelperToQuit{
+    // Send a message to the helper tool telling it to call it's quitHelper method.
+    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
+    
+    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
+    [helperXPCConnection resume];
+    
+    [[helperXPCConnection remoteObjectProxy] quitHelper];
 }
 
 //-------------------------------------------
@@ -223,107 +238,26 @@ NSError* initError;
     }
     
     // Insert code here to initialize your application
-    NSError *error = nil;
-    if ( [self helperNeedsInstalling] && ![self blessHelperWithLabel:kHelperName error:&error] ){
-        NSLog(@"Something went wrong!");
+    NSError  *error = nil;
+    NSString *prompt = @"In order to User the SMC Printers";
+    
+    if ([JobBlesser helperNeedsInstalling]){
+        BOOL rc = [JobBlesser blessHelperWithLabel:kHelperName andPrompt:prompt error:&error];
+        
+        if(rc){
+            NSLog(@"Helper Tool Installed");
+        }else{
+            NSLog(@"Somthing went wrong");
+        }
     }
-//    else{
-//        NSLog(@"Helper installed & available.");
-//    }
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification{
+    [self tellHelperToQuit];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return YES;
-}
-
-
--(void)applicationWillTerminate:(NSNotification *)notification{
-    //finalize things
-    //[self setDefaults];
-    [self tellHelperToQuit];
-}
-
-
-
-//----------------------------------------------
-//  SMJobBless
-//----------------------------------------------
-
-- (BOOL)blessHelperWithLabel:(NSString *)label
-                       error:(NSError **)error {
-    
-    OSStatus result;
-    
-	AuthorizationItem authItem		= { kSMRightBlessPrivilegedHelper, 0, NULL, 0 };
-	AuthorizationRights authRights	= { 1, &authItem };
-	AuthorizationFlags authFlags		=	kAuthorizationFlagDefaults				|
-    kAuthorizationFlagInteractionAllowed	|
-    kAuthorizationFlagPreAuthorize			|
-    kAuthorizationFlagExtendRights;
-    
-	AuthorizationRef authRef = NULL;
-	
-    result = AuthorizationCreate(&authRights, kAuthorizationEmptyEnvironment, authFlags, &authRef);
-	if (result != errAuthorizationSuccess) {
-        NSLog(@"Failed to create AuthorizationRef. Error code: %d", result);
-        
-	} else {
-		result = SMJobBless(kSMDomainSystemLaunchd, (CFStringRef)CFBridgingRetain(label), authRef, (CFErrorRef *)nil);
-	}
-    
-	AuthorizationFree (authRef, kAuthorizationFlagDefaults);
-	return result;
-}
-
-
--(BOOL)helperNeedsInstalling{
-    //This dose the job of checking wether the Helper App needs updateing,
-    //Much of this was taken from Eric Gorr's adaptation of SMJobBless http://ericgorr.net/cocoadev/SMJobBless.zip
-    OSStatus result = YES;
-    
-    
-
-    NSDictionary* installedHelperJobData = (NSDictionary*)CFBridgingRelease(SMJobCopyDictionary( kSMDomainSystemLaunchd, (CFStringRef)kHelperName ));
-    
-    if ( installedHelperJobData ){
-        NSString* installedPath = [[installedHelperJobData objectForKey:@"ProgramArguments"] objectAtIndex:0];
-        NSURL* installedPathURL = [NSURL fileURLWithPath:installedPath];
-        NSDictionary* installedInfoPlist = (NSDictionary*)CFBridgingRelease(CFBundleCopyInfoDictionaryForURL( (CFURLRef)CFBridgingRetain(installedPathURL) ));
-        NSString* installedBundleVersion = [installedInfoPlist objectForKey:@"CFBundleVersion"];
-        
-        //NSLog( @"Currently installed helper version: %@", installedBundleVersion );
-        
-        
-        // Now we'll get the version of the helper that is inside of the Main App's bundle
-        NSString * wrapperPath = [NSString stringWithFormat:@"Contents/Library/LaunchServices/%@",kHelperName];
-        
-        NSBundle* appBundle = [NSBundle mainBundle];
-        NSURL* appBundleURL	= [appBundle bundleURL];
-        NSURL* currentHelperToolURL	= [appBundleURL URLByAppendingPathComponent:wrapperPath];
-        NSDictionary* currentInfoPlist = (NSDictionary*)CFBridgingRelease(CFBundleCopyInfoDictionaryForURL( (CFURLRef)CFBridgingRetain(currentHelperToolURL) ));
-        NSString* currentBundleVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
-        
-        //NSLog( @"Avaliable helper version: %@", currentBundleVersion );
-        
-        
-        // Compare the Version numbers -- This could be done much better...
-        if ([installedBundleVersion compare:currentBundleVersion options:NSNumericSearch] == NSOrderedDescending
-            || [installedBundleVersion isEqualToString:currentBundleVersion]) {
-            //NSLog(@"Current version of Helper App installed");
-            result = NO;
-        }
-	}
-    return result;
-}
-
--(void)tellHelperToQuit{
-    // Send a message to the helper tool telling it to call it's quitHelper method.
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    [helperXPCConnection resume];
-    
-    [[helperXPCConnection remoteObjectProxy] quitHelper];
 }
 
 @end

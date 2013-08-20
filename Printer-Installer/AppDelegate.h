@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <cups/cups.h>
 #import <ServiceManagement/ServiceManagement.h>
+#import <cups/cups.h>
+
 #import "Interfaces.h"
 #import "Server.h"
+#import "Helper-SMJobBless.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
     IBOutlet NSArrayController *arrayController;

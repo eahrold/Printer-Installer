@@ -24,6 +24,7 @@
 		BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
 		BEC471C917C2920000481F8E /* Printer-Installer-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */; };
+		BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +72,8 @@
 		BEBFB8E517C027D40023B26C /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Printer-Installer-Info-Release.plist"; sourceTree = "<group>"; };
 		BEC471CA17C2933200481F8E /* helper-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "helper-Info-Release.plist"; sourceTree = "<group>"; };
+		BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Helper-SMJobBless.h"; sourceTree = "<group>"; };
+		BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Helper-SMJobBless.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				BEBFB8E517C027D40023B26C /* Server.m */,
 				BE93C99617BEC88400625DE2 /* AppDelegate.h */,
 				BE93C99717BEC88400625DE2 /* AppDelegate.m */,
+				BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */,
+				BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
@@ -284,6 +289,7 @@
 				BE93C99817BEC88400625DE2 /* AppDelegate.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
+				BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
