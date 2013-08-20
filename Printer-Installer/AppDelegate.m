@@ -10,6 +10,7 @@
 
 
 @implementation AppDelegate
+NSError* initError;
 
 @synthesize window;
 
@@ -78,6 +79,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
+                 [self showErrorAlert:error];
              }
          }];
          [helperXPCConnection invalidate];
@@ -95,6 +97,8 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
+                 [self showErrorAlert:error];
+
              }
          }];
          [helperXPCConnection invalidate];
@@ -146,6 +150,12 @@
     [server setGetListPath];
     
     printerList = [[server getRequest] objectForKey:@"printerList"];
+
+    if(server.error){
+        initError = server.error;
+        return;
+    }
+    
     
     NSSet* set = [self getAddedPrinters];
     
@@ -176,14 +186,42 @@
 }
 
 
+//-------------------------------------------
+//  Progress Panel and Alert
+//-------------------------------------------
+
+- (void)showErrorAlert:(NSError *)error {
+    [[NSAlert alertWithError:error] beginSheetModalForWindow:[[NSApplication sharedApplication] mainWindow]
+                                               modalDelegate:self
+                                              didEndSelector:nil
+                                                 contextInfo:nil];
+}
 
 
+- (void)showErrorAlert:(NSError *)error withSelector:(SEL)selector{
+    [[NSAlert alertWithError:error] beginSheetModalForWindow:self.window
+                                               modalDelegate:self
+                                              didEndSelector:selector
+                                                 contextInfo:nil];
+}
+
+
+- (void)setupDidEndWithTerminalError:(NSAlert *)alert
+{
+    NSLog(@"Setup encountered an error.");
+    [NSApp terminate:self];
+}
 
 //-------------------------------------------
 //  Delegate Methods
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    
+    if(initError){
+        [self showErrorAlert:initError withSelector:@selector(setupDidEndWithTerminalError:)];
+    }
+    
     // Insert code here to initialize your application
     NSError *error = nil;
     if ( [self helperNeedsInstalling] && ![self blessHelperWithLabel:kHelperName error:&error] ){
@@ -201,7 +239,7 @@
 
 -(void)applicationWillTerminate:(NSNotification *)notification{
     //finalize things
-    [self setDefaults];
+    //[self setDefaults];
     [self tellHelperToQuit];
 }
 

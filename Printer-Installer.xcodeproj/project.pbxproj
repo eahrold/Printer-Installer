@@ -23,6 +23,7 @@
 		BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
+		BEC471C917C2920000481F8E /* Printer-Installer-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +69,8 @@
 		BEBFB8E017BFFFD50023B26C /* Printer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Printer.m; path = "Printer-Installer/Printer.m"; sourceTree = "<group>"; };
 		BEBFB8E417C027D40023B26C /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		BEBFB8E517C027D40023B26C /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Printer-Installer-Info-Release.plist"; sourceTree = "<group>"; };
+		BEC471CA17C2933200481F8E /* helper-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "helper-Info-Release.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,7 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
 				BE93C99017BEC88400625DE2 /* main.m */,
@@ -174,6 +178,7 @@
 		BE93C9B817BEC99200625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEC471CA17C2933200481F8E /* helper-Info-Release.plist */,
 				BE93C9B217BEC8EA00625DE2 /* helper-Info.plist */,
 				BE93C9B317BEC8EA00625DE2 /* helper-Launchd.plist */,
 				BE93C9AC17BEC8CB00625DE2 /* printer-installer-helper-Prefix.pch */,
@@ -264,6 +269,7 @@
 				BE93C98F17BEC88400625DE2 /* InfoPlist.strings in Resources */,
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
+				BEC471C917C2920000481F8E /* Printer-Installer-Info-Release.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,11 +403,11 @@
 		BE93C9A017BEC88400625DE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
-				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
+				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info-Release.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -433,15 +439,15 @@
 		BE93C9B117BEC8CB00625DE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
-				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
+				INFOPLIST_FILE = "printer-installer-helper/helper-Info-Release.plist";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
 					__info_plist,
-					"printer-installer-helper/helper-Info.plist",
+					"printer-installer-helper/helper-Info-Release.plist",
 					"-sectcreate",
 					__TEXT,
 					__launchd_plist,

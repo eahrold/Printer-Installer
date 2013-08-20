@@ -17,6 +17,8 @@
 // ipp http https lpd socket
 @property (copy) NSString *protocol;
 @property (copy) NSString *ppd;
+@property (copy) NSString *model;
+
 @property (copy) NSString *host;
 
 @property (copy) NSString *url;

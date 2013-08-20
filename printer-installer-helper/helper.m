@@ -32,11 +32,19 @@
     [args addObject:printer.url];
     [args addObject:@"-P"];
     [args addObject:printer.ppd];
+    //[args addObject:@"-m"];
+    //[args addObject:printer.model];
     
     [task setArguments:args];
     
     [task launch];
     [task waitUntilExit];
+    int rc = [task terminationStatus];
+    
+    if(rc != 0){
+        error = [self taksError:@"There was a problem adding the printer"
+                 withReturnCode:rc];
+    }
 
     reply(error);
 }
@@ -51,6 +59,12 @@
     
     [task launch];
     [task waitUntilExit];
+
+    int rc = [task terminationStatus];
+    if(rc != 0){
+        error = [self taksError:@"There was a problem adding the printer"
+                 withReturnCode:rc];
+    }
     
     reply(error);
 }
@@ -87,5 +101,17 @@
     [newConnection resume];
     return YES;
 }
+
+-(NSError*)taksError:(NSString*)msg withReturnCode:(int)rc{
+    NSString* m = [NSString stringWithFormat:@"%@.  Error Code: %d",msg,rc];
+    NSError* error =[NSError errorWithDomain:NSPOSIXErrorDomain
+                           code:rc
+                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                 m,
+                                 NSLocalizedDescriptionKey,
+                                 nil]];
+    return error;
+}
+
 
 @end

@@ -45,14 +45,15 @@
     self.description = [dict objectForKey:@"description"];
     self.host = [dict objectForKey:@"host"];
     self.protocol = [dict objectForKey:@"protocol"];
+    self.model = [dict objectForKey:@"model"];
     
     /*use some private methods to do some conditional formatting*/
-    self.ppd = [self setPPDPath:[dict objectForKey:@"ppd"]];
+    self.ppd = [self setPPDPath:self.model];
     self.url = [ self getFullURL:self];
 }
 
--(NSString*)setPPDPath:(NSString*)ppd{
-    NSString* path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",ppd];
+-(NSString*)setPPDPath:(NSString*)model{
+    NSString* path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",model];
     return path;
 }
 
