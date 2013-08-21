@@ -79,7 +79,7 @@ NSError* initError;
 //-------------------------------------------
 
 -(void)addPrinter:(Printer*)printer{
-    NSLog(@"Adding printer: %@",printer.name);
+    NSLog(@"Adding printer: %@",printer.description);
     
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
@@ -98,7 +98,7 @@ NSError* initError;
 }
 
 -(void)removePrinter:(Printer*)printer{
-    NSLog(@"Removing printer: %@",printer.name);
+    NSLog(@"Removing printer: %@",printer.description);
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
@@ -130,29 +130,17 @@ NSError* initError;
 //  Cups  Stuff
 //-------------------------------------------
 
--(NSSet*)getAddedPrinters{
-   
-    NSTask* task = [NSTask new];
-    [task setLaunchPath:@"/usr/bin/lpstat"];
-    
-    NSArray* args = [[NSArray alloc]initWithObjects:@"-a", nil];
-    [task setArguments:args];
-        
-    NSPipe* outPipe = [NSPipe new];
-    [task setStandardOutput:outPipe];
-        
-    [task launch];
-    [task waitUntilExit];
-    
-    NSData *data = [[outPipe fileHandleForReading] readDataToEndOfFile];
-    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSArray *list = [str componentsSeparatedByString:@"\n"];
 
+-(NSSet*)getInstalledPrinters{
+    int i;
     NSMutableSet *set = [NSMutableSet new];
+
+    cups_dest_t *dests, *dest;
+    int num_dests = cupsGetDests(&dests);
     
-    for(NSString* i in list){
-        NSArray *p = [i componentsSeparatedByString:@" "];
-        [set addObject:[p objectAtIndex:0]];
+    for (i = num_dests, dest = dests; i > 0; i --, dest ++)
+    {
+        [set addObject:[NSString stringWithFormat:@"%s",dest->name]];
     }
     
     return set;
@@ -177,7 +165,7 @@ NSError* initError;
     }
     
     
-    NSSet* set = [self getAddedPrinters];
+    NSSet* set = [self getInstalledPrinters];
     
     for (NSDictionary* i in printerList){
         [name addObject:[i objectForKey:@"description"]];
@@ -245,7 +233,6 @@ NSError* initError;
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
     if(initError){
         [self showErrorAlert:initError withSelector:@selector(setupDidEndWithTerminalError:)];
     }
