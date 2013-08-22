@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE1FCEA917C46BFF00F3A3E6 /* PrintMe.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEA817C46BFF00F3A3E6 /* PrintMe.icns */; };
-		BE1FCEAB17C46C6700F3A3E6 /* PrintMe.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAA17C46C6700F3A3E6 /* PrintMe.icns */; };
+		BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAC17C54A0100F3A3E6 /* icon.icns */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C98F17BEC88400625DE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE93C98D17BEC88400625DE2 /* InfoPlist.strings */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
@@ -43,8 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BE1FCEA817C46BFF00F3A3E6 /* PrintMe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintMe.icns; sourceTree = "<group>"; };
-		BE1FCEAA17C46C6700F3A3E6 /* PrintMe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintMe.icns; sourceTree = "<group>"; };
+		BE1FCEAC17C54A0100F3A3E6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -106,7 +104,6 @@
 		BE93C97817BEC88400625DE2 = {
 			isa = PBXGroup;
 			children = (
-				BE1FCEAA17C46C6700F3A3E6 /* PrintMe.icns */,
 				BEBFB8E317C001F80023B26C /* Common */,
 				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
@@ -165,6 +162,7 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE1FCEAC17C54A0100F3A3E6 /* icon.icns */,
 				BEC471C817C2920000481F8E /* Printer-Installer-Info-Release.plist */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
@@ -178,7 +176,6 @@
 		BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */ = {
 			isa = PBXGroup;
 			children = (
-				BE1FCEA817C46BFF00F3A3E6 /* PrintMe.icns */,
 				BE93C9B517BEC96900625DE2 /* helper.h */,
 				BE93C9B617BEC96900625DE2 /* helper.m */,
 				BE93C9B817BEC99200625DE2 /* Supporting Files */,
@@ -281,8 +278,7 @@
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
 				BEC471C917C2920000481F8E /* Printer-Installer-Info-Release.plist in Resources */,
-				BE1FCEA917C46BFF00F3A3E6 /* PrintMe.icns in Resources */,
-				BE1FCEAB17C46C6700F3A3E6 /* PrintMe.icns in Resources */,
+				BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
