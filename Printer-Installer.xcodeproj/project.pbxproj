@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAC17C54A0100F3A3E6 /* icon.icns */; };
+		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C98F17BEC88400625DE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE93C98D17BEC88400625DE2 /* InfoPlist.strings */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
@@ -94,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */,
 				BE93C9A717BEC8CB00625DE2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

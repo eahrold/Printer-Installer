@@ -7,43 +7,63 @@
 //
 
 #import "helper.h"
+#include <cups/cups.h>
 
 @implementation helper
 
+/* cups types */
+ipp_t           *request;
+cups_option_t	*options;
+
+
 -(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
     NSError* error = nil;
-   
-    NSTask* task = [NSTask new];
-    [task setLaunchPath:@"/usr/sbin/lpadmin"];
     
-    NSMutableArray* args = [NSMutableArray new];
-    [args addObject:@"-p"];
-    [args addObject:printer.name];
-    [args addObject:@"-D"];
-    [args addObject:printer.description];
+    char        uri[HTTP_MAX_URI];
+    int         opt_count = 0;
     
-    if(printer.location){
-        [args addObject:@"-L"];
-        [args addObject:printer.location];
+    /* convert the printer obect items */
+    const char  *name = [printer.name UTF8String],
+                *ppd = [printer.ppd UTF8String],
+                *device_url = [printer.url UTF8String],
+                *location = [printer.location UTF8String],
+                *description = [printer.description UTF8String];
+
+    
+
+    request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
+
+    if(location){
+        opt_count = cupsAddOption("printer-location", location, opt_count, &options);
     }
     
-    [args addObject:@"-E"];
-    [args addObject:@"-v"];
-    [args addObject:printer.url];
-    [args addObject:@"-P"];
-    [args addObject:printer.ppd];
-    //[args addObject:@"-m"];
-    //[args addObject:printer.model];
+    if(description){
+        opt_count = cupsAddOption("printer-info", description, opt_count, &options);
+    }
     
-    [task setArguments:args];
+    opt_count = cupsAddOption("device-uri", device_url,
+                              opt_count, &options);
     
-    [task launch];
-    [task waitUntilExit];
-    int rc = [task terminationStatus];
+
+    httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
+                     "localhost", 0, "/printers/%s", name);
     
-    if(rc != 0){
-        error = [self taksError:@"There was a problem adding the printer"
-                 withReturnCode:rc];
+    ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                 "printer-uri", NULL, uri);
+    
+    cupsEncodeOptions2(request, opt_count, options, IPP_TAG_PRINTER);
+
+    ippAddInteger(request, IPP_TAG_PRINTER, IPP_TAG_ENUM, "printer-state",
+                  IPP_PRINTER_IDLE);
+    
+    ippAddBoolean(request, IPP_TAG_PRINTER, "printer-is-accepting-jobs", 1);
+    
+    ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppd));
+    
+    if (cupsLastError() > IPP_OK_CONFLICT)
+    {
+        error = [self cupsError:cupsLastErrorString()
+                 withReturnCode:1];
     }
 
     reply(error);
@@ -51,20 +71,28 @@
 
 -(void)removePrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
     NSError* error = nil;
-    NSLog(@"using helper to add printer");
     
-    NSTask* task = [NSTask new];
-    [task setLaunchPath:@"/usr/sbin/lpadmin"];
-    [task setArguments:[NSArray arrayWithObjects:@"-x",printer.name, nil]];
+    /* convert get these out of NSString */
+    const char  *name = [printer.name UTF8String];
+    char        uri[HTTP_MAX_URI];
     
-    [task launch];
-    [task waitUntilExit];
-
-    int rc = [task terminationStatus];
-    if(rc != 0){
-        error = [self taksError:@"There was a problem adding the printer"
-                 withReturnCode:rc];
+    request = ippNewRequest(CUPS_DELETE_PRINTER);
+    
+    httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
+                     "localhost", 0, "/printers/%s", name);
+    
+    ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                 "printer-uri", NULL, uri);
+    
+    ippDelete(cupsDoRequest(CUPS_HTTP_DEFAULT, request, "/admin/"));
+    
+    if (cupsLastError() > IPP_OK_CONFLICT)
+    {
+        error = [self cupsError:cupsLastErrorString()
+                 withReturnCode:1];
     }
+
+  
     
     reply(error);
 }
@@ -102,8 +130,8 @@
     return YES;
 }
 
--(NSError*)taksError:(NSString*)msg withReturnCode:(int)rc{
-    NSString* m = [NSString stringWithFormat:@"%@.  Error Code: %d",msg,rc];
+-(NSError*)cupsError:(const char*) msg withReturnCode:(int)rc{
+    NSString* m = [NSString stringWithFormat:@"%s.  Error Code: %d",msg,rc];
     NSError* error =[NSError errorWithDomain:NSPOSIXErrorDomain
                            code:rc
                        userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
