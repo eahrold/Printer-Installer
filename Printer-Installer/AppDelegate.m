@@ -247,7 +247,8 @@ NSError* initError;
         if(rc){
             NSLog(@"Helper Tool Installed");
         }else{
-            NSLog(@"Somthing went wrong");
+            NSLog(@"Somthing went wrong %d",rc);
+            // [self showErrorAlert:error withSelector:@selector(setupDidEndWithTerminalError:)];
         }
     }
 }

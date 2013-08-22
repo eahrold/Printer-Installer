@@ -49,6 +49,7 @@
         
 	} else {
 		result = SMJobBless(kSMDomainSystemLaunchd, (CFStringRef)CFBridgingRetain(helperID), authRef, (CFErrorRef *)nil);
+
 	}
     
 	AuthorizationFree (authRef, kAuthorizationFlagDefaults);
