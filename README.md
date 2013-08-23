@@ -1,7 +1,7 @@
 #Print-Installer
 Make it easy for your faculty to add and remove printer resources...  
 
-Just put the Printer-Installer.app into the Applicatons folder and write the preference file 
+Just put the Printer-Installer.app into the Applicatons folder and set the preference file 
 
 
 ###what you'll need  
@@ -30,8 +30,9 @@ here are the avaliable keys to use for the printers in the printerList array
 once you have create your printer.plist,  
 just drop it on your webserver where ever you like,  
 
-then do on the client  
+###you can set the client preference file either through a config profile, MCX, or a defaults write  
+it only takes on key, 'server'
 
  	$ defaults write /Library/Preferences/edu.loyno.smc.Printer-Installer server http://path.to.your.serve/pathto/printers 
 	
-_*  notice don't put the .plist at the end of "printers"_
+_*  notice don't put the .plist at the end of "printers" -- eventually I plan on writting a server side component and this will make for backwards compatibility _
