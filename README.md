@@ -31,7 +31,7 @@ once you have create your printer.plist,
 just drop it on your webserver where ever you like,  
 
 ###you can set the client preference file either through a config profile, MCX, or a defaults write  
-it only takes on key, 'server'
+it only takes one key, 'server'
 
  	$ defaults write /Library/Preferences/edu.loyno.smc.Printer-Installer server http://path.to.your.serve/pathto/printers 
 	
