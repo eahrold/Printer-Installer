@@ -10,7 +10,7 @@
 
 
 @implementation AppDelegate
-NSError* initError;
+NSError* _error;
 
 @synthesize window;
 
@@ -156,11 +156,12 @@ NSError* initError;
     Server* server = [Server new];
     server.URL = [getDefaults objectForKey:@"server"];
     [server setGetListPath];
+    [server setBasicHeaders:[getDefaults objectForKey:@"authHeader"]];
     
     printerList = [[server getRequest] objectForKey:@"printerList"];
 
     if(server.error){
-        initError = server.error;
+        _error = server.error;
         return;
     }
     
@@ -233,23 +234,18 @@ NSError* initError;
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    if(initError){
-        [self showErrorAlert:initError withSelector:@selector(setupDidEndWithTerminalError:)];
+    
+    if(_error){
+        [self showErrorAlert:_error withSelector:@selector(setupDidEndWithTerminalError:)];
     }
     
     // Insert code here to initialize your application
-    NSError  *error = nil;
     NSString *prompt = @"In order to User the SMC Printers";
+    NSError  *error = nil;
     
-    if ([JobBlesser helperNeedsInstalling]){
-        BOOL rc = [JobBlesser blessHelperWithLabel:kHelperName andPrompt:prompt error:&error];
-        
-        if(rc){
-            NSLog(@"Helper Tool Installed");
-        }else{
-            NSLog(@"Somthing went wrong %d",rc);
-            // [self showErrorAlert:error withSelector:@selector(setupDidEndWithTerminalError:)];
-        }
+    if(![JobBlesser blessHelperWithLabel:kHelperName andPrompt:prompt error:&error]){
+        NSLog(@"Somthing went wrong");
+        [self showErrorAlert:error withSelector:@selector(setupDidEndWithTerminalError:)];
     }
 }
 

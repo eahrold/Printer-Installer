@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>printerList</key>
+	<array>
+		<dict>
+			<key>description</key>
+			<string>Main Printer</string>
+			<key>host</key>
+			<string>your.printserver.com</string>
+			<key>location</key>
+			<string>First Floor</string>
+			<key>model</key>
+			<string>Brother DCP-8250DN CUPS</string>
+			<key>ppd</key>
+			<string>/Library/Printers/PPDs/Contents/Resources/Brother DCP-8250DN CUPS.gz</string>
+			<key>printer</key>
+			<string>main_printer</string>
+			<key>protocol</key>
+			<string>ipp</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>Another Printer</string>
+			<key>host</key>
+			<string>192.168.2.1</string>
+			<key>location</key>
+			<string>CMMN 332</string>
+			<key>model</key>
+			<string>HP LaserJet 4250</string>
+			<key>ppd</key>
+			<string>Library/Printers/PPDs/Contents/Resources/HP LaserJet 4250.gz</string>
+			<key>printer</key>
+			<string>comm_office</string>
+			<key>protocol</key>
+			<string>socket</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>Honcho's Printer</string>
+			<key>host</key>
+			<string>192.168.2.101</string>
+			<key>location</key>
+			<string>Bosses Office</string>
+			<key>model</key>
+			<string>HP LaserJet 4250</string>
+			<key>printer</key>
+			<string>boss_printer</string>
+			<key>protocol</key>
+			<string>lpd</string>
+		</dict>
+	</array>
+</dict>
+</plist>

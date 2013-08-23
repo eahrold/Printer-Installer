@@ -47,8 +47,13 @@
     self.protocol = [dict objectForKey:@"protocol"];
     self.model = [dict objectForKey:@"model"];
     
+    //self.ppd = [dict objectForKey:@"ppd"];
+    
     /*use some private methods to do some conditional formatting*/
-    self.ppd = [self setPPDPath:self.model];
+    if(!self.ppd){
+        self.ppd = [self setPPDPath:self.model];
+    }
+    
     self.url = [ self getFullURL:self];
 }
 

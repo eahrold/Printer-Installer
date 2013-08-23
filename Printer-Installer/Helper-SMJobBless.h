@@ -18,6 +18,4 @@
                   andPrompt:(NSString*)prompt
                       error:(NSError**)error;
 
-+(BOOL)helperNeedsInstalling;
-
 @end

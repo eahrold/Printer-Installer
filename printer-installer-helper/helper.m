@@ -132,7 +132,7 @@ cups_option_t	*options;
 
 -(NSError*)cupsError:(const char*) msg withReturnCode:(int)rc{
     NSString* m = [NSString stringWithFormat:@"%s.  Error Code: %d",msg,rc];
-    NSError* error =[NSError errorWithDomain:NSPOSIXErrorDomain
+    NSError* error =[NSError errorWithDomain:@"edu.loyno.smc.Printer-Installer"
                            code:rc
                        userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                  m,
