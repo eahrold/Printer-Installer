@@ -21,7 +21,7 @@
 	BOOL result = NO;
     NSError* error = nil;
     
-    if(![JobBlesser helperNeedsInstalling]){
+    if(![self helperNeedsInstalling]){
         return YES;
     }
 
@@ -70,20 +70,17 @@
 +(BOOL)helperNeedsInstalling{
     //This dose the job of checking wether the Helper App needs updateing,
     //Much of this was taken from Eric Gorr's adaptation of SMJobBless http://ericgorr.net/cocoadev/SMJobBless.zip
-    OSStatus result = YES;
+    OSStatus needsInstalled = YES;
+    NSDictionary* installedHelperJobData = nil;
     
-    
-    NSDictionary* installedHelperJobData = (NSDictionary*)CFBridgingRelease(SMJobCopyDictionary( kSMDomainSystemLaunchd, (CFStringRef)kHelperName ));
+    installedHelperJobData = (NSDictionary*)CFBridgingRelease(SMJobCopyDictionary( kSMDomainSystemLaunchd, (CFStringRef)kHelperName ));
     
     if ( installedHelperJobData ){
         NSString* installedPath = [[installedHelperJobData objectForKey:@"ProgramArguments"] objectAtIndex:0];
         NSURL* installedPathURL = [NSURL fileURLWithPath:installedPath];
         NSDictionary* installedInfoPlist = (NSDictionary*)CFBridgingRelease(CFBundleCopyInfoDictionaryForURL((__bridge CFURLRef)(installedPathURL)));
         
-        NSString* installedBundleVersion = [installedInfoPlist objectForKey:@"CFBundleVersion"];
-        
-        //NSLog( @"Currently installed helper version: %@", installedBundleVersion );
-        
+        NSString* installedVersion = [installedInfoPlist objectForKey:@"CFBundleVersion"];
         
         // get the version of the helper that is inside of the Main App's bundle
         NSString * wrapperPath = [NSString stringWithFormat:@"Contents/Library/LaunchServices/%@",kHelperName];
@@ -92,19 +89,46 @@
         NSURL* appBundleURL	= [appBundle bundleURL];
         NSURL* currentHelperToolURL	= [appBundleURL URLByAppendingPathComponent:wrapperPath];
         NSDictionary* currentInfoPlist = (NSDictionary*)CFBridgingRelease(CFBundleCopyInfoDictionaryForURL((__bridge CFURLRef)(currentHelperToolURL)));
-        NSString* currentBundleVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
+        NSString* avaliableVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
         
-        //NSLog( @"Avaliable helper version: %@", currentBundleVersion );
+
+        NSLog( @"Currently installed helper version: %@", installedVersion );
+        NSLog( @"Avaliable helper version: %@", avaliableVersion );
         
-        
-        // Compare the Version numbers -- This could be done much better...
-        if ([installedBundleVersion compare:currentBundleVersion options:NSNumericSearch] == NSOrderedDescending
-            || [installedBundleVersion isEqualToString:currentBundleVersion]) {
-            //NSLog(@"Current version of Helper App installed");
-            result = NO;
+        if(!installedVersion){
+            needsInstalled = YES;
+        }else{
+            if([self checkIfVersion:avaliableVersion isGreaterThan:installedVersion]){
+                needsInstalled = YES;
+            }else{
+                needsInstalled = NO;
+            }
         }
 	}
-    return result;
+    return needsInstalled;
+}
+
++(BOOL)checkIfVersion:(NSString*)avaliableVersion isGreaterThan:(NSString*)installedVersion{
+    NSMutableArray *aVer = [NSArray arrayWithArray:[installedVersion componentsSeparatedByString:@"."]];
+    NSMutableArray *iVer = [NSArray arrayWithArray:[avaliableVersion componentsSeparatedByString:@"."]];
+    
+    NSInteger max = 3;
+    
+    while(aVer.count < max){
+        [aVer addObject:@"0"];
+    }
+    
+    while(iVer.count < max){
+        [iVer addObject:@"0"];
+    }
+    
+    
+    for (NSInteger i=0; i<max; i++) {
+        if ([[aVer objectAtIndex:i] integerValue]<[[iVer objectAtIndex:i] integerValue]) {
+            return YES;
+        }        
+    }
+    return NO;
 }
 
 +(NSError*)jobBlessError:(NSString*)msg withReturnCode:(int)rc{
@@ -116,6 +140,5 @@
                                               nil]];
     return error;
 }
-
 
 @end
