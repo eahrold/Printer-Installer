@@ -92,8 +92,8 @@
         NSString* avaliableVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
         
 
-        NSLog( @"Currently installed helper version: %@", installedVersion );
-        NSLog( @"Avaliable helper version: %@", avaliableVersion );
+        //NSLog( @"Currently installed helper version: %@", installedVersion );
+        //NSLog( @"Avaliable helper version: %@", avaliableVersion );
         
         if(!installedVersion){
             needsInstalled = YES;
@@ -109,9 +109,11 @@
 }
 
 +(BOOL)checkIfVersion:(NSString*)avaliableVersion isGreaterThan:(NSString*)installedVersion{
-    NSMutableArray *aVer = [NSArray arrayWithArray:[installedVersion componentsSeparatedByString:@"."]];
-    NSMutableArray *iVer = [NSArray arrayWithArray:[avaliableVersion componentsSeparatedByString:@"."]];
+   
+    NSMutableArray *aVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[installedVersion componentsSeparatedByString:@"."]]];
     
+    NSMutableArray *iVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[avaliableVersion componentsSeparatedByString:@"."]]];
+
     NSInteger max = 3;
     
     while(aVer.count < max){
@@ -119,9 +121,9 @@
     }
     
     while(iVer.count < max){
+        NSLog(@"the ivar count:%lu",(unsigned long)iVer.count);
         [iVer addObject:@"0"];
     }
-    
     
     for (NSInteger i=0; i<max; i++) {
         if ([[aVer objectAtIndex:i] integerValue]<[[iVer objectAtIndex:i] integerValue]) {
