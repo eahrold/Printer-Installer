@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAC17C54A0100F3A3E6 /* icon.icns */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
+		BE8FD68617CE51C100452FD4 /* AppTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68517CE51C100452FD4 /* AppTable.m */; };
+		BE8FD68917CE547F00452FD4 /* AppNSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* AppNSXPC.m */; };
+		BE8FD68C17CE646800452FD4 /* AppProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* AppProgress.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
 		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
@@ -42,6 +45,12 @@
 
 /* Begin PBXFileReference section */
 		BE1FCEAC17C54A0100F3A3E6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		BE8FD68417CE51C100452FD4 /* AppTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTable.h; sourceTree = "<group>"; };
+		BE8FD68517CE51C100452FD4 /* AppTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTable.m; sourceTree = "<group>"; };
+		BE8FD68717CE547F00452FD4 /* AppNSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppNSXPC.h; sourceTree = "<group>"; };
+		BE8FD68817CE547F00452FD4 /* AppNSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppNSXPC.m; sourceTree = "<group>"; };
+		BE8FD68A17CE646800452FD4 /* AppProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppProgress.h; sourceTree = "<group>"; };
+		BE8FD68B17CE646800452FD4 /* AppProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppProgress.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -145,12 +154,14 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
-				BEBFB8E417C027D40023B26C /* Server.h */,
-				BEBFB8E517C027D40023B26C /* Server.m */,
 				BE93C99617BEC88400625DE2 /* AppDelegate.h */,
 				BE93C99717BEC88400625DE2 /* AppDelegate.m */,
-				BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */,
-				BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */,
+				BE8FD68417CE51C100452FD4 /* AppTable.h */,
+				BE8FD68517CE51C100452FD4 /* AppTable.m */,
+				BE8FD68A17CE646800452FD4 /* AppProgress.h */,
+				BE8FD68B17CE646800452FD4 /* AppProgress.m */,
+				BE8FD68717CE547F00452FD4 /* AppNSXPC.h */,
+				BE8FD68817CE547F00452FD4 /* AppNSXPC.m */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
@@ -160,10 +171,14 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEBFB8E417C027D40023B26C /* Server.h */,
+				BEBFB8E517C027D40023B26C /* Server.m */,
+				BE93C99017BEC88400625DE2 /* main.m */,
+				BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */,
+				BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */,
 				BE1FCEAC17C54A0100F3A3E6 /* icon.icns */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
-				BE93C99017BEC88400625DE2 /* main.m */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
 				BE93C99317BEC88400625DE2 /* Credits.rtf */,
 			);
@@ -288,6 +303,9 @@
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
 				BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */,
+				BE8FD68617CE51C100452FD4 /* AppTable.m in Sources */,
+				BE8FD68917CE547F00452FD4 /* AppNSXPC.m in Sources */,
+				BE8FD68C17CE646800452FD4 /* AppProgress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

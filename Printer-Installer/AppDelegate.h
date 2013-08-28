@@ -10,24 +10,18 @@
 #import <ServiceManagement/ServiceManagement.h>
 #import <cups/cups.h>
 
-#import "Interfaces.h"
-#import "Server.h"
-#import "Helper-SMJobBless.h"
+#include "Interfaces.h"
+#include "Server.h"
+#include "Helper-SMJobBless.h"
+#include "AppNSXPC.h"
+#import "AppTable.h"
+#import "AppProgress.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
-    IBOutlet NSArrayController *arrayController;
-    
-    NSMutableArray *name;
-    NSMutableArray *location;
-    NSMutableArray *state;
-    NSMutableArray *model;
-
-    
     NSArray* printerList;
 
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSTableView *addedPrinters;
 
 @end
