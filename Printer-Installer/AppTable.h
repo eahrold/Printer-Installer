@@ -23,8 +23,21 @@
     NSMutableArray *model;
     
     NSArray* printerList;
+    
 
 }
+@property (assign) IBOutlet NSTableView *printerTable;
+@property (assign) NSString *panelMessage;  // <----     this is bound
+
+@property (assign) IBOutlet NSWindow *defaultsPanel;
+@property (assign) IBOutlet NSButton *defaultsSetButton;
+@property (assign) IBOutlet NSButton *defaultsQuitButton;
+
+@property (assign) IBOutlet NSTextField *defaultsServerName;
+
+- (IBAction)startDefaultsPanel:(id)sender;
+- (IBAction)endDefaultsPanel:(id)sender;
+- (IBAction)quitNow:(id)sender;
 
 
 @end

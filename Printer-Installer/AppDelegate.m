@@ -33,11 +33,7 @@ NSError* _error;
 //  Delegate Methods
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    
-    AppPannel* ap = [AppPannel new];
-    [ap startDefaultsPanel:@"hellp"];
-    
+{        
     if(_error){
         [AppPannel showErrorAlert:_error
                            onWindow:self.window

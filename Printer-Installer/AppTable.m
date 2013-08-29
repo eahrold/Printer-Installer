@@ -9,16 +9,12 @@
 #import "AppTable.h"
 
 @implementation AppTable
+
 NSError* _error;
 
 - (id)init {
     self = [super init];
     if (self) {
-        name = [NSMutableArray new];
-        state = [NSMutableArray new];
-        location = [NSMutableArray new];
-        model = [NSMutableArray new];
-        
         [self setPrinterList];
     }
     
@@ -73,48 +69,68 @@ NSError* _error;
 }
 
 -(void)setPrinterList{
+    self.panelMessage = @"Please enter the Server address:";
+
+    name = [NSMutableArray new];
+    state = [NSMutableArray new];
+    location = [NSMutableArray new];
+    model = [NSMutableArray new];
+
+    
     NSUserDefaults *getDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* sn = [getDefaults objectForKey:@"server"];
     
-    Server* server = [Server new];
-    server.URL = [getDefaults objectForKey:@"server"];
-    [server setGetListPath];
-    [server setBasicHeaders:[getDefaults objectForKey:@"authHeader"]];
-    
-    printerList = [[server getRequest] objectForKey:@"printerList"];
-    
-    if(server.error){
-        _error = server.error;
-        return;
+    if(!sn){
+        [self performSelector: @selector(startDefaultsPanel:) withObject:self afterDelay: 0.1];
+    }else{
+        Server* server = [Server new];
+        server.URL = sn;
+        [server setGetListPath];
+        [server setBasicHeaders:[getDefaults objectForKey:@"authHeader"]];
+        
+        printerList = [[server getRequest] objectForKey:@"printerList"];
+        
+        if(printerList.count == 0){
+            [self.defaultsQuitButton setHidden:FALSE];
+            self.panelMessage = @"The Server you entered may not be correct";
+            [self performSelector: @selector(startDefaultsPanel:) withObject:self afterDelay: 0.0];
+        }else{
+        
+            if(server.error){
+                _error = server.error;
+                return;
+            }
+            
+            
+            NSSet* set = [self getInstalledPrinters];
+            
+            for (NSDictionary* i in printerList){
+                [name addObject:[i objectForKey:@"description"]];
+                
+                NSString* loc = [i objectForKey:@"location"];
+                if(loc){
+                    [location addObject:loc];
+                }else{
+                    [location addObject:@""];
+                }
+                
+                NSString* mdl = [i objectForKey:@"model"];
+                if(mdl){
+                    [model addObject:mdl];
+                }else{
+                    [model addObject:@""];
+                }
+                
+                
+                if([set containsObject:[i objectForKey:@"printer"]]){
+                    [state addObject:@"1"];
+                }else{
+                    [state addObject:@"0"];
+                }
+            }
+        }
     }
-    
-    
-    NSSet* set = [self getInstalledPrinters];
-    
-    for (NSDictionary* i in printerList){
-        [name addObject:[i objectForKey:@"description"]];
-        
-        NSString* loc = [i objectForKey:@"location"];
-        if(loc){
-            [location addObject:loc];
-        }else{
-            [location addObject:@""];
-        }
-        
-        NSString* mdl = [i objectForKey:@"model"];
-        if(mdl){
-            [model addObject:mdl];
-        }else{
-            [model addObject:@""];
-        }
-        
-        
-        if([set containsObject:[i objectForKey:@"printer"]]){
-            [state addObject:@"1"];
-        }else{
-            [state addObject:@"0"];
-        }
-        
-    }
+    [self.printerTable reloadData];
 }
 
 //-------------------------------------------
@@ -135,6 +151,40 @@ NSError* _error;
     }
     
     return set;
+}
+
+
+
+- (IBAction)startDefaultsPanel:(id)sender{
+    NSString* sn = [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    if(sn){
+        _defaultsServerName.stringValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    }
+    
+    [NSApp beginSheet:_defaultsPanel
+       modalForWindow:[[NSApp delegate]window]
+        modalDelegate:self
+       didEndSelector:nil
+          contextInfo:NULL];
+}
+
+- (IBAction)endDefaultsPanel:(id)sender{
+    [NSApp endSheet:self.defaultsPanel];
+    NSUserDefaults* setDefaults = [NSUserDefaults standardUserDefaults];
+    if(![_defaultsServerName.stringValue isEqualToString:@""]){
+        [setDefaults setObject:_defaultsServerName.stringValue forKey:@"server"];
+        [setDefaults synchronize];
+        [self setPrinterList];
+    }
+
+    [self.defaultsPanel close];
+    
+}
+- (IBAction)quitNow:(id)sender{
+    [NSApp endSheet:self.defaultsPanel];
+    [[NSApplication sharedApplication]terminate:self];
+    
+    
 }
 
 @end

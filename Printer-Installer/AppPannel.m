@@ -9,20 +9,10 @@
 #import "AppPannel.h"
 
 @implementation AppPannel
-
 //-------------------------------------------
 //  Progress Panel and Alert
 //-------------------------------------------
 
-- (void)startDefaultsPanel:(NSString*)message{
-    /* Display a progress panel as a sheet */
-    [self.defaultsOKButton setEnabled:YES];
-    [NSApp beginSheet:self.defaultsPanel
-       modalForWindow:[[NSApplication sharedApplication] mainWindow]
-        modalDelegate:self
-       didEndSelector:nil
-          contextInfo:NULL];
-}
 
 
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window {
@@ -51,4 +41,8 @@
     NSLog(@"Setup encountered an error.");
     [NSApp terminate:self];
 }
+
+
+
+
 @end
