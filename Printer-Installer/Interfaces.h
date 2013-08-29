@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Printer.h"
-
 #define kHelperName @"edu.loyno.smc.Printer-Installer.helper"
 
 

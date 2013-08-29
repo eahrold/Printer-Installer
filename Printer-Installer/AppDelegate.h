@@ -8,14 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <ServiceManagement/ServiceManagement.h>
-#import <cups/cups.h>
 
-#include "Interfaces.h"
-#include "Server.h"
-#include "Helper-SMJobBless.h"
-#include "AppNSXPC.h"
-#import "AppTable.h"
-#import "AppProgress.h"
+#import "Helper-SMJobBless.h"
+#import "AppNSXPC.h"
+#import "AppPannel.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
     NSArray* printerList;

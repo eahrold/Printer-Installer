@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Interfaces.h"
 
+#import "Interfaces.h"
 #import "Server.h"
-#import "AppProgress.h"
+#import "AppPannel.h"
 
 @interface AppNSXPC : NSObject
 

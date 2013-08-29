@@ -34,22 +34,24 @@ NSError* _error;
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-        
+    
+    AppPannel* ap = [AppPannel new];
+    [ap startDefaultsPanel:@"hellp"];
+    
     if(_error){
-        [AppProgress showErrorAlert:_error
+        [AppPannel showErrorAlert:_error
                            onWindow:self.window
                        withSelector:@selector(setupDidEndWithTerminalError:)];
     }
-    
-    //[AppTable new];
-    
+        
     // Insert code here to initialize your application
-    NSString *prompt = @"In order to User the SMC Printers";
     NSError  *error = nil;
     
-    if(![JobBlesser blessHelperWithLabel:kHelperName andPrompt:prompt error:&error]){
+    if(![JobBlesser blessHelperWithLabel:kHelperName
+                               andPrompt:@"In order to User the SMC Printers"
+                                   error:&error]){
         NSLog(@"Somthing went wrong");
-        [AppProgress showErrorAlert:_error
+        [AppPannel showErrorAlert:error
                            onWindow:self.window
                        withSelector:@selector(setupDidEndWithTerminalError:)];
         

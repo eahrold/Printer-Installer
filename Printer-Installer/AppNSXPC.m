@@ -22,7 +22,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [AppProgress showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [AppPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
              }
          }];
          [helperXPCConnection invalidate];
@@ -40,7 +40,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [AppProgress showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [AppPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
                  
              }
          }];

@@ -10,10 +10,9 @@
 #import <Foundation/Foundation.h>
 #import <cups/cups.h>
 
-#import "Interfaces.h"
 #import "Server.h"
 #import "AppNSXPC.h"
-#import "AppProgress.h"
+#import "AppPannel.h"
 
 
 @interface AppTable : NSObject <NSTableViewDelegate, NSTableViewDataSource>{

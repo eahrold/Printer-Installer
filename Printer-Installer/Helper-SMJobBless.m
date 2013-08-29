@@ -121,7 +121,6 @@
     }
     
     while(iVer.count < max){
-        NSLog(@"the ivar count:%lu",(unsigned long)iVer.count);
         [iVer addObject:@"0"];
     }
     
