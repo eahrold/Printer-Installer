@@ -92,7 +92,7 @@ NSError* _error;
         
         if(printerList.count == 0){
             [self.defaultsQuitButton setHidden:FALSE];
-            self.panelMessage = @"The Server you entered may not be correct";
+            self.panelMessage = @"The URL you entered may not be correct, please try again :";
             [self performSelector: @selector(startDefaultsPanel:) withObject:self afterDelay: 0.0];
         }else{
         
