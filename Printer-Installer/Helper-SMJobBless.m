@@ -10,16 +10,17 @@
 
 @implementation JobBlesser
 
+NSString* const JBAuthError = @"The Helper tool failed to install due to an Authorization issue, I must now quit";
+NSString* const JBCertError = @"The Helper tool failed to install due to Certificate Signing issues, I must now quit. Please let the System Admin Know, I assure (s)he will appericaite it.";
 //----------------------------------------------
 //  SMJobBless
 //----------------------------------------------
 
 +(BOOL)blessHelperWithLabel:(NSString *)helperID
                    andPrompt:(NSString*)prompt
-                       error:(NSError**)_error{
+                       error:(NSError**)error{
     
 	BOOL result = NO;
-    NSError* error = nil;
     
     if(![self helperNeedsInstalling]){
         return YES;
@@ -48,20 +49,19 @@
     
 	if (status != errAuthorizationSuccess) {
         NSLog(@"Failed to create AuthorizationRef. Error code: %d", status);
-        error = [JobBlesser jobBlessError:@"The Helper tool failed to install due to an Authorization issue, I must now quit" withReturnCode:1];
+        *error = [JobBlesser jobBlessError:JBAuthError withReturnCode:1];
         
 	}else {
         CFErrorRef  cfError;
-        result = (BOOL) SMJobBless(kSMDomainSystemLaunchd, (__bridge CFStringRef)helperID, authRef, &cfError);
+        result = (BOOL)SMJobBless(kSMDomainSystemLaunchd, (__bridge CFStringRef)helperID, authRef, &cfError);
         if (!result) {
             NSLog(@"Problem with SMJobBless: %@",CFBridgingRelease(cfError));
-            error = [JobBlesser jobBlessError:@"The Helper tool failed to install due to Certificate Signing issues, I must now quit. Please let the System Admin Know, I assure (s)he will appericaite it." withReturnCode:1];
+            *error = [JobBlesser jobBlessError:JBCertError withReturnCode:1];
         }
     }
     
-    if ( ! result && (_error != NULL) ) {
-        assert(error != nil);
-        *_error = error;
+    if ( !result && (*error != NULL) ) {
+        assert(*error != nil);
     }
     
     return result;
