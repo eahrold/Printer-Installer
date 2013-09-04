@@ -92,8 +92,8 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
         NSString* avaliableVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
         
 
-        //NSLog( @"Currently installed helper version: %@", installedVersion );
-        //NSLog( @"Avaliable helper version: %@", avaliableVersion );
+        NSLog( @"Currently installed helper version: %@", installedVersion );
+        NSLog( @"Avaliable helper version: %@", avaliableVersion );
         
         if(!installedVersion){
             needsInstalled = YES;
@@ -110,9 +110,9 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
 
 +(BOOL)checkIfVersion:(NSString*)avaliableVersion isGreaterThan:(NSString*)installedVersion{
    
-    NSMutableArray *aVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[installedVersion componentsSeparatedByString:@"."]]];
+    NSMutableArray *iVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[installedVersion componentsSeparatedByString:@"."]]];
     
-    NSMutableArray *iVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[avaliableVersion componentsSeparatedByString:@"."]]];
+    NSMutableArray *aVer = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithArray:[avaliableVersion componentsSeparatedByString:@"."]]];
 
     NSInteger max = 3;
     
@@ -125,7 +125,7 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     }
     
     for (NSInteger i=0; i<max; i++) {
-        if ([[aVer objectAtIndex:i] integerValue]<[[iVer objectAtIndex:i] integerValue]) {
+        if ([[aVer objectAtIndex:i] integerValue]>[[iVer objectAtIndex:i] integerValue]) {
             return YES;
         }        
     }
