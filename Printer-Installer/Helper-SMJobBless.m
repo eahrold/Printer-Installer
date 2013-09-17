@@ -19,7 +19,7 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
 +(BOOL)blessHelperWithLabel:(NSString *)helperID
                    andPrompt:(NSString*)prompt
                        error:(NSError**)error{
-    
+    NSError* localError = nil;
 	BOOL result = NO;
     
     if(![self helperNeedsInstalling]){
@@ -49,21 +49,22 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     
 	if (status != errAuthorizationSuccess) {
         NSLog(@"Failed to create AuthorizationRef. Error code: %d", status);
-        *error = [JobBlesser jobBlessError:JBAuthError withReturnCode:1];
+        localError = [JobBlesser jobBlessError:JBAuthError withReturnCode:1];
         
 	}else {
         CFErrorRef  cfError;
         result = (BOOL)SMJobBless(kSMDomainSystemLaunchd, (__bridge CFStringRef)helperID, authRef, &cfError);
         if (!result) {
             NSLog(@"Problem with SMJobBless: %@",CFBridgingRelease(cfError));
-            *error = [JobBlesser jobBlessError:JBCertError withReturnCode:1];
+            localError = [JobBlesser jobBlessError:JBCertError withReturnCode:1];
         }
     }
     
-    if ( !result && (*error != NULL) ) {
-        assert(*error != nil);
+    if ( !result && (localError != NULL) ) {
+        assert(localError != nil);
     }
     
+    if(error)*error = localError;
     return result;
 }
 

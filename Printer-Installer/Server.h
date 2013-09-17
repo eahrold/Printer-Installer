@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Server : NSObject
+@interface Server : NSObject <NSURLConnectionDelegate>
 
 @property (copy) NSString *URL;
 @property (copy) NSString *port;

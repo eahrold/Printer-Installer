@@ -1,5 +1,5 @@
 //
-//  AppProgress.h
+//  PIProgress.h
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface AppPannel : NSObject{
+@interface PIPannel : NSObject{
       
 }
 

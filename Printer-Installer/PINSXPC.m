@@ -1,14 +1,14 @@
 //
-//  AppNSXPC.m
+//  PINSXPC.m
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "AppNSXPC.h"
+#import "PINSXPC.h"
 
-@implementation AppNSXPC
+@implementation PINSXPC
 
 +(void)addPrinter:(Printer*)printer{
     NSLog(@"Adding printer: %@",printer.description);
@@ -22,7 +22,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [AppPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [PIPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
              }
          }];
          [helperXPCConnection invalidate];
@@ -40,7 +40,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [AppPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [PIPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
                  
              }
          }];

@@ -1,14 +1,14 @@
 //
-//  AppTable.m
+//  PITable.m
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "AppTable.h"
+#import "PITable.h"
 
-@implementation AppTable
+@implementation PITable
 
 NSError* _error;
 
@@ -60,9 +60,9 @@ NSError* _error;
     
     
     if([value integerValue] == 1 ){
-        [AppNSXPC addPrinter:printer];
+        [PINSXPC addPrinter:printer];
     }else if([value integerValue] == 0 ){
-        [AppNSXPC removePrinter:printer];
+        [PINSXPC removePrinter:printer];
     }
     
     [tableView reloadData];

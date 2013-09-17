@@ -1,15 +1,15 @@
 //
-//  AppDelegate.m
+//  PIDelegate.m
 //  Printer Installer
 //
 //  Created by Eldon Ahrold on 8/15/13.
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "PIDelegate.h"
 
 
-@implementation AppDelegate
+@implementation PIDelegate
 NSError* _error;
 
 @synthesize window;
@@ -35,8 +35,8 @@ NSError* _error;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {        
     if(_error){
-        [AppPannel showErrorAlert:_error
-                           onWindow:self.window
+        [PIPannel showErrorAlert:_error
+                           onWindow:window
                        withSelector:@selector(setupDidEndWithTerminalError:)];
     }
         
@@ -44,11 +44,11 @@ NSError* _error;
     NSError  *error = nil;
     
     if(![JobBlesser blessHelperWithLabel:kHelperName
-                               andPrompt:@"In order to User the SMC Printers"
+                               andPrompt:@"In order to use the SMC Printers"
                                    error:&error]){
         NSLog(@"Somthing went wrong");
-        [AppPannel showErrorAlert:error
-                           onWindow:self.window
+        [PIPannel showErrorAlert:error
+                           onWindow:window
                        withSelector:@selector(setupDidEndWithTerminalError:)];
         
     
@@ -56,7 +56,7 @@ NSError* _error;
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification{
-    [AppNSXPC tellHelperToQuit];
+    [PINSXPC tellHelperToQuit];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{

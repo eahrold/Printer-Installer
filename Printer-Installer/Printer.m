@@ -54,7 +54,7 @@
         self.ppd = [self setPPDPath:self.model];
     }
     
-    self.url = [ self getFullURL:self];
+    self.url = [ self getFullURL];
 }
 
 -(NSString*)setPPDPath:(NSString*)model{
@@ -62,17 +62,20 @@
     return path;
 }
 
--(NSString*)getFullURL:(Printer*)p{
+-(NSString*)getFullURL{
     NSString* url;
    
-    if([p.protocol isEqualToString:@"ipp"]){
-        url = [NSString stringWithFormat:@"%@://%@/printers/%@",p.protocol,p.host,p.name];
+    if([self.protocol isEqualToString:@"ipp"]){
+        url = [NSString stringWithFormat:@"%@://%@/printers/%@",self.protocol,self.host,self.name];
     }
-    else if([p.protocol isEqualToString:@"socket"]){
-        url = [NSString stringWithFormat:@"%@://%@:9100",p.protocol,p.host];
+    else if([self.protocol isEqualToString:@"http"] || [self.protocol isEqualToString:@"https"]) {
+        url = [NSString stringWithFormat:@"%@://%@:631/printers/%@",self.protocol,self.host,self.name];
+    }
+    else if([self.protocol isEqualToString:@"socket"]){
+        url = [NSString stringWithFormat:@"%@://%@:9100",self.protocol,self.host];
     }
     else{
-        url = [NSString stringWithFormat:@"%@://%@",p.protocol,p.host];
+        url = [NSString stringWithFormat:@"%@://%@",self.protocol,self.host];
     }
     
     return url;

@@ -1,14 +1,14 @@
 //
-//  AppProgress.m
+//  PIProgress.m
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "AppPannel.h"
+#import "PIPannel.h"
 
-@implementation AppPannel
+@implementation PIPannel
 //-------------------------------------------
 //  Progress Panel and Alert
 //-------------------------------------------

@@ -1,5 +1,5 @@
 //
-//  AppTable.h
+//  PITable.h
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
@@ -11,11 +11,11 @@
 #import <cups/cups.h>
 
 #import "Server.h"
-#import "AppNSXPC.h"
-#import "AppPannel.h"
+#import "PINSXPC.h"
+#import "PIPannel.h"
 
 
-@interface AppTable : NSObject <NSTableViewDelegate, NSTableViewDataSource>{
+@interface PITable : NSObject <NSTableViewDelegate, NSTableViewDataSource>{
     
     NSMutableArray *name;
     NSMutableArray *location;

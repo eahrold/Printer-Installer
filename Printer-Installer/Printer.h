@@ -16,11 +16,14 @@
 
 // ipp http https lpd socket
 @property (copy) NSString *protocol;
+
+// path to ppd file
 @property (copy) NSString *ppd;
+
+// model gathered using lpinfo
 @property (copy) NSString *model;
 
 @property (copy) NSString *host;
-
 @property (copy) NSString *url;
 
 -(void)setPrinterFromDictionary:(NSDictionary*)dict;

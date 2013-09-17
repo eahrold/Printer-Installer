@@ -1,5 +1,5 @@
 //
-//  AppNSXPC.h
+//  PINSXPC.h
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/28/13.
@@ -10,9 +10,9 @@
 
 #import "Interfaces.h"
 #import "Server.h"
-#import "AppPannel.h"
+#import "PIPannel.h"
 
-@interface AppNSXPC : NSObject
+@interface PINSXPC : NSObject
 
 +(void)addPrinter:(Printer*)printer;
 +(void)removePrinter:(Printer*)printer;

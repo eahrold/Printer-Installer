@@ -51,7 +51,7 @@
         
     // Create the request.
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.path]];
-    
+        
     // set as GET request
     request.HTTPMethod = @"GET";
     
@@ -82,6 +82,10 @@
                            errorDescription:&errorDesc];
     
     return dict;
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space {
+    return YES;
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  PIDelegate.h
 //  Printer-Installer
 //
 //  Created by Eldon Ahrold on 8/16/13.
@@ -10,10 +10,10 @@
 #import <ServiceManagement/ServiceManagement.h>
 
 #import "Helper-SMJobBless.h"
-#import "AppNSXPC.h"
-#import "AppPannel.h"
+#import "PINSXPC.h"
+#import "PIPannel.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>{
+@interface PIDelegate : NSObject <NSApplicationDelegate>{
     NSArray* printerList;
 
 }

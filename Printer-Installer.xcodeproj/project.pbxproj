@@ -10,13 +10,13 @@
 		BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAC17C54A0100F3A3E6 /* icon.icns */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */; };
-		BE8FD68617CE51C100452FD4 /* AppTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68517CE51C100452FD4 /* AppTable.m */; };
-		BE8FD68917CE547F00452FD4 /* AppNSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* AppNSXPC.m */; };
-		BE8FD68C17CE646800452FD4 /* AppPannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* AppPannel.m */; };
+		BE8FD68617CE51C100452FD4 /* PITable.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68517CE51C100452FD4 /* PITable.m */; };
+		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
+		BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannel.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
 		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
-		BE93C99817BEC88400625DE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99717BEC88400625DE2 /* AppDelegate.m */; };
+		BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99717BEC88400625DE2 /* PiDelegate.m */; };
 		BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99917BEC88400625DE2 /* MainMenu.xib */; };
 		BE93C9A717BEC8CB00625DE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C9A617BEC8CB00625DE2 /* Foundation.framework */; };
 		BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C9A917BEC8CB00625DE2 /* main.m */; };
@@ -47,12 +47,12 @@
 /* Begin PBXFileReference section */
 		BE1FCEAC17C54A0100F3A3E6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintInstaller.icns; sourceTree = "<group>"; };
-		BE8FD68417CE51C100452FD4 /* AppTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTable.h; sourceTree = "<group>"; };
-		BE8FD68517CE51C100452FD4 /* AppTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTable.m; sourceTree = "<group>"; };
-		BE8FD68717CE547F00452FD4 /* AppNSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppNSXPC.h; sourceTree = "<group>"; };
-		BE8FD68817CE547F00452FD4 /* AppNSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppNSXPC.m; sourceTree = "<group>"; };
-		BE8FD68A17CE646800452FD4 /* AppPannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPannel.h; sourceTree = "<group>"; };
-		BE8FD68B17CE646800452FD4 /* AppPannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPannel.m; sourceTree = "<group>"; };
+		BE8FD68417CE51C100452FD4 /* PITable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PITable.h; sourceTree = "<group>"; };
+		BE8FD68517CE51C100452FD4 /* PITable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PITable.m; sourceTree = "<group>"; };
+		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
+		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
+		BE8FD68A17CE646800452FD4 /* PIPannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannel.h; sourceTree = "<group>"; };
+		BE8FD68B17CE646800452FD4 /* PIPannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIPannel.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -63,8 +63,8 @@
 		BE93C99017BEC88400625DE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Printer-Installer-Prefix.pch"; sourceTree = "<group>"; };
 		BE93C99417BEC88400625DE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		BE93C99617BEC88400625DE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BE93C99717BEC88400625DE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE93C99617BEC88400625DE2 /* PIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIDelegate.h; sourceTree = "<group>"; };
+		BE93C99717BEC88400625DE2 /* PiDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PiDelegate.m; sourceTree = "<group>"; };
 		BE93C99A17BEC88400625DE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "edu.loyno.smc.Printer-Installer.helper"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C9A617BEC8CB00625DE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,14 +157,14 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
-				BE93C99617BEC88400625DE2 /* AppDelegate.h */,
-				BE93C99717BEC88400625DE2 /* AppDelegate.m */,
-				BE8FD68417CE51C100452FD4 /* AppTable.h */,
-				BE8FD68517CE51C100452FD4 /* AppTable.m */,
-				BE8FD68A17CE646800452FD4 /* AppPannel.h */,
-				BE8FD68B17CE646800452FD4 /* AppPannel.m */,
-				BE8FD68717CE547F00452FD4 /* AppNSXPC.h */,
-				BE8FD68817CE547F00452FD4 /* AppNSXPC.m */,
+				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
+				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
+				BE8FD68417CE51C100452FD4 /* PITable.h */,
+				BE8FD68517CE51C100452FD4 /* PITable.m */,
+				BE8FD68A17CE646800452FD4 /* PIPannel.h */,
+				BE8FD68B17CE646800452FD4 /* PIPannel.m */,
+				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
+				BE8FD68817CE547F00452FD4 /* PINSXPC.m */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
@@ -303,13 +303,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE93C99117BEC88400625DE2 /* main.m in Sources */,
-				BE93C99817BEC88400625DE2 /* AppDelegate.m in Sources */,
+				BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
 				BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */,
-				BE8FD68617CE51C100452FD4 /* AppTable.m in Sources */,
-				BE8FD68917CE547F00452FD4 /* AppNSXPC.m in Sources */,
-				BE8FD68C17CE646800452FD4 /* AppPannel.m in Sources */,
+				BE8FD68617CE51C100452FD4 /* PITable.m in Sources */,
+				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
+				BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
