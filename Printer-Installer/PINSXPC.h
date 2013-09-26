@@ -14,8 +14,8 @@
 
 @interface PINSXPC : NSObject
 
-+(void)addPrinter:(Printer*)printer;
-+(void)removePrinter:(Printer*)printer;
++(void)addPrinter:(NSDictionary*)printer;
++(void)removePrinter:(NSDictionary*)printer;
 +(void)tellHelperToQuit;
 
 @end

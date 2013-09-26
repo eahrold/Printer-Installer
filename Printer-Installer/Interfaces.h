@@ -12,10 +12,10 @@
 
 
 @protocol HelperAgent <NSObject>
--(void)addPrinter:(Printer*)printer
+-(void)addPrinter:(NSDictionary*)printer
         withReply:(void (^)(NSError *error))reply;
 
--(void)removePrinter:(Printer*)printer
+-(void)removePrinter:(NSDictionary*)printer
         withReply:(void (^)(NSError *error))reply;
 
 -(void)quitHelper;

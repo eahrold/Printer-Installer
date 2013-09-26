@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Printer : NSObject <NSSecureCoding>
+@interface Printer : NSObject
 
 @property (copy) NSString *name;
 @property (copy) NSString *description;
@@ -25,6 +25,8 @@
 
 @property (copy) NSString *host;
 @property (copy) NSString *url;
+
+@property (copy) NSArray *options;
 
 -(void)setPrinterFromDictionary:(NSDictionary*)dict;
 

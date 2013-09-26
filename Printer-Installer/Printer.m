@@ -10,34 +10,6 @@
 
 @implementation Printer
 
-- (id)initWithCoder:(NSCoder*)aDecoder {
-    self = [super init];
-    if (self) {
-        _name = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"name"];
-        _location = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"location"];
-        _description = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"description"];
-        _ppd = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"ppd"];
-        _protocol = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"protocol"];
-        _url = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"url"];
-        _host = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"host"];
-
-    }
-    return self;
-}
-
-
-+ (BOOL)supportsSecureCoding { return YES; }
-
-- (void)encodeWithCoder:(NSCoder*)aEncoder {
-    [aEncoder encodeObject:_name forKey:@"name"];
-    [aEncoder encodeObject:_location forKey:@"location"];
-    [aEncoder encodeObject:_description forKey:@"description"];
-    [aEncoder encodeObject:_ppd forKey:@"ppd"];
-    [aEncoder encodeObject:_protocol forKey:@"protocol"];
-    [aEncoder encodeObject:_url forKey:@"url"];
-    [aEncoder encodeObject:_host forKey:@"host"];
-
-}
 
 -(void)setPrinterFromDictionary:(NSDictionary*)dict{
     self.name = [dict objectForKey:@"printer"];
@@ -46,6 +18,7 @@
     self.host = [dict objectForKey:@"host"];
     self.protocol = [dict objectForKey:@"protocol"];
     self.model = [dict objectForKey:@"model"];
+    self.options = [[NSArray alloc] initWithArray:[dict objectForKey:@"options"]];
     
     //self.ppd = [dict objectForKey:@"ppd"];
     

@@ -10,9 +10,8 @@
 
 @implementation PINSXPC
 
-+(void)addPrinter:(Printer*)printer{
-    NSLog(@"Adding printer: %@",printer.description);
-    
++(void)addPrinter:(NSDictionary*)printer{
+
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
@@ -29,8 +28,7 @@
      }];
 }
 
-+(void)removePrinter:(Printer*)printer{
-    NSLog(@"Removing printer: %@",printer.description);
++(void)removePrinter:(NSDictionary*)printer{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     

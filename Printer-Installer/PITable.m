@@ -57,12 +57,11 @@ NSError* _error;
     
     Printer* printer = [Printer new];
     [printer setPrinterFromDictionary:[printerList objectAtIndex:row]];
-    
-    
+        
     if([value integerValue] == 1 ){
-        [PINSXPC addPrinter:printer];
+        [PINSXPC addPrinter:[printerList objectAtIndex:row]];
     }else if([value integerValue] == 0 ){
-        [PINSXPC removePrinter:printer];
+        [PINSXPC removePrinter:[printerList objectAtIndex:row]];
     }
     
     [tableView reloadData];
@@ -106,7 +105,6 @@ NSError* _error;
             
             for (NSDictionary* i in printerList){
                 [name addObject:[i objectForKey:@"description"]];
-                
                 NSString* loc = [i objectForKey:@"location"];
                 if(loc){
                     [location addObject:loc];

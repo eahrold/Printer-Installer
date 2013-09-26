@@ -54,6 +54,7 @@
         
     // set as GET request
     request.HTTPMethod = @"GET";
+    request.timeoutInterval = 3;
     
     // set header fields
     [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];

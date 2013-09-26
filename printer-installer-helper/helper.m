@@ -7,7 +7,8 @@
 //
 
 #import "helper.h"
-#include <cups/cups.h>
+#import <cups/cups.h>
+#import <syslog.h>
 
 @implementation helper
 
@@ -15,22 +16,52 @@
 ipp_t           *request;
 cups_option_t	*options;
 
+-(BOOL)addOptions:(Printer *)printer{
+    const char* opt_details = [[NSString stringWithFormat:@"%@",printer.options] UTF8String];
+    syslog(1,"setting options for printer %s",opt_details);
 
--(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
+    NSTask* task = [NSTask new];
+    NSMutableArray *args = [NSMutableArray new];
+    
+    [task setLaunchPath:@"/usr/sbin/lpadmin"];
+    
+    [args addObject:@"-p"];
+    [args addObject:printer.name];
+    
+    for(NSString* opt in printer.options){
+        [args addObject:@"-o"];
+        [args addObject:opt];
+    }
+    
+    [task setArguments:args];
+    [task launch];
+    [task waitUntilExit];
+    
+    return task.terminationStatus;
+}
+
+-(void)addPrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
     NSError* error = nil;
+
+    Printer* p = [Printer new];
+    [p setPrinterFromDictionary:printer];
+    
+    syslog(1,"Adding printer %s",[p.name UTF8String]);
+
     
     char        uri[HTTP_MAX_URI];
     int         opt_count = 0;
+    options = NULL;
+    
     
     /* convert the printer obect items */
-    const char  *name = [printer.name UTF8String],
-                *ppd = [printer.ppd UTF8String],
-                *device_url = [printer.url UTF8String],
-                *location = [printer.location UTF8String],
-                *description = [printer.description UTF8String];
-
+    const char  *name = [p.name UTF8String],
+                *ppd = [p.ppd UTF8String],
+                *device_url = [p.url UTF8String],
+                *location = [p.location UTF8String],
+                //*popts = [p.options UTF8String],
+                *description = [p.description UTF8String];
     
-
     request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
 
     if(location){
@@ -40,6 +71,10 @@ cups_option_t	*options;
     if(description){
         opt_count = cupsAddOption("printer-info", description, opt_count, &options);
     }
+    
+//    if(popts){
+//        opt_count = cupsParseOptions(popts, opt_count, &options);
+//    }
     
     opt_count = cupsAddOption("device-uri", device_url,
                               opt_count, &options);
@@ -60,20 +95,28 @@ cups_option_t	*options;
     
     ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppd));
     
+    
     if (cupsLastError() > IPP_OK_CONFLICT)
     {
         error = [self cupsError:cupsLastErrorString()
                  withReturnCode:1];
     }
-
-    reply(error);
+    
+    if(p.options){
+        [self addOptions:p];
+    }
 }
 
--(void)removePrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
+-(void)removePrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
+    Printer* p = [Printer new];
+    [p setPrinterFromDictionary:printer];
+    
+    syslog(1,"Removing printer %s",[p.name UTF8String]);
+
     NSError* error = nil;
     
     /* convert get these out of NSString */
-    const char  *name = [printer.name UTF8String];
+    const char  *name = [p.name UTF8String];
     char        uri[HTTP_MAX_URI];
     
     request = ippNewRequest(CUPS_DELETE_PRINTER);
