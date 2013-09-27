@@ -32,20 +32,19 @@
     ppd_file_t      *ppd;
     cups_file_t     *inppd;
     cups_file_t     *outppd;
-    
-    cups_option_t	*options = NULL;
     ppd_choice_t	*choice;
+    cups_option_t	*options = NULL;
 
-    int     opt_count = 0,
-            ppdchanged = 0,
-            wrote_ipp_supplies=0,
-            wrote_snmp_supplies;
+    int     opt_count           = 0,
+            ppdchanged          = 0,
+            wrote_ipp_supplies  = 0,
+            wrote_snmp_supplies = 0;
 
-    const char  *name = [p.name UTF8String],
-                *device_url = [p.url UTF8String],
-                *location = [p.location UTF8String],
-                *ppdfile = [p.ppd UTF8String],
-                *description = [p.description UTF8String],
+    const char  *name           = [p.name UTF8String],
+                *device_url     = [p.url UTF8String],
+                *location       = [p.location UTF8String],
+                *ppdfile        = [p.ppd UTF8String],
+                *description    = [p.description UTF8String],
                 *customval,
                 *boolval;
 
@@ -56,7 +55,7 @@
                 tempfile[1024];		/* Temporary filename */
     
     
-    request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER)
+    request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
     
     if(location){
         opt_count = cupsAddOption("printer-location", location, opt_count, &options);
@@ -104,18 +103,18 @@
     }
 
     ppdchanged = 0;
+    wrote_ipp_supplies = 1;
     
     while (cupsFileGets(inppd, line, sizeof(line)))
     {
         if (!strncmp(line, "*cupsIPPSupplies:", 17) &&
-            (boolval = cupsGetOption("cupsIPPSupplies", opt_count,
-                                     options)) != NULL)
+            (boolval = cupsGetOption("cupsIPPSupplies", opt_count, options)) != NULL)
         {
             wrote_ipp_supplies = 1;
             cupsFilePrintf(outppd, "*cupsIPPSupplies: %s\n",
-                           (!_cups_strcasecmp(boolval, "true") ||
-                            !_cups_strcasecmp(boolval, "yes") ||
-                            !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
+                           ( !_cups_strcasecmp(boolval, "true") ||
+                             !_cups_strcasecmp(boolval, "yes") ||
+                             !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
         }
         else if (!strncmp(line, "*cupsSNMPSupplies:", 18) &&
                  (boolval = cupsGetOption("cupsSNMPSupplies", opt_count,
@@ -186,6 +185,7 @@
                         !_cups_strcasecmp(boolval, "yes") ||
                         !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
     }
+    
     
     if (!wrote_snmp_supplies &&
         (boolval = cupsGetOption("cupsSNMPSupplies", opt_count,
