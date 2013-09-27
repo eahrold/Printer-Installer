@@ -5,65 +5,59 @@
 //  Created by Eldon Ahrold on 8/15/13.
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
+// much of this is taken from lpadmin.c from CUPS.org source code
+// http://www.cups.org/software.php?VERSION=1.6.2
+// and I would like to acknowledge the excelent work
+// of Matt Sweet and his team at cups.org
 
 #import "helper.h"
 #import <cups/cups.h>
+#import <cups/ppd.h>
+
 #import <syslog.h>
 
 @implementation helper
 
-/* cups types */
-ipp_t           *request;
-cups_option_t	*options;
-
--(BOOL)addOptions:(Printer *)printer{
-    const char* opt_details = [[NSString stringWithFormat:@"%@",printer.options] UTF8String];
-    syslog(1,"setting options for printer %s",opt_details);
-
-    NSTask* task = [NSTask new];
-    NSMutableArray *args = [NSMutableArray new];
-    
-    [task setLaunchPath:@"/usr/sbin/lpadmin"];
-    
-    [args addObject:@"-p"];
-    [args addObject:printer.name];
-    
-    for(NSString* opt in printer.options){
-        [args addObject:@"-o"];
-        [args addObject:opt];
-    }
-    
-    [task setArguments:args];
-    [task launch];
-    [task waitUntilExit];
-    
-    return task.terminationStatus;
-}
 
 -(void)addPrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
-    NSError* error = nil;
-
+    
     Printer* p = [Printer new];
     [p setPrinterFromDictionary:printer];
-    
     syslog(1,"Adding printer %s",[p.name UTF8String]);
 
+    NSError* error = nil;
+
+
+    ipp_t           *request;
+    ppd_file_t      *ppd;
+    cups_file_t     *inppd;
+    cups_file_t     *outppd;
     
-    char        uri[HTTP_MAX_URI];
-    int         opt_count = 0;
-    options = NULL;
-    
-    
-    /* convert the printer obect items */
+    cups_option_t	*options = NULL;
+    ppd_choice_t	*choice;
+
+    int     opt_count = 0,
+            ppdchanged = 0,
+            wrote_ipp_supplies=0,
+            wrote_snmp_supplies;
+
     const char  *name = [p.name UTF8String],
-                *ppd = [p.ppd UTF8String],
                 *device_url = [p.url UTF8String],
                 *location = [p.location UTF8String],
-                //*popts = [p.options UTF8String],
-                *description = [p.description UTF8String];
-    
-    request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
+                *ppdfile = [p.ppd UTF8String],
+                *description = [p.description UTF8String],
+                *customval,
+                *boolval;
 
+    char        uri[HTTP_MAX_URI],
+                line[1024],         /* Line from PPD file */
+                keyword[1024],		/* Keyword from Default line */
+                *keyptr,            /* Pointer into keyword... */
+                tempfile[1024];		/* Temporary filename */
+    
+    
+    request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER)
+    
     if(location){
         opt_count = cupsAddOption("printer-location", location, opt_count, &options);
     }
@@ -72,14 +66,15 @@ cups_option_t	*options;
         opt_count = cupsAddOption("printer-info", description, opt_count, &options);
     }
     
-//    if(popts){
-//        opt_count = cupsParseOptions(popts, opt_count, &options);
-//    }
+    if(p.options){
+        for(NSString* opt in p.options){
+            opt_count = cupsParseOptions([opt UTF8String], opt_count, &options);
+        }
+    }
     
     opt_count = cupsAddOption("device-uri", device_url,
                               opt_count, &options);
     
-
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
                      "localhost", 0, "/printers/%s", name);
     
@@ -87,13 +82,129 @@ cups_option_t	*options;
                  "printer-uri", NULL, uri);
     
     cupsEncodeOptions2(request, opt_count, options, IPP_TAG_PRINTER);
+    
+    ppd = ppdOpenFile(ppdfile);
+    ppdMarkDefaults(ppd);
+    cupsMarkOptions(ppd, opt_count, options);
+    
+    if ((outppd = cupsTempFile2(tempfile, sizeof(tempfile))) == NULL){
+        ippDelete(request);
+        error = [self cupsError:"lpadmin: Unable to create temporary file" withReturnCode:1];
+        goto nsxpc_reply;
+    }
+    
+    if ((inppd = cupsFileOpen(ppdfile, "r")) == NULL)
+    {
+        ippDelete(request);
+        error = [self cupsError:"lpadmin: Unable to open PPD file" withReturnCode:1];
+        
+        cupsFileClose(outppd);
+        unlink(tempfile);
+        goto nsxpc_reply;
+    }
 
-    ippAddInteger(request, IPP_TAG_PRINTER, IPP_TAG_ENUM, "printer-state",
-                  IPP_PRINTER_IDLE);
+    ppdchanged = 0;
     
+    while (cupsFileGets(inppd, line, sizeof(line)))
+    {
+        if (!strncmp(line, "*cupsIPPSupplies:", 17) &&
+            (boolval = cupsGetOption("cupsIPPSupplies", opt_count,
+                                     options)) != NULL)
+        {
+            wrote_ipp_supplies = 1;
+            cupsFilePrintf(outppd, "*cupsIPPSupplies: %s\n",
+                           (!_cups_strcasecmp(boolval, "true") ||
+                            !_cups_strcasecmp(boolval, "yes") ||
+                            !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
+        }
+        else if (!strncmp(line, "*cupsSNMPSupplies:", 18) &&
+                 (boolval = cupsGetOption("cupsSNMPSupplies", opt_count,
+                                          options)) != NULL)
+        {
+            wrote_snmp_supplies = 1;
+            cupsFilePrintf(outppd, "*cupsSNMPSupplies: %s\n",
+                           (!_cups_strcasecmp(boolval, "true") ||
+                            !_cups_strcasecmp(boolval, "yes") ||
+                            !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
+        }
+        else if (strncmp(line, "*Default", 8))
+            cupsFilePrintf(outppd, "%s\n", line);
+        else
+        {
+            /*
+             * Get default option name...
+             */
+            
+            strlcpy(keyword, line + 8, sizeof(keyword));
+            
+            for (keyptr = keyword; *keyptr; keyptr ++)
+                if (*keyptr == ':' || isspace(*keyptr & 255))
+                    break;
+            
+            *keyptr++ = '\0';
+            while (isspace(*keyptr & 255))
+                keyptr ++;
+            
+            if (!strcmp(keyword, "PageRegion") ||
+                !strcmp(keyword, "PageSize") ||
+                !strcmp(keyword, "PaperDimension") ||
+                !strcmp(keyword, "ImageableArea"))
+            {
+                if ((choice = ppdFindMarkedChoice(ppd, "PageSize")) == NULL)
+                    choice = ppdFindMarkedChoice(ppd, "PageRegion");
+            }
+            else
+                choice = ppdFindMarkedChoice(ppd, keyword);
+            
+            if (choice && strcmp(choice->choice, keyptr))
+            {
+                if (strcmp(choice->choice, "Custom"))
+                {
+                    cupsFilePrintf(outppd, "*Default%s: %s\n", keyword, choice->choice);
+                    ppdchanged = 1;
+                }
+                else if ((customval = cupsGetOption(keyword, opt_count,
+                                                    options)) != NULL)
+                {
+                    cupsFilePrintf(outppd, "*Default%s: %s\n", keyword, customval);
+                    ppdchanged = 1;
+                }
+                else
+                    cupsFilePrintf(outppd, "%s\n", line);
+            }
+            else
+                cupsFilePrintf(outppd, "%s\n", line);
+        }
+    }
+    
+    if (!wrote_ipp_supplies &&
+        (boolval = cupsGetOption("cupsIPPSupplies", opt_count,
+                                 options)) != NULL)
+    {
+        cupsFilePrintf(outppd, "*cupsIPPSupplies: %s\n",
+                       (!_cups_strcasecmp(boolval, "true") ||
+                        !_cups_strcasecmp(boolval, "yes") ||
+                        !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
+    }
+    
+    if (!wrote_snmp_supplies &&
+        (boolval = cupsGetOption("cupsSNMPSupplies", opt_count,
+                                 options)) != NULL)
+    {
+        cupsFilePrintf(outppd, "*cupsSNMPSupplies: %s\n",
+                       (!_cups_strcasecmp(boolval, "true") ||
+                        !_cups_strcasecmp(boolval, "yes") ||
+                        !_cups_strcasecmp(boolval, "on")) ? "True" : "False");
+    }
+    
+    cupsFileClose(inppd);
+    cupsFileClose(outppd);
+    ppdClose(ppd);
+
+    
+    ippAddInteger(request, IPP_TAG_PRINTER, IPP_TAG_ENUM, "printer-state", IPP_PRINTER_IDLE);
     ippAddBoolean(request, IPP_TAG_PRINTER, "printer-is-accepting-jobs", 1);
-    
-    ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppd));
+    ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppdchanged ? tempfile : ppdfile));
     
     
     if (cupsLastError() > IPP_OK_CONFLICT)
@@ -102,24 +213,24 @@ cups_option_t	*options;
                  withReturnCode:1];
     }
     
-    if(p.options){
-        [self addOptions:p];
-    }
+    
+nsxpc_reply:
+    reply(error);
 }
 
 -(void)removePrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
     Printer* p = [Printer new];
     [p setPrinterFromDictionary:printer];
-    
     syslog(1,"Removing printer %s",[p.name UTF8String]);
 
-    NSError* error = nil;
+    
+    NSError         *error = nil;
     
     /* convert get these out of NSString */
-    const char  *name = [p.name UTF8String];
-    char        uri[HTTP_MAX_URI];
+    const char      *name = [p.name UTF8String];
+    char            uri[HTTP_MAX_URI];
     
-    request = ippNewRequest(CUPS_DELETE_PRINTER);
+    ipp_t* request = ippNewRequest(CUPS_DELETE_PRINTER);
     
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
                      "localhost", 0, "/printers/%s", name);
