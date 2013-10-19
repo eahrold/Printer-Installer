@@ -94,12 +94,10 @@ NSError* _error;
             self.panelMessage = @"The URL you entered may not be correct, please try again :";
             [self performSelector: @selector(startDefaultsPanel:) withObject:self afterDelay: 0.0];
         }else{
-        
             if(server.error){
                 _error = server.error;
                 return;
             }
-            
             
             NSSet* set = [self getInstalledPrinters];
             

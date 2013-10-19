@@ -50,8 +50,6 @@ NSError* _error;
         [PIPannel showErrorAlert:error
                            onWindow:window
                        withSelector:@selector(setupDidEndWithTerminalError:)];
-        
-    
     }
 }
 

@@ -15,7 +15,7 @@
 
 
 -(void)setGetListPath{
-    self.path =  [NSString stringWithFormat:@"%@.plist",self.URL];
+    self.path =  [NSString stringWithFormat:@"%@",self.URL];
 }
 
 
@@ -68,19 +68,25 @@
     NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     NSDictionary* dict;
     self.response = response;
-    self.error = error;
-    
+
     if(error){
+        self.error = error;
         return nil;
     }
     
-    NSString* errorDesc = nil;
+    NSString* dst = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
+    //NSLog(@"%@",dst);
+
     NSPropertyListFormat plist;
     dict = (NSDictionary*)[NSPropertyListSerialization
-                           propertyListFromData:data
-                           mutabilityOption:NSPropertyListMutableContainersAndLeaves
+                           propertyListWithData:data
+                           options:NSPropertyListMutableContainersAndLeaves
                            format:&plist
-                           errorDescription:&errorDesc];
+                           error:&error];
+    
+    if(error){
+        self.error = error;
+    }
     
     return dict;
 }

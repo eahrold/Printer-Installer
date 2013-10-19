@@ -15,7 +15,7 @@
     self.name = [dict objectForKey:@"printer"];
     self.location = [dict objectForKey:@"location"];
     self.description = [dict objectForKey:@"description"];
-    self.host = [dict objectForKey:@"host"];
+    self.host = [dict objectForKey:@"url"];
     self.protocol = [dict objectForKey:@"protocol"];
     self.model = [dict objectForKey:@"model"];
     self.options = [[NSArray alloc] initWithArray:[dict objectForKey:@"options"]];

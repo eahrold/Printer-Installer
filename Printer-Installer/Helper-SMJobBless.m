@@ -93,8 +93,8 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
         NSString* avaliableVersion = [currentInfoPlist objectForKey:@"CFBundleVersion"];
         
 
-        NSLog( @"Currently installed helper version: %@", installedVersion );
-        NSLog( @"Avaliable helper version: %@", avaliableVersion );
+        //NSLog( @"Currently installed helper version: %@", installedVersion );
+        //NSLog( @"Avaliable helper version: %@", avaliableVersion );
         
         if(!installedVersion){
             needsInstalled = YES;
