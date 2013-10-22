@@ -23,10 +23,10 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     NSError* localError = nil;
 	BOOL result = NO;
     
-    if(![self helperNeedsInstalling]){
+    if(![self helperNeedsInstalling:helperID]){
         return YES;
     }
-
+    
     AuthorizationRef authRef = NULL;
 	AuthorizationItem authItem		= { kSMRightBlessPrivilegedHelper, 0, NULL, 0 };
 	AuthorizationRights authRights	= { 1, &authItem };
@@ -69,13 +69,14 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     return result;
 }
 
-+(BOOL)helperNeedsInstalling{
++(BOOL)helperNeedsInstalling:(NSString*)helperID{
+    
     //This dose the job of checking wether the Helper App needs updateing,
     //Much of this was taken from Eric Gorr's adaptation of SMJobBless http://ericgorr.net/cocoadev/SMJobBless.zip
     OSStatus needsInstalled = YES;
     NSDictionary* installedHelperJobData = nil;
     
-    installedHelperJobData = (NSDictionary*)CFBridgingRelease(SMJobCopyDictionary( kSMDomainSystemLaunchd, (CFStringRef)kHelperName ));
+    installedHelperJobData = (NSDictionary*)CFBridgingRelease(SMJobCopyDictionary( kSMDomainSystemLaunchd, (__bridge CFStringRef)helperID ));
     
     if ( installedHelperJobData ){
         NSString* installedPath = [[installedHelperJobData objectForKey:@"ProgramArguments"] objectAtIndex:0];
@@ -85,7 +86,7 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
         NSString* installedVersion = [installedInfoPlist objectForKey:@"CFBundleVersion"];
         
         // get the version of the helper that is inside of the Main App's bundle
-        NSString * wrapperPath = [NSString stringWithFormat:@"Contents/Library/LaunchServices/%@",kHelperName];
+        NSString * wrapperPath = [NSString stringWithFormat:@"Contents/Library/LaunchServices/%@",helperID];
         
         NSBundle* appBundle = [NSBundle mainBundle];
         NSURL* appBundleURL	= [appBundle bundleURL];
@@ -144,6 +145,53 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     return error;
 }
 
+
++(void)addLoginItem:(NSString*)helperID
+{
+    if (!SMLoginItemSetEnabled((__bridge CFStringRef)helperID, true)) {
+        NSLog(@"SMLoginItemSetEnabled(..., true) failed");
+    }
+}
+
++(void)removeLoginItem:(NSString*)helperID
+{
+    if (!SMLoginItemSetEnabled((__bridge CFStringRef)helperID, false)) {
+        NSLog(@"SMLoginItemSetEnabled(..., false) failed");
+    }
+}
+
++(void)setLaunchOnLogin:(BOOL)value withLabel:(NSString*)helperID
+{
+    if (!value) {
+        [self removeLoginItem:helperID];
+    } else {
+        [self addLoginItem:helperID];
+    }
+}
+
++(BOOL)launchOnLogin:(NSString*)helperID
+{
+    NSArray *jobs = (__bridge NSArray*)SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+    if (jobs == nil) {
+        return NO;
+    }
+    
+    if ([jobs count] == 0) {
+        CFRelease((__bridge CFArrayRef)jobs);
+        return NO;
+    }
+    
+    BOOL onDemand = NO;
+    for (NSDictionary *job in jobs) {
+        if ([helperID isEqualToString:[job objectForKey:@"Label"]]) {
+            onDemand = [[job objectForKey:@"OnDemand"] boolValue];
+            break;
+        }
+    }
+    
+    CFRelease((__bridge CFArrayRef)jobs);
+    return onDemand;
+}
 
 
 @end

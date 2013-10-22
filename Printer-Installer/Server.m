@@ -82,9 +82,6 @@
         return nil;
     }
     
-    NSString* dst = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
-    //NSLog(@"%@",dst);
-
     NSPropertyListFormat plist;
     dict = (NSDictionary*)[NSPropertyListSerialization
                            propertyListWithData:data

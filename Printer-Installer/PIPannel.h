@@ -14,11 +14,15 @@
       
 }
 
+//@property (assign) IBOutlet NSWindow* configSheet;
+
+
++ (void)showErrorAlert:(NSError *)error;
++ (void)showErrorAlert:(NSError *)error withSelector:(SEL)selector;
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window;
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window withSelector:(SEL)selector;
 
 + (void)setupDidEndWithTerminalError:(NSAlert *)alert;
-+ (void)showErrorAlert:(NSError *)error;
 
 
 

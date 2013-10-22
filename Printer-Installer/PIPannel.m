@@ -29,6 +29,14 @@
                                                  contextInfo:nil];
 }
 
++ (void)showErrorAlert:(NSError *)error withSelector:(SEL)selector{
+    [[NSAlert alertWithError:error] beginSheetModalForWindow:[[NSApplication sharedApplication]mainWindow]
+                                               modalDelegate:self
+                                              didEndSelector:selector
+                                                 contextInfo:nil];
+}
+
+
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window withSelector:(SEL)selector{
     [[NSAlert alertWithError:error] beginSheetModalForWindow:window
                                                modalDelegate:self

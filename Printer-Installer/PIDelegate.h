@@ -18,11 +18,10 @@
     NSArray* printerList;
 }
 
-@property (assign) IBOutlet NSWindow *window;
 @property (strong, nonatomic) PIStatusBar* piBar;
 
-
 @property (assign) NSString *panelMessage;  // <----     this is bound
+@property (assign) BOOL launchOnLogin;  // <----     this is bound
 
 @property (assign) IBOutlet NSWindow *defaultsPanel;
 @property (assign) IBOutlet NSButton *defaultsSetButton;
@@ -30,8 +29,9 @@
 
 @property (assign) IBOutlet NSTextField *defaultsServerName;
 
-- (IBAction)startDefaultsPanel:(id)sender;
-- (IBAction)endDefaultsPanel:(id)sender;
-- (IBAction)cancel:(id)sender;
+-(IBAction)startDefaultsPanel:(id)sender;
+-(IBAction)endDefaultsPanel:(id)sender;
+-(IBAction)cancel:(id)sender;
+-(IBAction)launchAtLoginChecked:(id)sender;
 
 @end

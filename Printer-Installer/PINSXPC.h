@@ -12,6 +12,8 @@
 #import "Server.h"
 #import "PIPannel.h"
 
+static NSString * const kHelperName;
+
 @interface PINSXPC : NSObject
 
 +(void)addPrinter:(NSDictionary*)printer;

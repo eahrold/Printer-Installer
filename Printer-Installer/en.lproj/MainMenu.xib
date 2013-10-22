@@ -658,8 +658,8 @@
             </items>
         </menu>
         <customObject id="420" customClass="NSFontManager"/>
-        <window title="Defaults Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="695">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="Configure Printer-Installer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="695">
+            <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="494" height="140"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
@@ -711,6 +711,20 @@ DQ
                         </buttonCell>
                         <connections>
                             <action selector="cancel:" target="494" id="Ce6-fs-T6c"/>
+                        </connections>
+                    </button>
+                    <button id="AsE-jn-9FZ">
+                        <rect key="frame" x="18" y="34" width="124" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Launch At Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1Zy-7q-bVV">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <connections>
+                                <binding destination="494" name="value" keyPath="launchOnLogin" id="Ma3-gg-lcG"/>
+                            </connections>
+                        </buttonCell>
+                        <connections>
+                            <action selector="launchAtLoginChecked:" target="494" id="lvz-ic-cIJ"/>
                         </connections>
                     </button>
                 </subviews>

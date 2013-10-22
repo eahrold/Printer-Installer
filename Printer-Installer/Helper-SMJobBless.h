@@ -14,8 +14,14 @@
 
 @interface JobBlesser : NSObject
 
-+(BOOL)blessHelperWithLabel:(NSString *)label
++(BOOL)blessHelperWithLabel:(NSString *)helperID
                   andPrompt:(NSString*)prompt
                       error:(NSError**)error;
+
++(void)addLoginItem:(NSString*)helperID;
++(void)removeLoginItem:(NSString*)helperID;
++(void)setLaunchOnLogin:(BOOL)value withLabel:(NSString*)helperID;
++(BOOL)launchOnLogin:(NSString*)helperID;
+
 
 @end

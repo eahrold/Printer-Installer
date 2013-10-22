@@ -8,18 +8,15 @@
 
 #import "PIDelegate.h"
 
+static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
+
 
 @implementation PIDelegate
-NSError* _error;
-
-@synthesize window, piBar;
-
-
+@synthesize piBar,launchOnLogin;
 
 //-------------------------------------------
 //  Set Up Arrays
 //-------------------------------------------
-
 
 -(void)setDefaults{
     NSUserDefaults* setDefaults = [NSUserDefaults standardUserDefaults];
@@ -33,13 +30,7 @@ NSError* _error;
 //  Delegate Methods
 //-------------------------------------------
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{        
-    if(_error){
-        [PIPannel showErrorAlert:_error
-                           onWindow:window
-                       withSelector:@selector(setupDidEndWithTerminalError:)];
-    }
-        
+{
     // Insert code here to initialize your application
     NSError  *error = nil;
     
@@ -48,9 +39,12 @@ NSError* _error;
                                    error:&error]){
         NSLog(@"Somthing went wrong");
         [PIPannel showErrorAlert:error
-                           onWindow:window
+                           onWindow:nil
                        withSelector:@selector(setupDidEndWithTerminalError:)];
     }
+    
+    self.launchOnLogin = [JobBlesser launchOnLogin:kLoginHelper];
+
     piBar = [[PIStatusBar alloc]initPrinterMenu];
     [piBar RefreshPrinters];
 }
@@ -86,7 +80,11 @@ NSError* _error;
     [self startDefaultsPanel:nil];
 }
 
-- (IBAction)startDefaultsPanel:(id)sender{    
+-(IBAction)launchAtLoginChecked:(id)sender{
+    [JobBlesser setLaunchOnLogin:self.launchOnLogin withLabel:kLoginHelper];
+}
+
+-(IBAction)startDefaultsPanel:(id)sender{
     if(sender == nil){
         self.panelMessage = @"Please enter the web address for the printers";
     }
@@ -95,7 +93,7 @@ NSError* _error;
     if(sn){
         _defaultsServerName.stringValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
     }
-    
+
     [NSApp beginSheet:_defaultsPanel
        modalForWindow:nil
         modalDelegate:nil
