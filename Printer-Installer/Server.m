@@ -9,13 +9,21 @@
 #import "Server.h"
 
 @implementation Server
+-(id)initWithURL:(NSString*)url{
+    self = [super init];
+    if (self) {
+        self.URL= [NSURL URLWithString:url];
+    }
+    return self;
+}
+
 -(void)setBasicHeaders:(NSString*)header{
     self.authHeader = [ NSString stringWithFormat:@"Basic %@",header];
 }
 
 
 -(void)setGetListPath{
-    self.path =  [NSString stringWithFormat:@"%@",self.URL];
+    self.path =  [NSString stringWithFormat:@"%@",self.path];
 }
 
 
@@ -24,7 +32,7 @@
     NSURLResponse* response = nil;
     
     // Create the request.
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.path]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.URL];
     
     // set as POST request
     request.HTTPMethod = @"POST";
@@ -50,7 +58,7 @@
     NSURLResponse* response = nil;
         
     // Create the request.
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.path]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.URL];
         
     // set as GET request
     request.HTTPMethod = @"GET";

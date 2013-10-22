@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE1FCEAC17C54A0100F3A3E6 /* icon.icns */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
+		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */; };
-		BE8FD68617CE51C100452FD4 /* PITable.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68517CE51C100452FD4 /* PITable.m */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannel.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
@@ -25,9 +24,11 @@
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAA87F817BECCCF00D2BCAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F717BECCCF00D2BCAE /* Security.framework */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
+		BEBF764518158EB3003BF2BE /* Status.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBF764418158EB3003BF2BE /* Status.png */; };
 		BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
+		BEE113731815764000850EF6 /* PIStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE113721815764000850EF6 /* PIStatusBar.m */; };
 		BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */; };
 /* End PBXBuildFile section */
 
@@ -45,10 +46,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BE1FCEAC17C54A0100F3A3E6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
+		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintInstaller.icns; sourceTree = "<group>"; };
-		BE8FD68417CE51C100452FD4 /* PITable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PITable.h; sourceTree = "<group>"; };
-		BE8FD68517CE51C100452FD4 /* PITable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PITable.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
 		BE8FD68A17CE646800452FD4 /* PIPannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannel.h; sourceTree = "<group>"; };
@@ -78,10 +78,13 @@
 		BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		BEAA87F717BECCCF00D2BCAE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
+		BEBF764418158EB3003BF2BE /* Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Status.png; sourceTree = "<group>"; };
 		BEBFB8DF17BFFFD50023B26C /* Printer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Printer.h; path = "Printer-Installer/Printer.h"; sourceTree = "<group>"; };
 		BEBFB8E017BFFFD50023B26C /* Printer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Printer.m; path = "Printer-Installer/Printer.m"; sourceTree = "<group>"; };
 		BEBFB8E417C027D40023B26C /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		BEBFB8E517C027D40023B26C /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		BEE113711815764000850EF6 /* PIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIStatusBar.h; sourceTree = "<group>"; };
+		BEE113721815764000850EF6 /* PIStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIStatusBar.m; sourceTree = "<group>"; };
 		BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Helper-SMJobBless.h"; sourceTree = "<group>"; };
 		BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Helper-SMJobBless.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,10 +160,12 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
+				BE7400C218122D1E00F71E1D /* PICups.h */,
+				BE7400C318122D1E00F71E1D /* PICups.m */,
 				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
-				BE8FD68417CE51C100452FD4 /* PITable.h */,
-				BE8FD68517CE51C100452FD4 /* PITable.m */,
+				BEE113711815764000850EF6 /* PIStatusBar.h */,
+				BEE113721815764000850EF6 /* PIStatusBar.m */,
 				BE8FD68A17CE646800452FD4 /* PIPannel.h */,
 				BE8FD68B17CE646800452FD4 /* PIPannel.m */,
 				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
@@ -174,12 +179,12 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEBF764418158EB3003BF2BE /* Status.png */,
 				BEBFB8E417C027D40023B26C /* Server.h */,
 				BEBFB8E517C027D40023B26C /* Server.m */,
 				BE93C99017BEC88400625DE2 /* main.m */,
 				BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */,
 				BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */,
-				BE1FCEAC17C54A0100F3A3E6 /* icon.icns */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
@@ -289,8 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
+				BEBF764518158EB3003BF2BE /* Status.png in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
-				BE1FCEAD17C54A0100F3A3E6 /* icon.icns in Resources */,
 				BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,9 +312,10 @@
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
 				BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */,
-				BE8FD68617CE51C100452FD4 /* PITable.m in Sources */,
+				BE7400C418122D1E00F71E1D /* PICups.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
 				BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */,
+				BEE113731815764000850EF6 /* PIStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

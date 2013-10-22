@@ -30,7 +30,8 @@
 }
 
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window withSelector:(SEL)selector{
-    [[NSAlert alertWithError:error] beginSheetModalForWindow:window                                               modalDelegate:self
+    [[NSAlert alertWithError:error] beginSheetModalForWindow:window
+                                               modalDelegate:self
                                               didEndSelector:selector
                                                  contextInfo:nil];
 }
@@ -41,8 +42,6 @@
     NSLog(@"Setup encountered an error.");
     [NSApp terminate:self];
 }
-
-
 
 
 @end

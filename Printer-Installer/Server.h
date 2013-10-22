@@ -10,7 +10,7 @@
 
 @interface Server : NSObject <NSURLConnectionDelegate>
 
-@property (copy) NSString *URL;
+@property (copy) NSURL *URL;
 @property (copy) NSString *port;
 @property (copy) NSString *path;
 @property (nonatomic) BOOL isSecure;
@@ -25,7 +25,7 @@
 @property (copy) NSURLResponse* response;
 
 
-
+-(id)initWithURL:(NSString*)url;
 -(void)setBasicHeaders:(NSString*)header;
 -(void)setGetListPath;
 
