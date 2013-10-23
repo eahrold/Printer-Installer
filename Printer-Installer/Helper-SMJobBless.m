@@ -163,8 +163,10 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
 +(void)setLaunchOnLogin:(BOOL)value withLabel:(NSString*)helperID
 {
     if (!value) {
+        NSLog(@"Removing Login Item");
         [self removeLoginItem:helperID];
     } else {
+        NSLog(@"Adding Login Item");
         [self addLoginItem:helperID];
     }
 }

@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
+		BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE28433B1816BCD200B9FABE /* ConfigSheet.xib */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
-		BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannel.m */; };
+		BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannelController.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
 		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
@@ -64,13 +65,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintInstaller.icns; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
-		BE8FD68A17CE646800452FD4 /* PIPannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannel.h; sourceTree = "<group>"; };
-		BE8FD68B17CE646800452FD4 /* PIPannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIPannel.m; sourceTree = "<group>"; };
+		BE8FD68A17CE646800452FD4 /* PIPannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannelController.h; sourceTree = "<group>"; };
+		BE8FD68B17CE646800452FD4 /* PIPannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIPannelController.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -206,11 +208,12 @@
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
 				BEE113711815764000850EF6 /* PIStatusBar.h */,
 				BEE113721815764000850EF6 /* PIStatusBar.m */,
-				BE8FD68A17CE646800452FD4 /* PIPannel.h */,
-				BE8FD68B17CE646800452FD4 /* PIPannel.m */,
+				BE8FD68A17CE646800452FD4 /* PIPannelController.h */,
+				BE8FD68B17CE646800452FD4 /* PIPannelController.m */,
 				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
 				BE8FD68817CE547F00452FD4 /* PINSXPC.m */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
+				BE28433B1816BCD200B9FABE /* ConfigSheet.xib */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
 			path = "Printer-Installer";
@@ -219,16 +222,16 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BEBF764418158EB3003BF2BE /* Status.png */,
+				BE93C99017BEC88400625DE2 /* main.m */,
 				BEBFB8E417C027D40023B26C /* Server.h */,
 				BEBFB8E517C027D40023B26C /* Server.m */,
-				BE93C99017BEC88400625DE2 /* main.m */,
 				BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */,
 				BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
 				BE93C99317BEC88400625DE2 /* Credits.rtf */,
+				BEBF764418158EB3003BF2BE /* Status.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */,
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
 				BEBF764518158EB3003BF2BE /* Status.png in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
@@ -409,7 +413,7 @@
 				BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */,
 				BE7400C418122D1E00F71E1D /* PICups.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
-				BE8FD68C17CE646800452FD4 /* PIPannel.m in Sources */,
+				BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */,
 				BEE113731815764000850EF6 /* PIStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

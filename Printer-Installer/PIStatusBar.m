@@ -48,7 +48,7 @@
     NSSet* set = [PICups getInstalledPrinters];
     NSMutableSet * cmp = [NSMutableSet new];
     
-    for ( NSDictionary* p in printerList){
+    for ( NSDictionary* p in [[printerList reverseObjectEnumerator] allObjects]){
         NSString* printer = [p objectForKey:@"printer"];
         NSString* description = [p objectForKey:@"description"];
         NSString* location = [p objectForKey:@"location"];

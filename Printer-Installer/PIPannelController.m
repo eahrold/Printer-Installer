@@ -6,13 +6,56 @@
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "PIPannel.h"
+#import "PIPannelController.h"
 
-@implementation PIPannel
+static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
+
+@implementation PIPannelCotroller
+@synthesize configSheet = _configSheet;
+
 //-------------------------------------------
 //  Progress Panel and Alert
 //-------------------------------------------
 
+-(IBAction)openConfigSheet:(id)sender{
+    self.panelMessage = @"Enter the URL for the printers:";
+    if(!_configSheet){
+        [NSBundle loadNibNamed:@"ConfigSheet" owner:self];
+    }
+    [NSApp beginSheet:self.configSheet
+       modalForWindow:NULL
+        modalDelegate:self
+       didEndSelector:NULL
+          contextInfo:NULL];
+}
+
+-(IBAction)closeConfigSheet:(id)sender{
+    NSButton* btn = sender;
+    PIDelegate* delegate = [NSApp delegate];
+    
+    if([btn.title isEqualToString:@"Set"]){
+        [delegate.piBar RefreshPrinters];
+        if(delegate.piBar.printerList.count == 0){
+            self.panelMessage = @"The URL you entered may not be correct, please try again:";
+            [self.defaultsCancelButton setHidden:NO];
+        }else{
+            [NSApp endSheet:self.configSheet];
+            [self.configSheet close];
+            self.configSheet=nil;
+        }
+    }else{
+        NSLog(@"Canceling");
+        [NSApp endSheet:self.configSheet];
+        [self.configSheet close];
+        self.configSheet=nil;
+    }
+    
+}
+
+-(IBAction)launchAtLoginChecked:(id)sender{
+    NSButton* btn = sender;
+    [JobBlesser setLaunchOnLogin:btn.state withLabel:kLoginHelper];
+}
 
 
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window {

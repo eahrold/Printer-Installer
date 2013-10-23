@@ -27,7 +27,6 @@
 
     NSError* error = nil;
 
-
     ipp_t           *request;
     ppd_file_t      *ppd;
     cups_file_t     *inppd;
@@ -223,8 +222,7 @@ nsxpc_reply:
     [p setPrinterFromDictionary:printer];
     syslog(1,"Removing printer %s",[p.name UTF8String]);
 
-    
-    NSError         *error = nil;
+    NSError *error = nil;
     
     /* convert get these out of NSString */
     const char      *name = [p.name UTF8String];

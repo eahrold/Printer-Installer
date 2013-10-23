@@ -21,7 +21,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [PIPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
              }
          }];
          [helperXPCConnection invalidate];
@@ -38,7 +38,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [PIPannel showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
                  
              }
          }];
