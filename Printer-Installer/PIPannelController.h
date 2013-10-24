@@ -11,7 +11,7 @@
 #import "PIDelegate.h"
 #import "Helper-SMJobBless.h"
 
-@interface PIPannelCotroller : NSObject
+@interface PIPannelCotroller : NSWindowController
 
 @property (assign) IBOutlet NSWindow* configSheet;
 @property (assign) IBOutlet NSButton *defaultsSetButton;

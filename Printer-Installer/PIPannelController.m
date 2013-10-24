@@ -8,10 +8,23 @@
 
 #import "PIPannelController.h"
 
+@interface PIPannelCotroller ()
+
+@end
+
 static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 
 @implementation PIPannelCotroller
 @synthesize configSheet = _configSheet;
+
+- (id)initWithWindow:(NSWindow *)window
+{
+    self = [super initWithWindow:window];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
+}
 
 //-------------------------------------------
 //  Progress Panel and Alert
@@ -50,6 +63,13 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
         self.configSheet=nil;
     }
     
+}
+
+- (void)windowDidLoad
+{
+    [super windowDidLoad];
+    
+    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 -(IBAction)launchAtLoginChecked:(id)sender{
