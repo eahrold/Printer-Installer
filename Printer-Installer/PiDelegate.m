@@ -12,7 +12,7 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 
 
 @implementation PIDelegate
-@synthesize piBar;
+@synthesize piBar,configSheet;
 
 
 //-------------------------------------------
@@ -24,18 +24,19 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
     NSError  *error = nil;
     
     if(![JobBlesser blessHelperWithLabel:kHelperName
-                               andPrompt:@"In order to use the SMC Printers"
+                               andPrompt:@"In order to add managed Printers"
                                    error:&error]){
         NSLog(@"Somthing went wrong");
         [PIPannelCotroller showErrorAlert:error
                            onWindow:nil
                        withSelector:@selector(setupDidEndWithTerminalError:)];
     }
-    
+}
+
+-(void)awakeFromNib{
     piBar = [[PIStatusBar alloc]initPrinterMenu];
     [piBar RefreshPrinters];
 }
-
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
 }
@@ -69,7 +70,12 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 }
 
 -(void)configure{
-    [self.defaultsSetButton performClick:self];
+    [NSApp activateIgnoringOtherApps:YES];
+    if(!configSheet){
+        NSLog(@"making sheet");
+        configSheet = [[PIPannelCotroller alloc]initWithWindowNibName:@"ConfigSheet"];
+    }
+    [configSheet showWindow:nil];
 }
 
 

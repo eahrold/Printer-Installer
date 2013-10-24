@@ -15,54 +15,14 @@
 static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 
 @implementation PIPannelCotroller
-@synthesize configSheet = _configSheet;
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+        self.panelMessage = @"Please enter the url";
     }
     return self;
-}
-
-//-------------------------------------------
-//  Progress Panel and Alert
-//-------------------------------------------
-
--(IBAction)openConfigSheet:(id)sender{
-    self.panelMessage = @"Enter the URL for the printers:";
-    if(!_configSheet){
-        [NSBundle loadNibNamed:@"ConfigSheet" owner:self];
-    }
-    [NSApp beginSheet:self.configSheet
-       modalForWindow:NULL
-        modalDelegate:self
-       didEndSelector:NULL
-          contextInfo:NULL];
-}
-
--(IBAction)closeConfigSheet:(id)sender{
-    NSButton* btn = sender;
-    PIDelegate* delegate = [NSApp delegate];
-    
-    if([btn.title isEqualToString:@"Set"]){
-        [delegate.piBar RefreshPrinters];
-        if(delegate.piBar.printerList.count == 0){
-            self.panelMessage = @"The URL you entered may not be correct, please try again:";
-            [self.defaultsCancelButton setHidden:NO];
-        }else{
-            [NSApp endSheet:self.configSheet];
-            [self.configSheet close];
-            self.configSheet=nil;
-        }
-    }else{
-        NSLog(@"Canceling");
-        [NSApp endSheet:self.configSheet];
-        [self.configSheet close];
-        self.configSheet=nil;
-    }
-    
 }
 
 - (void)windowDidLoad
@@ -72,11 +32,37 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+//-------------------------------------------
+//  Configure Sheet
+//-------------------------------------------
+
+
+-(IBAction)setButtonPressed:(id)sender{
+    PIDelegate* delegate = [NSApp delegate];
+    
+    if(delegate.piBar.printerList.count == 0){
+        self.panelMessage = @"The URL you entered may not be correct, please try again:";
+        [self.defaultsCancelButton setHidden:NO];
+    }else{
+        [self.window close];
+        delegate.configSheet = nil;
+    }
+}
+
+-(IBAction)cancelButtonPressed:(id)sender{
+    [self.window close];
+    [[NSApp delegate] setConfigSheet:nil];
+}
+
 -(IBAction)launchAtLoginChecked:(id)sender{
     NSButton* btn = sender;
     [JobBlesser setLaunchOnLogin:btn.state withLabel:kLoginHelper];
 }
 
+
+//-------------------------------------------
+//  Progress Panel and Alert
+//-------------------------------------------
 
 + (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window {
     [[NSAlert alertWithError:error] beginSheetModalForWindow:window

@@ -14,9 +14,14 @@
 #import "PIPannelController.h"
 #import "PIStatusBar.h"
 
+@class PIPannelCotroller;
+
 @interface PIDelegate : NSObject <NSApplicationDelegate>{
+    //PIPannelCotroller *configSheet;
     NSArray* printerList;
 }
+
+@property (strong,nonatomic) PIPannelCotroller *configSheet;
 
 @property (strong, nonatomic) PIStatusBar* piBar;
 @property (assign) IBOutlet NSButton *defaultsSetButton;

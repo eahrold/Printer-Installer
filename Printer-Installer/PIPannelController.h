@@ -13,13 +13,13 @@
 
 @interface PIPannelCotroller : NSWindowController
 
-@property (assign) IBOutlet NSWindow* configSheet;
 @property (assign) IBOutlet NSButton *defaultsSetButton;
 @property (assign) IBOutlet NSButton *defaultsCancelButton;
 @property (assign) NSString *panelMessage;  // <----     this is bound
 
-- (IBAction)openConfigSheet:(id)sender;
-- (IBAction)closeConfigSheet:(id)sender;
+- (IBAction)setButtonPressed:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
+
 - (IBAction)launchAtLoginChecked:(id)sender;
 
 + (void)showErrorAlert:(NSError *)error;

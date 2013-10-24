@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */,
-				BEBFB8E317C001F80023B26C /* Common */,
+				BEBFB8E317C001F80023B26C /* App/Helper Common */,
 				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
 				BEC6CDE318160AD700300121 /* PILaunchAtLogin */,
@@ -257,14 +257,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BEBFB8E317C001F80023B26C /* Common */ = {
+		BEBFB8E317C001F80023B26C /* App/Helper Common */ = {
 			isa = PBXGroup;
 			children = (
 				BEBFB8DF17BFFFD50023B26C /* Printer.h */,
 				BEBFB8E017BFFFD50023B26C /* Printer.m */,
 				BE93C9B417BEC90300625DE2 /* Interfaces.h */,
 			);
-			name = Common;
+			name = "App/Helper Common";
 			sourceTree = "<group>";
 		};
 		BEC6CDE318160AD700300121 /* PILaunchAtLogin */ = {
