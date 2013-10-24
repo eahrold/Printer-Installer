@@ -36,6 +36,9 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 -(void)awakeFromNib{
     piBar = [[PIStatusBar alloc]initPrinterMenu];
     [piBar RefreshPrinters];
+    if(piBar.printerList.count == 0){
+        [self configure];
+    }
 }
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
@@ -72,7 +75,6 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 -(void)configure{
     [NSApp activateIgnoringOtherApps:YES];
     if(!configSheet){
-        NSLog(@"making sheet");
         configSheet = [[PIPannelCotroller alloc]initWithWindowNibName:@"ConfigSheet"];
     }
     [configSheet showWindow:nil];

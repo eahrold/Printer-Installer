@@ -20,7 +20,7 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 {
     self = [super initWithWindow:window];
     if (self) {
-        self.panelMessage = @"Please enter the url";
+        self.panelMessage = @"Please enter the URL for the managed printers:";
     }
     return self;
 }
@@ -39,7 +39,8 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 
 -(IBAction)setButtonPressed:(id)sender{
     PIDelegate* delegate = [NSApp delegate];
-    
+    [delegate.piBar RefreshPrinters];
+
     if(delegate.piBar.printerList.count == 0){
         self.panelMessage = @"The URL you entered may not be correct, please try again:";
         [self.defaultsCancelButton setHidden:NO];
