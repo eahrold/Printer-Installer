@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE052C73181989EC0007D51C /* PIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE052C72181989EC0007D51C /* PIApplication.m */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE28433B1816BCD200B9FABE /* ConfigSheet.xib */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
@@ -65,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE052C71181989EC0007D51C /* PIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIApplication.h; sourceTree = "<group>"; };
+		BE052C72181989EC0007D51C /* PIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIApplication.m; sourceTree = "<group>"; };
 		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
+				BE052C71181989EC0007D51C /* PIApplication.h */,
+				BE052C72181989EC0007D51C /* PIApplication.m */,
 				BE7400C218122D1E00F71E1D /* PICups.h */,
 				BE7400C318122D1E00F71E1D /* PICups.m */,
 				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
@@ -354,6 +359,14 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Eldon Ahrold";
+				TargetAttributes = {
+					BE93C98017BEC88400625DE2 = {
+						DevelopmentTeam = BUN87F4W87;
+					};
+					BEC6CDE018160AD700300121 = {
+						DevelopmentTeam = BUN87F4W87;
+					};
+				};
 			};
 			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -407,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE93C99117BEC88400625DE2 /* main.m in Sources */,
+				BE052C73181989EC0007D51C /* PIApplication.m in Sources */,
 				BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEBFB8E617C027D40023B26C /* Server.m in Sources */,
@@ -605,7 +619,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
 				INFOPLIST_FILE = "./release/helper-Info.plist";
@@ -631,6 +645,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PILaunchAtLogin/PILaunchAtLogin-Prefix.pch";
@@ -654,6 +669,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -36,9 +36,7 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 -(void)awakeFromNib{
     piBar = [[PIStatusBar alloc]initPrinterMenu];
     [piBar RefreshPrinters];
-    if(piBar.printerList.count == 0){
-        [self configure];
-    }
+    if(piBar.printerList.count == 0)[self configure];
 }
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
