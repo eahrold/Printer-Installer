@@ -11,7 +11,6 @@
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE28433B1816BCD200B9FABE /* ConfigSheet.xib */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
-		BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannelController.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
@@ -25,19 +24,12 @@
 		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAA87F817BECCCF00D2BCAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F717BECCCF00D2BCAE /* Security.framework */; };
+		BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAB4CD7181AE97300585C03 /* CoreServices.framework */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
-		BEBF764518158EB3003BF2BE /* Status.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBF764418158EB3003BF2BE /* Status.png */; };
 		BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E217BFFFD50023B26C /* Printer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E017BFFFD50023B26C /* Printer.m */; };
 		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
-		BEC6CDE218160AD700300121 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
-		BEC6CDE818160AD700300121 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEC6CDE618160AD700300121 /* InfoPlist.strings */; };
-		BEC6CDEA18160AD700300121 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC6CDE918160AD700300121 /* main.m */; };
-		BEC6CDEE18160AD700300121 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BEC6CDEC18160AD700300121 /* Credits.rtf */; };
-		BEC6CDF118160AD700300121 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC6CDF018160AD700300121 /* AppDelegate.m */; };
-		BEC6CDF418160AD800300121 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC6CDF218160AD800300121 /* MainMenu.xib */; };
-		BEC6CDF618160AD800300121 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC6CDF518160AD800300121 /* Images.xcassets */; };
-		BEC6CE1018160C1B00300121 /* PILaunchAtLogin.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = BEC6CDE118160AD700300121 /* PILaunchAtLogin.app */; };
+		BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC420AA181A0947005F3AC7 /* Images.xcassets */; };
 		BEE113731815764000850EF6 /* PIStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE113721815764000850EF6 /* PIStatusBar.m */; };
 		BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */; };
 /* End PBXBuildFile section */
@@ -53,16 +45,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BEC6CE0F18160C0700300121 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Contents/Library/LoginItems;
-			dstSubfolderSpec = 1;
-			files = (
-				BEC6CE1018160C1B00300121 /* PILaunchAtLogin.app in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +53,6 @@
 		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
-		BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PrintInstaller.icns; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
 		BE8FD68A17CE646800452FD4 /* PIPannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannelController.h; sourceTree = "<group>"; };
@@ -100,22 +81,13 @@
 		BE93C9B617BEC96900625DE2 /* helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helper.m; sourceTree = "<group>"; };
 		BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		BEAA87F717BECCCF00D2BCAE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BEAB4CD7181AE97300585C03 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
-		BEBF764418158EB3003BF2BE /* Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Status.png; sourceTree = "<group>"; };
 		BEBFB8DF17BFFFD50023B26C /* Printer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Printer.h; path = "Printer-Installer/Printer.h"; sourceTree = "<group>"; };
 		BEBFB8E017BFFFD50023B26C /* Printer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Printer.m; path = "Printer-Installer/Printer.m"; sourceTree = "<group>"; };
 		BEBFB8E417C027D40023B26C /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		BEBFB8E517C027D40023B26C /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
-		BEC6CDE118160AD700300121 /* PILaunchAtLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PILaunchAtLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEC6CDE518160AD700300121 /* PILaunchAtLogin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PILaunchAtLogin-Info.plist"; sourceTree = "<group>"; };
-		BEC6CDE718160AD700300121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEC6CDE918160AD700300121 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BEC6CDEB18160AD700300121 /* PILaunchAtLogin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PILaunchAtLogin-Prefix.pch"; sourceTree = "<group>"; };
-		BEC6CDED18160AD700300121 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		BEC6CDEF18160AD700300121 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BEC6CDF018160AD700300121 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BEC6CDF318160AD800300121 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BEC6CDF518160AD800300121 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BEC420AA181A0947005F3AC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BEE113711815764000850EF6 /* PIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIStatusBar.h; sourceTree = "<group>"; };
 		BEE113721815764000850EF6 /* PIStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIStatusBar.m; sourceTree = "<group>"; };
@@ -139,16 +111,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */,
 				BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */,
 				BE93C9A717BEC8CB00625DE2 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BEC6CDDE18160AD700300121 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEC6CDE218160AD700300121 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,11 +123,9 @@
 		BE93C97817BEC88400625DE2 = {
 			isa = PBXGroup;
 			children = (
-				BE7FB6E517D0447100F6D33E /* PrintInstaller.icns */,
 				BEBFB8E317C001F80023B26C /* App/Helper Common */,
 				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
-				BEC6CDE318160AD700300121 /* PILaunchAtLogin */,
 				BE93C98317BEC88400625DE2 /* Frameworks */,
 				BE93C98217BEC88400625DE2 /* Products */,
 			);
@@ -173,7 +136,6 @@
 			children = (
 				BE93C98117BEC88400625DE2 /* Printer-Installer.app */,
 				BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */,
-				BEC6CDE118160AD700300121 /* PILaunchAtLogin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,6 +143,7 @@
 		BE93C98317BEC88400625DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEAB4CD7181AE97300585C03 /* CoreServices.framework */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BEAA87F717BECCCF00D2BCAE /* Security.framework */,
 				BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */,
@@ -205,10 +168,6 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
-				BE052C71181989EC0007D51C /* PIApplication.h */,
-				BE052C72181989EC0007D51C /* PIApplication.m */,
-				BE7400C218122D1E00F71E1D /* PICups.h */,
-				BE7400C318122D1E00F71E1D /* PICups.m */,
 				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
 				BEE113711815764000850EF6 /* PIStatusBar.h */,
@@ -227,6 +186,11 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
+				BE052C71181989EC0007D51C /* PIApplication.h */,
+				BE052C72181989EC0007D51C /* PIApplication.m */,
+				BE7400C218122D1E00F71E1D /* PICups.h */,
+				BE7400C318122D1E00F71E1D /* PICups.m */,
 				BE93C99017BEC88400625DE2 /* main.m */,
 				BEBFB8E417C027D40023B26C /* Server.h */,
 				BEBFB8E517C027D40023B26C /* Server.m */,
@@ -236,7 +200,6 @@
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
 				BE93C99317BEC88400625DE2 /* Credits.rtf */,
-				BEBF764418158EB3003BF2BE /* Status.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -272,30 +235,6 @@
 			name = "App/Helper Common";
 			sourceTree = "<group>";
 		};
-		BEC6CDE318160AD700300121 /* PILaunchAtLogin */ = {
-			isa = PBXGroup;
-			children = (
-				BEC6CDEF18160AD700300121 /* AppDelegate.h */,
-				BEC6CDF018160AD700300121 /* AppDelegate.m */,
-				BEC6CDF218160AD800300121 /* MainMenu.xib */,
-				BEC6CDF518160AD800300121 /* Images.xcassets */,
-				BEC6CDE418160AD700300121 /* Supporting Files */,
-			);
-			path = PILaunchAtLogin;
-			sourceTree = "<group>";
-		};
-		BEC6CDE418160AD700300121 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BEC6CDE518160AD700300121 /* PILaunchAtLogin-Info.plist */,
-				BEC6CDE618160AD700300121 /* InfoPlist.strings */,
-				BEC6CDE918160AD700300121 /* main.m */,
-				BEC6CDEB18160AD700300121 /* PILaunchAtLogin-Prefix.pch */,
-				BEC6CDEC18160AD700300121 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -307,7 +246,6 @@
 				BE93C97D17BEC88400625DE2 /* Sources */,
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
-				BEC6CE0F18160C0700300121 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -334,23 +272,6 @@
 			productReference = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */;
 			productType = "com.apple.product-type.tool";
 		};
-		BEC6CDE018160AD700300121 /* PILaunchAtLogin */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BEC6CE0D18160AD800300121 /* Build configuration list for PBXNativeTarget "PILaunchAtLogin" */;
-			buildPhases = (
-				BEC6CDDD18160AD700300121 /* Sources */,
-				BEC6CDDE18160AD700300121 /* Frameworks */,
-				BEC6CDDF18160AD700300121 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PILaunchAtLogin;
-			productName = PILaunchAtLogin;
-			productReference = BEC6CDE118160AD700300121 /* PILaunchAtLogin.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -361,9 +282,6 @@
 				ORGANIZATIONNAME = "Eldon Ahrold";
 				TargetAttributes = {
 					BE93C98017BEC88400625DE2 = {
-						DevelopmentTeam = BUN87F4W87;
-					};
-					BEC6CDE018160AD700300121 = {
 						DevelopmentTeam = BUN87F4W87;
 					};
 				};
@@ -383,7 +301,6 @@
 			targets = (
 				BE93C98017BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A417BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */,
-				BEC6CDE018160AD700300121 /* PILaunchAtLogin */,
 			);
 		};
 /* End PBXProject section */
@@ -395,20 +312,8 @@
 			files = (
 				BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */,
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
-				BEBF764518158EB3003BF2BE /* Status.png in Resources */,
+				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
-				BE7FB6E617D0447100F6D33E /* PrintInstaller.icns in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BEC6CDDF18160AD700300121 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEC6CDE818160AD700300121 /* InfoPlist.strings in Resources */,
-				BEC6CDF618160AD800300121 /* Images.xcassets in Resources */,
-				BEC6CDEE18160AD700300121 /* Credits.rtf in Resources */,
-				BEC6CDF418160AD800300121 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,15 +347,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BEC6CDDD18160AD700300121 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEC6CDF118160AD700300121 /* AppDelegate.m in Sources */,
-				BEC6CDEA18160AD700300121 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -474,30 +370,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BE93C99A17BEC88400625DE2 /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		BEC6CDE618160AD700300121 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEC6CDE718160AD700300121 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BEC6CDEC18160AD700300121 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEC6CDED18160AD700300121 /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		BEC6CDF218160AD800300121 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEC6CDF318160AD800300121 /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -567,6 +439,7 @@
 		BE93C99F17BEC88400625DE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = MainApp;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -581,6 +454,7 @@
 		BE93C9A017BEC88400625DE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = MainApp;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -638,51 +512,6 @@
 			};
 			name = Release;
 		};
-		BEC6CE0918160AD800300121 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PILaunchAtLogin/PILaunchAtLogin-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "PILaunchAtLogin/PILaunchAtLogin-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		BEC6CE0A18160AD800300121 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
-				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PILaunchAtLogin/PILaunchAtLogin-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "PILaunchAtLogin/PILaunchAtLogin-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -709,15 +538,6 @@
 			buildConfigurations = (
 				BE93C9B017BEC8CB00625DE2 /* Debug */,
 				BE93C9B117BEC8CB00625DE2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BEC6CE0D18160AD800300121 /* Build configuration list for PBXNativeTarget "PILaunchAtLogin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BEC6CE0918160AD800300121 /* Debug */,
-				BEC6CE0A18160AD800300121 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

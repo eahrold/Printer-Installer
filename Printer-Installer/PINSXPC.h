@@ -18,6 +18,7 @@ static NSString * const kHelperName;
 
 +(void)addPrinter:(NSDictionary*)printer;
 +(void)removePrinter:(NSDictionary*)printer;
++(void)installGlobalLoginItem;
 +(void)tellHelperToQuit;
 
 @end

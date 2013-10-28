@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "Printer.h"
 
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
@@ -19,6 +20,7 @@ static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 -(void)removePrinter:(NSDictionary*)printer
         withReply:(void (^)(NSError *error))reply;
 
+-(void)installLoginItem:(NSURL*)loginItem;
 -(void)quitHelper;
 
 @end

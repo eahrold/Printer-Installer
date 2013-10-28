@@ -28,6 +28,8 @@
 
 @property (copy) NSArray *options;
 
+@property (copy) NSError *error;
+
 -(void)setPrinterFromDictionary:(NSDictionary*)dict;
 
 @end

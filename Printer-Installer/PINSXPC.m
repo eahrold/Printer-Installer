@@ -46,6 +46,15 @@
      }];
 }
 
++(void)installGlobalLoginItem{
+    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
+    
+    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
+    [helperXPCConnection resume];
+    
+    [[helperXPCConnection remoteObjectProxy] installLoginItem:[[NSBundle mainBundle] bundleURL]];
+}
+
 +(void)tellHelperToQuit{
     // Send a message to the helper tool telling it to call it's quitHelper method.
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];

@@ -9,9 +9,11 @@
 #import "PIStatusBar.h"
 
 @implementation PIStatusBar
-@synthesize statusMenu = _statusMenu,
-            statusItem = _statusItem,
-            printerList, currentManagedPrinters;
+
+@synthesize statusMenu = _statusMenu;
+@synthesize statusItem = _statusItem;
+@synthesize printerList = _printerList;
+@synthesize currentManagedPrinters = _currentManagedPrinters;
 
 - (id)initPrinterMenu{
     self = [super init];
@@ -21,13 +23,24 @@
         _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength ];
 
         [_statusItem setMenu:_statusMenu];
-        [_statusItem setImage:[NSImage imageNamed:@"Status"]];
+        [_statusItem setImage:[NSImage imageNamed:@"StatusBar"]];
         [_statusItem setHighlightMode:YES];
+                               
+        if(![[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
+            NSMenuItem *configure = [[NSMenuItem alloc]initWithTitle:@"Configure" action:@selector(configure) keyEquivalent:@""];
+            [configure setTarget:[NSApp delegate]];
+            [_statusMenu addItem:configure];
+        }else{
+            [_statusMenu addItemWithTitle:@"Check Printer To Install" action:nil keyEquivalent:@""];
+        }
         
-        [_statusMenu addItemWithTitle:@"Configure" action:@selector(configure) keyEquivalent:@""];
+        // add seperators for the printer list to go between
         [_statusMenu addItem:[NSMenuItem separatorItem]];
         [_statusMenu addItem:[NSMenuItem separatorItem]];
-        [_statusMenu addItemWithTitle:@"Quit" action:@selector(quitNow) keyEquivalent:@""];
+        
+        NSMenuItem *quitMenu = [[NSMenuItem alloc]initWithTitle:@"Quit" action:@selector(quitNow) keyEquivalent:@""];
+        [quitMenu setTarget:self];
+        [_statusMenu addItem:quitMenu];
     }
     return self;
 }
@@ -35,25 +48,27 @@
 -(void)RefreshPrinters{
     NSUserDefaults *getDefaults = [NSUserDefaults standardUserDefaults];
     NSString* sn = [getDefaults objectForKey:@"server"];
-    
+      
     Server* server = [[Server alloc]initWithURL:sn];
     [server setBasicHeaders:[getDefaults objectForKey:@"authHeader"]];
     
-    printerList = [[server getRequest] objectForKey:@"printerList"];
+    _printerList = [[server getRequest] objectForKey:@"printerList"];
     
     NSSet* set = [PICups getInstalledPrinters];
     NSMutableSet * cmp = [NSMutableSet new];
     
-    if(printerList.count != 0){
-        for (NSMenuItem* i in currentManagedPrinters){
+    if(_printerList.count != 0){
+        for (NSMenuItem* i in _currentManagedPrinters){
             [_statusMenu removeItem:i];
         }
 
-        for ( NSDictionary* p in [[printerList reverseObjectEnumerator] allObjects]){
+        for ( NSDictionary* p in [[_printerList reverseObjectEnumerator] allObjects]){
             NSString* printer = [p objectForKey:@"printer"];
             NSString* description = [p objectForKey:@"description"];
             NSString* location = [p objectForKey:@"location"];
             NSString* model = [p objectForKey:@"model"];
+            NSString* ppd = [p objectForKey:@"ppd"];
+
 
             NSMenuItem* smi;
             if(description){
@@ -66,6 +81,7 @@
                                                 keyEquivalent:@""];
             }
             
+            [smi setTarget:self];
             NSMenu* details = [[NSMenu alloc]init];
             
             if(location){
@@ -76,10 +92,15 @@
                 [details addItemWithTitle:[NSString stringWithFormat:@"model: %@",model] action:nil keyEquivalent:@""];
             }
             
+            if(ppd){
+                [details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",ppd] action:nil keyEquivalent:@""];
+            }
+            
             
             [_statusMenu setSubmenu:details forItem:smi];
-
+            
             [_statusMenu insertItem:smi atIndex:2];
+    
             [cmp addObject:smi];
             
             if([set containsObject:printer]){
@@ -88,10 +109,26 @@
                 [smi setState:NSOffState];
             }        
         }
-        currentManagedPrinters = [NSSet setWithSet:cmp];
+        _currentManagedPrinters = [NSSet setWithSet:cmp];
     }
 }
 
+-(void)managePrinter:(id)sender{
+    NSMenuItem* pmi = sender;
+    NSInteger pix = ([self.statusMenu indexOfItem:pmi]-2);
+    NSDictionary* printer = [self.printerList objectAtIndex:pix];
+    
+    [pmi setState:pmi.state ? NSOffState : NSOnState];
+    if (pmi.state){
+        [PINSXPC addPrinter:printer];
+    }else{
+        [PINSXPC removePrinter:printer];
+    }
 
+}
+
+-(void)quitNow{
+    [NSApp terminate:self];
+}
 
 @end

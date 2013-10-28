@@ -12,7 +12,7 @@
 
 @end
 
-static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
+static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginlaunch";
 
 @implementation PIPannelCotroller
 
@@ -52,14 +52,60 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 
 -(IBAction)cancelButtonPressed:(id)sender{
     [self.window close];
+    self.window = nil;
     [[NSApp delegate] setConfigSheet:nil];
 }
 
 -(IBAction)launchAtLoginChecked:(id)sender{
     NSButton* btn = sender;
-    [JobBlesser setLaunchOnLogin:btn.state withLabel:kLoginHelper];
+    //[JobBlesser setLaunchOnLogin:btn.state withLabel:kLoginHelper];
+    [self installLoginItem:btn.state];
+    
 }
 
+-(void)installLoginItem:(BOOL)state{
+    NSString * appPath = [[NSBundle mainBundle] bundlePath];
+    CFURLRef loginItem = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+
+    if(state){
+        if (loginItems) {
+            LSSharedFileListItemRef ourLoginItem = LSSharedFileListInsertItemURL(loginItems,
+                                                                                 kLSSharedFileListItemLast,
+                                                                                 NULL, NULL,
+                                                                                 loginItem,
+                                                                                 NULL, NULL);
+            if (ourLoginItem) {
+                CFRelease(ourLoginItem);
+            } else {
+                NSLog(@"Could not insert ourselves as a login item");
+            }
+            
+            CFRelease(loginItems);
+        } else {
+            NSLog(@"Could not get the login items");
+        }
+    }else{
+        if (loginItems) {
+            UInt32 seedValue;
+            //Retrieve the list of Login Items and cast them to
+            // a NSArray so that it will be easier to iterate.
+            NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+            int i = 0;
+            for(i ; i< [loginItemsArray count]; i++){
+                LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)[loginItemsArray
+                                                                            objectAtIndex:i];
+                //Resolve the item with URL
+                if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &loginItem, NULL) == noErr) {
+                    NSString * urlPath = [(__bridge NSURL*)loginItem path];
+                    if ([urlPath compare:appPath] == NSOrderedSame){
+                        LSSharedFileListItemRemove(loginItems,itemRef);
+                    }
+                }
+            }
+        }
+    }
+}
 
 //-------------------------------------------
 //  Progress Panel and Alert

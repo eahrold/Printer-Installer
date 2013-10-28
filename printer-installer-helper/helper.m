@@ -20,11 +20,9 @@
 
 
 -(void)addPrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
-    
     Printer* p = [Printer new];
     [p setPrinterFromDictionary:printer];
-    syslog(1,"Adding printer %s",[p.name UTF8String]);
-
+    
     NSError* error = nil;
 
     ipp_t           *request;
@@ -53,6 +51,15 @@
                 *keyptr,            /* Pointer into keyword... */
                 tempfile[1024];		/* Temporary filename */
     
+    
+    if(p.error){
+        syslog(1,"p-i error %s",p.error.localizedDescription);
+        error = p.error;
+        goto nsxpc_reply;
+    }
+    
+    syslog(1,"Adding printer %s",name);
+    syslog(1,"using ppd %s",ppdfile);
     
     request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
     
@@ -218,14 +225,13 @@ nsxpc_reply:
 }
 
 -(void)removePrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
-    Printer* p = [Printer new];
-    [p setPrinterFromDictionary:printer];
-    syslog(1,"Removing printer %s",[p.name UTF8String]);
+    NSString* p = [printer objectForKey:@"printer"];
+    syslog(1,"Removing printer %s",[p UTF8String]);
 
     NSError *error = nil;
     
     /* convert get these out of NSString */
-    const char      *name = [p.name UTF8String];
+    const char      *name = [p UTF8String];
     char            uri[HTTP_MAX_URI];
     
     ipp_t* request = ippNewRequest(CUPS_DELETE_PRINTER);
@@ -255,6 +261,31 @@ nsxpc_reply:
     self.helperToolShouldQuit = YES;
 }
 
+-(void)installLoginItem:(NSURL*)loginItem{
+    syslog(1,"installing loginitem");
+    AuthorizationRef auth = NULL;
+    LSSharedFileListRef globalLoginItems = LSSharedFileListCreate(NULL, kLSSharedFileListGlobalLoginItems, NULL);
+    LSSharedFileListSetAuthorization(globalLoginItems, auth);
+    
+    if (globalLoginItems) {
+        LSSharedFileListItemRef ourLoginItem = LSSharedFileListInsertItemURL(globalLoginItems,
+                                                                             kLSSharedFileListItemLast,
+                                                                             NULL, NULL,
+                                                                             (__bridge CFURLRef)loginItem,
+                                                                             NULL, NULL);
+        if (ourLoginItem) {
+            CFRelease(ourLoginItem);
+        } else {
+            syslog(1,"Could not insert ourselves as a global login item");
+        }
+        
+        CFRelease(globalLoginItems);
+    } else {
+        syslog(1,"Could not get the global login items");
+    }
+}
+
+
 //----------------------------------------
 // Helper Singleton
 //----------------------------------------
@@ -282,7 +313,7 @@ nsxpc_reply:
     return YES;
 }
 
--(NSError*)cupsError:(const char*) msg withReturnCode:(int)rc{
+-(NSError*)cupsError:(const char*)msg withReturnCode:(int)rc{
     NSString* m = [NSString stringWithFormat:@"%s.  Error Code: %d",msg,rc];
     NSError* error =[NSError errorWithDomain:@"edu.loyno.smc.Printer-Installer"
                            code:rc

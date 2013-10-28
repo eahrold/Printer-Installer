@@ -8,7 +8,7 @@
 
 #import "PIDelegate.h"
 
-static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
+static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginlaunch";
 
 
 @implementation PIDelegate
@@ -31,13 +31,20 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
                            onWindow:nil
                        withSelector:@selector(setupDidEndWithTerminalError:)];
     }
+    if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
+        [PINSXPC installGlobalLoginItem];
+    }
 }
 
 -(void)awakeFromNib{
     piBar = [[PIStatusBar alloc]initPrinterMenu];
+
     [piBar RefreshPrinters];
-    if(piBar.printerList.count == 0)[self configure];
+    if(piBar.printerList.count == 0){
+        [self configure];
+    }
 }
+
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
 }
@@ -47,24 +54,8 @@ static NSString * const kLoginHelper = @"com.aapps.PILaunchAtLogin";
 }
 
 //-------------------------------------------
-//  Menu Controller
+//  PIStatusBar Controller
 //-------------------------------------------
-
-
--(void)managePrinter:(id)sender{
-    NSMenuItem* pmi = sender;
-    NSInteger pix = ([piBar.statusMenu indexOfItem:pmi]-2);
-    NSDictionary* printer = [piBar.printerList objectAtIndex:pix];
-    
-    [pmi setState:pmi.state ? NSOffState : NSOnState];
-    if (pmi.state){
-        //NSLog(@"adding printer %@",[printer objectForKey:@"description"]);
-        [PINSXPC addPrinter:printer];
-    }else{
-        //NSLog(@"removing printer %@",[printer objectForKey:@"description"]);
-        [PINSXPC removePrinter:printer];
-    }
-}
 
 -(void)quitNow{
     [NSApp terminate:self];

@@ -8,7 +8,6 @@
 
 #import "Interfaces.h"
 
-
 @interface helper : NSObject <HelperAgent,NSXPCListenerDelegate>
 
 @property (nonatomic, assign) BOOL helperToolShouldQuit;

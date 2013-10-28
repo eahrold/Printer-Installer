@@ -40,8 +40,9 @@
     // set header fields
     [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+    if(self.authHeader){
+        [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
+    }
     // Convert data and set request's HTTPBody property
     [request setHTTPBody:self.requestData];
     
@@ -67,8 +68,10 @@
     // set header fields
     [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    
+    if(self.authHeader){
+        [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
+    }
+        
     // Convert data and set request's HTTPBody property
     [request setHTTPBody:self.requestData];
     
@@ -94,6 +97,46 @@
     }
     
     return dict;
+}
+
+-(void)downloadPPD:(NSString**)ppd{
+    NSError* error = nil;
+    NSURLResponse* response = nil;
+    
+    // Create the request.
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.URL];
+    
+    // set as GET request
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = 3;
+    
+    // set header fields
+    [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    if(self.authHeader){
+        [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
+    }
+    
+    // Convert data and set request's HTTPBody property
+    //[request setHTTPBody:self.requestData];
+    
+    // Create url connection and fire request
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    self.response = response;
+    
+    NSString* _ppd = [NSTemporaryDirectory() stringByAppendingPathComponent:@"printer-installer.ppd"];
+    
+    NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
+    if(error){
+        self.error = error;
+    }
+    else if(rc == 404 || rc == 500){
+        NSDictionary* d = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"Server returned a %ld error",(long)rc],@"forKey:NSLocalizedDescriptionKey",nil ];
+        self.error = [[NSError alloc]initWithDomain:@"Web Server" code:rc userInfo:d];
+    }else{
+        [[NSFileManager defaultManager] createFileAtPath:_ppd contents:data attributes:nil];
+        *ppd = _ppd;
+    }
 }
 
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space {

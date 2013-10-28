@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PICups.h"
 #import "Server.h"
+#import "PINSXPC.h"
 
 @interface PIStatusBar : NSStatusBar
 
@@ -17,7 +18,7 @@
 @property (nonatomic, strong) IBOutlet NSMenu *statusMenu;
 @property (nonatomic, strong) NSSet* currentManagedPrinters;
 
--(void)RefreshPrinters;
 -(id)initPrinterMenu;
+-(void)RefreshPrinters;
 
 @end
