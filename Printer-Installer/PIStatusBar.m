@@ -7,6 +7,7 @@
 //
 
 #import "PIStatusBar.h"
+#import <Sparkle/SUUpdater.h>
 
 @implementation PIStatusBar
 
@@ -25,9 +26,11 @@
         [_statusItem setMenu:_statusMenu];
         [_statusItem setImage:[NSImage imageNamed:@"StatusBar"]];
         [_statusItem setHighlightMode:YES];
-                               
-        if(![[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
-            NSMenuItem *configure = [[NSMenuItem alloc]initWithTitle:@"Configure" action:@selector(configure) keyEquivalent:@""];
+        
+        BOOL managed =[[NSUserDefaults standardUserDefaults]boolForKey:@"managed"];
+        
+        if(!managed){
+            NSMenuItem *configure = [[NSMenuItem alloc]initWithTitle:@"Configure..." action:@selector(configure) keyEquivalent:@""];
             [configure setTarget:[NSApp delegate]];
             [_statusMenu addItem:configure];
         }else{
@@ -38,9 +41,16 @@
         [_statusMenu addItem:[NSMenuItem separatorItem]];
         [_statusMenu addItem:[NSMenuItem separatorItem]];
         
+        if(![[[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURLKey"]isEqualToString:@""] || !managed){
+            NSMenuItem *cfu = [[NSMenuItem alloc]initWithTitle:@"Check For Updates..." action:@selector(checkForUpdates) keyEquivalent:@""];
+            [cfu setTarget:self];
+            [_statusMenu addItem:cfu];
+        }
+        
         NSMenuItem *quitMenu = [[NSMenuItem alloc]initWithTitle:@"Quit" action:@selector(quitNow) keyEquivalent:@""];
         [quitMenu setTarget:self];
         [_statusMenu addItem:quitMenu];
+
     }
     return self;
 }
@@ -52,7 +62,18 @@
     Server* server = [[Server alloc]initWithURL:sn];
     [server setBasicHeaders:[getDefaults objectForKey:@"authHeader"]];
     
-    _printerList = [[server getRequest] objectForKey:@"printerList"];
+    NSDictionary* piSettings = [server getRequest];
+    NSString* feedURL = [piSettings objectForKey:@"updateServer"];
+    
+    _printerList = [piSettings objectForKey:@"printerList"];
+    
+    [[[NSUserDefaultsController sharedUserDefaultsController] values]setValue:feedURL forKey:@"SUFeedURLKey"];
+    
+    //NSLog(@"feedURL: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"SUFeedURLKey"]);
+    
+    if(feedURL){
+        [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
+    }
     
     NSSet* set = [PICups getInstalledPrinters];
     NSMutableSet * cmp = [NSMutableSet new];
@@ -125,6 +146,10 @@
         [PINSXPC removePrinter:printer];
     }
 
+}
+
+-(void)checkForUpdates{
+    [[SUUpdater sharedUpdater] checkForUpdates:self];
 }
 
 -(void)quitNow{

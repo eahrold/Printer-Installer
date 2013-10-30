@@ -86,15 +86,14 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
             NSLog(@"Could not get the login items");
         }
     }else{
-        if (loginItems) {
+        if (loginItem){
             UInt32 seedValue;
             //Retrieve the list of Login Items and cast them to
             // a NSArray so that it will be easier to iterate.
             NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
-            int i = 0;
-            for(i ; i< [loginItemsArray count]; i++){
-                LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)[loginItemsArray
-                                                                            objectAtIndex:i];
+            
+            for( id i in loginItemsArray){
+                LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)i;
                 //Resolve the item with URL
                 if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &loginItem, NULL) == noErr) {
                     NSString * urlPath = [(__bridge NSURL*)loginItem path];
@@ -102,6 +101,7 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
                         LSSharedFileListItemRemove(loginItems,itemRef);
                     }
                 }
+                CFRelease(loginItems);
             }
         }
     }

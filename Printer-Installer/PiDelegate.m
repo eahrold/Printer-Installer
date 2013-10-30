@@ -7,6 +7,7 @@
 //
 
 #import "PIDelegate.h"
+#import <Sparkle/SUUpdater.h>
 
 static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginlaunch";
 
@@ -18,12 +19,20 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
 //-------------------------------------------
 //  Delegate Methods
 //-------------------------------------------
+
+-(void)applicationWillFinishLaunching:(NSNotification *)notification{
+    if([[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURLKey"]){
+        [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
+    }
+
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
     NSError  *error = nil;
     
-    if(![JobBlesser blessHelperWithLabel:kHelperName
+       if(![JobBlesser blessHelperWithLabel:kHelperName
                                andPrompt:@"In order to add managed Printers"
                                    error:&error]){
         NSLog(@"Somthing went wrong");

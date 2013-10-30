@@ -10,6 +10,8 @@
 		BE052C73181989EC0007D51C /* PIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE052C72181989EC0007D51C /* PIApplication.m */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE28433B1816BCD200B9FABE /* ConfigSheet.xib */; };
+		BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
+		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannelController.m */; };
@@ -31,10 +33,21 @@
 		BEBFB8E617C027D40023B26C /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFB8E517C027D40023B26C /* Server.m */; };
 		BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC420AA181A0947005F3AC7 /* Images.xcassets */; };
 		BEE113731815764000850EF6 /* PIStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE113721815764000850EF6 /* PIStatusBar.m */; };
+		BEED08EF181FD92B00F15F3F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = BEED08EE181FD92B00F15F3F /* dsa_pub.pem */; };
 		BEF145D417C306F0003897D3 /* Helper-SMJobBless.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BE2F4481181F4804007E36B1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE93C9B917BECBB300625DE2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,6 +64,7 @@
 		BE052C71181989EC0007D51C /* PIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIApplication.h; sourceTree = "<group>"; };
 		BE052C72181989EC0007D51C /* PIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIApplication.m; sourceTree = "<group>"; };
 		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
+		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -91,6 +105,7 @@
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BEE113711815764000850EF6 /* PIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIStatusBar.h; sourceTree = "<group>"; };
 		BEE113721815764000850EF6 /* PIStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIStatusBar.m; sourceTree = "<group>"; };
+		BEED08EE181FD92B00F15F3F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		BEF145D217C306F0003897D3 /* Helper-SMJobBless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Helper-SMJobBless.h"; sourceTree = "<group>"; };
 		BEF145D317C306F0003897D3 /* Helper-SMJobBless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Helper-SMJobBless.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
+				BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */,
 				BEAA87F817BECCCF00D2BCAE /* Security.framework in Frameworks */,
 				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
@@ -143,8 +159,9 @@
 		BE93C98317BEC88400625DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BEAB4CD7181AE97300585C03 /* CoreServices.framework */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
+				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
+				BEAB4CD7181AE97300585C03 /* CoreServices.framework */,
 				BEAA87F717BECCCF00D2BCAE /* Security.framework */,
 				BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */,
 				BE93C98417BEC88400625DE2 /* Cocoa.framework */,
@@ -186,6 +203,7 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEED08EE181FD92B00F15F3F /* dsa_pub.pem */,
 				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
 				BE052C71181989EC0007D51C /* PIApplication.h */,
 				BE052C72181989EC0007D51C /* PIApplication.m */,
@@ -246,6 +264,7 @@
 				BE93C97D17BEC88400625DE2 /* Sources */,
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
+				BE2F4481181F4804007E36B1 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -310,10 +329,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */,
+				BEED08EF181FD92B00F15F3F /* dsa_pub.pem in Resources */,
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
-				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
+				BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
+				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +462,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = MainApp;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer",
+					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Printer-Installer",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
 				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
@@ -458,6 +483,11 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer",
+					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Printer-Installer",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
 				INFOPLIST_FILE = "./release/Printer-Installer-Info.plist";
