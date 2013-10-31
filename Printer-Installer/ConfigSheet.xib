@@ -16,9 +16,11 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Configure" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="495" height="129"/>
+            <windowPositionMask key="initialPositionMask" rightStrut="YES" topStrut="YES"/>
+            <rect key="contentRect" x="1420" y="1001" width="495" height="129"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
+            <value key="minSize" type="size" width="495" height="129"/>
+            <value key="maxSize" type="size" width="495" height="129"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="495" height="129"/>
                 <autoresizingMask key="autoresizingMask"/>
