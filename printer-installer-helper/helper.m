@@ -53,7 +53,7 @@
     
     
     if(p.error){
-        syslog(1,"p-i error %s",p.error.localizedDescription);
+        syslog(1,"printer-installer error %s",[p.error.localizedDescription UTF8String]);
         error = p.error;
         goto nsxpc_reply;
     }

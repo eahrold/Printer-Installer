@@ -28,7 +28,6 @@
         [_statusItem setHighlightMode:YES];
         
         BOOL managed =[[NSUserDefaults standardUserDefaults]boolForKey:@"managed"];
-        
         if(!managed){
             NSMenuItem *configure = [[NSMenuItem alloc]initWithTitle:@"Configure..." action:@selector(configure) keyEquivalent:@""];
             [configure setTarget:[NSApp delegate]];
@@ -66,12 +65,9 @@
     NSString* feedURL = [piSettings objectForKey:@"updateServer"];
     
     _printerList = [piSettings objectForKey:@"printerList"];
-    
-    [[[NSUserDefaultsController sharedUserDefaultsController] values]setValue:feedURL forKey:@"SUFeedURLKey"];
-    
-    //NSLog(@"feedURL: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"SUFeedURLKey"]);
-    
+        
     if(feedURL){
+        [[[NSUserDefaultsController sharedUserDefaultsController] values]setValue:feedURL forKey:@"SUFeedURLKey"];
         [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
     }
     
@@ -90,7 +86,6 @@
             NSString* model = [p objectForKey:@"model"];
             NSString* ppd = [p objectForKey:@"ppd"];
 
-
             NSMenuItem* smi;
             if(description){
                 smi = [[NSMenuItem alloc]initWithTitle:description
@@ -105,23 +100,12 @@
             [smi setTarget:self];
             NSMenu* details = [[NSMenu alloc]init];
             
-            if(location){
-                [details addItemWithTitle:[NSString stringWithFormat:@"location: %@",location] action:nil keyEquivalent:@""];
-            }
-            
-            if(model){
-                [details addItemWithTitle:[NSString stringWithFormat:@"model: %@",model] action:nil keyEquivalent:@""];
-            }
-            
-            if(ppd){
-                [details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",ppd] action:nil keyEquivalent:@""];
-            }
-            
-            
+            if(location)[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",location] action:nil keyEquivalent:@""];
+            if(model)[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",model] action:nil keyEquivalent:@""];
+            if(ppd)[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",ppd] action:nil keyEquivalent:@""];
+
             [_statusMenu setSubmenu:details forItem:smi];
-            
             [_statusMenu insertItem:smi atIndex:2];
-    
             [cmp addObject:smi];
             
             if([set containsObject:printer]){

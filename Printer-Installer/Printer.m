@@ -19,8 +19,9 @@
     self.host = [dict objectForKey:@"url"];
     self.protocol = [dict objectForKey:@"protocol"];
     self.model = [dict objectForKey:@"model"];
-    self.options = [[NSArray alloc] initWithArray:[dict objectForKey:@"options"]];
+    self.options = [NSArray arrayWithArray:[dict objectForKey:@"options"]];
     self.url = [ self getFullURL];
+    
     
     // check if it's installed locally
     NSString* path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",self.model];
