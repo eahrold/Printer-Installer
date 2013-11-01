@@ -29,7 +29,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>PIApplication</string>
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>edu.loyno.smc.Printer-Installer.helper</key>

@@ -11,25 +11,22 @@
 @interface Printer : NSObject
 
 @property (copy) NSString *name;
+@property (copy) NSString *host;
+@property (copy) NSString *protocol; // ipp, http, https, socket or lpd
 @property (copy) NSString *description;
 @property (copy) NSString *location;
-
-// ipp http https lpd socket
-@property (copy) NSString *protocol;
-
-// path to ppd file
-@property (copy) NSString *ppd;
-
-// model gathered using lpinfo
 @property (copy) NSString *model;
-
-@property (copy) NSString *host;
-@property (copy) NSString *url;
-
+@property (copy) NSString *ppd_url; // path where ppd can be downloads
 @property (copy) NSArray *options;
+
+@property (copy) NSString *ppd; // path to ppd file
+@property (copy) NSString *url; // full uri for cups dest
 
 @property (copy) NSError *error;
 
--(void)setPrinterFromDictionary:(NSDictionary*)dict;
+-(void)configureURL;
+-(void)configurePPD;
+
+-(id)initWithDict:(NSDictionary*)dict;
 
 @end

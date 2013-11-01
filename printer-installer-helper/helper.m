@@ -20,8 +20,8 @@
 
 
 -(void)addPrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
-    Printer* p = [Printer new];
-    [p setPrinterFromDictionary:printer];
+    Printer* p = [[Printer alloc]initWithDict:printer];
+    //[p setPrinterFromDictionary:printer];
     
     NSError* error = nil;
 
@@ -37,12 +37,7 @@
             wrote_ipp_supplies  = 0,
             wrote_snmp_supplies = 0;
 
-    const char  *name           = [p.name UTF8String],
-                *device_url     = [p.url UTF8String],
-                *location       = [p.location UTF8String],
-                *ppdfile        = [p.ppd UTF8String],
-                *description    = [p.description UTF8String],
-                *customval,
+    const char  *customval,
                 *boolval;
 
     char        uri[HTTP_MAX_URI],
@@ -58,17 +53,14 @@
         goto nsxpc_reply;
     }
     
-    syslog(1,"Adding printer %s",name);
-    syslog(1,"using ppd %s",ppdfile);
-    
     request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
     
-    if(location){
-        opt_count = cupsAddOption("printer-location", location, opt_count, &options);
+    if(p.location.UTF8String){
+        opt_count = cupsAddOption("printer-location", p.location.UTF8String, opt_count, &options);
     }
     
-    if(description){
-        opt_count = cupsAddOption("printer-info", description, opt_count, &options);
+    if(p.description.UTF8String){
+        opt_count = cupsAddOption("printer-info", p.description.UTF8String, opt_count, &options);
     }
     
     if(p.options){
@@ -77,18 +69,18 @@
         }
     }
     
-    opt_count = cupsAddOption("device-uri", device_url,
+    opt_count = cupsAddOption("device-uri", p.url.UTF8String,
                               opt_count, &options);
     
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
-                     "localhost", 0, "/printers/%s", name);
+                     "localhost", 0, "/printers/%s", p.name.UTF8String);
     
     ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
                  "printer-uri", NULL, uri);
     
     cupsEncodeOptions2(request, opt_count, options, IPP_TAG_PRINTER);
     
-    ppd = ppdOpenFile(ppdfile);
+    ppd = ppdOpenFile(p.ppd.UTF8String);
     ppdMarkDefaults(ppd);
     cupsMarkOptions(ppd, opt_count, options);
     
@@ -98,7 +90,7 @@
         goto nsxpc_reply;
     }
     
-    if ((inppd = cupsFileOpen(ppdfile, "r")) == NULL)
+    if ((inppd = cupsFileOpen(p.ppd.UTF8String, "r")) == NULL)
     {
         ippDelete(request);
         error = [self cupsError:"lpadmin: Unable to open PPD file" withReturnCode:1];
@@ -210,7 +202,7 @@
     
     ippAddInteger(request, IPP_TAG_PRINTER, IPP_TAG_ENUM, "printer-state", IPP_PRINTER_IDLE);
     ippAddBoolean(request, IPP_TAG_PRINTER, "printer-is-accepting-jobs", 1);
-    ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppdchanged ? tempfile : ppdfile));
+    ippDelete(cupsDoFileRequest(CUPS_HTTP_DEFAULT, request, "/admin/", ppdchanged ? tempfile : p.ppd.UTF8String));
     
     
     if (cupsLastError() > IPP_OK_CONFLICT)
@@ -225,7 +217,7 @@ nsxpc_reply:
 }
 
 -(void)removePrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
-    NSString* p = [printer objectForKey:@"printer"];
+    NSString* p = [printer objectForKey:@"name"];
     syslog(1,"Removing printer %s",[p UTF8String]);
 
     NSError *error = nil;
