@@ -84,11 +84,11 @@
         }
 
         for ( NSDictionary* p in [[_printerList reverseObjectEnumerator] allObjects]){
-            NSString* printer = [p objectForKey:@"printer"];
+            NSString* printer = [p objectForKey:@"name"];
             NSString* description = [p objectForKey:@"description"];
             NSString* location = [p objectForKey:@"location"];
             NSString* model = [p objectForKey:@"model"];
-            NSString* ppd = [p objectForKey:@"ppd"];
+            NSString* ppd = [p objectForKey:@"ppd_url"];
 
             NSMenuItem* smi;
             if(description){
@@ -126,14 +126,12 @@
     NSMenuItem* pmi = sender;
     NSInteger pix = ([self.statusMenu indexOfItem:pmi]-2);
     NSDictionary* printer = [self.printerList objectAtIndex:pix];
-    
-    [pmi setState:pmi.state ? NSOffState : NSOnState];
-    if (pmi.state){
-        [PINSXPC addPrinter:printer];
-    }else{
-        [PINSXPC removePrinter:printer];
-    }
 
+    if (!pmi.state){
+        [PINSXPC addPrinter:printer menuItem:pmi];
+    }else{
+        [PINSXPC removePrinter:printer menuItem:pmi];
+    }
 }
 
 -(void)checkForUpdates{

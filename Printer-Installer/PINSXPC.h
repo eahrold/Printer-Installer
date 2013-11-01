@@ -16,8 +16,9 @@ static NSString * const kHelperName;
 
 @interface PINSXPC : NSObject
 
-+(void)addPrinter:(NSDictionary*)printer;
-+(void)removePrinter:(NSDictionary*)printer;
++(void)addPrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem;
++(void)removePrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem;
+
 +(void)installGlobalLoginItem;
 +(void)tellHelperToQuit;
 

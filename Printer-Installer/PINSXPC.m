@@ -10,8 +10,7 @@
 
 @implementation PINSXPC
 
-+(void)addPrinter:(NSDictionary*)printer{
-
++(void)addPrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
@@ -22,13 +21,15 @@
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
                  [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+             }else{
+                 [menuItem setState:NSOnState];
              }
          }];
          [helperXPCConnection invalidate];
      }];
 }
 
-+(void)removePrinter:(NSDictionary*)printer{
++(void)removePrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
@@ -39,7 +40,8 @@
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
                  [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
-                 
+             }else{
+                 [menuItem setState:NSOffState];
              }
          }];
          [helperXPCConnection invalidate];
