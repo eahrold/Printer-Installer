@@ -65,6 +65,7 @@
 		BE052C72181989EC0007D51C /* PIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIApplication.m; sourceTree = "<group>"; };
 		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
+		BE56D9181823422B005BCF9D /* release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = release; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
 				BE93C98317BEC88400625DE2 /* Frameworks */,
+				BE56D9181823422B005BCF9D /* release */,
 				BE93C98217BEC88400625DE2 /* Products */,
 			);
 			sourceTree = "<group>";
