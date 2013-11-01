@@ -32,6 +32,6 @@
 
 -(void)postRequestWithData;
 -(NSDictionary*)getRequest;
--(void)downloadPPD:(NSString**)ppd;
 
++(BOOL)checkURL:(NSString*)url;
 @end

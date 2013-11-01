@@ -99,12 +99,17 @@
     return dict;
 }
 
--(void)downloadPPD:(NSString**)ppd{
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space {
+    return YES;
+}
+
++(BOOL)checkURL:(NSString*)url{
+    BOOL rc = YES;
     NSError* error = nil;
     NSURLResponse* response = nil;
     
     // Create the request.
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.URL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     // set as GET request
     request.HTTPMethod = @"GET";
@@ -113,35 +118,15 @@
     // set header fields
     [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    if(self.authHeader){
-        [request setValue:self.authHeader forHTTPHeaderField:@"Authorization"];
-    }
-    
-    // Convert data and set request's HTTPBody property
-    //[request setHTTPBody:self.requestData];
-    
     // Create url connection and fire request
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    self.response = response;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
-    NSString* _ppd = [NSTemporaryDirectory() stringByAppendingPathComponent:@"printer-installer.ppd"];
+    NSInteger server_rc = [((NSHTTPURLResponse *)response) statusCode];
     
-    NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
-    if(error){
-        self.error = error;
+    if(server_rc == 404 || server_rc == 500 || error){
+        rc = NO;
     }
-    else if(rc == 404 || rc == 500){
-        NSDictionary* d = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"Server returned a %ld error",(long)rc],@"forKey:NSLocalizedDescriptionKey",nil ];
-        self.error = [[NSError alloc]initWithDomain:@"Web Server" code:rc userInfo:d];
-    }else{
-        [[NSFileManager defaultManager] createFileAtPath:_ppd contents:data attributes:nil];
-        *ppd = _ppd;
-    }
+    return rc;
 }
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space {
-    return YES;
-}
-
 
 @end

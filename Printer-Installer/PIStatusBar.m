@@ -40,7 +40,7 @@
         [_statusMenu addItem:[NSMenuItem separatorItem]];
         [_statusMenu addItem:[NSMenuItem separatorItem]];
         
-        if(![[[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURLKey"]isEqualToString:@""] || !managed){
+        if(!managed){
             NSMenuItem *cfu = [[NSMenuItem alloc]initWithTitle:@"Check For Updates..." action:@selector(checkForUpdates) keyEquivalent:@""];
             [cfu setTarget:self];
             [_statusMenu addItem:cfu];
@@ -66,8 +66,12 @@
     
     _printerList = [piSettings objectForKey:@"printerList"];
         
-    if(feedURL){
-        [[[NSUserDefaultsController sharedUserDefaultsController] values]setValue:feedURL forKey:@"SUFeedURLKey"];
+    if([Server checkURL:feedURL]){
+        //NSLog(@"Update URL is good");
+        [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
+    }else{
+        //NSLog(@"Update URL is no good");
+        feedURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SUFeedURL"];
         [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
     }
     

@@ -21,10 +21,9 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
 //-------------------------------------------
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification{
-    if([[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURLKey"]){
+    if([[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURL"]){
         [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
     }
-
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -32,14 +31,16 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
     // Insert code here to initialize your application
     NSError  *error = nil;
     
-       if(![JobBlesser blessHelperWithLabel:kHelperName
-                               andPrompt:@"In order to add managed Printers"
-                                   error:&error]){
+    if(![JobBlesser blessHelperWithLabel:kHelperName
+                           andPrompt:@"In order to add managed Printers"
+                               error:&error]){
+    
         NSLog(@"Somthing went wrong");
         [PIPannelCotroller showErrorAlert:error
-                           onWindow:nil
-                       withSelector:@selector(setupDidEndWithTerminalError:)];
+                                 onWindow:nil
+                             withSelector:@selector(setupDidEndWithTerminalError:)];
     }
+    
     if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
         [PINSXPC installGlobalLoginItem];
     }
