@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="defaultsCancelButton" destination="g4O-Gd-AwG" id="Anw-z3-h0G"/>
                 <outlet property="defaultsSetButton" destination="o1G-oK-4pC" id="FMr-TV-zZ7"/>
-                <outlet property="window" destination="1" id="imI-Sh-gMi"/>
+                <outlet property="window" destination="1" id="yhW-dQ-uCb"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -18,7 +18,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="1420" y="1001" width="495" height="129"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="495" height="129"/>
             <value key="maxSize" type="size" width="495" height="129"/>
             <view key="contentView" id="2">
@@ -64,7 +64,7 @@ DQ
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="setButtonPressed:" target="-2" id="etC-dN-qDB"/>
+                            <action selector="configure:" target="-2" id="fvq-Ge-f7O"/>
                         </connections>
                     </button>
                     <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4O-Gd-AwG">
@@ -75,7 +75,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="cancelButtonPressed:" target="-2" id="QSS-dH-0u9"/>
+                            <action selector="cancel:" target="-2" id="qjc-fM-cQI"/>
                         </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JA1-nH-itz">

@@ -14,6 +14,35 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="494" userLabel="PIDelegate" customClass="PIDelegate"/>
         <customObject id="420" customClass="NSFontManager"/>
+        <customObject id="ekH-1L-uWy" userLabel="PIController" customClass="PIController">
+            <connections>
+                <outlet property="piMenu" destination="NH5-Kn-XLs" id="yPF-FQ-HNO"/>
+            </connections>
+        </customObject>
         <userDefaultsController representsSharedInstance="YES" id="726"/>
+        <menu id="NH5-Kn-XLs" customClass="PIMenu">
+            <items>
+                <menuItem title="Configure..." id="NE2-u0-GFC">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="configure:" target="ekH-1L-uWy" id="VXD-mN-y6w"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="uWG-pX-VUh"/>
+                <menuItem isSeparatorItem="YES" id="LLQ-s3-7kL"/>
+                <menuItem title="Update..." id="AFc-QJ-pOL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="checkForUpdates:" target="ekH-1L-uWy" id="aCB-Kf-BwB"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="vVw-GQ-ApM">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quitNow:" target="ekH-1L-uWy" id="rP3-0Q-xke"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
 </document>

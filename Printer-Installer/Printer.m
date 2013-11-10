@@ -7,32 +7,41 @@
 //
 
 #import "Printer.h"
+#import "PIError.h"
 #import <syslog.h>
 
 @implementation Printer
 
 -(id)initWithDict:(NSDictionary*)dict{
     self = [super init];
-    if (self) {
+    if(self){
         [self setValuesForKeysWithDictionary:dict];
         [self configureURL];
-        [self configurePPD];
     }
     return self;
 }
 
 -(void)configureURL{
-    if([_protocol isEqualToString:@"ipp"]){
+    // ipp and ipps for connecting to CUPS server
+    if([_protocol isEqualToString:@"ipp"]||[_protocol isEqualToString:@"ipps"]){
         _url = [NSString stringWithFormat:@"%@://%@/printers/%@",_protocol,_host,_name];
     }
-    else if([_protocol isEqualToString:@"http"] || [_protocol isEqualToString:@"https"]) {
+    // http and https for connecting to CUPS server
+    else if([_protocol isEqualToString:@"http"] || [_protocol isEqualToString:@"https"]){
         _url = [NSString stringWithFormat:@"%@://%@:631/printers/%@",_protocol,_host,_name];
     }
+    // socket for connecting to AppSocket 
     else if([_protocol isEqualToString:@"socket"]){
         _url = [NSString stringWithFormat:@"%@://%@:9100",_protocol,_host];
     }
-    else{
+    else if([_protocol isEqualToString:@"lpd"]){
         _url = [NSString stringWithFormat:@"%@://%@",_protocol,_host];
+    }
+    else if([_protocol isEqualToString:@"smb"]){
+        _url = [NSString stringWithFormat:@"%@://%@/%@",_protocol,_host,_name];
+    }
+    else{
+        _error = [PIError errorWithCode:PIInvalidProtocol];
     }
 }
 
@@ -57,9 +66,7 @@
     
     // if we still don't have it error out
     if(!_ppd){
-        _error = [NSError errorWithDomain:@"No PPD Avaliable"
-                                         code:1
-                                     userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"No PPD Avaliable, please download and install the drivers from the manufacturer.",NSLocalizedDescriptionKey,nil]];
+        _error = [PIError errorWithCode:PIPPDNotFound];
     }
 
 }
@@ -67,11 +74,10 @@
 -(NSString*)downloadPPD:(NSURL*)URL{
     NSString* ppdFile;
     if(!URL){
-        syslog(1, "the url %s isn't valid",[[URL path] UTF8String]);
+        syslog(1, "the url %s isn't valid",[URL path].UTF8String);
         return nil;
     }
-    syslog(1, "downloading PPD from %s://%s:%d%s",[URL scheme].UTF8String,[URL host].UTF8String,[URL port].intValue,[URL path].UTF8String);
-  
+    
     NSError* error = nil;
     NSURLResponse* response = nil;
     
@@ -91,9 +97,8 @@
     
     NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
     
-    if(rc == 404 || rc == 500){
-        NSDictionary* d = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"Server returned a %ld error",(long)rc],@"forKey:NSLocalizedDescriptionKey",nil ];
-        error = [NSError errorWithDomain:@"Web Server" code:rc userInfo:d];
+    if(rc >= 400){
+        error = [PIError errorWithCode:PIServerNotFound];
     }
     
     if(error){

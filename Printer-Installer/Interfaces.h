@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import "Printer.h"
+#import "PIError.h"
 
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Server/Server.h>
 
 #import "Interfaces.h"
-#import "Server.h"
 #import "PIPannelController.h"
 
 static NSString * const kHelperName;

@@ -15,6 +15,7 @@
 static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginlaunch";
 
 @implementation PIPannelCotroller
+@synthesize delegate;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -32,38 +33,25 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+-(IBAction)cancel:(id)sender{
+    [delegate cancelConfigSheet];
+}
+-(IBAction)configure:(id)sender{
+    [delegate setConfiguration];
+}
+
 //-------------------------------------------
 //  Configure Sheet
 //-------------------------------------------
 
 
--(IBAction)setButtonPressed:(id)sender{
-    PIDelegate* delegate = [NSApp delegate];
-    [delegate.piBar RefreshPrinters];
-
-    if(delegate.piBar.printerList.count == 0){
-        self.panelMessage = @"The URL you entered may not be correct, please try again:";
-        [self.defaultsCancelButton setHidden:NO];
-    }else{
-        [self.window close];
-        delegate.configSheet = nil;
-    }
-}
-
--(IBAction)cancelButtonPressed:(id)sender{
-    [self.window close];
-    self.window = nil;
-    [[NSApp delegate] setConfigSheet:nil];
-}
-
 -(IBAction)launchAtLoginChecked:(id)sender{
     NSButton* btn = sender;
-    //[JobBlesser setLaunchOnLogin:btn.state withLabel:kLoginHelper];
     [self installLoginItem:btn.state];
-    
 }
 
 -(void)installLoginItem:(BOOL)state{
+//    NSArray  *loginItemsArray;
     NSString * appPath = [[NSBundle mainBundle] bundlePath];
     CFURLRef loginItem = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
@@ -90,7 +78,7 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
             UInt32 seedValue;
             //Retrieve the list of Login Items and cast them to
             // a NSArray so that it will be easier to iterate.
-            NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+            NSArray  *loginItemsArray = CFBridgingRelease(LSSharedFileListCopySnapshot(loginItems, &seedValue));
             
             for( id i in loginItemsArray){
                 LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)i;

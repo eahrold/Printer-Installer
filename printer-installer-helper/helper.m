@@ -21,7 +21,7 @@
 
 -(void)addPrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
     Printer* p = [[Printer alloc]initWithDict:printer];
-    //[p setPrinterFromDictionary:printer];
+    [p configurePPD];
     
     NSError* error = nil;
 
@@ -86,14 +86,14 @@
     
     if ((outppd = cupsTempFile2(tempfile, sizeof(tempfile))) == NULL){
         ippDelete(request);
-        error = [self cupsError:"lpadmin: Unable to create temporary file" withReturnCode:1];
+        error = [PIError errorWithCode:PICantWriteFile];
         goto nsxpc_reply;
     }
     
     if ((inppd = cupsFileOpen(p.ppd.UTF8String, "r")) == NULL)
     {
         ippDelete(request);
-        error = [self cupsError:"lpadmin: Unable to open PPD file" withReturnCode:1];
+        error = [PIError errorWithCode:PICantOpenPPD];
         
         cupsFileClose(outppd);
         unlink(tempfile);
@@ -207,8 +207,7 @@
     
     if (cupsLastError() > IPP_OK_CONFLICT)
     {
-        error = [self cupsError:cupsLastErrorString()
-                 withReturnCode:1];
+        error = [PIError cupsError:1 message:cupsLastErrorString()];
     }
     
     
@@ -219,17 +218,15 @@ nsxpc_reply:
 -(void)removePrinter:(NSDictionary *)printer withReply:(void (^)(NSError *))reply{
     NSString* p = [printer objectForKey:@"name"];
     syslog(1,"Removing printer %s",[p UTF8String]);
-
     NSError *error = nil;
     
     /* convert get these out of NSString */
-    const char      *name = [p UTF8String];
     char            uri[HTTP_MAX_URI];
     
     ipp_t* request = ippNewRequest(CUPS_DELETE_PRINTER);
     
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
-                     "localhost", 0, "/printers/%s", name);
+                     "localhost", 0, "/printers/%s", p.UTF8String);
     
     ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
                  "printer-uri", NULL, uri);
@@ -238,8 +235,7 @@ nsxpc_reply:
     
     if (cupsLastError() > IPP_OK_CONFLICT)
     {
-        error = [self cupsError:cupsLastErrorString()
-                 withReturnCode:1];
+        error = [PIError cupsError:1 message:cupsLastErrorString()];
     }
 
   
@@ -304,17 +300,5 @@ nsxpc_reply:
     [newConnection resume];
     return YES;
 }
-
--(NSError*)cupsError:(const char*)msg withReturnCode:(int)rc{
-    NSString* m = [NSString stringWithFormat:@"%s.  Error Code: %d",msg,rc];
-    NSError* error =[NSError errorWithDomain:@"edu.loyno.smc.Printer-Installer"
-                           code:rc
-                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                 m,
-                                 NSLocalizedDescriptionKey,
-                                 nil]];
-    return error;
-}
-
 
 @end

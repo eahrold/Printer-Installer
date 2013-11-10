@@ -7,9 +7,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>PrintInstaller</string>
+	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>edu.loyno.smc.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.aapps.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.1</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -29,13 +29,6 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>PIApplication</string>
-	<key>SMPrivilegedExecutables</key>
-	<dict>
-		<key>edu.loyno.smc.Printer-Installer.helper</key>
-		<string>identifier "edu.loyno.smc.Printer-Installer.helper" and certificate leaf = H"f30730e7f976c288e6972913cae6e438e6df6ec3"</string>
-	</dict>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
+	<string>NSApplication</string>
 </dict>
 </plist>

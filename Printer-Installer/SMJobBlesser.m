@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import "Helper-SMJobBless.h"
+#import "SMJobBlesser.h"
 
 @implementation JobBlesser
 
 NSString* const JBAuthError = @"The Helper tool failed to install due to an Authorization issue, I must now quit";
-
 NSString* const JBCertError = @"The Helper tool failed to install due to Certificate Signing issues, I must now quit. Please let the System Admin Know, I assure (s)he will appericaite it.";
+
 //----------------------------------------------
 //  SMJobBless
 //----------------------------------------------

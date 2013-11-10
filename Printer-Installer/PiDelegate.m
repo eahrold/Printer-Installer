@@ -7,13 +7,14 @@
 //
 
 #import "PIDelegate.h"
+
 #import <Sparkle/SUUpdater.h>
-
-static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginlaunch";
-
+#import <ServiceManagement/ServiceManagement.h>
+#import "SMJobBlesser.h"
+#import "PINSXPC.h"
+#import "PIError.h"
 
 @implementation PIDelegate
-@synthesize piBar,configSheet;
 
 
 //-------------------------------------------
@@ -21,9 +22,7 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
 //-------------------------------------------
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification{
-    if([[NSUserDefaults standardUserDefaults]objectForKey:@"SUFeedURL"]){
-        [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
-    }
+    
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -44,16 +43,12 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
     if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
         [PINSXPC installGlobalLoginItem];
     }
-}
-
--(void)awakeFromNib{
-    piBar = [[PIStatusBar alloc]initPrinterMenu];
-
-    [piBar RefreshPrinters];
-    if(piBar.printerList.count == 0){
-        [self configure];
+    
+    if([[SUUpdater sharedUpdater]feedURL]){
+         [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
     }
 }
+
 
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
@@ -61,22 +56,6 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return NO;
-}
-
-//-------------------------------------------
-//  PIStatusBar Controller
-//-------------------------------------------
-
--(void)quitNow{
-    [NSApp terminate:self];
-}
-
--(void)configure{
-    [NSApp activateIgnoringOtherApps:YES];
-    if(!configSheet){
-        configSheet = [[PIPannelCotroller alloc]initWithWindowNibName:@"ConfigSheet"];
-    }
-    [configSheet showWindow:nil];
 }
 
 

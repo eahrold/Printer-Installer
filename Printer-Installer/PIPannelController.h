@@ -8,17 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
-#import "PIDelegate.h"
-#import "Helper-SMJobBless.h"
+#import "PIError.h"
+
+@protocol PICConfigMenuDelegate <NSObject>
+- (void)setConfiguration;
+- (void)cancelConfigSheet;
+@end
 
 @interface PIPannelCotroller : NSWindowController
 
-@property (assign) IBOutlet NSButton *defaultsSetButton;
+@property (strong) id<PICConfigMenuDelegate>delegate;
+
+//@property (assign) IBOutlet NSButton *defaultsSetButton;
 @property (assign) IBOutlet NSButton *defaultsCancelButton;
 @property (assign) NSString *panelMessage;  // <----     this is bound
 
-- (IBAction)setButtonPressed:(id)sender;
-- (IBAction)cancelButtonPressed:(id)sender;
 
 - (IBAction)launchAtLoginChecked:(id)sender;
 

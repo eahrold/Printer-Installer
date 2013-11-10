@@ -17,7 +17,7 @@
 @property (copy) NSString *location;
 @property (copy) NSString *model;
 @property (copy) NSString *ppd_url; // path where ppd can be downloads
-@property (copy) NSArray *options;
+@property (copy) NSArray  *options;
 
 @property (copy) NSString *ppd; // path to ppd file
 @property (copy) NSString *url; // full uri for cups dest

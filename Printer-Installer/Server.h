@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Server : NSObject <NSURLConnectionDelegate>
+@interface Server : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 
 @property (copy) NSURL *URL;
 @property (copy) NSString *port;
-@property (copy) NSString *path;
-@property (nonatomic) BOOL isSecure;
 
 @property (copy) NSString *authName;
 @property (copy) NSString *authPass;
@@ -24,14 +22,19 @@
 @property (copy) NSError   *error;
 @property (copy) NSURLResponse* response;
 
+@property (nonatomic,readwrite) NSTimeInterval timeout;
+@property (nonatomic,readwrite) NSURLRequestCachePolicy cachePolicy;
 
--(id)initWithURL:(NSString*)url;
+-(id)initWithURL:(NSURL*)URL;
+-(id)initWithURLString:(NSString*)URL;
+
+- (void)getRequestReturningData:(void(^)(NSData *data))data withError:(void (^)(NSError *error))error;
+- (void)cancelConnections;
+
+
 -(void)setBasicHeaders:(NSString*)header;
--(void)setGetListPath;
-
-
 -(void)postRequestWithData;
--(NSDictionary*)getRequest;
+-(NSData*)getRequest;
 
-+(BOOL)checkURL:(NSString*)url;
++(BOOL)checkURL:(NSString*)URL;
 @end
