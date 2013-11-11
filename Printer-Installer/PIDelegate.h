@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class PIPannelCotroller;
-
 @interface PIDelegate : NSObject <NSApplicationDelegate>
 
 @end

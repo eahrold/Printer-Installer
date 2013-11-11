@@ -249,7 +249,7 @@ nsxpc_reply:
     self.helperToolShouldQuit = YES;
 }
 
--(void)installLoginItem:(NSURL*)loginItem{
+-(void)helperInstallLoginItem:(NSURL*)loginItem{
     syslog(1,"installing loginitem");
     AuthorizationRef auth = NULL;
     LSSharedFileListRef globalLoginItems = LSSharedFileListCreate(NULL, kLSSharedFileListGlobalLoginItems, NULL);

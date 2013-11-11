@@ -198,54 +198,5 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
 }
 
 
-+(void)addLoginItem:(NSString*)helperID
-{
-    if (!SMLoginItemSetEnabled((__bridge CFStringRef)helperID, true)) {
-        NSLog(@"SMLoginItemSetEnabled(..., true) failed");
-    }
-}
-
-+(void)removeLoginItem:(NSString*)helperID
-{
-    if (!SMLoginItemSetEnabled((__bridge CFStringRef)helperID, false)) {
-        NSLog(@"SMLoginItemSetEnabled(..., false) failed");
-    }
-}
-
-+(void)setLaunchOnLogin:(BOOL)value withLabel:(NSString*)helperID
-{
-    if (!value) {
-        NSLog(@"Removing Login Item");
-        [self removeLoginItem:helperID];
-    } else {
-        NSLog(@"Adding Login Item");
-        [self addLoginItem:helperID];
-    }
-}
-
-+(BOOL)launchOnLogin:(NSString*)helperID
-{
-    NSArray *jobs = (__bridge NSArray*)SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
-    if (jobs == nil) {
-        return NO;
-    }
-    
-    if ([jobs count] == 0) {
-        CFRelease((__bridge CFArrayRef)jobs);
-        return NO;
-    }
-    
-    BOOL onDemand = NO;
-    for (NSDictionary *job in jobs) {
-        if ([helperID isEqualToString:[job objectForKey:@"Label"]]) {
-            onDemand = [[job objectForKey:@"OnDemand"] boolValue];
-            break;
-        }
-    }
-    
-    CFRelease((__bridge CFArrayRef)jobs);
-    return onDemand;
-}
-
 
 @end

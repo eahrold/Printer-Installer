@@ -13,7 +13,6 @@
 
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 
-
 @protocol HelperAgent <NSObject>
 -(void)addPrinter:(NSDictionary*)printer
         withReply:(void (^)(NSError *error))reply;
@@ -21,7 +20,7 @@ static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 -(void)removePrinter:(NSDictionary*)printer
         withReply:(void (^)(NSError *error))reply;
 
--(void)installLoginItem:(NSURL*)loginItem;
+-(void)helperInstallLoginItem:(NSURL*)loginItem;
 -(void)quitHelper;
 
 @end

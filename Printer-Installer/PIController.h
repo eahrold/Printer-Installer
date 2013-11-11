@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "PIMenu.h"
-#import "PIPannelController.h"
+#import "PIConfigSheet.h"
 
-@interface PIController : NSObject <PIMenuDelegate,PICConfigMenuDelegate>{
+@interface PIController : NSObject <PIMenuDelegate,PIConfigSheetDelegate>{
     NSStatusItem* statusItem;
 }
 
 @property (weak) IBOutlet PIMenu* piMenu;
-@property (strong,nonatomic) PIPannelCotroller* configSheet;
+@property (strong,nonatomic) PIConfigSheet* configSheet;
 
 
 @end

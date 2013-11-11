@@ -58,12 +58,70 @@
         }
     }withError:^(NSError *error) {
         NSLog(@"%@",error.localizedDescription);
-        
         configSheet.panelMessage = @"The URL you entered may not be correct, please try again:";
         [configSheet.defaultsCancelButton setHidden:NO];
         [self performSelectorOnMainThread:@selector(configure:) withObject:self waitUntilDone:NO];
 
     }];
+}
+
+#pragma mark - PIConfigSheet delegate methods
+-(void)cancelConfigSheet{
+    [configSheet close];
+    configSheet = nil;
+}
+
+-(BOOL)installLoginItem:(BOOL)state{
+    BOOL status = YES;
+    NSError* error;
+    NSString * appPath = [[NSBundle mainBundle] bundlePath];
+    CFURLRef loginItem = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    
+    if(state){
+        //Adding Login Item
+        if (loginItems) {
+            LSSharedFileListItemRef ourLoginItem = LSSharedFileListInsertItemURL(loginItems,
+                                                                            kLSSharedFileListItemLast,
+                                                                                 NULL, NULL,
+                                                                                 loginItem,
+                                                                                 NULL, NULL);
+            if (ourLoginItem) {
+                CFRelease(ourLoginItem);
+            } else {
+                NSLog(@"Could not insert ourselves as a login item");
+                error = [PIError errorWithCode:PICouldNotAddLoginItem];
+                status = NO;
+            }
+            CFRelease(loginItems);
+        } else {
+            NSLog(@"Could not get the login items");
+            error = [PIError errorWithCode:PICouldNotAddLoginItem];
+            status = NO;
+        }
+        if(error)[NSApp presentError:error];
+        
+    }else{
+        //Removing Login Item
+        if (loginItem){
+            UInt32 seedValue;
+            //Retrieve the list of Login Items and cast them to
+            // a NSArray so that it will be easier to iterate.
+            NSArray  *loginItemsArray = CFBridgingRelease(LSSharedFileListCopySnapshot(loginItems, &seedValue));
+            for( id i in loginItemsArray){
+                LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)i;
+                //Resolve the item with URL
+                if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &loginItem, NULL) == noErr) {
+                    NSString * urlPath = [(__bridge NSURL*)loginItem path];
+                    if ([urlPath compare:appPath] == NSOrderedSame){
+                        LSSharedFileListItemRemove(loginItems,itemRef);
+                    }
+                }
+            }
+        }
+        CFRelease(loginItems);
+    }
+    return status;
 }
 
 
@@ -78,25 +136,14 @@
 
 -(IBAction)configure:(id)sender{
     if(!configSheet){
-        configSheet = [[PIPannelCotroller alloc]initWithWindowNibName:@"ConfigSheet"];
+        configSheet = [[PIConfigSheet alloc]initWithWindowNibName:@"ConfigSheet"];
         [configSheet setDelegate:self];
     }
     [configSheet showWindow:self];
 }
 
 
-#pragma mark - config sheet delegate methods
--(void)cancelConfigSheet{
-    [configSheet close];
-    configSheet = nil;
-}
-
--(void)setConfiguration{
-    [self setPrinterList];
-}
-
-
-#pragma mark - menu delegate methods
+#pragma mark - PIMenu delegate methods
 -(NSArray*)printersInPrinterList:(PIMenu *)piMenu{
     return printerList;
 }

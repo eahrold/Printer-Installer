@@ -16,7 +16,6 @@
 
 @implementation PIDelegate
 
-
 //-------------------------------------------
 //  Delegate Methods
 //-------------------------------------------
@@ -34,10 +33,8 @@
                            andPrompt:@"In order to add managed Printers"
                                error:&error]){
     
-        NSLog(@"Somthing went wrong");
-        [PIPannelCotroller showErrorAlert:error
-                                 onWindow:nil
-                             withSelector:@selector(setupDidEndWithTerminalError:)];
+        if(error)[NSApp presentError:error modalForWindow:NULL delegate:self
+         didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
     }
     
     if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
@@ -58,5 +55,10 @@
     return NO;
 }
 
+- (void)setupDidEndWithTerminalError:(NSAlert *)alert
+{
+    NSLog(@"Setup encountered an error.");
+    [NSApp terminate:self];
+}
 
 @end

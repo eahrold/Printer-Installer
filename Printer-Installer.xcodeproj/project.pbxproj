@@ -17,7 +17,7 @@
 		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
-		BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIPannelController.m */; };
+		BE8FD68C17CE646800452FD4 /* PIConfigSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
 		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
@@ -76,8 +76,8 @@
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
-		BE8FD68A17CE646800452FD4 /* PIPannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIPannelController.h; sourceTree = "<group>"; };
-		BE8FD68B17CE646800452FD4 /* PIPannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIPannelController.m; sourceTree = "<group>"; };
+		BE8FD68A17CE646800452FD4 /* PIConfigSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIConfigSheet.h; sourceTree = "<group>"; };
+		BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIConfigSheet.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -108,8 +108,8 @@
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BEDA9EB3182F45230055B0B8 /* PIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIController.h; sourceTree = "<group>"; };
 		BEDA9EB4182F45230055B0B8 /* PIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIController.m; sourceTree = "<group>"; };
-		BEDC5B3618252CBD003717BB /* PIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIError.h; sourceTree = "<group>"; };
-		BEDC5B3718252CBD003717BB /* PIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIError.m; sourceTree = "<group>"; };
+		BEDC5B3618252CBD003717BB /* PIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIError.h; path = "Printer-Installer/PIError.h"; sourceTree = "<group>"; };
+		BEDC5B3718252CBD003717BB /* PIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIError.m; path = "Printer-Installer/PIError.m"; sourceTree = "<group>"; };
 		BEE113711815764000850EF6 /* PIMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIMenu.h; sourceTree = "<group>"; };
 		BEE113721815764000850EF6 /* PiMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiMenu.m; sourceTree = "<group>"; };
 		BEED08EE181FD92B00F15F3F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 				BEE113721815764000850EF6 /* PiMenu.m */,
 				BEDA9EB3182F45230055B0B8 /* PIController.h */,
 				BEDA9EB4182F45230055B0B8 /* PIController.m */,
-				BE8FD68A17CE646800452FD4 /* PIPannelController.h */,
-				BE8FD68B17CE646800452FD4 /* PIPannelController.m */,
+				BE8FD68A17CE646800452FD4 /* PIConfigSheet.h */,
+				BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */,
 				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
 				BE8FD68817CE547F00452FD4 /* PINSXPC.m */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
@@ -363,7 +363,7 @@
 				BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */,
 				BE7400C418122D1E00F71E1D /* PICups.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
-				BE8FD68C17CE646800452FD4 /* PIPannelController.m in Sources */,
+				BE8FD68C17CE646800452FD4 /* PIConfigSheet.m in Sources */,
 				BEE113731815764000850EF6 /* PiMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

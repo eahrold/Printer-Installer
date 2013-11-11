@@ -10,28 +10,17 @@
 #import <Foundation/Foundation.h>
 #import "PIError.h"
 
-@protocol PICConfigMenuDelegate <NSObject>
-- (void)setConfiguration;
+@protocol PIConfigSheetDelegate <NSObject>
+- (void)setPrinterList;
 - (void)cancelConfigSheet;
+- (BOOL)installLoginItem:(BOOL)state;
 @end
 
-@interface PIPannelCotroller : NSWindowController
+@interface PIConfigSheet : NSWindowController
 
-@property (strong) id<PICConfigMenuDelegate>delegate;
+@property (strong) id<PIConfigSheetDelegate>delegate;
 
-//@property (assign) IBOutlet NSButton *defaultsSetButton;
 @property (assign) IBOutlet NSButton *defaultsCancelButton;
 @property (assign) NSString *panelMessage;  // <----     this is bound
-
-
-- (IBAction)launchAtLoginChecked:(id)sender;
-
-+ (void)showErrorAlert:(NSError *)error;
-+ (void)showErrorAlert:(NSError *)error withSelector:(SEL)selector;
-+ (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window;
-+ (void)showErrorAlert:(NSError *)error onWindow:(NSWindow*)window withSelector:(SEL)selector;
-
-+ (void)setupDidEndWithTerminalError:(NSAlert *)alert;
-
 
 @end

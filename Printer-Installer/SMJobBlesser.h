@@ -20,10 +20,5 @@
 
 +(BOOL)removeHelperWithLabel:(NSString*)helperID;
 
-+(void)addLoginItem:(NSString*)helperID;
-+(void)removeLoginItem:(NSString*)helperID;
-+(void)setLaunchOnLogin:(BOOL)value withLabel:(NSString*)helperID;
-+(BOOL)launchOnLogin:(NSString*)helperID;
-
 
 @end

@@ -10,7 +10,6 @@
 #import <Server/Server.h>
 
 #import "Interfaces.h"
-#import "PIPannelController.h"
 
 static NSString * const kHelperName;
 

@@ -20,7 +20,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [NSApp presentError:error];
              }else{
                  [menuItem setState:NSOnState];
              }
@@ -39,7 +39,7 @@
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
                  NSLog(@"%@",[error localizedDescription]);
-                 [PIPannelCotroller showErrorAlert:error onWindow:[[NSApplication sharedApplication]mainWindow]];
+                 [NSApp presentError:error];
              }else{
                  [menuItem setState:NSOffState];
              }
@@ -54,7 +54,7 @@
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     [helperXPCConnection resume];
     
-    [[helperXPCConnection remoteObjectProxy] installLoginItem:[[NSBundle mainBundle] bundleURL]];
+    [[helperXPCConnection remoteObjectProxy] helperInstallLoginItem:[[NSBundle mainBundle] bundleURL]];
 }
 
 +(void)tellHelperToQuit{
