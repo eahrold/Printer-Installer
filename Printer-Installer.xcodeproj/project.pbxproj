@@ -77,6 +77,9 @@
 		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
 		BE56D9181823422B005BCF9D /* release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = release; sourceTree = "<group>"; };
+		BE69529918492B990008CFAA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		BE69529A18492B990008CFAA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		BE69529C18492F080008CFAA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE69529918492B990008CFAA /* Reachability.h */,
+				BE69529A18492B990008CFAA /* Reachability.m */,
 				BEED08EE181FD92B00F15F3F /* dsa_pub.pem */,
 				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
 				BE052C71181989EC0007D51C /* PIApplication.h */,
@@ -363,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE69529B18492B990008CFAA /* Reachability.m in Sources */,
 				BE93C99117BEC88400625DE2 /* main.m in Sources */,
 				BEDC5B3818252CBD003717BB /* PIError.m in Sources */,
 				BE052C73181989EC0007D51C /* PIApplication.m in Sources */,

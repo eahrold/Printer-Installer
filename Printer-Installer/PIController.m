@@ -8,10 +8,11 @@
 
 #import <Sparkle/SUUpdater.h>
 #import <Server/Server.h>
-
 #import "PIController.h"
 #import "PIDelegate.h"
 #import "PINSXPC.h"
+#import "PILoginItem.h"
+
 
 @implementation PIController{
     NSArray *printerList;
@@ -27,11 +28,28 @@
     [statusItem setImage:[NSImage imageNamed:@"StatusBar"]];
     [statusItem setHighlightMode:YES];
     [piMenu setDelegate:self];
-    [self setPrinterList];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    self.internet = [Reachability reachabilityForInternetConnection];
+    [self.internet startNotifier];
+    if([self.internet currentReachabilityStatus]){
+        [self refreshPrinterList];
+    }
 }
 
-#pragma mark -- Class Methods
--(void)setPrinterList{
+- (void) reachabilityChanged:(NSNotification *)note
+{
+	self.internet = [note object];
+	NSParameterAssert([self.internet isKindOfClass:[Reachability class]]);
+
+    if([self.internet currentReachabilityStatus]){
+        [self refreshPrinterList];
+    }else{
+    }
+}
+
+-(void)refreshPrinterList{
     NSString* url = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"server"];
     
     Server* server = [[Server alloc]initWithQueue];
@@ -40,7 +58,7 @@
     [server getRequestReturningData:^(NSData *data) {
         NSDictionary *settings =[NSDictionary dictionaryFromData:data];
 
-        printerList = [settings objectForKey:@"printerList"];
+        printerList = settings[@"printerList"];
         if(printerList.count){
             [piMenu updateMenuItems];
             [self cancelConfigSheet];
@@ -48,12 +66,12 @@
             configSheet.panelMessage = @"There are no printers shared with that group at this time:";
         }
 
-        NSString* feedURL = [settings objectForKey:@"updateServer"];
+        NSString* feedURL = settings[@"updateServer"];
 
         if([Server checkURL:feedURL]){
             [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
         }else{
-            feedURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SUFeedURL"];
+            feedURL = [[NSBundle mainBundle] infoDictionary][@"SUFeedURL"];
             [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
         }
     }withError:^(NSError *error) {
@@ -72,60 +90,10 @@
 }
 
 -(BOOL)installLoginItem:(BOOL)state{
-    BOOL status = YES;
-    NSError* error;
-    NSString * appPath = [[NSBundle mainBundle] bundlePath];
-    CFURLRef loginItem = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    
-    if(state){
-        //Adding Login Item
-        if (loginItems) {
-            LSSharedFileListItemRef ourLoginItem = LSSharedFileListInsertItemURL(loginItems,
-                                                                            kLSSharedFileListItemLast,
-                                                                                 NULL, NULL,
-                                                                                 loginItem,
-                                                                                 NULL, NULL);
-            if (ourLoginItem) {
-                CFRelease(ourLoginItem);
-            } else {
-                NSLog(@"Could not insert ourselves as a login item");
-                error = [PIError errorWithCode:PICouldNotAddLoginItem];
-                status = NO;
-            }
-            CFRelease(loginItems);
-        } else {
-            NSLog(@"Could not get the login items");
-            error = [PIError errorWithCode:PICouldNotAddLoginItem];
-            status = NO;
-        }
-        if(error)[NSApp presentError:error];
-        
-    }else{
-        //Removing Login Item
-        if (loginItem){
-            UInt32 seedValue;
-            //Retrieve the list of Login Items and cast them to
-            // a NSArray so that it will be easier to iterate.
-            NSArray  *loginItemsArray = CFBridgingRelease(LSSharedFileListCopySnapshot(loginItems, &seedValue));
-            for( id i in loginItemsArray){
-                LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)i;
-                //Resolve the item with URL
-                if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &loginItem, NULL) == noErr) {
-                    NSString * urlPath = [(__bridge NSURL*)loginItem path];
-                    if ([urlPath compare:appPath] == NSOrderedSame){
-                        LSSharedFileListItemRemove(loginItems,itemRef);
-                    }
-                }
-            }
-        }
-        CFRelease(loginItems);
-    }
-    return status;
+    return([PILoginItem installLoginItem:state]);
 }
 
-
-#pragma mark -- IBActions
+#pragma mark - IBActions
 -(IBAction)checkForUpdates:(id)sender{
     [[SUUpdater sharedUpdater]checkForUpdates:self];
 }
@@ -161,5 +129,10 @@
     }
 }
 
+#pragma mark - dealloc
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
 
 @end
