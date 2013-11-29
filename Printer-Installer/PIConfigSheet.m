@@ -37,7 +37,7 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
     [delegate cancelConfigSheet];
 }
 -(IBAction)configure:(id)sender{
-    [delegate setPrinterList];
+    [delegate refreshPrinterList];
 }
 
 -(IBAction)launchAtLoginChecked:(id)sender{

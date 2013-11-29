@@ -188,7 +188,7 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
 }
 
 +(NSError*)jobBlessError:(NSString*)msg withReturnCode:(int)rc{
-    NSError* error =[NSError errorWithDomain:@"edu.loyno.smc.Printer-Installer"
+    NSError* error =[NSError errorWithDomain:[[NSBundle mainBundle]bundleIdentifier]
                                         code:rc
                                     userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
                                               msg,

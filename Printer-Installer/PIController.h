@@ -14,8 +14,7 @@
     NSStatusItem* statusItem;
 }
 
-@property (weak) IBOutlet PIMenu* piMenu;
-@property (strong,nonatomic) PIConfigSheet* configSheet;
-
+@property (strong) IBOutlet PIMenu* piMenu;
+@property (strong) PIConfigSheet* configSheet;
 
 @end

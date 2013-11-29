@@ -26,15 +26,16 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
     NSError  *error = nil;
     
     if(![JobBlesser blessHelperWithLabel:kHelperName
                            andPrompt:@"In order to add managed Printers"
                                error:&error]){
     
-        if(error)[NSApp presentError:error modalForWindow:NULL delegate:self
-         didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
+        if(error){
+            [NSApp presentError:error modalForWindow:NULL delegate:self
+             didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
+        }
     }
     
     if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){

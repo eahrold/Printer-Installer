@@ -26,6 +26,7 @@
     NSError* error = nil;
 
     ipp_t           *request;
+    http_t          *http;
     ppd_file_t      *ppd;
     cups_file_t     *inppd;
     cups_file_t     *outppd;
@@ -54,6 +55,14 @@
     }
     
     request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
+    
+    cups_dest_t dest;
+    
+    http = httpConnectEncrypt(cupsServer(), ippPort(),
+                              cupsEncryption());
+    
+    
+    cupsCopyDestInfo(http, &dest);
     
     if(p.location.UTF8String){
         opt_count = cupsAddOption("printer-location", p.location.UTF8String, opt_count, &options);
@@ -238,8 +247,6 @@ nsxpc_reply:
         error = [PIError cupsError:1 message:cupsLastErrorString()];
     }
 
-  
-    
     reply(error);
 }
 

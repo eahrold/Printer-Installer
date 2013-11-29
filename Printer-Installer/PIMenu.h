@@ -19,7 +19,7 @@
 
 @interface PIMenu : NSMenu
 
-@property (strong) id<PIMenuDelegate>delegate;
+@property (weak) id<PIMenuDelegate>delegate;
 -(void)updateMenuItems;
 
 

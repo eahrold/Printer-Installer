@@ -11,14 +11,14 @@
 #import "PIError.h"
 
 @protocol PIConfigSheetDelegate <NSObject>
-- (void)setPrinterList;
+- (void)refreshPrinterList;
 - (void)cancelConfigSheet;
 - (BOOL)installLoginItem:(BOOL)state;
 @end
 
 @interface PIConfigSheet : NSWindowController
 
-@property (strong) id<PIConfigSheetDelegate>delegate;
+@property (weak) id<PIConfigSheetDelegate>delegate;
 
 @property (assign) IBOutlet NSButton *defaultsCancelButton;
 @property (assign) NSString *panelMessage;  // <----     this is bound
