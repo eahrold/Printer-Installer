@@ -280,6 +280,28 @@ nsxpc_reply:
     }
 }
 
+-(void)uninstall:(void (^)(NSError *))reply{
+    NSError* error;
+    NSError* retunError;
+    
+    NSString *launchD = [NSString stringWithFormat:@"/Library/LaunchDaemons/%@.plist",kHelperName];
+    NSString *helperTool = [NSString stringWithFormat:@"/Library/PrivilegedHelperTools/%@",kHelperName];
+    
+    [[NSFileManager defaultManager] removeItemAtPath:launchD error:&error];
+    if (error.code != NSFileNoSuchFileError) {
+        NSLog(@"%@", error);
+        retunError = error;
+        error = nil;
+    }
+    
+    [[NSFileManager defaultManager] removeItemAtPath:helperTool error:&error];
+    if (error.code != NSFileNoSuchFileError) {
+        NSLog(@"%@", error);
+        retunError = error;
+        error = nil;
+    }
+    reply(retunError);
+}
 
 //----------------------------------------
 // Helper Singleton

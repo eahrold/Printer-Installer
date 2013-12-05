@@ -22,6 +22,7 @@ static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 
 -(void)helperInstallLoginItem:(NSURL*)loginItem;
 -(void)quitHelper;
+-(void)uninstall:(void (^)(NSError*))reply;
 
 @end
 

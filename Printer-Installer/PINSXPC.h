@@ -20,5 +20,6 @@ static NSString * const kHelperName;
 
 +(void)installGlobalLoginItem;
 +(void)tellHelperToQuit;
++(void)uninstallHelper;
 
 @end

@@ -116,10 +116,14 @@
     return printerList;
 }
 
+-(void)uninstallHelper:(id)sender{
+    [PINSXPC uninstallHelper];
+}
+
 #pragma mark - internal methods
 -(void)managePrinter:(id)sender{
     NSMenuItem* pmi = sender;
-    NSInteger pix = ([piMenu indexOfItem:pmi]-2);
+    NSInteger pix = ([piMenu indexOfItem:pmi]-3);
     NSDictionary* printer = [printerList objectAtIndex:pix];
     
     if (!pmi.state){

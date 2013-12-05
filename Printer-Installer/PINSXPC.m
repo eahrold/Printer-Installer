@@ -7,6 +7,7 @@
 //
 
 #import "PINSXPC.h"
+#import "SMJobBlesser.h"
 
 @implementation PINSXPC
 
@@ -65,6 +66,26 @@
     [helperXPCConnection resume];
     
     [[helperXPCConnection remoteObjectProxy] quitHelper];
+}
+
++(void)uninstallHelper{
+    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
+    
+    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
+    [helperXPCConnection resume];
+    
+    [[helperXPCConnection remoteObjectProxy] uninstall:^(NSError * error) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+            if(error){
+                NSLog(@"error: %@", error.localizedDescription);
+            }else{
+                [JobBlesser removeHelperWithLabel:kHelperName];
+                [NSApp presentError:[NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Helper Tool and associated files have been removed.  We will now quit"}] modalForWindow:NULL delegate:[NSApp delegate]
+                 didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
+            }
+        }];
+    }];
 }
 
 

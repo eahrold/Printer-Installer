@@ -15,6 +15,7 @@
 
 @protocol PIMenuDelegate <NSObject>
 -(NSArray*)printersInPrinterList:(PIMenu*)piMenu;
+-(void)uninstallHelper:(id)sender;
 @end
 
 @interface PIMenu : NSMenu

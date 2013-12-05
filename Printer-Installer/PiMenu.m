@@ -11,11 +11,34 @@
 
 @implementation PIMenu{
     NSSet* currentManagedPrinters;
+    BOOL setupDone;
 }
 @synthesize delegate;
 
+-(void)awakeFromNib{
+    // Setup About Panel As Alternate Key
+    NSMenuItem* about = [[NSMenuItem alloc]initWithTitle:@"About..."
+                                                  action:@selector(orderFrontStandardAboutPanel:)
+                                           keyEquivalent:@""];
+    [about setKeyEquivalentModifierMask:NSAlternateKeyMask];
+    [about setTarget:[NSApplication sharedApplication]];
+    [about setAlternate:YES];
+    [self insertItem:about atIndex:1];
+}
 
 -(void)updateMenuItems{
+    if(!setupDone){
+        // Setup Uninstall Helper as Alternate Menu Item...
+        NSMenuItem* uninstall = [[NSMenuItem alloc]initWithTitle:@"Uninstall..."
+                                                          action:@selector(uninstallHelper:)
+                                                   keyEquivalent:@""];
+        [uninstall setKeyEquivalentModifierMask:NSAlternateKeyMask];
+        [uninstall setTarget:delegate];
+        [uninstall setAlternate:YES];
+        [self insertItem:uninstall atIndex:[self numberOfItems]];
+        setupDone = YES;
+    }
+    
     NSSet* set = [PICups getInstalledPrinters];
     NSArray* printerList = [delegate printersInPrinterList:self];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
@@ -50,7 +73,7 @@
                 [details addItemWithTitle:p.url action:nil keyEquivalent:@""];
                 
                 [self setSubmenu:details forItem:smi];
-                [self insertItem:smi atIndex:2];
+                [self insertItem:smi atIndex:3];
                 [cmp addObject:smi];
                 
                 if([set containsObject:p.name]){

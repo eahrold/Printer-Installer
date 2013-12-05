@@ -323,11 +323,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Eldon Ahrold";
-				TargetAttributes = {
-					BE93C98017BEC88400625DE2 = {
-						DevelopmentTeam = BUN87F4W87;
-					};
-				};
 			};
 			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
 			compatibilityVersion = "Xcode 3.2";
