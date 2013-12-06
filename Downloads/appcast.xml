@@ -15,5 +15,15 @@
                 <sparkle:minimumSystemVersion>10.8</sparkle:minimumSystemVersion>
                 <enclosure url="https://raw.github.com/eahrold/Printer-Installer/master/Downloads/Printer-Installer-2.2.zip" sparkle:version="2.2" sparkle:shortVersionString="2.2" length="1238619" type="application/octet-stream" sparkle:dsaSignature="MC0CFHs5doRng6uvCvs7ZwJaoWM4HwvhAhUAvb8kyY8LX9nv0PFfrDkf1mTQTrU=" />
             </item>
+            <item>
+                <title>Version 2.5</title>
+			    <description><![CDATA[
+                    <p></p>
+                ]]>
+                </description>
+                <pubDate>Wed, 30 Oct 2013 16:02:21 -0500</pubDate>
+                <sparkle:minimumSystemVersion>10.8</sparkle:minimumSystemVersion>
+                <enclosure url="https://raw.github.com/eahrold/Printer-Installer/master/Downloads/Printer-Installer-2.2.5.zip" sparkle:version="2.2.5" sparkle:shortVersionString="2.2.5" length="1238619" type="application/octet-stream" sparkle:dsaSignature="MC4CFQCQIaa51HQV+TCJvV1V6KOSAI3BpAIVAJBKuT7XAiqvB/cdyIK75++4duOt" />
+            </item>
    </channel>
 </rss>
