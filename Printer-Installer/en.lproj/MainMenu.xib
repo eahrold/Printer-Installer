@@ -33,7 +33,7 @@
                 <menuItem title="Update..." id="AFc-QJ-pOL">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="checkForUpdates:" target="ekH-1L-uWy" id="aCB-Kf-BwB"/>
+                        <action selector="checkForUpdates:" target="Ezn-6M-YvB" id="NRH-8U-TwM"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="vVw-GQ-ApM">
@@ -44,5 +44,6 @@
                 </menuItem>
             </items>
         </menu>
+        <customObject id="Ezn-6M-YvB" customClass="SUUpdater"/>
     </objects>
 </document>

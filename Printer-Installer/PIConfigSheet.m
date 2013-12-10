@@ -43,9 +43,8 @@ static NSString * const kLoginHelper = @"edu.loyno.smc.Printer-Installer.loginla
 -(IBAction)launchAtLoginChecked:(id)sender{
     NSButton* button = sender;
     if(![delegate installLoginItem:button.state]){
-        if(button.state)button.state=NO; else button.state=YES;
+        button.state = button.state ? YES:NO;
     };
-    
 }
 
 

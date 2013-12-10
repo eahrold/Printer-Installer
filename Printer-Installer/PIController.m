@@ -23,6 +23,8 @@
 
 #pragma mark - setup
 -(void)awakeFromNib {
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
     statusItem = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:piMenu];
     [statusItem setImage:[NSImage imageNamed:@"StatusBar"]];
@@ -51,7 +53,6 @@
 
 -(void)refreshPrinterList{
     NSString* url = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"server"];
-    
     Server* server = [[Server alloc]initWithQueue];
     server.URL = [NSURL URLWithString:url];
     
@@ -94,10 +95,6 @@
 }
 
 #pragma mark - IBActions
--(IBAction)checkForUpdates:(id)sender{
-    [[SUUpdater sharedUpdater]checkForUpdates:self];
-}
-
 -(IBAction)quitNow:(id)sender{
     [NSApp terminate:self];
 }
@@ -131,6 +128,17 @@
     }else{
         [PINSXPC removePrinter:printer menuItem:pmi];
     }
+}
+
+- (void)configureFromURLSheme:(NSAppleEventDescriptor*)event
+{
+    // get the URL from the Event and change it to an actual web url
+    // we register both printerinstaller and printerinstallers which
+    // represent http and https respectively
+    NSString* piurl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    NSString *url = [piurl stringByReplacingOccurrencesOfString:@"printerinstaller" withString:@"http"];
+    [[[NSUserDefaultsController sharedUserDefaultsController]values ]setValue:url forKey:@"server"];
+    [self refreshPrinterList];
 }
 
 #pragma mark - dealloc

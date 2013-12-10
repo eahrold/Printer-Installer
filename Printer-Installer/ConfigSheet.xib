@@ -18,7 +18,7 @@
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="1420" y="1001" width="495" height="129"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="495" height="129"/>
             <value key="maxSize" type="size" width="495" height="129"/>
             <view key="contentView" id="2">
@@ -75,7 +75,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="cancel:" target="-2" id="qjc-fM-cQI"/>
+                            <action selector="cancel:" target="-2" id="9ub-Ca-paC"/>
                         </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JA1-nH-itz">

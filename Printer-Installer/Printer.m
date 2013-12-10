@@ -93,7 +93,7 @@
     
     // Create url connection and fire request
     NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSString* downloadedPPD = [NSTemporaryDirectory() stringByAppendingPathComponent:_name];
+    NSString* downloadedPPD = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.gz",_name]];
     
     NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
     

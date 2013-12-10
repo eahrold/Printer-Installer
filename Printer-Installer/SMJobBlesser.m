@@ -13,6 +13,7 @@
 NSString* const JBAuthError = @"The Helper tool failed to install due to an Authorization issue, I must now quit";
 NSString* const JBCertError = @"The Helper tool failed to install due to Certificate Signing issues, I must now quit. Please let the System Admin Know, I assure (s)he will appericaite it.";
 
+NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool.";
 //----------------------------------------------
 //  SMJobBless
 //----------------------------------------------
@@ -98,7 +99,7 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
     
 	if (status != errAuthorizationSuccess) {
         NSLog(@"Failed to create AuthorizationRef. Error code: %d", status);
-        localError = [JobBlesser jobBlessError:@"Coulnd't remove" withReturnCode:1];
+        localError = [JobBlesser jobBlessError:JBAuthError withReturnCode:1];
         
 	}else {
         NSLog(@"Trying to remove helper tool");
@@ -107,13 +108,13 @@ NSString* const JBCertError = @"The Helper tool failed to install due to Certifi
         
         if (!result) {
             NSLog(@"Problem with SMJobBless: %@",CFBridgingRelease(cfError));
-            localError = [JobBlesser jobBlessError:JBCertError withReturnCode:1];
+            localError = [JobBlesser jobBlessError:JBRemoveError withReturnCode:1];
         }
     }
     
     if ( !result && (localError != NULL) ) {
         assert(localError != nil);
-        NSLog(@"we errored somewhere %@",localError.localizedDescription);
+        NSLog(@"We errored somewhere %@",localError.localizedDescription);
 
     }
     

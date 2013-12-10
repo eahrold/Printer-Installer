@@ -13,7 +13,7 @@
 
 @class PIMenu,PIController;
 
-@protocol PIMenuDelegate <NSObject>
+@protocol PIMenuDelegate <NSObject,NSMenuDelegate>
 -(NSArray*)printersInPrinterList:(PIMenu*)piMenu;
 -(void)uninstallHelper:(id)sender;
 @end

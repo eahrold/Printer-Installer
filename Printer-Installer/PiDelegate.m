@@ -21,7 +21,14 @@
 //-------------------------------------------
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification{
-    
+
+
+}
+
+- (void)handleURLEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+NSLog(@"%@", replyEvent);
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -46,7 +53,6 @@
          [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
     }
 }
-
 
 -(void)applicationWillTerminate:(NSNotification *)notification{
     [PINSXPC tellHelperToQuit];
