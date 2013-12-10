@@ -13,14 +13,16 @@
 		BE203708183E6E06000E33CE /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE203707183E6E06000E33CE /* Server.framework */; };
 		BE203709183E6E66000E33CE /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE203707183E6E06000E33CE /* Server.framework */; };
 		BE20370C183E7058000E33CE /* PILoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE20370B183E7058000E33CE /* PILoginItem.m */; };
-		BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE28433B1816BCD200B9FABE /* ConfigSheet.xib */; };
 		BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE69529B18492B990008CFAA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69529A18492B990008CFAA /* Reachability.m */; };
 		BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE69529C18492F080008CFAA /* SystemConfiguration.framework */; };
+		BE6A73801857B3F200A4DA71 /* PIMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A737F1857B3F200A4DA71 /* PIMenuView.m */; };
+		BE6A73841857B41600A4DA71 /* PIConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73821857B41600A4DA71 /* PIConfigView.m */; };
+		BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6A73831857B41600A4DA71 /* PIConfigView.xib */; };
+		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
-		BE8FD68C17CE646800452FD4 /* PIConfigSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
 		BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99317BEC88400625DE2 /* Credits.rtf */; };
@@ -74,18 +76,22 @@
 		BE203707183E6E06000E33CE /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Server.framework; sourceTree = "<group>"; };
 		BE20370A183E7058000E33CE /* PILoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PILoginItem.h; sourceTree = "<group>"; };
 		BE20370B183E7058000E33CE /* PILoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PILoginItem.m; sourceTree = "<group>"; };
-		BE28433B1816BCD200B9FABE /* ConfigSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigSheet.xib; sourceTree = "<group>"; };
 		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
 		BE56D9181823422B005BCF9D /* release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = release; sourceTree = "<group>"; };
 		BE69529918492B990008CFAA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BE69529A18492B990008CFAA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BE69529C18492F080008CFAA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BE6A737E1857B3F200A4DA71 /* PIMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIMenuView.h; sourceTree = "<group>"; };
+		BE6A737F1857B3F200A4DA71 /* PIMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIMenuView.m; sourceTree = "<group>"; };
+		BE6A73811857B41600A4DA71 /* PIConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIConfigView.h; sourceTree = "<group>"; };
+		BE6A73821857B41600A4DA71 /* PIConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIConfigView.m; sourceTree = "<group>"; };
+		BE6A73831857B41600A4DA71 /* PIConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PIConfigView.xib; sourceTree = "<group>"; };
+		BE6A73861857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+canBecomeKeyWindow.h"; sourceTree = "<group>"; };
+		BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+canBecomeKeyWindow.m"; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
-		BE8FD68A17CE646800452FD4 /* PIConfigSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIConfigSheet.h; sourceTree = "<group>"; };
-		BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIConfigSheet.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE93C98417BEC88400625DE2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE93C98717BEC88400625DE2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -207,16 +213,18 @@
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
 				BEE113711815764000850EF6 /* PIMenu.h */,
 				BEE113721815764000850EF6 /* PiMenu.m */,
+				BE6A737E1857B3F200A4DA71 /* PIMenuView.h */,
+				BE6A737F1857B3F200A4DA71 /* PIMenuView.m */,
 				BEDA9EB3182F45230055B0B8 /* PIController.h */,
 				BEDA9EB4182F45230055B0B8 /* PIController.m */,
 				BE20370A183E7058000E33CE /* PILoginItem.h */,
 				BE20370B183E7058000E33CE /* PILoginItem.m */,
-				BE8FD68A17CE646800452FD4 /* PIConfigSheet.h */,
-				BE8FD68B17CE646800452FD4 /* PIConfigSheet.m */,
 				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
 				BE8FD68817CE547F00452FD4 /* PINSXPC.m */,
+				BE6A73811857B41600A4DA71 /* PIConfigView.h */,
+				BE6A73821857B41600A4DA71 /* PIConfigView.m */,
+				BE6A73831857B41600A4DA71 /* PIConfigView.xib */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
-				BE28433B1816BCD200B9FABE /* ConfigSheet.xib */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
 			path = "Printer-Installer";
@@ -225,21 +233,23 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
+				BE93C99017BEC88400625DE2 /* main.m */,
+				BE6A73861857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.h */,
+				BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */,
 				BE69529918492B990008CFAA /* Reachability.h */,
 				BE69529A18492B990008CFAA /* Reachability.m */,
-				BEED08EE181FD92B00F15F3F /* dsa_pub.pem */,
-				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
 				BE052C71181989EC0007D51C /* PIApplication.h */,
 				BE052C72181989EC0007D51C /* PIApplication.m */,
 				BE7400C218122D1E00F71E1D /* PICups.h */,
 				BE7400C318122D1E00F71E1D /* PICups.m */,
-				BE93C99017BEC88400625DE2 /* main.m */,
 				BEF145D217C306F0003897D3 /* SMJobBlesser.h */,
 				BEF145D317C306F0003897D3 /* SMJobBlesser.m */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
 				BE93C99317BEC88400625DE2 /* Credits.rtf */,
+				BEED08EE181FD92B00F15F3F /* dsa_pub.pem */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -350,7 +360,7 @@
 			files = (
 				BEED08EF181FD92B00F15F3F /* dsa_pub.pem in Resources */,
 				BE93C99517BEC88400625DE2 /* Credits.rtf in Resources */,
-				BE28433C1816BCD200B9FABE /* ConfigSheet.xib in Resources */,
+				BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
 				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
 			);
@@ -373,8 +383,10 @@
 				BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */,
 				BE7400C418122D1E00F71E1D /* PICups.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
+				BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */,
 				BE20370C183E7058000E33CE /* PILoginItem.m in Sources */,
-				BE8FD68C17CE646800452FD4 /* PIConfigSheet.m in Sources */,
+				BE6A73801857B3F200A4DA71 /* PIMenuView.m in Sources */,
+				BE6A73841857B41600A4DA71 /* PIConfigView.m in Sources */,
 				BEE113731815764000850EF6 /* PiMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

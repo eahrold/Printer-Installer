@@ -8,15 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "PIMenu.h"
-#import "PIConfigSheet.h"
+#import "PIConfigView.h"
 #import "Reachability.h"
 
-@interface PIController : NSObject <PIMenuDelegate,PIConfigSheetDelegate>{
-    NSStatusItem* statusItem;
+@interface PIController : NSObject <PIMenuDelegate,PIConfigViewControllerDelegate>{
 }
 
-@property (strong) IBOutlet PIMenu* piMenu;
-@property (strong) PIConfigSheet* configSheet;
+@property (strong) IBOutlet PIMenu* menu;
 @property (nonatomic) Reachability *internet;
 
 @end

@@ -9,5 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PIDelegate : NSObject <NSApplicationDelegate>
+@property BOOL popupIsActive;
 
 @end

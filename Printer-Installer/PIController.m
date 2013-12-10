@@ -12,33 +12,54 @@
 #import "PIDelegate.h"
 #import "PINSXPC.h"
 #import "PILoginItem.h"
+#import "PIMenuView.h"
 
 
 @implementation PIController{
-    NSArray *printerList;
+    PIMenuView   *_menuView;
+    PIConfigView *_configView;
+    NSStatusItem *_statusItem;
+    NSArray      *_printerList;
+    NSPopover    *_popover;
+
 }
 
-@synthesize piMenu;
-@synthesize configSheet;
+@synthesize menu = _menu;
 
-#pragma mark - setup
+#pragma mark - Setup / Tear Down
 -(void)awakeFromNib {
+    // Setup Reachability
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
-    
-    statusItem = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:piMenu];
-    [statusItem setImage:[NSImage imageNamed:@"StatusBar"]];
-    [statusItem setHighlightMode:YES];
-    [piMenu setDelegate:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     self.internet = [Reachability reachabilityForInternetConnection];
     [self.internet startNotifier];
+    
+    // Setup Status Item
+    _statusItem = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
+    [_statusItem setMenu:_menu];
+    [_statusItem setHighlightMode:YES];
+    [_menu setDelegate:self];
+    
+    if(!_menuView){
+        _menuView = [[PIMenuView alloc]initWithStatusItem:_statusItem andMenu:_menu];
+    }
+    
+    _statusItem.view = _menuView;
+    
+    // If we have Internet Connectivity try and downlaod the list from the server,
+    // Otherwise, get notified when we do and pick up there...
     if([self.internet currentReachabilityStatus]){
         [self refreshPrinterList];
     }
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
 
 - (void) reachabilityChanged:(NSNotification *)note
 {
@@ -47,7 +68,6 @@
 
     if([self.internet currentReachabilityStatus]){
         [self refreshPrinterList];
-    }else{
     }
 }
 
@@ -59,12 +79,12 @@
     [server getRequestReturningData:^(NSData *data) {
         NSDictionary *settings =[NSDictionary dictionaryFromData:data];
 
-        printerList = settings[@"printerList"];
-        if(printerList.count){
-            [piMenu updateMenuItems];
-            [self cancelConfigSheet];
+        _printerList = settings[@"printerList"];
+        if(_printerList.count){
+            [_menu updateMenuItems];
+            [self cancelConfigView];
         }else{
-            configSheet.panelMessage = @"There are no printers shared with that group at this time:";
+            _configView.panelMessage = @"There are no printers shared with that group at this time:";
         }
 
         NSString* feedURL = settings[@"updateServer"];
@@ -77,17 +97,23 @@
         }
     }withError:^(NSError *error) {
         NSLog(@"%@",error.localizedDescription);
-        configSheet.panelMessage = @"The URL you entered may not be correct, please try again:";
-        [configSheet.defaultsCancelButton setHidden:NO];
-        [self performSelectorOnMainThread:@selector(configure:) withObject:self waitUntilDone:NO];
+        _configView.panelMessage = @"The URL you entered may not be correct, please try again:";
+        [_configView.defaultsCancelButton setHidden:NO];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self configure:self];
+        }];
 
     }];
 }
 
 #pragma mark - PIConfigSheet delegate methods
--(void)cancelConfigSheet{
-    [configSheet close];
-    configSheet = nil;
+-(void)cancelConfigView{
+    if (_popover != nil && _popover.isShown) {
+        [_popover close];
+    }
+    
+    ((PIDelegate*)[NSApp delegate]).popupIsActive = NO;
+    _configView = nil;
 }
 
 -(BOOL)installLoginItem:(BOOL)state{
@@ -100,28 +126,30 @@
 }
 
 -(IBAction)configure:(id)sender{
-    if(!configSheet){
-        configSheet = [[PIConfigSheet alloc]initWithWindowNibName:@"ConfigSheet"];
-        [configSheet setDelegate:self];
+    if(!_configView){
+        _configView = [[PIConfigView alloc]initWithNibName:@"PIConfigView" bundle:nil];
+        [_configView setDelegate:self];
     }
-    [configSheet showWindow:self];
-}
-
-
-#pragma mark - PIMenu delegate methods
--(NSArray*)printersInPrinterList:(PIMenu *)piMenu{
-    return printerList;
-}
-
--(void)uninstallHelper:(id)sender{
-    [PINSXPC uninstallHelper];
+    
+    if (_popover == nil) {
+        _popover = [[NSPopover alloc] init];
+        _popover.contentViewController = _configView;
+    }
+    
+    
+    if (!_popover.isShown) {
+        [_popover showRelativeToRect:_menuView.frame
+                              ofView:_menuView
+                       preferredEdge:NSMinYEdge];
+    }
+    ((PIDelegate*)[NSApp delegate]).popupIsActive = _popover.isShown;
 }
 
 #pragma mark - internal methods
 -(void)managePrinter:(id)sender{
     NSMenuItem* pmi = sender;
-    NSInteger pix = ([piMenu indexOfItem:pmi]-3);
-    NSDictionary* printer = [printerList objectAtIndex:pix];
+    NSInteger pix = ([_menu indexOfItem:pmi]-3);
+    NSDictionary* printer = [_printerList objectAtIndex:pix];
     
     if (!pmi.state){
         [PINSXPC addPrinter:printer menuItem:pmi];
@@ -141,10 +169,23 @@
     [self refreshPrinterList];
 }
 
-#pragma mark - dealloc
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+
+
+#pragma mark - PIMenu delegate methods
+-(NSArray*)printersInPrinterList:(PIMenu *)piMenu{
+    return _printerList;
 }
+
+-(void)uninstallHelper:(id)sender{
+    [PINSXPC uninstallHelper];
+}
+
+#pragma mark - NSMenuDelegate
+- (void)menuDidClose:(NSMenu *)menu
+{
+    [_menuView setActive:NO];
+}
+
+
 
 @end

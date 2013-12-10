@@ -16,7 +16,7 @@
         <customObject id="420" customClass="NSFontManager"/>
         <customObject id="ekH-1L-uWy" userLabel="PIController" customClass="PIController">
             <connections>
-                <outlet property="piMenu" destination="NH5-Kn-XLs" id="yPF-FQ-HNO"/>
+                <outlet property="menu" destination="NH5-Kn-XLs" id="R2k-yb-v4a"/>
             </connections>
         </customObject>
         <userDefaultsController representsSharedInstance="YES" id="726"/>
