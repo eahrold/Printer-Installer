@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 extern NSString* const PIDomain;
+extern NSString* const PINoSharedGroups;
+extern NSString* const PIIncorrectURL;
+extern NSString* const PIIncorrectURLAlt;
+
+
 
 @interface PIError : NSError
 + (NSError*) errorWithCode:(int)code;

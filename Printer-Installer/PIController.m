@@ -14,7 +14,6 @@
 #import "PILoginItem.h"
 #import "PIMenuView.h"
 
-
 @implementation PIController{
     PIMenuView   *_menuView;
     PIConfigView *_configView;
@@ -32,6 +31,8 @@
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    _printerList = [[NSUserDefaults standardUserDefaults]objectForKey:@"PrinterList"];
     
     self.internet = [Reachability reachabilityForInternetConnection];
     [self.internet startNotifier];
@@ -72,37 +73,47 @@
 }
 
 -(void)refreshPrinterList{
-    NSString* url = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"server"];
+    id values = [[NSUserDefaultsController sharedUserDefaultsController] values];
+    NSString* url = [values valueForKey:@"server" ];
+    
     Server* server = [[Server alloc]initWithQueue];
     server.URL = [NSURL URLWithString:url];
     
-    [server getRequestReturningData:^(NSData *data) {
-        NSDictionary *settings =[NSDictionary dictionaryFromData:data];
+    [server getRequestReturningData:^(NSData *data, NSError *error) {
+        if(error){
+            NSLog(@"%@",error.localizedDescription);
+            if(_configView){
+                _configView.panelMessage = [_configView.panelMessage isEqualToString:PIIncorrectURLAlt] ? PIIncorrectURL:PIIncorrectURLAlt;
+            }else if(_printerList){
+                [_menu updateMenuItems];
+            }
+        }else if (data){
+            NSDictionary *settings =[NSDictionary dictionaryFromData:data];
+            NSArray* printerList = settings[@"printerList"];
 
-        _printerList = settings[@"printerList"];
-        if(_printerList.count){
-            [_menu updateMenuItems];
-            [self cancelConfigView];
-        }else{
-            _configView.panelMessage = @"There are no printers shared with that group at this time:";
+            if(printerList.count){
+                _printerList = printerList;
+                [[NSUserDefaults standardUserDefaults]setObject:_printerList forKey:@"PrinterList"];
+                [_menu updateMenuItems];
+                [self cancelConfigView];
+            }else{
+                _configView.panelMessage = PINoSharedGroups;
+            }
+            
+            // check if the Serever Provided us with a feedURL if so use that.
+            // If not use the one provided int the App's Info.plist
+            NSString* feedURL = settings[@"updateServer"];
+            [Server checkURL:feedURL status:^(BOOL avaliable) {
+                if(avaliable){
+                    [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
+                }else{
+                    NSString *feedURL = [[NSBundle mainBundle] infoDictionary][@"SUFeedURL"];
+                    if(feedURL){
+                        [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
+                    }
+                }
+             }];
         }
-
-        NSString* feedURL = settings[@"updateServer"];
-
-        if([Server checkURL:feedURL]){
-            [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
-        }else{
-            feedURL = [[NSBundle mainBundle] infoDictionary][@"SUFeedURL"];
-            [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
-        }
-    }withError:^(NSError *error) {
-        NSLog(@"%@",error.localizedDescription);
-        _configView.panelMessage = @"The URL you entered may not be correct, please try again:";
-        [_configView.defaultsCancelButton setHidden:NO];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self configure:self];
-        }];
-
     }];
 }
 
@@ -128,15 +139,14 @@
 -(IBAction)configure:(id)sender{
     if(!_configView){
         _configView = [[PIConfigView alloc]initWithNibName:@"PIConfigView" bundle:nil];
-        [_configView setDelegate:self];
     }
-    
-    if (_popover == nil) {
+    [_configView setDelegate:self];
+
+    if (!_popover) {
         _popover = [[NSPopover alloc] init];
-        _popover.contentViewController = _configView;
     }
-    
-    
+    [_popover setContentViewController:_configView];
+
     if (!_popover.isShown) {
         [_popover showRelativeToRect:_menuView.frame
                               ofView:_menuView
@@ -151,11 +161,7 @@
     NSInteger pix = ([_menu indexOfItem:pmi]-3);
     NSDictionary* printer = [_printerList objectAtIndex:pix];
     
-    if (!pmi.state){
-        [PINSXPC addPrinter:printer menuItem:pmi];
-    }else{
-        [PINSXPC removePrinter:printer menuItem:pmi];
-    }
+    [PINSXPC changePrinterAvaliablily:printer menuItem:pmi add:pmi.state];
 }
 
 - (void)configureFromURLSheme:(NSAppleEventDescriptor*)event

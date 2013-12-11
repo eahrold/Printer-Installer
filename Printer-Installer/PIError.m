@@ -10,6 +10,9 @@
 
 //  The Domain to user with error codes and Alert Panel
 NSString* const PIDomain = @"edu.loyno.smc.Printer-Installer";
+NSString* const PINoSharedGroups = @"There are no printers shared with that group at this time:";
+NSString* const PIIncorrectURL = @"The URL you entered may not be correct, please try again:";
+NSString* const PIIncorrectURLAlt = @"The URL still isn't right, please check again:";
 
 @implementation PIError
 

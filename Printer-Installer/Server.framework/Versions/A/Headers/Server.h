@@ -36,11 +36,14 @@
 
 -(BOOL)getRequest:(NSData**)data withError:(NSError**)error;
 
--(void)getRequestReturningData:(void(^)(NSData *data))data
-                     withError:(void (^)(NSError *error))error;
+-(void)getRequestReturningData:(void(^)(NSData *data,NSError *error))reply;
 
 -(BOOL)postRequest:(NSData*)data withError:(NSError**)error;
 
 -(void)cancelConnections;
-+(BOOL)checkURL:(NSString*)URL;
+
+
++(BOOL)checkURL:(NSString*)URL __deprecated;
++(void)checkURL:(NSString*)URL status:(void(^)(BOOL avaliable))reply;
+
 @end

@@ -10,8 +10,6 @@
 		BE052C73181989EC0007D51C /* PIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BE052C72181989EC0007D51C /* PIApplication.m */; };
 		BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1266CB18297F5700D6A05F /* Security.framework */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
-		BE203708183E6E06000E33CE /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE203707183E6E06000E33CE /* Server.framework */; };
-		BE203709183E6E66000E33CE /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE203707183E6E06000E33CE /* Server.framework */; };
 		BE20370C183E7058000E33CE /* PILoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE20370B183E7058000E33CE /* PILoginItem.m */; };
 		BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
@@ -22,6 +20,9 @@
 		BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6A73831857B41600A4DA71 /* PIConfigView.xib */; };
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
 		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
+		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
+		BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
+		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
 		BE93C99117BEC88400625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C99017BEC88400625DE2 /* main.m */; };
@@ -53,7 +54,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */,
-				BE203709183E6E66000E33CE /* Server.framework in CopyFiles */,
+				BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +74,6 @@
 		BE052C71181989EC0007D51C /* PIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIApplication.h; sourceTree = "<group>"; };
 		BE052C72181989EC0007D51C /* PIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIApplication.m; sourceTree = "<group>"; };
 		BE1266CB18297F5700D6A05F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		BE203707183E6E06000E33CE /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Server.framework; sourceTree = "<group>"; };
 		BE20370A183E7058000E33CE /* PILoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PILoginItem.h; sourceTree = "<group>"; };
 		BE20370B183E7058000E33CE /* PILoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PILoginItem.m; sourceTree = "<group>"; };
 		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
@@ -90,6 +90,8 @@
 		BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+canBecomeKeyWindow.m"; sourceTree = "<group>"; };
 		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
 		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
+		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
+		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
 		BE93C98117BEC88400625DE2 /* Printer-Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Printer-Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,11 +140,11 @@
 			files = (
 				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
-				BE203708183E6E06000E33CE /* Server.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
 				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
 				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */,
+				BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,8 +184,8 @@
 		BE93C98317BEC88400625DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE8EC6FB1858C6C5005F4E6D /* Server.framework */,
 				BE69529C18492F080008CFAA /* SystemConfiguration.framework */,
-				BE203707183E6E06000E33CE /* Server.framework */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BE1266CB18297F5700D6A05F /* Security.framework */,
 				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
@@ -233,6 +235,7 @@
 		BE93C98B17BEC88400625DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE8EC6FE1858CD68005F4E6D /* StatusBar.png */,
 				BEC420AA181A0947005F3AC7 /* Images.xcassets */,
 				BE93C99017BEC88400625DE2 /* main.m */,
 				BE6A73861857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.h */,
@@ -278,11 +281,11 @@
 		BEBFB8E317C001F80023B26C /* App/Helper Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE93C9B417BEC90300625DE2 /* Interfaces.h */,
 				BEBFB8DF17BFFFD50023B26C /* Printer.h */,
 				BEBFB8E017BFFFD50023B26C /* Printer.m */,
 				BEDC5B3618252CBD003717BB /* PIError.h */,
 				BEDC5B3718252CBD003717BB /* PIError.m */,
-				BE93C9B417BEC90300625DE2 /* Interfaces.h */,
 			);
 			name = "App/Helper Common";
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */,
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
 				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
+				BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

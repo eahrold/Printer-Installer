@@ -10,6 +10,12 @@
 #import "SMJobBlesser.h"
 
 @implementation PINSXPC
++(void)changePrinterAvaliablily:(NSDictionary*)printer
+                       menuItem:(NSMenuItem*)menuItem
+                            add:(BOOL)added{
+    !added ?[self addPrinter:printer menuItem:menuItem]:
+            [self removePrinter:printer menuItem:menuItem];
+}
 
 +(void)addPrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
