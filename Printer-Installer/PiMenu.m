@@ -18,10 +18,10 @@
 -(void)awakeFromNib{
     // Setup About Panel As Alternate Key
     NSMenuItem* about = [[NSMenuItem alloc]initWithTitle:@"About..."
-                                                  action:@selector(orderFrontStandardAboutPanel:)
+                                                  action:@selector(showAboutPanel)
                                            keyEquivalent:@""];
     [about setKeyEquivalentModifierMask:NSAlternateKeyMask];
-    [about setTarget:[NSApplication sharedApplication]];
+    [about setTarget:[NSApp delegate]];
     [about setAlternate:YES];
     [self insertItem:about atIndex:1];
 }

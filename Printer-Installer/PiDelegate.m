@@ -58,6 +58,11 @@ NSLog(@"%@", replyEvent);
     [PINSXPC tellHelperToQuit];
 }
 
+-(void)showAboutPanel{
+    [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
+    [NSApp orderFrontStandardAboutPanel:self];
+}
+
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return NO;
 }
