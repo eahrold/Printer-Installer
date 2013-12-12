@@ -73,4 +73,9 @@ NSLog(@"%@", replyEvent);
     [NSApp terminate:self];
 }
 
+-(void)setupDidRemoveHelperTool:(NSAlert *)alert{
+    NSLog(@"Helper Tools Removed");
+    [NSApp terminate:self];
+}
+
 @end

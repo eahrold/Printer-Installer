@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PICups.h"
 #import "Printer.h"
 #import "PIError.h"
 

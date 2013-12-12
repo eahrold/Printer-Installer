@@ -13,7 +13,6 @@ extern NSString* const PIIncorrectURL;
 extern NSString* const PIIncorrectURLAlt;
 
 
-
 @interface PIError : NSError
 + (NSError*) errorWithCode:(int)code;
 + (NSError*) errorWithCode:(NSInteger)rc message:(NSString*)msg;
@@ -29,4 +28,5 @@ enum PIErrorCodes {
     PICantWriteFile = 1005 ,
     PICantOpenPPD = 1006,
     PICouldNotAddLoginItem = 1007,
+    PIIncompletePrinter = 1008,
 };

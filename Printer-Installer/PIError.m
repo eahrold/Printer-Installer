@@ -38,7 +38,7 @@ NSString* const PIIncorrectURLAlt = @"The URL still isn't right, please check ag
 +(NSString *) errorTextForCode:(int)code {
     NSString * codeText = @"";
     switch (code) {
-        case PIBadURL: codeText = @"The URL to the printer is incorrect.  Contact the system Admin";
+        case PIBadURL: codeText = @"The URL to the printer is incorrect.  Contact the System Admin";
             break;
         case PIPPDNotFound: codeText = @"No PPD Avaliable, please download and install the drivers from the manufacturer.";
             break;
@@ -49,6 +49,8 @@ NSString* const PIIncorrectURLAlt = @"The URL still isn't right, please check ag
         case PICantOpenPPD:codeText = @"lpadmin: Unable to open PPD file";
             break;
         case PICouldNotAddLoginItem:codeText = @"There was a problem setting this app to launch at login, you should try to manually add it using System Preferences.";
+            break;
+        case PIIncompletePrinter:codeText = @"Some Required attributes for the printer were not supplied";
             break;
         default: codeText = @"There was a unknown problem, sorry!";
             break;

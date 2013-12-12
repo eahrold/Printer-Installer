@@ -10,19 +10,21 @@
 #import "SMJobBlesser.h"
 
 @implementation PINSXPC
-+(void)changePrinterAvaliablily:(NSDictionary*)printer
++(void)changePrinterAvaliablily:(Printer*)printer
                        menuItem:(NSMenuItem*)menuItem
                             add:(BOOL)added{
     !added ?[self addPrinter:printer menuItem:menuItem]:
             [self removePrinter:printer menuItem:menuItem];
 }
 
-+(void)addPrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem{
++(void)addPrinter:(Printer*)printer menuItem:(NSMenuItem*)menuItem{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
     [helperXPCConnection resume];
-    [[helperXPCConnection remoteObjectProxy] addPrinter:printer withReply:^(NSError *error)
+    [[helperXPCConnection remoteObjectProxyWithErrorHandler:^(NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
+    }] addPrinter:printer withReply:^(NSError *error)
      {
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
@@ -36,12 +38,14 @@
      }];
 }
 
-+(void)removePrinter:(NSDictionary*)printer menuItem:(NSMenuItem*)menuItem{
++(void)removePrinter:(Printer*)printer menuItem:(NSMenuItem*)menuItem{
     NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
     helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     
     [helperXPCConnection resume];
-    [[helperXPCConnection remoteObjectProxy] removePrinter:printer withReply:^(NSError *error)
+    [[helperXPCConnection remoteObjectProxyWithErrorHandler:^(NSError *error) {
+        NSLog(@"Error: %@",error.localizedDescription);
+    }] removePrinter:printer withReply:^(NSError *error)
      {
          [[NSOperationQueue mainQueue] addOperationWithBlock:^{
              if(error){
@@ -88,7 +92,7 @@
             }else{
                 [JobBlesser removeHelperWithLabel:kHelperName];
                 [NSApp presentError:[NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Helper Tool and associated files have been removed.  We will now quit"}] modalForWindow:NULL delegate:[NSApp delegate]
-                 didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
+                 didPresentSelector:@selector(setupDidRemoveHelperTool:) contextInfo:nil];
             }
         }];
     }];

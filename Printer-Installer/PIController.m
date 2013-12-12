@@ -159,8 +159,8 @@
 -(void)managePrinter:(id)sender{
     NSMenuItem* pmi = sender;
     NSInteger pix = ([_menu indexOfItem:pmi]-3);
-    NSDictionary* printer = [_printerList objectAtIndex:pix];
-    
+    //NSDictionary* printer = [_printerList objectAtIndex:pix];
+    Printer* printer = [[Printer alloc]initWithDictionary:_printerList[pix]];
     [PINSXPC changePrinterAvaliablily:printer menuItem:pmi add:pmi.state];
 }
 

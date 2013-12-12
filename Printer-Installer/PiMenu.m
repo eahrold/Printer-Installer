@@ -39,7 +39,7 @@
         setupDone = YES;
     }
     
-    NSSet* set = [PICups getInstalledPrinters];
+    NSSet* set = [Printer getInstalledPrinters];
     NSArray* printerList = [delegate printersInPrinterList:self];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
     
@@ -49,7 +49,7 @@
         }
         
         for ( NSDictionary* dict in [[printerList reverseObjectEnumerator] allObjects]){
-            Printer* p = [[Printer alloc]initWithDict:dict];
+            Printer* p = [[Printer alloc]initWithDictionary:dict];
             
             if(!p.error){
                 NSMenuItem* smi;
@@ -82,7 +82,7 @@
                     [smi setState:NSOffState];
                 }
             }else{
-                NSLog(@"printer %@: %@",p.name,p.error.localizedDescription);
+                NSLog(@"printer %@",p.error.localizedDescription);
             }
             currentManagedPrinters = [NSSet setWithSet:cmp];
         }

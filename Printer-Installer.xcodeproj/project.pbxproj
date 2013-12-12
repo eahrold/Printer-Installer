@@ -19,7 +19,6 @@
 		BE6A73841857B41600A4DA71 /* PIConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73821857B41600A4DA71 /* PIConfigView.m */; };
 		BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6A73831857B41600A4DA71 /* PIConfigView.xib */; };
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
-		BE7400C418122D1E00F71E1D /* PICups.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7400C318122D1E00F71E1D /* PICups.m */; };
 		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
@@ -88,8 +87,6 @@
 		BE6A73831857B41600A4DA71 /* PIConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PIConfigView.xib; sourceTree = "<group>"; };
 		BE6A73861857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+canBecomeKeyWindow.h"; sourceTree = "<group>"; };
 		BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+canBecomeKeyWindow.m"; sourceTree = "<group>"; };
-		BE7400C218122D1E00F71E1D /* PICups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICups.h; sourceTree = "<group>"; };
-		BE7400C318122D1E00F71E1D /* PICups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICups.m; sourceTree = "<group>"; };
 		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
 		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -244,8 +241,6 @@
 				BE69529A18492B990008CFAA /* Reachability.m */,
 				BE052C71181989EC0007D51C /* PIApplication.h */,
 				BE052C72181989EC0007D51C /* PIApplication.m */,
-				BE7400C218122D1E00F71E1D /* PICups.h */,
-				BE7400C318122D1E00F71E1D /* PICups.m */,
 				BEF145D217C306F0003897D3 /* SMJobBlesser.h */,
 				BEF145D317C306F0003897D3 /* SMJobBlesser.m */,
 				BE93C98C17BEC88400625DE2 /* Printer-Installer-Info.plist */,
@@ -385,7 +380,6 @@
 				BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */,
-				BE7400C418122D1E00F71E1D /* PICups.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
 				BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */,
 				BE20370C183E7058000E33CE /* PILoginItem.m in Sources */,
@@ -555,6 +549,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.9;
 			};
 			name = Debug;
 		};
@@ -578,6 +573,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.9;
 			};
 			name = Release;
 		};

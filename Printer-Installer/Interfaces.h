@@ -14,10 +14,10 @@
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 
 @protocol HelperAgent <NSObject>
--(void)addPrinter:(NSDictionary*)printer
+-(void)addPrinter:(Printer*)printer
         withReply:(void (^)(NSError *error))reply;
 
--(void)removePrinter:(NSDictionary*)printer
+-(void)removePrinter:(Printer*)printer
         withReply:(void (^)(NSError *error))reply;
 
 -(void)helperInstallLoginItem:(NSURL*)loginItem;
