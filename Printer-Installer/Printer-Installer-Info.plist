@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.4</string>
+	<string>2.3.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -33,7 +33,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>edu.loyno.smc.Printer-Installer.helper</key>
-		<string>identifier "edu.loyno.smc.Printer-Installer.helper" and certificate leaf = H"f30730e7f976c288e6972913cae6e438e6df6ec3"</string>
+		<string>identifier &quot;edu.loyno.smc.Printer-Installer.helper&quot; and certificate leaf = H&quot;f30730e7f976c288e6972913cae6e438e6df6ec3&quot;</string>
 	</dict>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>

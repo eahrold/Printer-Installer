@@ -40,6 +40,7 @@ NSLog(@"%@", replyEvent);
                                error:&error]){
     
         if(error){
+            [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
             [NSApp presentError:error modalForWindow:NULL delegate:self
              didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
         }

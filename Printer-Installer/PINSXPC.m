@@ -91,6 +91,7 @@
                 NSLog(@"error: %@", error.localizedDescription);
             }else{
                 [JobBlesser removeHelperWithLabel:kHelperName];
+                [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
                 [NSApp presentError:[NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Helper Tool and associated files have been removed.  We will now quit"}] modalForWindow:NULL delegate:[NSApp delegate]
                  didPresentSelector:@selector(setupDidRemoveHelperTool:) contextInfo:nil];
             }

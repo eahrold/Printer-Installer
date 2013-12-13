@@ -549,7 +549,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.8;
 			};
 			name = Debug;
 		};
@@ -573,7 +573,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.8;
 			};
 			name = Release;
 		};

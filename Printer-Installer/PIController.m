@@ -58,6 +58,7 @@
 
 - (void)dealloc
 {
+    [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
