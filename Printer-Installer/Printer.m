@@ -24,6 +24,7 @@
         _location = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"location"];
         _description = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"description"];
         _ppd = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"ppd"];
+        _model = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"model"];
         _protocol = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"protocol"];
         _url = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"url"];
         _host = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"host"];
@@ -40,6 +41,7 @@
     [aEncoder encodeObject:_location forKey:@"location"];
     [aEncoder encodeObject:_description forKey:@"description"];
     [aEncoder encodeObject:_ppd forKey:@"ppd"];
+    [aEncoder encodeObject:_model forKey:@"model"];
     [aEncoder encodeObject:_protocol forKey:@"protocol"];
     [aEncoder encodeObject:_url forKey:@"url"];
     [aEncoder encodeObject:_host forKey:@"host"];
@@ -262,8 +264,18 @@
 
 #pragma mark - private methods
 -(BOOL)configurePPD{
+    NSString* path;
     // check if we have the PPD locally
-    NSString* path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",_model];
+
+#if DEBUG
+    syslog(1, "the model %s ",_model.UTF8String);
+    syslog(1, "the host %s ",_host.UTF8String);
+    syslog(1, "the name %s ",_name.UTF8String);
+    syslog(1, "the protocol %s ",_protocol.UTF8String);
+#endif
+    
+    path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",_model];
+
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         _ppd = path;
         return YES;
