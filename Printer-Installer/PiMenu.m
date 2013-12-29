@@ -49,16 +49,16 @@
         }
         
         for ( NSDictionary* dict in [[printerList reverseObjectEnumerator] allObjects]){
-            Printer* p = [[Printer alloc]initWithDictionary:dict];
+            Printer* printer = [[Printer alloc]initWithDictionary:dict];
             
-            if(!p.error){
+            if(printer){
                 NSMenuItem* smi;
-                if(p.description){
-                    smi = [[NSMenuItem alloc]initWithTitle:p.description
+                if(printer.description){
+                    smi = [[NSMenuItem alloc]initWithTitle:printer.description
                                                     action:@selector(managePrinter:)
                                              keyEquivalent:@""];
                 }else{
-                    smi = [[NSMenuItem alloc]initWithTitle:p.name
+                    smi = [[NSMenuItem alloc]initWithTitle:printer.name
                                                     action:@selector(managePrinter:)
                                              keyEquivalent:@""];
                 }
@@ -66,23 +66,21 @@
                 [smi setTarget:delegate];
                 NSMenu* details = [[NSMenu alloc]init];
                 
-                if(![p.location isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",p.location] action:nil keyEquivalent:@""];
-                if(![p.model isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",p.model] action:nil keyEquivalent:@""];
-                if(![p.ppd_url isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",p.ppd_url] action:nil keyEquivalent:@""];
+                if(![printer.location isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",printer.location] action:nil keyEquivalent:@""];
+                if(![printer.model isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",printer.model] action:nil keyEquivalent:@""];
+                if(![printer.ppd_url isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",printer.ppd_url] action:nil keyEquivalent:@""];
                 
-                [details addItemWithTitle:p.url action:nil keyEquivalent:@""];
+                [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
                 
                 [self setSubmenu:details forItem:smi];
                 [self insertItem:smi atIndex:3];
                 [cmp addObject:smi];
                 
-                if([set containsObject:p.name]){
+                if([set containsObject:printer.name]){
                     [smi setState:NSOnState];
                 }else{
                     [smi setState:NSOffState];
                 }
-            }else{
-                NSLog(@"printer %@",p.error.localizedDescription);
             }
             currentManagedPrinters = [NSSet setWithSet:cmp];
         }

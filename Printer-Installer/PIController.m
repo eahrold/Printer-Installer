@@ -20,7 +20,6 @@
     NSStatusItem *_statusItem;
     NSArray      *_printerList;
     NSPopover    *_popover;
-
 }
 
 @synthesize menu = _menu;
@@ -84,6 +83,7 @@
         if(error){
             NSLog(@"%@",error.localizedDescription);
             if(_configView){
+                // we switch between messages so the use knows something is happening
                 _configView.panelMessage = [_configView.panelMessage isEqualToString:PIIncorrectURLAlt] ? PIIncorrectURL:PIIncorrectURLAlt;
             }else if(_printerList){
                 [_menu updateMenuItems];
@@ -91,10 +91,9 @@
         }else if (data){
             NSDictionary *settings =[NSDictionary dictionaryFromData:data];
             NSArray* printerList = settings[@"printerList"];
-
             if(printerList.count){
+                [[NSUserDefaults standardUserDefaults]setObject:printerList forKey:@"PrinterList"];
                 _printerList = printerList;
-                [[NSUserDefaults standardUserDefaults]setObject:_printerList forKey:@"PrinterList"];
                 [_menu updateMenuItems];
                 [self cancelConfigView];
             }else{
@@ -157,12 +156,15 @@
 }
 
 #pragma mark - internal methods
--(void)managePrinter:(id)sender{
-    NSMenuItem* pmi = sender;
-    NSInteger pix = ([_menu indexOfItem:pmi]-3);
-    //NSDictionary* printer = [_printerList objectAtIndex:pix];
+-(void)managePrinter:(NSMenuItem*)sender{
+    NSInteger pix = ([_menu indexOfItem:sender]-3);
     Printer* printer = [[Printer alloc]initWithDictionary:_printerList[pix]];
-    [PINSXPC changePrinterAvaliablily:printer menuItem:pmi add:pmi.state];
+    [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            if(!error)sender.state = !sender.state;
+            else [NSApp presentError:error];
+        }];
+    }];
 }
 
 - (void)configureFromURLSheme:(NSAppleEventDescriptor*)event
@@ -175,7 +177,6 @@
     [[[NSUserDefaultsController sharedUserDefaultsController]values ]setValue:url forKey:@"server"];
     [self refreshPrinterList];
 }
-
 
 
 #pragma mark - PIMenu delegate methods
@@ -192,6 +193,7 @@
 {
     [_menuView setActive:NO];
 }
+
 
 
 

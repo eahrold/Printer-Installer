@@ -20,24 +20,28 @@
 
 
 -(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
-    [printer addPrinter];
-    reply(printer.error);
+    NSError *error;
+    [printer addPrinter:&error];
+    reply(error);
 }
 
 
 -(void)removePrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
-    [printer removePrinter];
-    reply(printer.error);
+    NSError *error;
+    [printer removePrinter:&error];
+    reply(error);
 }
 
--(void)quitHelper{
+-(void)quitHelper:(void (^)(BOOL success))reply{
     // this will cause the run-loop to exit;
     // you should call it via NSXPCConnection during the applicationShouldTerminate routine
     self.helperToolShouldQuit = YES;
+    reply(YES);
 }
 
--(void)helperInstallLoginItem:(NSURL*)loginItem{
+-(void)helperInstallLoginItem:(NSURL*)loginItem withReply:(void (^)(NSError *))reply{
     syslog(1,"installing loginitem");
+    NSError* error;
     AuthorizationRef auth = NULL;
     LSSharedFileListRef globalLoginItems = LSSharedFileListCreate(NULL, kLSSharedFileListGlobalLoginItems, NULL);
     LSSharedFileListSetAuthorization(globalLoginItems, auth);
@@ -51,13 +55,14 @@
         if (ourLoginItem) {
             CFRelease(ourLoginItem);
         } else {
-            syslog(1,"Could not insert ourselves as a global login item");
+            error = [PIError errorWithCode:1 message:@"Could not insert ourselves as a global login item"];
         }
         
         CFRelease(globalLoginItems);
     } else {
-        syslog(1,"Could not get the global login items");
+        error = [PIError errorWithCode:1 message:@"Could not get the global login items"];
     }
+    reply(error);
 }
 
 -(void)uninstall:(void (^)(NSError *))reply{
@@ -81,18 +86,6 @@
         error = nil;
     }
     reply(retunError);
-}
-
-//----------------------------------------
-// Helper Singleton
-//----------------------------------------
-+ (helper *)sharedAgent {
-    static dispatch_once_t onceToken;
-    static helper *shared;
-    dispatch_once(&onceToken, ^{
-        shared = [helper new];
-    });
-    return shared;
 }
 
 

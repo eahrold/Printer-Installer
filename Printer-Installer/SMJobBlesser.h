@@ -15,10 +15,10 @@
 @interface JobBlesser : NSObject
 
 +(BOOL)blessHelperWithLabel:(NSString *)helperID
-                  andPrompt:(NSString*)prompt
-                      error:(NSError**)error;
+                  andPrompt:(NSString *)prompt
+                      error:(NSError **)error;
 
-+(BOOL)removeHelperWithLabel:(NSString*)helperID;
++(BOOL)removeHelperWithLabel:(NSString *)helperID;
 
 
 @end

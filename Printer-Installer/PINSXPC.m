@@ -8,92 +8,88 @@
 
 #import "PINSXPC.h"
 #import "SMJobBlesser.h"
+#import "PIAlert.h"
 
 @implementation PINSXPC
-+(void)changePrinterAvaliablily:(Printer*)printer
-                       menuItem:(NSMenuItem*)menuItem
-                            add:(BOOL)added{
-    !added ?[self addPrinter:printer menuItem:menuItem]:
-            [self removePrinter:printer menuItem:menuItem];
+
+#pragma mark - Initializers
+-(id)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options{
+    self = [super initWithMachServiceName:name options:options];
+    if (self) {
+        self.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
+        [self resume];
+    }
+    return self;
 }
 
-+(void)addPrinter:(Printer*)printer menuItem:(NSMenuItem*)menuItem{
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    
-    [helperXPCConnection resume];
-    [[helperXPCConnection remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        NSLog(@"%@",[error localizedDescription]);
-    }] addPrinter:printer withReply:^(NSError *error)
-     {
-         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-             if(error){
-                 NSLog(@"%@",[error localizedDescription]);
-                 [NSApp presentError:error];
-             }else{
-                 [menuItem setState:NSOnState];
-             }
-         }];
-         [helperXPCConnection invalidate];
-     }];
+-(id)initConnection{
+    self = [self initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
+    return self;
 }
 
-+(void)removePrinter:(Printer*)printer menuItem:(NSMenuItem*)menuItem{
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    
-    [helperXPCConnection resume];
-    [[helperXPCConnection remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        NSLog(@"Error: %@",error.localizedDescription);
-    }] removePrinter:printer withReply:^(NSError *error)
-     {
-         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-             if(error){
-                 NSLog(@"%@",[error localizedDescription]);
-                 [NSApp presentError:error];
-             }else{
-                 [menuItem setState:NSOffState];
-             }
-         }];
-         [helperXPCConnection invalidate];
-     }];
+
+-(void)addPrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
+    [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
+        if(error)NSLog(@"add printer xpc error: %@",error.localizedDescription);
+    }] addPrinter:printer withReply:^(NSError *error) {
+        reply(error);
+        [self invalidate];
+    }];
 }
+
+-(void)removePrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
+    [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
+        if(error)NSLog(@"remove printer xpc error: %@",error.localizedDescription);
+    }] removePrinter:printer withReply:^(NSError *error) {
+        reply(error);
+        [self invalidate];
+    }];
+}
+
+
++(void)changePrinterAvaliablily:(Printer*)printer add:(BOOL)added reply:(void (^)(NSError *error))reply{
+    PINSXPC* connection = [[PINSXPC alloc]initConnection];
+    if(added){
+        [connection addPrinter:printer reply:^(NSError *error) {
+            reply(error);
+        }];
+    }else{
+        [connection removePrinter:printer reply:^(NSError *error) {
+            reply(error);
+        }];
+    }
+}
+
+
 
 +(void)installGlobalLoginItem{
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    [helperXPCConnection resume];
-    
-    [[helperXPCConnection remoteObjectProxy] helperInstallLoginItem:[[NSBundle mainBundle] bundleURL]];
+    PINSXPC* connection = [[PINSXPC alloc]initConnection];
+    [[connection remoteObjectProxy] helperInstallLoginItem:[[NSBundle mainBundle] bundleURL] withReply:^(NSError *error) {
+        [connection invalidate];
+    }];
 }
 
 +(void)tellHelperToQuit{
     // Send a message to the helper tool telling it to call it's quitHelper method.
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    [helperXPCConnection resume];
-    
-    [[helperXPCConnection remoteObjectProxy] quitHelper];
+    PINSXPC* connection = [[PINSXPC alloc]initConnection];
+    [[connection remoteObjectProxy] quitHelper:^(BOOL success) {
+        [connection invalidate];
+    }];
 }
 
 +(void)uninstallHelper{
-    NSXPCConnection *helperXPCConnection = [[NSXPCConnection alloc] initWithMachServiceName:kHelperName options:NSXPCConnectionPrivileged];
-    
-    helperXPCConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    [helperXPCConnection resume];
-    
-    [[helperXPCConnection remoteObjectProxy] uninstall:^(NSError * error) {
+    PINSXPC* connection = [[PINSXPC alloc]initConnection];
+    [[connection remoteObjectProxy] uninstall:^(NSError * error) {
+        [connection invalidate];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            
             if(error){
-                NSLog(@"error: %@", error.localizedDescription);
+                [NSApp presentError:error];
             }else{
                 [JobBlesser removeHelperWithLabel:kHelperName];
                 [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
-                [NSApp presentError:[NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Helper Tool and associated files have been removed.  We will now quit"}] modalForWindow:NULL delegate:[NSApp delegate]
-                 didPresentSelector:@selector(setupDidRemoveHelperTool:) contextInfo:nil];
+                [PIAlert showAlert:@"Helper Tool Removed"
+                   withDescription:@"we've removed all files associated with printer installer. we will now quit."
+                    didEndSelector:@selector(setupDidRemoveHelperTool:)];
             }
         }];
     }];

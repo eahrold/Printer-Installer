@@ -12,7 +12,10 @@
 #import <cups/cups.h>
 #import <cups/ppd.h>
 
-@implementation Printer
+@implementation Printer{
+    ipp_t           *request;
+    http_t          *http;
+}
 
 #pragma mark - Initializers / Secure Coding
 - (id)initWithCoder:(NSCoder*)aDecoder {
@@ -52,22 +55,26 @@
     self = [super init];
     if(self){
         [self setValuesForKeysWithDictionary:dict];
-        if(!_url)[self configureURL];
+        if(!_url)
+            if(![self configureURL:nil]){
+                return nil;
+            };
     }
     return self;
 }
 
 -(BOOL)configureURI{
-    return [self configureURL];
+    return [self configureURL:nil];
 }
 
 #pragma mark - CUPS Wrappers
 -(BOOL)addPrinter{
-    if(![self nameIsValid])return NO;
-    if(![self configurePPD])return NO;
+    return [self addPrinter:nil];
+}
+-(BOOL)addPrinter:(NSError *__autoreleasing*)error{
+    if(![self nameIsValid:error])return NO;
+    if(![self configurePPD:error])return NO;
     
-    ipp_t           *request;
-    http_t          *http;
     ppd_file_t      *ppd;
     cups_file_t     *inppd;
     cups_file_t     *outppd;
@@ -81,12 +88,11 @@
     
     const char  *customval;
     
-    char        uri[HTTP_MAX_URI],
-    line[1024],         /* Line from PPD file */
-    keyword[1024],		/* Keyword from Default line */
-    *keyptr,            /* Pointer into keyword... */
-    tempfile[1024];		/* Temporary filename */
-    
+    char    uri[HTTP_MAX_URI],
+            line[1024],         /* Line from PPD file */
+            keyword[1024],		/* Keyword from Default line */
+            *keyptr,            /* Pointer into keyword... */
+            tempfile[1024];		/* Temporary filename */
     
     request = ippNewRequest(CUPS_ADD_MODIFY_PRINTER);
     http = httpConnectEncrypt(cupsServer(), ippPort(),cupsEncryption());
@@ -118,7 +124,6 @@
     ippAddBoolean(request, IPP_TAG_PRINTER, "printer-is-accepting-jobs", 1);
     
     cupsEncodeOptions2(request, num_options, options, IPP_TAG_PRINTER);
-    cupsEncodeOptions2(request, num_options, options, IPP_TAG_PRINTER);
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -131,7 +136,7 @@
     
     if ((outppd = cupsTempFile2(tempfile, sizeof(tempfile))) == NULL){
         ippDelete(request);
-        _error = [PIError errorWithCode:PICantWriteFile];
+        if(error)*error = [PIError errorWithCode:PICantWriteFile];
         return NO;
     }
     
@@ -140,7 +145,7 @@
         ippDelete(request);
         cupsFileClose(outppd);
         unlink(tempfile);
-        _error =  [PIError errorWithCode:PICantOpenPPD];
+        if(error)*error =  [PIError errorWithCode:PICantOpenPPD];
         return NO;
     }
     
@@ -156,7 +161,6 @@
             /*
              * Get default option name...
              */
-            
             strlcpy(keyword, line + 8, sizeof(keyword));
             
             for (keyptr = keyword; *keyptr; keyptr ++)
@@ -198,8 +202,6 @@
                 cupsFilePrintf(outppd, "%s\n", line);
         }
     }
-    
-    
     cupsFileClose(inppd);
     cupsFileClose(outppd);
     ppdClose(ppd);
@@ -212,22 +214,69 @@
     
     if (cupsLastError() > IPP_OK_CONFLICT)
     {
-        _error = [PIError cupsError:1 message:cupsLastErrorString()];
+        if(error)*error = [PIError cupsError:1 message:cupsLastErrorString()];
         return NO;
     }
 
     
     return YES;
 }
--(BOOL)addOptions:(ipp_t *)request{
+-(BOOL)addOptions:(NSArray *)opts{
+    cups_option_t	*options = NULL;
+    int             num_options = 0;
+
+    cups_dest_t     *dest = NULL;
+    cups_dest_t     *dests = NULL;
+    int             num_dests = 0;
+
+    char            *printer,
+                    *instance,
+                    option;
+    
+    printer = (char*)self.name.UTF8String;
+    
+    if ((instance = strrchr(printer, '/')) != NULL)
+        *instance++ = '\0';
+    
+    if (num_dests == 0)
+        num_dests = cupsGetDests(&dests);
+    
+    if ((dest = cupsGetDest(printer, instance, num_dests, dests)) == NULL)
+    {
+        num_dests = cupsAddDest(printer, instance, num_dests, &dests);
+        dest      = cupsGetDest(printer, instance, num_dests, dests);
+        
+        if (dest == NULL)
+        {
+	        NSLog(@"unable to locate printer %@", self.name);
+            return (1);
+        }
+    }
+    
+    
+    if(opts.count){
+        for(NSString* opt in opts){
+            num_options = cupsParseOptions(opt.UTF8String, num_options, &options);
+        }
+    }
+    
+    cupsEncodeOptions2(request, num_options, options, IPP_TAG_PRINTER);
     
     return YES;
 }
+
+-(BOOL)addOption:(NSString *)opt{
+   return [self addOptions:@[opt]];
+}
+
 -(BOOL)removePrinter{
+    return [self removePrinter:nil];
+}
+-(BOOL)removePrinter:(NSError *__autoreleasing*)error{
     /* convert get these out of NSString */
     char            uri[HTTP_MAX_URI];
     
-    ipp_t* request = ippNewRequest(CUPS_DELETE_PRINTER);
+    request = ippNewRequest(CUPS_DELETE_PRINTER);
     
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
                      "localhost", 0, "/printers/%s", _name.UTF8String);
@@ -239,7 +288,7 @@
     
     if (cupsLastError() > IPP_OK_CONFLICT)
     {
-        _error = [PIError cupsError:1 message:cupsLastErrorString()];
+        if(error)*error = [PIError cupsError:1 message:cupsLastErrorString()];
         return NO;
     }
     
@@ -247,23 +296,8 @@
 }
 
 
-+(NSSet*)getInstalledPrinters{
-    int i;
-    NSMutableSet *set = [NSMutableSet new];
-    
-    cups_dest_t *dests, *dest;
-    int num_dests = cupsGetDests(&dests);
-    
-    for (i = num_dests, dest = dests; i > 0; i --, dest ++)
-    {
-        [set addObject:[NSString stringWithFormat:@"%s",dest->name]];
-    }
-    
-    return set;
-}
-
 #pragma mark - private methods
--(BOOL)configurePPD{
+-(BOOL)configurePPD:(NSError*__autoreleasing*)error{
     NSString* path;
     // check if we have the PPD locally
 
@@ -296,14 +330,14 @@
     }
     
     // if we still don't have it error out
-    _error = [PIError errorWithCode:PIPPDNotFound];
+    if(error)*error = [PIError errorWithCode:PIPPDNotFound];
     return NO;
 }
 
--(BOOL)configureURL{
+-(BOOL)configureURL:(NSError*__autoreleasing*)error{
     if(!_name || !_protocol || !_host){
         NSString *errMsg = [NSString stringWithFormat:@"Values Cannot be empty printer:%@ protocol:%@ host:%@",_name,_protocol,_host];
-        _error = [PIError errorWithCode:PIIncompletePrinter message:errMsg];
+        if(error)*error = [PIError errorWithCode:PIIncompletePrinter message:errMsg];
         return NO;
     }
     
@@ -326,7 +360,7 @@
         _url = [NSString stringWithFormat:@"%@://%@/%@",_protocol,_host,_name];
     }
     else{
-        _error = [PIError errorWithCode:PIInvalidProtocol];
+        if(error)*error = [PIError errorWithCode:PIInvalidProtocol];
         return NO;
     }
     return YES;
@@ -342,17 +376,17 @@
     NSURLResponse* response = nil;
     
     // Create the request.
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    NSMutableURLRequest *ppdRequest = [NSMutableURLRequest requestWithURL:URL];
     
     // set as GET request
-    request.HTTPMethod = @"GET";
-    request.timeoutInterval = 3;
+    ppdRequest.HTTPMethod = @"GET";
+    ppdRequest.timeoutInterval = 3;
     
     // set header fields
-    [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [ppdRequest setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
     // Create url connection and fire request
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData* data = [NSURLConnection sendSynchronousRequest:ppdRequest returningResponse:&response error:&error];
     NSString* downloadedPPD = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.gz",_name]];
     
     NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
@@ -375,8 +409,8 @@
     return NO;
 }
 
--(BOOL)nameIsValid{
-    const char  *name = self.name.UTF8String;
+-(BOOL)nameIsValid:(NSError*__autoreleasing*)error{
+    const char  *name = _name.UTF8String;
     const char	*ptr;
     
     for (ptr = name; *ptr; ptr ++){
@@ -385,7 +419,7 @@
         }else if
             ((*ptr >= 0 && *ptr <= ' ') || *ptr == 127 || *ptr == '/' ||
              *ptr == '#'){
-                _error = [PIError errorWithCode:1008 message:@"Printer name can only contain printable characters"];
+                if(error)*error = [PIError errorWithCode:1008 message:@"Printer name can only contain printable characters"];
                 return NO;
         }
     }
@@ -394,10 +428,26 @@
      * All the characters are good; validate the length, too...
      */
     if((ptr - name) > 127){
-        _error = [PIError errorWithCode:1009 message:@"Printer Name is Too Long"];
+        if(error)*error = [PIError errorWithCode:1009 message:@"Printer Name is Too Long"];
         return NO;
     }
     return YES;
+}
+
+#pragma mark - Class Methods
++(NSSet*)getInstalledPrinters{
+    int i;
+    NSMutableSet *set = [NSMutableSet new];
+    
+    cups_dest_t *dests, *dest;
+    int num_dests = cupsGetDests(&dests);
+    
+    for (i = num_dests, dest = dests; i > 0; i --, dest ++)
+    {
+        [set addObject:[NSString stringWithFormat:@"%s",dest->name]];
+    }
+    
+    return set;
 }
 
 @end

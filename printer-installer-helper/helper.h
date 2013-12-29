@@ -12,8 +12,6 @@
 
 @property (nonatomic, assign) BOOL helperToolShouldQuit;
 
-+ (helper *)sharedAgent;
-
 @property (weak) NSXPCConnection *xpcConnection;
 
 @end

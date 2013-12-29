@@ -29,13 +29,11 @@
             if (ourLoginItem) {
                 CFRelease(ourLoginItem);
             } else {
-                NSLog(@"Could not insert ourselves as a login item");
                 error = [PIError errorWithCode:PICouldNotAddLoginItem];
                 status = NO;
             }
             CFRelease(loginItems);
         } else {
-            NSLog(@"Could not get the login items");
             error = [PIError errorWithCode:PICouldNotAddLoginItem];
             status = NO;
         }

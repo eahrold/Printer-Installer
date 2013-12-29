@@ -21,16 +21,19 @@
 @property (copy) NSString *ppd;         // path to raw ppd file either .gz or .ppd
 @property (copy) NSString *url;         // full uri for cups dest
 
-@property (copy) NSError *error;
-
 -(id)initWithDictionary:(NSDictionary*)dict;
 
 -(BOOL)configureURI;    // try and configure a Printer URI from the protocol-host-name keys
 
 // Objective-C wrappers for CUPS
-+(NSSet*)getInstalledPrinters;  //Returns A list of all installed printers
++(NSSet*)getInstalledPrinters;          //Returns A list of all installed printers
 
--(BOOL)addPrinter;  // adds a Printer object
--(BOOL)removePrinter;  // remove a Printer object
+-(BOOL)addPrinter:(NSError**)error;
+-(BOOL)addPrinter;                      // adds a Printer object
+
+-(BOOL)removePrinter:(NSError**)error;
+-(BOOL)removePrinter;                   // remove a Printer object
+-(BOOL)addOption:(NSString*)option;     // add single option conforming to lpoptions syntax
+-(BOOL)addOptions:(NSArray *)options;   // add list option conforming to lpoptions syntax
 
 @end
