@@ -61,7 +61,6 @@
 }
 
 
-
 +(void)installGlobalLoginItem{
     PINSXPC* connection = [[PINSXPC alloc]initConnection];
     [[connection remoteObjectProxy] helperInstallLoginItem:[[NSBundle mainBundle] bundleURL] withReply:^(NSError *error) {

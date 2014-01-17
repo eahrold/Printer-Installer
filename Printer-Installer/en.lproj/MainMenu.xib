@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -30,7 +30,7 @@
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="uWG-pX-VUh"/>
                 <menuItem isSeparatorItem="YES" id="LLQ-s3-7kL"/>
-                <menuItem title="Update..." id="AFc-QJ-pOL">
+                <menuItem title="Check For Updates..." id="AFc-QJ-pOL">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="checkForUpdates:" target="Ezn-6M-YvB" id="NRH-8U-TwM"/>

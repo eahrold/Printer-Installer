@@ -14,14 +14,17 @@
 #import "PINSXPC.h"
 #import "PIError.h"
 
-@implementation PIDelegate
+static NSString* kShowBonjourPrinters = @"ShowBonjourPrinters";
+
+
+@implementation PIDelegate{
+}
 
 //-------------------------------------------
 //  Delegate Methods
 //-------------------------------------------
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification{
-
 
 }
 
@@ -34,6 +37,9 @@ NSLog(@"%@", replyEvent);
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSError  *error = nil;
+    [[NSUserDefaults standardUserDefaults]registerDefaults:@{
+                                                             kShowBonjourPrinters:@NO,
+                                                             }];
     
     if(![JobBlesser blessHelperWithLabel:kHelperName
                            andPrompt:@"In order to add managed Printers"
@@ -44,10 +50,6 @@ NSLog(@"%@", replyEvent);
             [NSApp presentError:error modalForWindow:NULL delegate:self
              didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
         }
-    }
-    
-    if([[NSUserDefaults standardUserDefaults]boolForKey:@"managed"]){
-        [PINSXPC installGlobalLoginItem];
     }
     
     if([[SUUpdater sharedUpdater]feedURL]){

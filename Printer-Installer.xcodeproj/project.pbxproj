@@ -13,6 +13,9 @@
 		BE20370C183E7058000E33CE /* PILoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE20370B183E7058000E33CE /* PILoginItem.m */; };
 		BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
+		BE5D200F188706EE001A542A /* PIBonjourBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D200E188706EE001A542A /* PIBonjourBrowser.m */; };
+		BE5D201718886C09001A542A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5D201518886BE9001A542A /* libz.dylib */; };
+		BE5D201818886C13001A542A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5D201518886BE9001A542A /* libz.dylib */; };
 		BE69529B18492B990008CFAA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69529A18492B990008CFAA /* Reachability.m */; };
 		BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE69529C18492F080008CFAA /* SystemConfiguration.framework */; };
 		BE6A73801857B3F200A4DA71 /* PIMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A737F1857B3F200A4DA71 /* PIMenuView.m */; };
@@ -77,6 +80,9 @@
 		BE20370B183E7058000E33CE /* PILoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PILoginItem.m; sourceTree = "<group>"; };
 		BE2F448C181F5257007E36B1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
 		BE56D9181823422B005BCF9D /* release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = release; sourceTree = "<group>"; };
+		BE5D200D188706EE001A542A /* PIBonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIBonjourBrowser.h; sourceTree = "<group>"; };
+		BE5D200E188706EE001A542A /* PIBonjourBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIBonjourBrowser.m; sourceTree = "<group>"; };
+		BE5D201518886BE9001A542A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BE69529918492B990008CFAA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BE69529A18492B990008CFAA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BE69529C18492F080008CFAA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -87,6 +93,9 @@
 		BE6A73831857B41600A4DA71 /* PIConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PIConfigView.xib; sourceTree = "<group>"; };
 		BE6A73861857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+canBecomeKeyWindow.h"; sourceTree = "<group>"; };
 		BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+canBecomeKeyWindow.m"; sourceTree = "<group>"; };
+		BE7936131889BC9C00F0936F /* PrinterCUPSExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrinterCUPSExtensions.h; path = "Printer-Installer/PrinterCUPSExtensions.h"; sourceTree = "<group>"; };
+		BE7F16031870C35100362EA5 /* PIAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAlert.h; path = "Printer-Installer/PIAlert.h"; sourceTree = "<group>"; };
+		BE7F16041870C35100362EA5 /* PIAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAlert.m; path = "Printer-Installer/PIAlert.m"; sourceTree = "<group>"; };
 		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
 		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -135,8 +144,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
+				BE5D201818886C13001A542A /* libz.dylib in Frameworks */,
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
+				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
 				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
 				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
@@ -149,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE5D201718886C09001A542A /* libz.dylib in Frameworks */,
 				BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */,
 				BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */,
 			);
@@ -157,9 +168,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE7F15FF186F2DCF00362EA5 /* Extra Items */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Extra Items";
+			sourceTree = "<group>";
+		};
+		BE7F16061871C4F800362EA5 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
+				BE5D200D188706EE001A542A /* PIBonjourBrowser.h */,
+				BEDA9EB3182F45230055B0B8 /* PIController.h */,
+				BEE113711815764000850EF6 /* PIMenu.h */,
+				BE6A737E1857B3F200A4DA71 /* PIMenuView.h */,
+				BE20370A183E7058000E33CE /* PILoginItem.h */,
+				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
+				BE6A73811857B41600A4DA71 /* PIConfigView.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 		BE93C97817BEC88400625DE2 = {
 			isa = PBXGroup;
 			children = (
+				BE7F15FF186F2DCF00362EA5 /* Extra Items */,
 				BEBFB8E317C001F80023B26C /* App/Helper Common */,
 				BE93C98A17BEC88400625DE2 /* Printer-Installer */,
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
@@ -181,11 +215,13 @@
 		BE93C98317BEC88400625DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE5D201518886BE9001A542A /* libz.dylib */,
+				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
+				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
+				BE7F1600186F6BF800362EA5 /* CDEvents.framework */,
 				BE8EC6FB1858C6C5005F4E6D /* Server.framework */,
 				BE69529C18492F080008CFAA /* SystemConfiguration.framework */,
-				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BE1266CB18297F5700D6A05F /* Security.framework */,
-				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
 				BEAB4CD7181AE97300585C03 /* CoreServices.framework */,
 				BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */,
 				BEC6CDFC18160AD800300121 /* XCTest.framework */,
@@ -208,22 +244,17 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
-				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
-				BEE113711815764000850EF6 /* PIMenu.h */,
-				BEE113721815764000850EF6 /* PiMenu.m */,
-				BE6A737E1857B3F200A4DA71 /* PIMenuView.h */,
-				BE6A737F1857B3F200A4DA71 /* PIMenuView.m */,
-				BEDA9EB3182F45230055B0B8 /* PIController.h */,
 				BEDA9EB4182F45230055B0B8 /* PIController.m */,
-				BE20370A183E7058000E33CE /* PILoginItem.h */,
-				BE20370B183E7058000E33CE /* PILoginItem.m */,
-				BE8FD68717CE547F00452FD4 /* PINSXPC.h */,
+				BE5D200E188706EE001A542A /* PIBonjourBrowser.m */,
+				BEE113721815764000850EF6 /* PiMenu.m */,
 				BE8FD68817CE547F00452FD4 /* PINSXPC.m */,
-				BE6A73811857B41600A4DA71 /* PIConfigView.h */,
+				BE20370B183E7058000E33CE /* PILoginItem.m */,
+				BE6A737F1857B3F200A4DA71 /* PIMenuView.m */,
 				BE6A73821857B41600A4DA71 /* PIConfigView.m */,
 				BE6A73831857B41600A4DA71 /* PIConfigView.xib */,
 				BE93C99917BEC88400625DE2 /* MainMenu.xib */,
+				BE7F16061871C4F800362EA5 /* Headers */,
 				BE93C98B17BEC88400625DE2 /* Supporting Files */,
 			);
 			path = "Printer-Installer";
@@ -279,8 +310,11 @@
 				BE93C9B417BEC90300625DE2 /* Interfaces.h */,
 				BEBFB8DF17BFFFD50023B26C /* Printer.h */,
 				BEBFB8E017BFFFD50023B26C /* Printer.m */,
+				BE7936131889BC9C00F0936F /* PrinterCUPSExtensions.h */,
 				BEDC5B3618252CBD003717BB /* PIError.h */,
 				BEDC5B3718252CBD003717BB /* PIError.m */,
+				BE7F16031870C35100362EA5 /* PIAlert.h */,
+				BE7F16041870C35100362EA5 /* PIAlert.m */,
 			);
 			name = "App/Helper Common";
 			sourceTree = "<group>";
@@ -297,6 +331,7 @@
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
 				BE2F4481181F4804007E36B1 /* CopyFiles */,
+				BE2DA4E2188960590001D5EC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -376,10 +411,12 @@
 				BE93C99117BEC88400625DE2 /* main.m in Sources */,
 				BEDC5B3818252CBD003717BB /* PIError.m in Sources */,
 				BE052C73181989EC0007D51C /* PIApplication.m in Sources */,
+				BE7F16051870C35100362EA5 /* PIAlert.m in Sources */,
 				BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */,
 				BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,
 				BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */,
+				BE5D200F188706EE001A542A /* PIBonjourBrowser.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
 				BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */,
 				BE20370C183E7058000E33CE /* PILoginItem.m in Sources */,
@@ -502,6 +539,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
 				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -524,6 +562,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
 				INFOPLIST_FILE = "./release/Printer-Installer-Info.plist";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -537,6 +576,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
 				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
+				INSTALL_PATH = "";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -561,6 +601,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
 				INFOPLIST_FILE = "./release/helper-Info.plist";
+				INSTALL_PATH = "";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,

@@ -1,5 +1,5 @@
 //
-//  PIStatusBar.m
+//  PIMenu.m
 //  Printer-Installer
 //
 //  Created by Eldon on 10/21/13.
@@ -9,11 +9,14 @@
 #import <Sparkle/SUUpdater.h>
 #import "PIMenu.h"
 
+#define PRINTER_MENU_INDEX 3
+
 @implementation PIMenu{
-    NSSet* currentManagedPrinters;
-    BOOL setupDone;
+    NSSet*      currentManagedPrinters;
+    BOOL        setupDone;
+    NSMenuItem* _bonjourMenuItem;
+    NSMenu*     _bonjourMenu;
 }
-@synthesize delegate;
 
 -(void)awakeFromNib{
     // Setup About Panel As Alternate Key
@@ -26,6 +29,96 @@
     [self insertItem:about atIndex:1];
 }
 
+#pragma mark - PIBonjourBrowserDelegate
+-(BOOL)displayBonjourMenu:(BOOL)display{
+    BOOL state = NO;
+    if(display){
+        if(!_bonjourMenu){
+            _bonjourMenu = [[NSMenu alloc]initWithTitle:@"Bonjour Printers"];
+        }
+        if(!_bonjourMenuItem){
+            _bonjourMenuItem = [[NSMenuItem alloc]init];
+            _bonjourMenuItem.title = @"Bonjour Printers";
+        }
+        _bonjourMenuItem.submenu = _bonjourMenu;
+        state = YES;
+    }else if (_bonjourMenuItem){
+        NSMenuItem* item =[ self itemWithTitle:_bonjourMenuItem.title];
+        if(item)[self removeItem:_bonjourMenuItem];
+        _bonjourMenu = nil;
+        _bonjourMenuItem = nil;
+        state =  NO;
+    }
+    return state;
+}
+
+-(void)addBonjourPrinter:(Printer *)printer{
+    if(!_bonjourMenu){
+        if(![self displayBonjourMenu:YES])return;
+    }
+        
+    if(![self itemWithTitle:_bonjourMenuItem.title]){
+        NSInteger insertionPoint = [self indexOfItemWithTitle:@"Check For Updates..."];
+        [self insertItem:_bonjourMenuItem atIndex:insertionPoint];
+    };
+    
+    NSMenuItem* bpmi;
+    if(printer.description){
+        bpmi = [[NSMenuItem alloc]initWithTitle:printer.description
+                                        action:@selector(manageBonjourPrinter:)
+                                 keyEquivalent:@""];
+    }else if(printer.name){
+        bpmi = [[NSMenuItem alloc]initWithTitle:printer.name
+                                        action:@selector(manageBonjourPrinter:)
+                                 keyEquivalent:@""];
+    }else{
+        return;
+    }
+    
+    [bpmi setTarget:_delegate];
+    NSMenu* details = [[NSMenu alloc]init];
+
+    if(printer.location)[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",printer.location] action:nil keyEquivalent:@""];
+    if(printer.model)[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",printer.model] action:nil keyEquivalent:@""];
+    if(printer.ppd_url)[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",printer.ppd_url] action:nil keyEquivalent:@""];
+    if(printer.url)[details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
+    
+    if([[Printer getInstalledPrinters] containsObject:printer.name]){
+        [bpmi setState:NSOnState];
+    }else{
+        [bpmi setState:NSOffState];
+    }
+    
+    [bpmi setSubmenu:details];
+    [_bonjourMenu addItem:bpmi];
+    if(!_delegate.bonjourPrinterList){
+        _delegate.bonjourPrinterList = [NSMutableArray new];
+    }
+    [_delegate.bonjourPrinterList addObject:printer];
+    
+}
+
+-(void)updateBonjourPrinter:(Printer *)printer{
+}
+
+-(void)removeBonjourPrinter:(NSString *)printerName{
+    NSMenuItem* item =[_bonjourMenu itemWithTitle:printerName];
+    if(item)[_bonjourMenu removeItem:item];
+    
+    for(Printer* p in _delegate.bonjourPrinterList ){
+        if([p.description isEqualToString:printerName]){
+            [_delegate.bonjourPrinterList removeObject:p];
+            break;
+        };
+    }
+    
+    if(_delegate.bonjourPrinterList.count == 0){
+        item = [self itemWithTitle:_bonjourMenuItem.title];
+        if(item)[self removeItem:_bonjourMenuItem];
+    }
+}
+
+
 -(void)updateMenuItems{
     if(!setupDone){
         // Setup Uninstall Helper as Alternate Menu Item...
@@ -33,22 +126,21 @@
                                                           action:@selector(uninstallHelper:)
                                                    keyEquivalent:@""];
         [uninstall setKeyEquivalentModifierMask:NSAlternateKeyMask];
-        [uninstall setTarget:delegate];
+        [uninstall setTarget:_delegate];
         [uninstall setAlternate:YES];
         [self insertItem:uninstall atIndex:[self numberOfItems]];
         setupDone = YES;
     }
     
     NSSet* set = [Printer getInstalledPrinters];
-    NSArray* printerList = [delegate printersInPrinterList:self];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
     
-    if(printerList.count){
+    if(_delegate.printerList.count){
         for (NSMenuItem* i in currentManagedPrinters){
             [self removeItem:i];
         }
         
-        for ( NSDictionary* dict in [[printerList reverseObjectEnumerator] allObjects]){
+        for ( NSDictionary* dict in [[_delegate.printerList reverseObjectEnumerator] allObjects]){
             Printer* printer = [[Printer alloc]initWithDictionary:dict];
             
             if(printer){
@@ -63,7 +155,7 @@
                                              keyEquivalent:@""];
                 }
                 
-                [smi setTarget:delegate];
+                [smi setTarget:_delegate];
                 NSMenu* details = [[NSMenu alloc]init];
                 
                 if(![printer.location isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",printer.location] action:nil keyEquivalent:@""];
@@ -73,7 +165,7 @@
                 [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
                 
                 [self setSubmenu:details forItem:smi];
-                [self insertItem:smi atIndex:3];
+                [self insertItem:smi atIndex:PRINTER_MENU_INDEX];
                 [cmp addObject:smi];
                 
                 if([set containsObject:printer.name]){

@@ -18,11 +18,14 @@
     PIMenuView   *_menuView;
     PIConfigView *_configView;
     NSStatusItem *_statusItem;
-    NSArray      *_printerList;
     NSPopover    *_popover;
+    NSNetServiceBrowser *_bonjourBrowser;
+    PIBonjourBrowser    *_bonjourBrowserDelegate;
 }
 
 @synthesize menu = _menu;
+@synthesize bonjourPrinterList = _bonjourPrinterList;
+@synthesize printerList = _printerList;
 
 #pragma mark - Setup / Tear Down
 -(void)awakeFromNib {
@@ -30,6 +33,8 @@
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"ShowBonjourPrinters" options:NSKeyValueObservingOptionNew context:NULL];
     
     _printerList = [[NSUserDefaults standardUserDefaults]objectForKey:@"PrinterList"];
     
@@ -57,10 +62,16 @@
 
 - (void)dealloc
 {
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
     [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"ShowBonjourPrinters"]){
+        [self enableBonjourPrinters:[[change valueForKey:@"new"] boolValue]];
+    }
+}
 
 - (void) reachabilityChanged:(NSNotification *)note
 {
@@ -117,6 +128,28 @@
     }];
 }
 
+-(void)enableBonjourPrinters:(BOOL)enable{
+    [_menu displayBonjourMenu:enable];
+    if(enable){
+        if(!_bonjourBrowserDelegate){
+            _bonjourBrowserDelegate = [[PIBonjourBrowser alloc]initWithDelegate:_menu];
+        }
+        
+        if(!_bonjourBrowser){
+            _bonjourBrowser = [[NSNetServiceBrowser alloc]init];
+            _bonjourBrowser.delegate = _bonjourBrowserDelegate;
+        }
+        
+        [_bonjourBrowser searchForServicesOfType:@"_printer._tcp." inDomain:@"local"];
+    }else{
+        for(NSNetService* service in _bonjourBrowserDelegate.services){
+            [service stopMonitoring];
+        }
+        _bonjourBrowserDelegate = nil;
+        _bonjourBrowser = nil;
+    }
+}
+
 #pragma mark - PIConfigSheet delegate methods
 -(void)cancelConfigView{
     if (_popover != nil && _popover.isShown) {
@@ -157,7 +190,7 @@
 
 #pragma mark - internal methods
 -(void)managePrinter:(NSMenuItem*)sender{
-    NSInteger pix = ([_menu indexOfItem:sender]-3);
+    NSInteger pix = [_menu indexOfItem:sender]-3;
     Printer* printer = [[Printer alloc]initWithDictionary:_printerList[pix]];
     [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
         [[NSOperationQueue mainQueue]addOperationWithBlock:^{
@@ -165,6 +198,21 @@
             else [NSApp presentError:error];
         }];
     }];
+}
+
+-(void)manageBonjourPrinter:(NSMenuItem*)sender{
+    for(Printer* printer in _bonjourPrinterList){
+        if([printer.name isEqualToString:sender.title ]||
+            [printer.description isEqualToString:sender.title ]){
+            [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
+                [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+                    if(!error)sender.state = !sender.state;
+                    else [NSApp presentError:error];
+                }];
+            }];
+            return;
+        }
+    }
 }
 
 - (void)configureFromURLSheme:(NSAppleEventDescriptor*)event

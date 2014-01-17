@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PIMenu.h"
 #import "PIConfigView.h"
+#import "PIBonjourBrowser.h"
 #import "Reachability.h"
 
 @interface PIController : NSObject <PIMenuDelegate,PIConfigViewControllerDelegate>{
