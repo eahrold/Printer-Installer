@@ -18,12 +18,11 @@
 @property (copy) NSString *model;       // model name matching the an lpinfo -m (end of each line)
 @property (copy) NSString *ppd_url;     // path where ppd can be downloads
 @property (copy) NSArray  *options;     // List of options that use the lpoptions structure
-@property (copy) NSString *ppd;         // path to raw ppd file either .gz or .ppd
-@property (copy) NSString *url;         // full uri for cups dest
+@property (copy,nonatomic) NSString *ppd;         // path to raw ppd file either .gz or .ppd
+@property (copy,nonatomic) NSString *url;         // full uri for cups dest
 
 -(id)initWithDictionary:(NSDictionary*)dict;
 
--(BOOL)configureURI;    // try and configure a Printer URI from the protocol-host-name keys
 
 // Objective-C wrappers for CUPS
 +(NSSet*)getInstalledPrinters;          //Returns A list of all installed printers

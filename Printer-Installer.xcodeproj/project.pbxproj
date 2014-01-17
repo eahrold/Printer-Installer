@@ -22,6 +22,7 @@
 		BE6A73841857B41600A4DA71 /* PIConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73821857B41600A4DA71 /* PIConfigView.m */; };
 		BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6A73831857B41600A4DA71 /* PIConfigView.xib */; };
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
+		BE793632188A2C8D00F0936F /* PIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7F16041870C35100362EA5 /* PIAlert.m */; };
 		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
@@ -218,7 +219,6 @@
 				BE5D201518886BE9001A542A /* libz.dylib */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
-				BE7F1600186F6BF800362EA5 /* CDEvents.framework */,
 				BE8EC6FB1858C6C5005F4E6D /* Server.framework */,
 				BE69529C18492F080008CFAA /* SystemConfiguration.framework */,
 				BE1266CB18297F5700D6A05F /* Security.framework */,
@@ -331,7 +331,6 @@
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
 				BE2F4481181F4804007E36B1 /* CopyFiles */,
-				BE2DA4E2188960590001D5EC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -411,7 +410,7 @@
 				BE93C99117BEC88400625DE2 /* main.m in Sources */,
 				BEDC5B3818252CBD003717BB /* PIError.m in Sources */,
 				BE052C73181989EC0007D51C /* PIApplication.m in Sources */,
-				BE7F16051870C35100362EA5 /* PIAlert.m in Sources */,
+				BE793632188A2C8D00F0936F /* PIAlert.m in Sources */,
 				BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */,
 				BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */,
 				BEBFB8E117BFFFD50023B26C /* Printer.m in Sources */,

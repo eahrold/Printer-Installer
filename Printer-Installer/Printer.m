@@ -8,9 +8,12 @@
 
 #import "Printer.h"
 #import "PIError.h"
+#import "PrinterCUPSExtensions.h"
+
 #import <syslog.h>
 #import <cups/cups.h>
 #import <cups/ppd.h>
+#import <zlib.h>
 
 @implementation Printer{
     ipp_t           *request;
@@ -27,6 +30,8 @@
         _location = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"location"];
         _description = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"description"];
         _ppd = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"ppd"];
+        _ppd_url = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"ppd_url"];
+
         _model = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"model"];
         _protocol = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"protocol"];
         _url = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"url"];
@@ -44,6 +49,7 @@
     [aEncoder encodeObject:_location forKey:@"location"];
     [aEncoder encodeObject:_description forKey:@"description"];
     [aEncoder encodeObject:_ppd forKey:@"ppd"];
+    [aEncoder encodeObject:_ppd_url forKey:@"ppd_url"];
     [aEncoder encodeObject:_model forKey:@"model"];
     [aEncoder encodeObject:_protocol forKey:@"protocol"];
     [aEncoder encodeObject:_url forKey:@"url"];
@@ -55,17 +61,10 @@
     self = [super init];
     if(self){
         [self setValuesForKeysWithDictionary:dict];
-        if(!_url)
-            if(![self configureURL:nil]){
-                return nil;
-            };
     }
     return self;
 }
 
--(BOOL)configureURI{
-    return [self configureURL:nil];
-}
 
 #pragma mark - CUPS Wrappers
 -(BOOL)addPrinter{
@@ -111,7 +110,7 @@
         }
     }
     
-    num_options = cupsAddOption("device-uri", _url.UTF8String,
+    num_options = cupsAddOption("device-uri", self.url.UTF8String,
                               num_options, &options);
     
     httpAssembleURIf(HTTP_URI_CODING_ALL, uri, sizeof(uri), "ipp", NULL,
@@ -230,10 +229,9 @@
     int             num_dests = 0;
 
     char            *printer,
-                    *instance,
-                    option;
+                    *instance;
     
-    printer = (char*)self.name.UTF8String;
+    printer = (char*)_name.UTF8String;
     
     if ((instance = strrchr(printer, '/')) != NULL)
         *instance++ = '\0';
@@ -248,7 +246,7 @@
         
         if (dest == NULL)
         {
-	        NSLog(@"unable to locate printer %@", self.name);
+	        NSLog(@"unable to locate printer %@", _name);
             return (1);
         }
     }
@@ -295,50 +293,15 @@
     return YES;
 }
 
-
-#pragma mark - private methods
--(BOOL)configurePPD:(NSError*__autoreleasing*)error{
-    NSString* path;
-    // check if we have the PPD locally
-
-#if DEBUG
-    syslog(1, "the model %s ",_model.UTF8String);
-    syslog(1, "the host %s ",_host.UTF8String);
-    syslog(1, "the name %s ",_name.UTF8String);
-    syslog(1, "the protocol %s ",_protocol.UTF8String);
-#endif
-    
-    path = [NSString stringWithFormat:@"/Library/Printers/PPDs/Contents/Resources/%@.gz",_model];
-
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
-        _ppd = path;
-        return YES;
+#pragma mark - Custom Accessors
+-(NSString*)url{
+    if(_url){
+        return _url;
     }
     
-    // if not local, try and get if from the printer-installer-server
-    path = [_ppd_url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    if([self downloadPPD:[NSURL URLWithString:path]]){
-        return YES;
-    }
-    
-    // otherwise, if it's getting shared via ipp, try to grab it from the CUPS server
-    if([_protocol isEqualToString:@"ipp"]){
-        path = [NSString stringWithFormat:@"http://%@:631/printers/%@.ppd",_host,_name];
-        if([self downloadPPD:[NSURL URLWithString:path]]){
-            return YES;
-        }
-    }
-    
-    // if we still don't have it error out
-    if(error)*error = [PIError errorWithCode:PIPPDNotFound];
-    return NO;
-}
-
--(BOOL)configureURL:(NSError*__autoreleasing*)error{
     if(!_name || !_protocol || !_host){
-        NSString *errMsg = [NSString stringWithFormat:@"Values Cannot be empty printer:%@ protocol:%@ host:%@",_name,_protocol,_host];
-        if(error)*error = [PIError errorWithCode:PIIncompletePrinter message:errMsg];
-        return NO;
+       NSLog(@"%@",[NSString stringWithFormat:@"Values Cannot be nil printer:%@ protocol:%@ host:%@",_name,_protocol,_host]);
+        return nil;
     }
     
     // ipp and ipps for connecting to CUPS server
@@ -359,21 +322,62 @@
     else if([_protocol isEqualToString:@"smb"]){
         _url = [NSString stringWithFormat:@"%@://%@/%@",_protocol,_host,_name];
     }
+    else if([_protocol isEqualToString:@"dnssd"]){
+        _url = [NSString stringWithFormat:@"%@://%@._pdl-datastream._tcp.local./?bidi",_protocol,_host];
+    }
     else{
-        if(error)*error = [PIError errorWithCode:PIInvalidProtocol];
+        NSLog(@"%@",[[PIError errorWithCode:PIInvalidProtocol] localizedDescription]);
         return NO;
     }
-    return YES;
+    return _url;
+}
+
+#pragma mark - private methods
+-(BOOL)configurePPD:(NSError*__autoreleasing*)error{
+    NSString* path;
+
+#if DEBUG
+    printf("the model %s ",_model.UTF8String);
+    printf("the host %s ",_host.UTF8String);
+    printf("the name %s ",_name.UTF8String);
+    printf("the protocol %s ",_protocol.UTF8String);
+#endif
+    
+    
+    // Check if we can find a match locally...
+    if([self localPPD]){
+        return YES;
+    }
+    
+    // if not local, try and get if from the printer-installer-server
+    if(_ppd_url){
+        path = [_ppd_url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        if([self downloadPPD:[NSURL URLWithString:path]]){
+            return YES;
+        }
+    }
+    
+    // otherwise, if it's getting shared via ipp, try to grab it from the CUPS server
+    if([_protocol isEqualToString:@"ipp"]){
+        path = [NSString stringWithFormat:@"http://%@:631/printers/%@.ppd",_host,_name];
+        if([self downloadPPD:[NSURL URLWithString:path]]){
+            return YES;
+        }
+    }
+    
+    // if we still don't have it error out
+    if(error)*error = [PIError errorWithCode:PIPPDNotFound];
+    return NO;
 }
 
 -(BOOL)downloadPPD:(NSURL*)URL{
     if(!URL){
-        syslog(1, "the url %s isn't valid",[URL path].UTF8String);
+        syslog(1, "the url for %s isn't valid",_name.UTF8String);
         return NO;
     }
     
     NSError* error = nil;
-    NSURLResponse* response = nil;
+    NSHTTPURLResponse* response = nil;
     
     // Create the request.
     NSMutableURLRequest *ppdRequest = [NSMutableURLRequest requestWithURL:URL];
@@ -387,9 +391,9 @@
     
     // Create url connection and fire request
     NSData* data = [NSURLConnection sendSynchronousRequest:ppdRequest returningResponse:&response error:&error];
-    NSString* downloadedPPD = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.gz",_name]];
+    NSString* downloadedPPD = [NSTemporaryDirectory() stringByAppendingPathComponent:[_name stringByAppendingPathExtension:@"gz"]];
     
-    NSInteger rc = [((NSHTTPURLResponse *)response) statusCode];
+    NSInteger rc = [response statusCode];
     
     if(rc >= 400){
         error = [PIError errorWithCode:PIServerNotFound];
@@ -400,8 +404,16 @@
         _ppd = nil;
     }else{
         if([[NSFileManager defaultManager] createFileAtPath:downloadedPPD contents:data attributes:nil]){
-            _ppd = downloadedPPD;
-            return YES;
+            if([_protocol isEqualToString:@"ipp"]){
+                _ppd = downloadedPPD;
+                return YES;
+            }else{
+                NSString* unzippedPPD = [downloadedPPD stringByDeletingPathExtension];
+                if([self unzipPPD:downloadedPPD to:unzippedPPD error:&error]){
+                    _ppd = unzippedPPD;
+                    return YES;
+                }
+            }
         }else{
             syslog(1,"there was a problem Creating the PPD File");
         }
@@ -409,25 +421,124 @@
     return NO;
 }
 
+#pragma mark - Utility
+-(BOOL)unzipPPD:(NSString *)inPath to:(NSString*)outPath error:(NSError*__autoreleasing*)error{
+    int CHUNK =  0x1000;
+    unsigned char buffer[CHUNK];
+    gzFile file = gzopen([inPath UTF8String], "r");
+	NSMutableData* bufferData = [[NSMutableData alloc]init];
+    
+	while (1) {
+        int err;
+        int bytes_read;
+        bytes_read = gzread (file, buffer, CHUNK - 1);
+        buffer[bytes_read] = '\0';
+        [bufferData appendBytes:buffer length:bytes_read];
+        
+        if (bytes_read < CHUNK - 1) {
+            if (gzeof (file)) {
+                break;
+            }
+            else {
+                const char * error_string;
+                error_string = gzerror (file, & err);
+                if (err) {
+                    syslog(1, "unZipping Error: %s.\n", error_string);
+                    return NO;
+                }
+            }
+        }
+    }
+	gzclose(file);
+    return [bufferData writeToFile:outPath atomically:YES];
+}
+
+-(BOOL)localPPD{
+    ipp_t	*ppd_request,
+            *response;
+    
+    ipp_attribute_t *attr;
+    const char      *ppd_name;
+    
+    ppd_request = ippNewRequest(CUPS_GET_PPDS);
+    
+    if (_model){
+        ippAddString(ppd_request, IPP_TAG_OPERATION, IPP_TAG_TEXT, "ppd-product",
+                     NULL, _model.UTF8String);
+    }else{
+        return NO;
+    }
+        
+    if ((response = cupsDoRequest(CUPS_HTTP_DEFAULT, ppd_request, "/")) != NULL)
+    {
+        if (response->request.status.status_code > IPP_OK_CONFLICT)
+        {
+            NSLog(@"Error Retreving PPD: %s", cupsLastErrorString());
+            ippDelete(response);
+            return NO;
+        }
+        
+        for (attr = response->attrs; attr != NULL; attr = attr->next)
+        {
+            while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
+                attr = attr->next;
+            
+            if (attr == NULL)
+                break;
+            
+            ppd_name = NULL;
+            
+            while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+            {
+                if (!strcmp(attr->name, "ppd-name") &&
+                    attr->value_tag == IPP_TAG_NAME)
+                    ppd_name = attr->values[0].string.text;
+                
+                attr = attr->next;
+            }
+            
+            
+            if (ppd_name == NULL)
+            {
+                if (attr == NULL)
+                    break;
+                else
+                    continue;
+            }
+            
+            _ppd = [NSString stringWithFormat:@"/%s",ppd_name];
+            if([[NSFileManager defaultManager]fileExistsAtPath:_ppd]){
+                return YES;
+            }
+            
+            if (attr == NULL)
+                break;
+        }
+        
+        ippDelete(response);
+    }
+    else
+    {
+        NSLog(@"Error Retreving PPD: %s", cupsLastErrorString());
+    }
+    
+    return NO;
+}
+
 -(BOOL)nameIsValid:(NSError*__autoreleasing*)error{
     const char  *name = _name.UTF8String;
-    const char	*ptr;
+    const char	*pt;
     
-    for (ptr = name; *ptr; ptr ++){
-        if (*ptr == '@'){
-            break;
-        }else if
-            ((*ptr >= 0 && *ptr <= ' ') || *ptr == 127 || *ptr == '/' ||
-             *ptr == '#'){
+    for (pt = name; *pt; pt ++){
+        if (*pt == '@')break;
+        else if
+            ((*pt >= 0 && *pt <= ' ') || *pt == 127 || *pt == '/' ||
+             *pt == '#'){
                 if(error)*error = [PIError errorWithCode:1008 message:@"Printer name can only contain printable characters"];
                 return NO;
         }
     }
-    
-    /*
-     * All the characters are good; validate the length, too...
-     */
-    if((ptr - name) > 127){
+    if((pt - name) > 127){
         if(error)*error = [PIError errorWithCode:1009 message:@"Printer Name is Too Long"];
         return NO;
     }
