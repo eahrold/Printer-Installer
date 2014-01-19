@@ -15,6 +15,11 @@
 #import <cups/ppd.h>
 #import <zlib.h>
 
+enum ppdDownloadModes{
+    PPD_FROM_URL = 0,
+    PPD_FROM_CUPS_SERVER = 1,
+};
+
 @implementation Printer{
     ipp_t           *request;
     http_t          *http;
@@ -71,8 +76,10 @@
     return [self addPrinter:nil];
 }
 -(BOOL)addPrinter:(NSError *__autoreleasing*)error{
-    if(![self nameIsValid:error])return NO;
-    if(![self configurePPD:error])return NO;
+    if(![self nameIsValid:error])
+        return NO;
+    if(![self configurePPD:error])
+        return NO;
     
     ppd_file_t      *ppd;
     cups_file_t     *inppd;
@@ -352,7 +359,7 @@
     // if not local, try and get if from the printer-installer-server
     if(_ppd_url){
         path = [_ppd_url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-        if([self downloadPPD:[NSURL URLWithString:path]]){
+        if([self downloadPPD:[NSURL URLWithString:path] mode:PPD_FROM_URL]){
             return YES;
         }
     }
@@ -360,7 +367,7 @@
     // otherwise, if it's getting shared via ipp, try to grab it from the CUPS server
     if([_protocol isEqualToString:@"ipp"]){
         path = [NSString stringWithFormat:@"http://%@:631/printers/%@.ppd",_host,_name];
-        if([self downloadPPD:[NSURL URLWithString:path]]){
+        if([self downloadPPD:[NSURL URLWithString:path] mode:PPD_FROM_CUPS_SERVER]){
             return YES;
         }
     }
@@ -370,7 +377,7 @@
     return NO;
 }
 
--(BOOL)downloadPPD:(NSURL*)URL{
+-(BOOL)downloadPPD:(NSURL*)URL mode:(int)mode{
     if(!URL){
         syslog(1, "the url for %s isn't valid",_name.UTF8String);
         return NO;
@@ -404,7 +411,7 @@
         _ppd = nil;
     }else{
         if([[NSFileManager defaultManager] createFileAtPath:downloadedPPD contents:data attributes:nil]){
-            if([_protocol isEqualToString:@"ipp"]){
+            if(mode == PPD_FROM_CUPS_SERVER){
                 _ppd = downloadedPPD;
                 return YES;
             }else{
@@ -555,7 +562,7 @@
     
     for (i = num_dests, dest = dests; i > 0; i --, dest ++)
     {
-        [set addObject:[NSString stringWithFormat:@"%s",dest->name]];
+        [set addObject:[NSString stringWithUTF8String:dest->name]];
     }
     
     return set;
