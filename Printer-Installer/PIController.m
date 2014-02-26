@@ -38,9 +38,16 @@
     
     _printerList = [[NSUserDefaults standardUserDefaults]objectForKey:@"PrinterList"];
     
-    self.internet = [Reachability reachabilityForInternetConnection];
-    [self.internet startNotifier];
+    NSURL* serverURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"server"]];
     
+    if(serverURL){
+        self.internet = [Reachability reachabilityWithHostName:serverURL.host];
+    }else{
+        self.internet = [Reachability reachabilityForInternetConnection];
+    }
+    
+    [self.internet startNotifier];
+
     // Setup Status Item
     _statusItem = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
     [_statusItem setMenu:_menu];
@@ -52,12 +59,6 @@
     }
     
     _statusItem.view = _menuView;
-    
-    // If we have Internet Connectivity try and downlaod the list from the server,
-    // Otherwise, get notified when we do and pick up there...
-    if([self.internet currentReachabilityStatus]){
-        [self refreshPrinterList];
-    }
 }
 
 - (void)dealloc
@@ -123,7 +124,7 @@
                         [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
                     }
                 }
-             }];
+            }];
         }
     }];
 }

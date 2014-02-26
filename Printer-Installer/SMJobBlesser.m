@@ -65,7 +65,9 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
     if ( !result && (localError != NULL) ) {
         assert(localError != nil);
     }
-    
+
+    status = AuthorizationFree(authRef, authFlags);
+
     if(error)*error = localError;
     return result;
 }
@@ -81,10 +83,10 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
 	AuthorizationRights authRights	= { 1, &authItem };
     AuthorizationEnvironment environment = {0, NULL};
     
-    AuthorizationFlags authFlags    =   kAuthorizationFlagDefaults				|
-    kAuthorizationFlagInteractionAllowed    |
-    kAuthorizationFlagPreAuthorize          |
-    kAuthorizationFlagExtendRights;
+    AuthorizationFlags authFlags    =   kAuthorizationFlagDefaults|
+                                        kAuthorizationFlagInteractionAllowed|
+                                        kAuthorizationFlagPreAuthorize|
+                                        kAuthorizationFlagExtendRights;
     
     if(prompt){
         AuthorizationItem envItem = {
@@ -116,6 +118,7 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
         NSLog(@"We errored somewhere %@",localError.localizedDescription);
 
     }
+    status = AuthorizationFree(authRef, authFlags);
     
     return result;
 

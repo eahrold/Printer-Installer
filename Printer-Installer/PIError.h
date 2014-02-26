@@ -19,7 +19,7 @@ extern NSString* const PIIncorrectURLAlt;
 + (NSError*) cupsError:(int)rc message:(const char*)msg;
 @end
 
-enum PIErrorCodes {
+typedef NS_ENUM(NSInteger, PIErrorCodes){
     PISuccess = 0,
     PIPPDNotFound = 1001 ,
     PIInvalidProtocol = 1002 ,

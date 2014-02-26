@@ -17,11 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.3.4</string>
+	<string>2.3.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
@@ -33,7 +31,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>edu.loyno.smc.Printer-Installer.helper</key>
-		<string>identifier &quot;edu.loyno.smc.Printer-Installer.helper&quot; and certificate leaf = H&quot;f30730e7f976c288e6972913cae6e438e6df6ec3&quot;</string>
+		<string>identifier "edu.loyno.smc.Printer-Installer.helper" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = BUN87F4W87</string>
 	</dict>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>

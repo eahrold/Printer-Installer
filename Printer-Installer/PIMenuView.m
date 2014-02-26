@@ -36,10 +36,10 @@
         
         _active = NO;
         _imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, ImageViewWidth, height)];
+        _imageView.image = [NSImage imageNamed:@"StatusBar"];
         [self addSubview:_imageView];
         [self refreshView];
     }
-    _imageView.image = [NSImage imageNamed:@"StatusBar"];
     
     return self;
 }

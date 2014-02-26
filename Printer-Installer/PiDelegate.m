@@ -8,8 +8,8 @@
 
 #import "PIDelegate.h"
 
-#import <Sparkle/SUUpdater.h>
 #import <ServiceManagement/ServiceManagement.h>
+#import <Sparkle/SUUpdater.h>
 #import "SMJobBlesser.h"
 #import "PINSXPC.h"
 #import "PIError.h"
@@ -31,7 +31,6 @@ static NSString* kShowBonjourPrinters = @"ShowBonjourPrinters";
 - (void)handleURLEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
 {
 NSLog(@"%@", replyEvent);
-
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

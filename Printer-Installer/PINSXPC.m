@@ -30,7 +30,7 @@
 
 -(void)addPrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        if(error)NSLog(@"add printer xpc error: %@",error.localizedDescription);
+        if(error)NSLog(@"add printer xpc error: %@",error.localizedRecoveryOptions);
     }] addPrinter:printer withReply:^(NSError *error) {
         reply(error);
         [self invalidate];
@@ -39,7 +39,7 @@
 
 -(void)removePrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        if(error)NSLog(@"remove printer xpc error: %@",error.localizedDescription);
+        if(error)NSLog(@"remove printer xpc error: %@",error.localizedKey);
     }] removePrinter:printer withReply:^(NSError *error) {
         reply(error);
         [self invalidate];
