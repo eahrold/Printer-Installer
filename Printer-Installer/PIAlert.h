@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, PIAlertCode){
+    kPIAlertSuccess = 0,
+    kPIAlertHelperToolRemoved = 2000,
+};
+
 @interface PIAlert : NSObject
-+(void)showAlert:(NSString *)alert withDescription:(NSString *)msg didEndSelector:(SEL)selector;
-+(void)showAlert:(NSString *)alert withDescription:(NSString *)msg;
++(void)showAlertWithCode:(PIAlertCode)code didEndSelector:(SEL)selector;
 
 @end

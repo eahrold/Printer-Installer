@@ -99,7 +99,7 @@
 
 @end
 
-
+#pragma mark - Readable Record from NSNetService
 @implementation NSNetService (readableTXTRecord)
 -(NSDictionary*)readableTXTRecord{
     NSData* data = [self TXTRecordData];
@@ -117,6 +117,7 @@
 }
 @end
 
+#pragma mark Printer Extension for NSNetService
 @implementation Printer (initWithServiceDiscovery)
 -(id)initWithServiceDiscovery:(NSNetService*)sender{
     NSDictionary* dict = [sender readableTXTRecord];

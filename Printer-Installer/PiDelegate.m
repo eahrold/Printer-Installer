@@ -37,8 +37,7 @@ NSLog(@"%@", replyEvent);
 {
     NSError  *error = nil;
     [[NSUserDefaults standardUserDefaults]registerDefaults:@{
-                                                             kShowBonjourPrinters:@NO,
-                                                             }];
+                                                             kShowBonjourPrinters:@NO,                                           }];
     
     if(![JobBlesser blessHelperWithLabel:kHelperName
                            andPrompt:@"In order to add managed Printers"
@@ -46,9 +45,10 @@ NSLog(@"%@", replyEvent);
     
         if(error){
             [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
-            [NSApp presentError:error modalForWindow:NULL delegate:self
-             didPresentSelector:@selector(setupDidEndWithTerminalError:) contextInfo:nil];
-        }
+            [PIError presentError:error
+                         delegate:self
+               didPresentSelector:@selector(setupDidEndWithTerminalError:)];
+             }
     }
     
     if([[SUUpdater sharedUpdater]feedURL]){

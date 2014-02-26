@@ -12,21 +12,27 @@ extern NSString* const PINoSharedGroups;
 extern NSString* const PIIncorrectURL;
 extern NSString* const PIIncorrectURLAlt;
 
+typedef NS_ENUM(NSInteger, PIErrorCode){
+    kPIErrorSuccess = 0,
+    kPIErrorServerNotFound = 1004,
+    kPIErrorCouldNotAddLoginItem = 1007,
+};
 
-@interface PIError : NSError
-+ (NSError*) errorWithCode:(int)code;
-+ (NSError*) errorWithCode:(NSInteger)rc message:(NSString*)msg;
-+ (NSError*) cupsError:(int)rc message:(const char*)msg;
+@interface PIError : NSObject
++(BOOL) errorWithCode:(PIErrorCode)code error:(NSError **)error;
+
++(void) presentError:(NSError*)error;
+
++(void) presentErrorWithCode:(PIErrorCode)code
+                    delegate:(id)sender
+          didPresentSelector:(SEL)selector;
+
+
++(void) presentError:(NSError *)error
+            delegate:(id)sender
+  didPresentSelector:(SEL)selector;
+
 @end
 
-typedef NS_ENUM(NSInteger, PIErrorCodes){
-    PISuccess = 0,
-    PIPPDNotFound = 1001 ,
-    PIInvalidProtocol = 1002 ,
-    PIBadURL = 1003,
-    PIServerNotFound = 1004,
-    PICantWriteFile = 1005 ,
-    PICantOpenPPD = 1006,
-    PICouldNotAddLoginItem = 1007,
-    PIIncompletePrinter = 1008,
-};
+
+

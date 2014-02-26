@@ -194,10 +194,10 @@
     NSInteger pix = [_menu indexOfItem:sender]-3;
     Printer* printer = [[Printer alloc]initWithDictionary:_printerList[pix]];
     [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
-        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
-            if(!error)sender.state = !sender.state;
-            else [NSApp presentError:error];
-        }];
+            if(!error)
+                sender.state = !sender.state;
+            else
+                [PIError presentError:error];
     }];
 }
 
@@ -206,10 +206,10 @@
         if([printer.name isEqualToString:sender.title ]||
             [printer.description isEqualToString:sender.title ]){
             [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
-                [[NSOperationQueue mainQueue]addOperationWithBlock:^{
-                    if(!error)sender.state = !sender.state;
-                    else [NSApp presentError:error];
-                }];
+                    if(!error)
+                        sender.state = !sender.state;
+                    else
+                        [PIError presentError:error];
             }];
             return;
         }

@@ -9,7 +9,30 @@
 #import "PIAlert.h"
 #import <Cocoa/Cocoa.h>
 
+NSDictionary* alertFromCode(PIAlertCode code){
+    NSString* message;
+    NSString* description;
+    switch (code) {
+        case kPIAlertHelperToolRemoved:
+            message = @"";
+            description = @"";
+            break;
+        default:
+            message = @"This was recieved in error";
+            description = @"Please report you saw this to the system admin";
+            break;
+    }
+    return @{@"msg":message,@"des":description};
+}
+
 @implementation PIAlert
+
++(void)showAlertWithCode:(PIAlertCode)code didEndSelector:(SEL)selector{
+    NSDictionary* dict = alertFromCode(code);
+    [self showAlert:dict[@"msg"] withDescription:dict[@"des"] didEndSelector:selector];
+}
+
+
 +(void)showAlert:(NSString *)alert withDescription:(NSString *)msg{
     [self showAlert:alert withDescription:msg didEndSelector:NULL];
 }

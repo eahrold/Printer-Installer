@@ -30,7 +30,7 @@
 
 -(void)addPrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        if(error)NSLog(@"add printer xpc error: %@",error.localizedRecoveryOptions);
+        if(error)[PIError presentError:error];
     }] addPrinter:printer withReply:^(NSError *error) {
         reply(error);
         [self invalidate];
@@ -39,7 +39,7 @@
 
 -(void)removePrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
-        if(error)NSLog(@"remove printer xpc error: %@",error.localizedKey);
+        if(error)[PIError presentError:error];
     }] removePrinter:printer withReply:^(NSError *error) {
         reply(error);
         [self invalidate];
@@ -60,14 +60,6 @@
     }
 }
 
-
-+(void)installGlobalLoginItem{
-    PINSXPC* connection = [[PINSXPC alloc]initConnection];
-    [[connection remoteObjectProxy] helperInstallLoginItem:[[NSBundle mainBundle] bundleURL] withReply:^(NSError *error) {
-        [connection invalidate];
-    }];
-}
-
 +(void)tellHelperToQuit{
     // Send a message to the helper tool telling it to call it's quitHelper method.
     PINSXPC* connection = [[PINSXPC alloc]initConnection];
@@ -82,13 +74,12 @@
         [connection invalidate];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if(error){
-                [NSApp presentError:error];
+                [PIError presentError:error];
             }else{
                 [JobBlesser removeHelperWithLabel:kHelperName];
-                [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
-                [PIAlert showAlert:@"Helper Tool Removed"
-                   withDescription:@"we've removed all files associated with printer installer. we will now quit."
-                    didEndSelector:@selector(setupDidRemoveHelperTool:)];
+                [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+                [PIAlert showAlertWithCode:kPIAlertHelperToolRemoved
+                            didEndSelector:@selector(setupDidRemoveHelperTool:)];
             }
         }];
     }];

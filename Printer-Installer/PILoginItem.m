@@ -29,15 +29,14 @@
             if (ourLoginItem) {
                 CFRelease(ourLoginItem);
             } else {
-                error = [PIError errorWithCode:PICouldNotAddLoginItem];
-                status = NO;
+                status = [PIError errorWithCode:kPIErrorCouldNotAddLoginItem error:&error];
             }
             CFRelease(loginItems);
         } else {
-            error = [PIError errorWithCode:PICouldNotAddLoginItem];
-            status = NO;
+            status = [PIError errorWithCode:kPIErrorCouldNotAddLoginItem error:&error];
         }
-        if(error)[NSApp presentError:error];
+        if(error)
+            [PIError presentError:error];
         
     }else{
         //Removing Login Item

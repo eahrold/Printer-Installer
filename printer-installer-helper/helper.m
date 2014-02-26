@@ -65,32 +65,6 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
     reply(YES);
 }
 
--(void)helperInstallLoginItem:(NSURL*)loginItem withReply:(void (^)(NSError *))reply{
-    syslog(1,"installing loginitem");
-    NSError* error;
-    AuthorizationRef auth = NULL;
-    LSSharedFileListRef globalLoginItems = LSSharedFileListCreate(NULL, kLSSharedFileListGlobalLoginItems, NULL);
-    LSSharedFileListSetAuthorization(globalLoginItems, auth);
-    
-    if (globalLoginItems) {
-        LSSharedFileListItemRef ourLoginItem = LSSharedFileListInsertItemURL(globalLoginItems,
-                                                                             kLSSharedFileListItemLast,
-                                                                             NULL, NULL,
-                                                                             (__bridge CFURLRef)loginItem,
-                                                                             NULL, NULL);
-        if (ourLoginItem) {
-            CFRelease(ourLoginItem);
-        } else {
-            error = [PIError errorWithCode:1 message:@"Could not insert ourselves as a global login item"];
-        }
-        
-        CFRelease(globalLoginItems);
-    } else {
-        error = [PIError errorWithCode:1 message:@"Could not get the global login items"];
-    }
-    reply(error);
-}
-
 -(void)uninstall:(void (^)(NSError *))reply{
     NSError* error;
     NSError* retunError;

@@ -14,49 +14,52 @@ NSString* const PINoSharedGroups = @"There are no printers shared with that grou
 NSString* const PIIncorrectURL = @"The URL you entered may not be correct, please try again:";
 NSString* const PIIncorrectURLAlt = @"The URL still isn't right, please check again:";
 
-@implementation PIError
-
-+ (NSError*) errorWithCode:(int)code
-{
-    NSDictionary* info = [NSDictionary dictionaryWithObjectsAndKeys:[PIError errorTextForCode:code], NSLocalizedDescriptionKey, nil];
-    return [self errorWithDomain:PIDomain code:code userInfo:info];
-}
-
-+ (NSError*) errorWithCode:(NSInteger)code message:(NSString*)msg
-{
-    NSDictionary* info = [NSDictionary dictionaryWithObjectsAndKeys:msg, NSLocalizedDescriptionKey, nil];
-    return [self errorWithDomain:PIDomain code:code userInfo:info];
-}
-
-+ (NSError*) cupsError:(int)code message:(const char*)msg
-{
-    NSDictionary* info = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%s",msg], NSLocalizedDescriptionKey, nil];
-    return [self errorWithDomain:PIDomain code:code userInfo:info];
-}
-
-
-+(NSString *) errorTextForCode:(int)code {
+NSString* errorTextForCode(int code){
     NSString * codeText = @"";
     switch (code) {
-        case PIBadURL: codeText = @"The URL to the printer is incorrect.  Contact the System Admin";
+        case kPIErrorCouldNotAddLoginItem:codeText = @"There was a problem setting this app to launch at login, you should try to manually add it using System Preferences.";
             break;
-        case PIPPDNotFound: codeText = @"No PPD Avaliable, please download and install the drivers from the manufacturer.";
-            break;
-        case PIInvalidProtocol:codeText = @"That url scheme is not supported at this time";
-            break;
-        case PICantWriteFile:codeText = @"lpadmin: Unable to open PPD file";
-            break;
-        case PICantOpenPPD:codeText = @"lpadmin: Unable to open PPD file";
-            break;
-        case PICouldNotAddLoginItem:codeText = @"There was a problem setting this app to launch at login, you should try to manually add it using System Preferences.";
-            break;
-        case PIIncompletePrinter:codeText = @"Some Required attributes for the printer were not supplied";
+        case kPIErrorServerNotFound:codeText = @"We could not locate the Managed Printer Server.  Try again later or contact your system admin";
             break;
         default: codeText = @"There was a unknown problem, sorry!";
             break;
-            
     }
     return codeText;
+}
+
+@implementation PIError
+
++(void)presentErrorWithCode:(PIErrorCode)code delegate:(id)sender didPresentSelector:(SEL)selector
+{
+    NSError* error;
+    [[self class] errorWithCode:code error:&error];
+    [self presentError:error delegate:sender didPresentSelector:selector];
+}
+
++(void)presentError:(NSError *)error{
+    [self presentError:error delegate:nil didPresentSelector:NULL];
+}
+
++(void)presentError:(NSError *)error delegate:(id)sender didPresentSelector:(SEL)selector
+{
+#ifdef _COCOA_H
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        [NSApp presentError:error
+             modalForWindow:NULL
+                   delegate:sender
+         didPresentSelector:selector
+                contextInfo:NULL];
+    }];
+#endif
+}
+
+
++ (BOOL)errorWithCode:(PIErrorCode)code error:(NSError *__autoreleasing *)error
+{
+    if(error)*error = [NSError errorWithDomain:PIDomain
+                                          code:code
+                                      userInfo:@{NSLocalizedDescriptionKey:errorTextForCode(code)}];
+    return NO;
 }
 
 @end

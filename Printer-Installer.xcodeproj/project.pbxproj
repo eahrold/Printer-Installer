@@ -192,9 +192,10 @@
 		BE7F16061871C4F800362EA5 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BE052C71181989EC0007D51C /* PIApplication.h */,
 				BE93C99617BEC88400625DE2 /* PIDelegate.h */,
-				BE5D200D188706EE001A542A /* PIBonjourBrowser.h */,
 				BEDA9EB3182F45230055B0B8 /* PIController.h */,
+				BE5D200D188706EE001A542A /* PIBonjourBrowser.h */,
 				BEE113711815764000850EF6 /* PIMenu.h */,
 				BE6A737E1857B3F200A4DA71 /* PIMenuView.h */,
 				BE20370A183E7058000E33CE /* PILoginItem.h */,
@@ -258,6 +259,7 @@
 		BE93C98A17BEC88400625DE2 /* Printer-Installer */ = {
 			isa = PBXGroup;
 			children = (
+				BE052C72181989EC0007D51C /* PIApplication.m */,
 				BE93C99717BEC88400625DE2 /* PiDelegate.m */,
 				BEDA9EB4182F45230055B0B8 /* PIController.m */,
 				BE5D200E188706EE001A542A /* PIBonjourBrowser.m */,
@@ -282,8 +284,6 @@
 				BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */,
 				BE69529918492B990008CFAA /* Reachability.h */,
 				BE69529A18492B990008CFAA /* Reachability.m */,
-				BE052C71181989EC0007D51C /* PIApplication.h */,
-				BE052C72181989EC0007D51C /* PIApplication.m */,
 				BEF145D217C306F0003897D3 /* SMJobBlesser.h */,
 				BEF145D317C306F0003897D3 /* SMJobBlesser.m */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
