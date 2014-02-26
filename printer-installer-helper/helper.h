@@ -8,10 +8,9 @@
 
 #import "Interfaces.h"
 
-@interface helper : NSObject <HelperAgent,NSXPCListenerDelegate>
+@interface PIHelper : NSObject
 
-@property (nonatomic, assign) BOOL helperToolShouldQuit;
-
-@property (weak) NSXPCConnection *xpcConnection;
+-(id)init;
+-(void)run;
 
 @end

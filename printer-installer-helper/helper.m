@@ -16,7 +16,32 @@
 
 #import <syslog.h>
 
-@implementation helper
+static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check whether to quit
+
+@interface PIHelper()<HelperAgent,NSXPCListenerDelegate>
+@property (atomic, strong, readwrite) NSXPCListener   *listener;
+@property (weak) NSXPCConnection *connection;
+@property (nonatomic, assign) BOOL helperToolShouldQuit;
+@end
+
+@implementation PIHelper
+
+-(id)init{
+    self = [super init];
+    if(self){
+        self->_listener = [[NSXPCListener alloc] initWithMachServiceName:kHelperName];
+        self->_listener.delegate = self;
+    }
+    return self;
+}
+
+-(void)run{
+    [self.listener resume];
+    while (!self.helperToolShouldQuit)
+    {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kHelperCheckInterval]];
+    }
+}
 
 
 -(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
@@ -87,6 +112,7 @@
         error = nil;
     }
     reply(retunError);
+    
 }
 
 
@@ -94,11 +120,11 @@
 // Set up the one method of NSXPClistener
 //----------------------------------------
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
-    newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
-    newConnection.exportedObject = self;
     
+    newConnection.exportedObject = self;
+    newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperAgent)];
     newConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HelperProgress)];
-    self.xpcConnection = newConnection;
+    self.connection = newConnection;
     
     [newConnection resume];
     return YES;
