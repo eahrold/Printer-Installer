@@ -34,7 +34,8 @@
 
 -(void)quitHelper:(void (^)(BOOL success))reply{
     // this will cause the run-loop to exit;
-    // you should call it via NSXPCConnection during the applicationShouldTerminate routine
+    // you should call it via NSXPCConnection
+    // during the applicationShouldTerminate routine
     self.helperToolShouldQuit = YES;
     reply(YES);
 }

@@ -77,13 +77,13 @@
     
     [bpmi setTarget:_delegate];
     NSMenu* details = [[NSMenu alloc]init];
-
+    
     if(printer.location)[details addItemWithTitle:[NSString stringWithFormat:@"location: %@",printer.location] action:nil keyEquivalent:@""];
     if(printer.model)[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",printer.model] action:nil keyEquivalent:@""];
     if(printer.ppd_url)[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",printer.ppd_url] action:nil keyEquivalent:@""];
     if(printer.url)[details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
     
-    if([[Printer getInstalledPrinters] containsObject:printer.name]){
+    if([[Printer installedPrinters] containsObject:printer.name]){
         [bpmi setState:NSOnState];
     }else{
         [bpmi setState:NSOffState];
@@ -132,9 +132,8 @@
         setupDone = YES;
     }
     
-    NSSet* set = [Printer getInstalledPrinters];
+    NSSet* set = [Printer installedPrinters];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
-    
     if(_delegate.printerList.count){
         for (NSMenuItem* i in currentManagedPrinters){
             [self removeItem:i];
@@ -164,11 +163,13 @@
                 
                 [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
                 
+                
                 [self setSubmenu:details forItem:smi];
                 [self insertItem:smi atIndex:PRINTER_MENU_INDEX];
                 [cmp addObject:smi];
                 
-                if([set containsObject:printer.name]){
+                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name == %@",printer.name];
+                if( [[set filteredSetUsingPredicate:predicate] count] != 0){
                     [smi setState:NSOnState];
                 }else{
                     [smi setState:NSOffState];
