@@ -8,6 +8,7 @@
 
 #import <Sparkle/SUUpdater.h>
 #import "PIMenu.h"
+#import "Objective-CUPS.h"
 
 #define PRINTER_MENU_INDEX 3
 
@@ -90,7 +91,7 @@
     if(printer.url)
         [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
     
-    if([[Printer installedPrinters] containsObject:printer.name]){
+    if([[CUPSManager installedPrinters] containsObject:printer.name]){
         [bpmi setState:NSOnState];
     }else{
         [bpmi setState:NSOffState];
@@ -138,8 +139,8 @@
         [self insertItem:uninstall atIndex:[self numberOfItems]];
         setupDone = YES;
     }
-    
-    NSSet* set = [Printer installedPrinters];
+    NSSet* set;
+    set = [CUPSManager installedPrinters];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
     if(_delegate.printerList.count){
         for (NSMenuItem* i in currentManagedPrinters){

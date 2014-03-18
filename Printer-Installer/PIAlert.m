@@ -14,8 +14,8 @@ NSDictionary* alertFromCode(PIAlertCode code){
     NSString* description;
     switch (code) {
         case kPIAlertHelperToolRemoved:
-            message = @"";
-            description = @"";
+            message = @"The Helper Tool Remove";
+            description = @"The Helper tool and it's associated components have been removed.  You can now move the Printer-Installer application to the trash";
             break;
         default:
             message = @"This was recieved in error";

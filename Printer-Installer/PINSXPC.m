@@ -9,6 +9,7 @@
 #import "PINSXPC.h"
 #import "SMJobBlesser.h"
 #import "PIAlert.h"
+#import "Printer.h"
 
 @implementation PINSXPC
 
@@ -76,7 +77,6 @@
             if(error){
                 [PIError presentError:error];
             }else{
-                [JobBlesser removeHelperWithLabel:kHelperName];
                 [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
                 [PIAlert showAlertWithCode:kPIAlertHelperToolRemoved
                             didEndSelector:@selector(setupDidRemoveHelperTool:)];

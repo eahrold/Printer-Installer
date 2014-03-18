@@ -13,6 +13,7 @@
 #import "PINSXPC.h"
 #import "PILoginItem.h"
 #import "PIMenuView.h"
+#import "Printer.h"
 
 @implementation PIController{
     PIMenuView   *_menuView;

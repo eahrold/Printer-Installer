@@ -7,6 +7,7 @@
 //
 
 #import "SMJobBlesser.h"
+#import <syslog.h>
 
 @implementation JobBlesser
 
@@ -72,6 +73,45 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
     return result;
 }
 
++(void)unblessHelperFromTool:(NSString *)helperID{
+    NSError* localError = nil;
+    AuthorizationRef authRef;
+    AuthorizationItem authItem = { "com.apple.ServiceManagement.daemons.modify", 0, NULL, 0 };
+    
+    AuthorizationRights authRights	= { 1, &authItem };
+    AuthorizationEnvironment environment = {0, NULL};
+    
+    
+    OSStatus status = AuthorizationCreate(&authRights, &environment, [[self class] defaultFlags], &authRef);
+    
+	if (status != errAuthorizationSuccess) {
+        syslog(1,"Failed to create AuthorizationRef. Error code: %d", status);
+        return;
+	}
+    
+    CFErrorRef cfError;
+    cfError = NULL;
+    
+    BOOL rc = SMJobRemove(kSMDomainSystemLaunchd, (__bridge CFStringRef)(helperID), authRef, YES, &cfError);
+    
+    if(!rc){
+        localError = CFBridgingRelease(cfError);
+        syslog(1,"Failed to Remove Job: %s", localError.localizedDescription.UTF8String);
+    }
+}
+
++(AuthorizationFlags)defaultFlags{
+    static dispatch_once_t onceToken;
+    static AuthorizationFlags authFlags;
+    dispatch_once(&onceToken, ^{
+        authFlags = kAuthorizationFlagDefaults           |
+                    kAuthorizationFlagInteractionAllowed |
+                    kAuthorizationFlagPreAuthorize       |
+                    kAuthorizationFlagExtendRights       ;
+    });
+    return authFlags;
+}
+
 +(BOOL)removeHelperWithLabel:(NSString*)helperID{
     BOOL result = YES;
     NSError* localError = nil;
@@ -100,7 +140,7 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
     OSStatus status = AuthorizationCreate(&authRights, &environment, authFlags, &authRef);
     
 	if (status != errAuthorizationSuccess) {
-        NSLog(@"Failed to create AuthorizationRef. Error code: %d", status);
+        syslog(1,"Failed to create AuthorizationRef. Error code: %d", status);
         localError = [JobBlesser jobBlessError:JBAuthError withReturnCode:1];
         
 	}else {
@@ -108,14 +148,15 @@ NSString* const JBRemoveError = @"There Was a problem removing the Helper Tool."
         result = SMJobRemove(kSMDomainSystemLaunchd, (__bridge CFStringRef)helperID, authRef,NO, &cfError);
         
         if (!result) {
-            NSLog(@"Problem with SMJobBless: %@",CFBridgingRelease(cfError));
+            CFRelease(cfError);
             localError = [JobBlesser jobBlessError:JBRemoveError withReturnCode:1];
+            syslog(1,"Problem with SMJobBless: %s",localError.localizedDescription.UTF8String);
         }
     }
     
     if ( !result && (localError != NULL) ) {
         assert(localError != nil);
-        NSLog(@"We errored somewhere %@",localError.localizedDescription);
+        syslog(1,"We errored somewhere %s",localError.localizedDescription.UTF8String);
 
     }
     status = AuthorizationFree(authRef, authFlags);

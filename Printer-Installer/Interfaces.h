@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-#import "Printer.h"
 #import "PIError.h"
-
+@class Printer;
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 
 @protocol HelperAgent <NSObject>

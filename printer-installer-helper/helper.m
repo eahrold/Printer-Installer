@@ -13,7 +13,8 @@
 #import "helper.h"
 #import <cups/cups.h>
 #import <cups/ppd.h>
-
+#import "Objective-CUPS.h"
+#import "AHLaunchCtl.h"
 #import <syslog.h>
 
 static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check whether to quit
@@ -46,14 +47,14 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
 
 -(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
     NSError *error;
-    [printer addPrinter:&error];
+    [[CUPSManager sharedManager] addPrinter:printer error:&error];
     reply(error);
 }
 
 
 -(void)removePrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
     NSError *error;
-    [printer removePrinter:&error];
+    [[CUPSManager sharedManager]removePrinter:printer.name error:&error];
     reply(error);
 }
 
@@ -66,27 +67,8 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
 }
 
 -(void)uninstall:(void (^)(NSError *))reply{
-    NSError* error;
-    NSError* retunError;
-    
-    NSString *launchD = [NSString stringWithFormat:@"/Library/LaunchDaemons/%@.plist",kHelperName];
-    NSString *helperTool = [NSString stringWithFormat:@"/Library/PrivilegedHelperTools/%@",kHelperName];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:launchD error:&error];
-    if (error.code != NSFileNoSuchFileError) {
-        NSLog(@"%@", error);
-        retunError = error;
-        error = nil;
-    }
-    
-    [[NSFileManager defaultManager] removeItemAtPath:helperTool error:&error];
-    if (error.code != NSFileNoSuchFileError) {
-        NSLog(@"%@", error);
-        retunError = error;
-        error = nil;
-    }
-    reply(retunError);
-    
+    reply(nil);
+    [AHLaunchCtl uninstallHelper:kHelperName error:nil];
 }
 
 

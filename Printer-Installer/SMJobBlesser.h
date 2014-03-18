@@ -20,5 +20,6 @@
 
 +(BOOL)removeHelperWithLabel:(NSString *)helperID;
 
++(void)unblessHelperFromTool:(NSString*)helperID;
 
 @end

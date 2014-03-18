@@ -11,8 +11,12 @@
 		BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1266CB18297F5700D6A05F /* Security.framework */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE20370C183E7058000E33CE /* PILoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE20370B183E7058000E33CE /* PILoginItem.m */; };
-		BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
+		BE2F448E181F526D007E36B1 /* Sparkle.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
 		BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2F448C181F5257007E36B1 /* Sparkle.framework */; };
+		BE503DBB18BF9CBF00C84357 /* SMJobBlesser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* SMJobBlesser.m */; };
+		BE503DBC18BF9D4000C84357 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
+		BE503DBD18BF9D4B00C84357 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1266CB18297F5700D6A05F /* Security.framework */; };
+		BE503DC518BFA5B700C84357 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE69529C18492F080008CFAA /* SystemConfiguration.framework */; };
 		BE5D200F188706EE001A542A /* PIBonjourBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D200E188706EE001A542A /* PIBonjourBrowser.m */; };
 		BE5D201718886C09001A542A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5D201518886BE9001A542A /* libz.dylib */; };
 		BE5D201818886C13001A542A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5D201518886BE9001A542A /* libz.dylib */; };
@@ -24,7 +28,7 @@
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
 		BE793632188A2C8D00F0936F /* PIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7F16041870C35100362EA5 /* PIAlert.m */; };
 		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
-		BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
+		BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
@@ -37,10 +41,12 @@
 		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAB4CD7181AE97300585C03 /* CoreServices.framework */; };
+		BEADF7B718D8C2B7006E60AE /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEADF7AC18D8C286006E60AE /* libAHLaunchCtl.a */; };
+		BEADF7B818D8C2B7006E60AE /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEADF79B18D8C27E006E60AE /* libObjective_CUPS.a */; };
+		BEADF7B918D8C2BE006E60AE /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEADF7AC18D8C286006E60AE /* libAHLaunchCtl.a */; };
+		BEADF7BA18D8C2BE006E60AE /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEADF79B18D8C27E006E60AE /* libObjective_CUPS.a */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC420AA181A0947005F3AC7 /* Images.xcassets */; };
-		BECC149418BE26BF0012B016 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BECC149318BE26BF0012B016 /* libObjective_CUPS.a */; };
-		BECC149518BE26BF0012B016 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BECC149318BE26BF0012B016 /* libObjective_CUPS.a */; };
 		BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDA9EB4182F45230055B0B8 /* PIController.m */; };
 		BEDC5B3818252CBD003717BB /* PIError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDC5B3718252CBD003717BB /* PIError.m */; };
 		BEDC5B3918252CBD003717BB /* PIError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDC5B3718252CBD003717BB /* PIError.m */; };
@@ -57,18 +63,103 @@
 			remoteGlobalIDString = BE93C9A417BEC8CB00625DE2;
 			remoteInfo = "edu.loyno.smc.Printer-Installer.helper";
 		};
+		BEADF79818D8C27E006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE26D39518909E4F00DD31AB;
+			remoteInfo = "Objective-CUPS";
+		};
+		BEADF79A18D8C27E006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE26D3C61890C83600DD31AB;
+			remoteInfo = Objective_CUPS;
+		};
+		BEADF79C18D8C27E006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE26D3D21890C83600DD31AB;
+			remoteInfo = Objective_CUPSTests;
+		};
+		BEADF79E18D8C27E006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE42458618C63EE300B527B9;
+			remoteInfo = "test-cli";
+		};
+		BEADF7A718D8C286006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE91DC4418A586D5000FD8D7;
+			remoteInfo = LaunchControl;
+		};
+		BEADF7A918D8C286006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE5B001B18A55BAA000D8603;
+			remoteInfo = com.eeaapps.launchctl.helper;
+		};
+		BEADF7AB18D8C286006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE76C6F118A19369003C94A0;
+			remoteInfo = AHLaunchCtl;
+		};
+		BEADF7AD18D8C286006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE76C70418A19369003C94A0;
+			remoteInfo = AHLaunchCtlTests;
+		};
+		BEADF7AF18D8C2AC006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE26D3C51890C83600DD31AB;
+			remoteInfo = Objective_CUPS;
+		};
+		BEADF7B118D8C2AC006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE76C6F018A19369003C94A0;
+			remoteInfo = AHLaunchCtl;
+		};
+		BEADF7B318D8C2B1006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE26D3C51890C83600DD31AB;
+			remoteInfo = Objective_CUPS;
+		};
+		BEADF7B518D8C2B1006E60AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE76C6F018A19369003C94A0;
+			remoteInfo = AHLaunchCtl;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BE2F4481181F4804007E36B1 /* CopyFiles */ = {
+		BE2F4481181F4804007E36B1 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE2F448E181F526D007E36B1 /* Sparkle.framework in CopyFiles */,
-				BE8EC6FD1858C80F005F4E6D /* Server.framework in CopyFiles */,
+				BE2F448E181F526D007E36B1 /* Sparkle.framework in Copy Files */,
+				BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BE93C9B917BECBB300625DE2 /* CopyFiles */ = {
@@ -133,13 +224,11 @@
 		BE93C9B617BEC96900625DE2 /* helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helper.m; sourceTree = "<group>"; };
 		BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		BEAB4CD7181AE97300585C03 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Objective-CUPS.xcodeproj"; path = "../../Frameworks/Objective-CUPS/Objective-CUPS.xcodeproj"; sourceTree = "<group>"; };
+		BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AHLaunchCtl.xcodeproj; path = ../../Frameworks/AHLaunchCtl/AHLaunchCtl.xcodeproj; sourceTree = "<group>"; };
 		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
 		BEC420AA181A0947005F3AC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BECC149018BE26BF0012B016 /* Objective-CUPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Objective-CUPS.h"; sourceTree = "<group>"; };
-		BECC149118BE26BF0012B016 /* Printer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Printer.h; sourceTree = "<group>"; };
-		BECC149218BE26BF0012B016 /* PrinterJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrinterJob.h; sourceTree = "<group>"; };
-		BECC149318BE26BF0012B016 /* libObjective_CUPS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libObjective_CUPS.a; sourceTree = "<group>"; };
 		BEDA9EB3182F45230055B0B8 /* PIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIController.h; sourceTree = "<group>"; };
 		BEDA9EB4182F45230055B0B8 /* PIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIController.m; sourceTree = "<group>"; };
 		BEDC5B3618252CBD003717BB /* PIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIError.h; path = "Printer-Installer/PIError.h"; sourceTree = "<group>"; };
@@ -156,13 +245,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEADF7B918D8C2BE006E60AE /* libAHLaunchCtl.a in Frameworks */,
+				BEADF7BA18D8C2BE006E60AE /* libObjective_CUPS.a in Frameworks */,
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
-				BECC149418BE26BF0012B016 /* libObjective_CUPS.a in Frameworks */,
 				BE5D201818886C13001A542A /* libz.dylib in Frameworks */,
 				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
+				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
 				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
-				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE4B23F6181F541D00669BA3 /* Sparkle.framework in Frameworks */,
 				BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */,
 			);
@@ -172,9 +262,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEADF7B718D8C2B7006E60AE /* libAHLaunchCtl.a in Frameworks */,
+				BEADF7B818D8C2B7006E60AE /* libObjective_CUPS.a in Frameworks */,
+				BE503DC518BFA5B700C84357 /* SystemConfiguration.framework in Frameworks */,
+				BE503DBD18BF9D4B00C84357 /* Security.framework in Frameworks */,
+				BE503DBC18BF9D4000C84357 /* ServiceManagement.framework in Frameworks */,
 				BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */,
 				BE5D201718886C09001A542A /* libz.dylib in Frameworks */,
-				BECC149518BE26BF0012B016 /* libObjective_CUPS.a in Frameworks */,
 				BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +309,8 @@
 				BE93C9A817BEC8CB00625DE2 /* printer-installer-helper */,
 				BE93C98317BEC88400625DE2 /* Frameworks */,
 				BE93C98217BEC88400625DE2 /* Products */,
+				BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */,
+				BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,7 +326,6 @@
 		BE93C98317BEC88400625DE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BECC148E18BE26BF0012B016 /* Objective-CUPS */,
 				BE5D201518886BE9001A542A /* libz.dylib */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BE2F448C181F5257007E36B1 /* Sparkle.framework */,
@@ -318,6 +413,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BEADF79218D8C27E006E60AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEADF79918D8C27E006E60AE /* Objective-CUPS.framework */,
+				BEADF79B18D8C27E006E60AE /* libObjective_CUPS.a */,
+				BEADF79D18D8C27E006E60AE /* Objective_CUPSTests.xctest */,
+				BEADF79F18D8C27E006E60AE /* test-cli */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEADF7A118D8C286006E60AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEADF7A818D8C286006E60AE /* LaunchControl.app */,
+				BEADF7AA18D8C286006E60AE /* com.eeaapps.launchctl.helper */,
+				BEADF7AC18D8C286006E60AE /* libAHLaunchCtl.a */,
+				BEADF7AE18D8C286006E60AE /* AHLaunchCtlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BEBFB8E317C001F80023B26C /* Shared Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,25 +445,6 @@
 				BE7F16041870C35100362EA5 /* PIAlert.m */,
 			);
 			name = "Shared Items";
-			sourceTree = "<group>";
-		};
-		BECC148E18BE26BF0012B016 /* Objective-CUPS */ = {
-			isa = PBXGroup;
-			children = (
-				BECC148F18BE26BF0012B016 /* Headers */,
-				BECC149318BE26BF0012B016 /* libObjective_CUPS.a */,
-			);
-			path = "Objective-CUPS";
-			sourceTree = "<group>";
-		};
-		BECC148F18BE26BF0012B016 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				BECC149018BE26BF0012B016 /* Objective-CUPS.h */,
-				BECC149118BE26BF0012B016 /* Printer.h */,
-				BECC149218BE26BF0012B016 /* PrinterJob.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,11 +459,13 @@
 				BE93C97D17BEC88400625DE2 /* Sources */,
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
-				BE2F4481181F4804007E36B1 /* CopyFiles */,
+				BE2F4481181F4804007E36B1 /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BEADF7B018D8C2AC006E60AE /* PBXTargetDependency */,
+				BEADF7B218D8C2AC006E60AE /* PBXTargetDependency */,
 				BE0CCCE318BDA89F00ABD105 /* PBXTargetDependency */,
 			);
 			name = "Printer-Installer";
@@ -383,6 +483,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				BEADF7B418D8C2B1006E60AE /* PBXTargetDependency */,
+				BEADF7B618D8C2B1006E60AE /* PBXTargetDependency */,
 			);
 			name = "edu.loyno.smc.Printer-Installer.helper";
 			productName = "printer-installer-helper";
@@ -409,6 +511,16 @@
 			mainGroup = BE93C97817BEC88400625DE2;
 			productRefGroup = BE93C98217BEC88400625DE2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BEADF7A118D8C286006E60AE /* Products */;
+					ProjectRef = BEADF7A018D8C286006E60AE /* AHLaunchCtl.xcodeproj */;
+				},
+				{
+					ProductGroup = BEADF79218D8C27E006E60AE /* Products */;
+					ProjectRef = BEADF79118D8C27E006E60AE /* Objective-CUPS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BE93C98017BEC88400625DE2 /* Printer-Installer */,
@@ -416,6 +528,65 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BEADF79918D8C27E006E60AE /* Objective-CUPS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = "Objective-CUPS.framework";
+			remoteRef = BEADF79818D8C27E006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF79B18D8C27E006E60AE /* libObjective_CUPS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libObjective_CUPS.a;
+			remoteRef = BEADF79A18D8C27E006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF79D18D8C27E006E60AE /* Objective_CUPSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Objective_CUPSTests.xctest;
+			remoteRef = BEADF79C18D8C27E006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF79F18D8C27E006E60AE /* test-cli */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "test-cli";
+			remoteRef = BEADF79E18D8C27E006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF7A818D8C286006E60AE /* LaunchControl.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LaunchControl.app;
+			remoteRef = BEADF7A718D8C286006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF7AA18D8C286006E60AE /* com.eeaapps.launchctl.helper */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = com.eeaapps.launchctl.helper;
+			remoteRef = BEADF7A918D8C286006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF7AC18D8C286006E60AE /* libAHLaunchCtl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAHLaunchCtl.a;
+			remoteRef = BEADF7AB18D8C286006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BEADF7AE18D8C286006E60AE /* AHLaunchCtlTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AHLaunchCtlTests.xctest;
+			remoteRef = BEADF7AD18D8C286006E60AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BE93C97F17BEC88400625DE2 /* Resources */ = {
@@ -479,6 +650,7 @@
 				BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */,
 				BE93C9B717BEC96900625DE2 /* helper.m in Sources */,
 				BEDC5B3918252CBD003717BB /* PIError.m in Sources */,
+				BE503DBB18BF9CBF00C84357 /* SMJobBlesser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +661,26 @@
 			isa = PBXTargetDependency;
 			target = BE93C9A417BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */;
 			targetProxy = BE0CCCE218BDA89F00ABD105 /* PBXContainerItemProxy */;
+		};
+		BEADF7B018D8C2AC006E60AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Objective_CUPS;
+			targetProxy = BEADF7AF18D8C2AC006E60AE /* PBXContainerItemProxy */;
+		};
+		BEADF7B218D8C2AC006E60AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AHLaunchCtl;
+			targetProxy = BEADF7B118D8C2AC006E60AE /* PBXContainerItemProxy */;
+		};
+		BEADF7B418D8C2B1006E60AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Objective_CUPS;
+			targetProxy = BEADF7B318D8C2B1006E60AE /* PBXContainerItemProxy */;
+		};
+		BEADF7B618D8C2B1006E60AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AHLaunchCtl;
+			targetProxy = BEADF7B518D8C2B1006E60AE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -585,21 +777,25 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Printer-Installer",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Server-cdqlgoghdfmhlygevbhlqmyszmso/Build/Products/Release",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Printer-Installer-dfhhbbeipwhxxvafpcitwjmerkps/Build/Products/Debug",
+					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Objective-CUPS",
+					"$(SRCROOT)/Printer-Installer/",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.8;
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -613,21 +809,25 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Printer-Installer",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Server-cdqlgoghdfmhlygevbhlqmyszmso/Build/Products/Release",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Printer-Installer-dfhhbbeipwhxxvafpcitwjmerkps/Build/Products/Debug",
+					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "Printer-Installer/Printer-Installer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Objective-CUPS",
+					"$(SRCROOT)/Printer-Installer/",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.8;
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -636,16 +836,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
 				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Printer-Installer-dfhhbbeipwhxxvafpcitwjmerkps/Build/Products/Debug",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Objective-CUPS",
+					"$(SRCROOT)/Printer-Installer/",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -660,6 +868,7 @@
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.8;
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Debug;
 		};
@@ -668,16 +877,24 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "printer-installer-helper/printer-installer-helper-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "printer-installer-helper/helper-Info.plist";
 				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Printer-Installer-dfhhbbeipwhxxvafpcitwjmerkps/Build/Products/Debug",
-					"/Volumes/myHome/Users/eldon/Desktop/git/My\\ Objective-c/Printer-Installer/Objective-CUPS",
+					"$(SRCROOT)/Printer-Installer/",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -692,6 +909,7 @@
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.8;
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Release;
 		};

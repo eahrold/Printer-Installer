@@ -10,7 +10,7 @@
 
 #import <ServiceManagement/ServiceManagement.h>
 #import <Sparkle/SUUpdater.h>
-#import "SMJobBlesser.h"
+#import "AHLaunchCtl.h"
 #import "PINSXPC.h"
 #import "PIError.h"
 
@@ -36,19 +36,16 @@ NSLog(@"%@", replyEvent);
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSError  *error = nil;
-    [[NSUserDefaults standardUserDefaults]registerDefaults:@{
-                                                             kShowBonjourPrinters:@NO,                                           }];
+    [[NSUserDefaults standardUserDefaults]registerDefaults:@{kShowBonjourPrinters:@NO,}];
     
-    if(![JobBlesser blessHelperWithLabel:kHelperName
-                           andPrompt:@"In order to add managed Printers"
-                               error:&error]){
-    
+    if(![AHLaunchCtl installHelper:kHelperName prompt:@"In order to add managed Printers" error:&error ])
+    {
         if(error){
             [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
             [PIError presentError:error
                          delegate:self
                didPresentSelector:@selector(setupDidEndWithTerminalError:)];
-             }
+        }
     }
     
     if([[SUUpdater sharedUpdater]feedURL]){
