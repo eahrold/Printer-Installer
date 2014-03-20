@@ -25,6 +25,13 @@
 		BE6A73851857B41600A4DA71 /* PIConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE6A73831857B41600A4DA71 /* PIConfigView.xib */; };
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
 		BE793632188A2C8D00F0936F /* PIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7F16041870C35100362EA5 /* PIAlert.m */; };
+		BE88D34718DB87F200A82F08 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D34618DB87F200A82F08 /* Sparkle.framework */; };
+		BE88D34818DB883400A82F08 /* Sparkle.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34618DB87F200A82F08 /* Sparkle.framework */; };
+		BE88D34918DB883E00A82F08 /* CDEvents.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34118DB83D300A82F08 /* CDEvents.framework */; };
+		BE88D34A18DB885100A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
+		BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
+		BE88D35418DB88F900A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
+		BE88D35518DB88F900A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
 		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
@@ -39,8 +46,6 @@
 		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAB4CD7181AE97300585C03 /* CoreServices.framework */; };
-		BEAE79F318DB3E8C004ADE82 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAE79F218DB3E8C004ADE82 /* Sparkle.framework */; };
-		BEAE79F418DB3F78004ADE82 /* Sparkle.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BEAE79F218DB3E8C004ADE82 /* Sparkle.framework */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC420AA181A0947005F3AC7 /* Images.xcassets */; };
 		BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDA9EB4182F45230055B0B8 /* PIController.m */; };
@@ -129,6 +134,34 @@
 			remoteGlobalIDString = 9C6D067D1167CC7400343E46;
 			remoteInfo = CDEventsTestApp;
 		};
+		BE88D34C18DB885D00A82F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79BF18DB3AC6004ADE82 /* Objective-CUPS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE26D3C51890C83600DD31AB;
+			remoteInfo = Objective_CUPS;
+		};
+		BE88D34E18DB885D00A82F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE76C6F018A19369003C94A0;
+			remoteInfo = AHLaunchCtl;
+		};
+		BE88D35018DB88EF00A82F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79BF18DB3AC6004ADE82 /* Objective-CUPS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE26D3C51890C83600DD31AB;
+			remoteInfo = Objective_CUPS;
+		};
+		BE88D35218DB88EF00A82F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE76C6F018A19369003C94A0;
+			remoteInfo = AHLaunchCtl;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -138,8 +171,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BEAE79F418DB3F78004ADE82 /* Sparkle.framework in Copy Files */,
+				BE88D34918DB883E00A82F08 /* CDEvents.framework in Copy Files */,
 				BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */,
+				BE88D34818DB883400A82F08 /* Sparkle.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,7 +212,8 @@
 		BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+canBecomeKeyWindow.m"; sourceTree = "<group>"; };
 		BE7F16031870C35100362EA5 /* PIAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAlert.h; path = "Printer-Installer/PIAlert.h"; sourceTree = "<group>"; };
 		BE7F16041870C35100362EA5 /* PIAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAlert.m; path = "Printer-Installer/PIAlert.m"; sourceTree = "<group>"; };
-		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = Other_Frameworks/Server.framework; sourceTree = "<group>"; };
+		BE88D34618DB87F200A82F08 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
+		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
 		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
@@ -208,7 +243,6 @@
 		BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AHLaunchCtl.xcodeproj; path = "Printer-Installer/AHLaunchCtl/AHLaunchCtl.xcodeproj"; sourceTree = "<group>"; };
 		BEAE79B618DB3AAB004ADE82 /* CDEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CDEvents.xcodeproj; path = "Printer-Installer/CDEvents/CDEvents.xcodeproj"; sourceTree = "<group>"; };
 		BEAE79BF18DB3AC6004ADE82 /* Objective-CUPS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Objective-CUPS.xcodeproj"; path = "Printer-Installer/Objective-CUPS/Objective-CUPS.xcodeproj"; sourceTree = "<group>"; };
-		BEAE79F218DB3E8C004ADE82 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Other_Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
 		BEC420AA181A0947005F3AC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -228,14 +262,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE88D34A18DB885100A82F08 /* libAHLaunchCtl.a in Frameworks */,
+				BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */,
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
 				BE5D201818886C13001A542A /* libz.dylib in Frameworks */,
 				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
 				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
-				BEAE79F318DB3E8C004ADE82 /* Sparkle.framework in Frameworks */,
 				BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */,
 				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
+				BE88D34718DB87F200A82F08 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +279,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE88D35418DB88F900A82F08 /* libAHLaunchCtl.a in Frameworks */,
+				BE88D35518DB88F900A82F08 /* libObjective_CUPS.a in Frameworks */,
 				BE503DC518BFA5B700C84357 /* SystemConfiguration.framework in Frameworks */,
 				BE503DBD18BF9D4B00C84357 /* Security.framework in Frameworks */,
 				BE503DBC18BF9D4000C84357 /* ServiceManagement.framework in Frameworks */,
@@ -339,7 +377,7 @@
 			children = (
 				BE5D201518886BE9001A542A /* libz.dylib */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
-				BEAE79F218DB3E8C004ADE82 /* Sparkle.framework */,
+				BE88D34618DB87F200A82F08 /* Sparkle.framework */,
 				BE8EC6FB1858C6C5005F4E6D /* Server.framework */,
 				BE69529C18492F080008CFAA /* SystemConfiguration.framework */,
 				BE1266CB18297F5700D6A05F /* Security.framework */,
@@ -453,6 +491,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE88D34D18DB885D00A82F08 /* PBXTargetDependency */,
+				BE88D34F18DB885D00A82F08 /* PBXTargetDependency */,
 				BE0CCCE318BDA89F00ABD105 /* PBXTargetDependency */,
 			);
 			name = "Printer-Installer";
@@ -470,6 +510,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE88D35118DB88EF00A82F08 /* PBXTargetDependency */,
+				BE88D35318DB88EF00A82F08 /* PBXTargetDependency */,
 			);
 			name = "edu.loyno.smc.Printer-Installer.helper";
 			productName = "printer-installer-helper";
@@ -665,6 +707,26 @@
 			target = BE93C9A417BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */;
 			targetProxy = BE0CCCE218BDA89F00ABD105 /* PBXContainerItemProxy */;
 		};
+		BE88D34D18DB885D00A82F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Objective_CUPS;
+			targetProxy = BE88D34C18DB885D00A82F08 /* PBXContainerItemProxy */;
+		};
+		BE88D34F18DB885D00A82F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AHLaunchCtl;
+			targetProxy = BE88D34E18DB885D00A82F08 /* PBXContainerItemProxy */;
+		};
+		BE88D35118DB88EF00A82F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Objective_CUPS;
+			targetProxy = BE88D35018DB88EF00A82F08 /* PBXContainerItemProxy */;
+		};
+		BE88D35318DB88EF00A82F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AHLaunchCtl;
+			targetProxy = BE88D35218DB88EF00A82F08 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -763,6 +825,7 @@
 					"$(SRCROOT)/**",
 					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
 					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
+					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
@@ -797,6 +860,7 @@
 					"$(SRCROOT)/**",
 					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
 					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
+					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
