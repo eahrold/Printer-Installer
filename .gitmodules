@@ -1,0 +1,9 @@
+[submodule "Printer-Installer/CDEvents"]
+	path = Printer-Installer/CDEvents
+	url = https://github.com/rastersize/CDEvents.git
+[submodule "Printer-Installer/Objective-CUPS"]
+	path = Printer-Installer/Objective-CUPS
+	url = https://github.com/eahrold/Objective-CUPS.git
+[submodule "Printer-Installer/AHLaunchCtl"]
+	path = Printer-Installer/AHLaunchCtl
+	url = https://github.com/eahrold/AHLaunchCtl.git
