@@ -32,6 +32,8 @@
 		BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
 		BE88D35418DB88F900A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
 		BE88D35518DB88F900A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
+		BE88D36F18DB8E8500A82F08 /* CDEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D34118DB83D300A82F08 /* CDEvents.framework */; };
+		BE88D37618DB905E00A82F08 /* PCClient.app in Resources */ = {isa = PBXBuildFile; fileRef = BE88D36118DB8E2600A82F08 /* PCClient.app */; };
 		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
@@ -162,6 +164,13 @@
 			remoteGlobalIDString = BE76C6F018A19369003C94A0;
 			remoteInfo = AHLaunchCtl;
 		};
+		BE88D36D18DB8E6B00A82F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79B618DB3AAB004ADE82 /* CDEvents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CDEvents;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -213,6 +222,7 @@
 		BE7F16031870C35100362EA5 /* PIAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAlert.h; path = "Printer-Installer/PIAlert.h"; sourceTree = "<group>"; };
 		BE7F16041870C35100362EA5 /* PIAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAlert.m; path = "Printer-Installer/PIAlert.m"; sourceTree = "<group>"; };
 		BE88D34618DB87F200A82F08 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
+		BE88D36118DB8E2600A82F08 /* PCClient.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = PCClient.app; sourceTree = "<group>"; };
 		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
 		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
@@ -270,8 +280,9 @@
 				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
 				BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */,
-				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
 				BE88D34718DB87F200A82F08 /* Sparkle.framework in Frameworks */,
+				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
+				BE88D36F18DB8E8500A82F08 /* CDEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +307,7 @@
 		BE7F15FF186F2DCF00362EA5 /* Extra Items */ = {
 			isa = PBXGroup;
 			children = (
+				BE88D36118DB8E2600A82F08 /* PCClient.app */,
 			);
 			name = "Extra Items";
 			sourceTree = "<group>";
@@ -491,6 +503,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE88D36E18DB8E6B00A82F08 /* PBXTargetDependency */,
 				BE88D34D18DB885D00A82F08 /* PBXTargetDependency */,
 				BE88D34F18DB885D00A82F08 /* PBXTargetDependency */,
 				BE0CCCE318BDA89F00ABD105 /* PBXTargetDependency */,
@@ -644,6 +657,7 @@
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
 				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
 				BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */,
+				BE88D37618DB905E00A82F08 /* PCClient.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +740,11 @@
 			isa = PBXTargetDependency;
 			name = AHLaunchCtl;
 			targetProxy = BE88D35218DB88EF00A82F08 /* PBXContainerItemProxy */;
+		};
+		BE88D36E18DB8E6B00A82F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CDEvents;
+			targetProxy = BE88D36D18DB8E6B00A82F08 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -823,9 +842,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
@@ -858,9 +874,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
