@@ -942,9 +942,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
@@ -958,7 +955,7 @@
 					"$(SRCROOT)/Printer-Installer/",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.9;
@@ -977,9 +974,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Other_Frameworks",
-					"/Volumes/myHome/Users/eldon/Desktop/myGit/My_Objective-c/Printer-Installer/Printer-Installer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Printer-Installer/Printer-Installer-Prefix.pch";
@@ -993,7 +987,7 @@
 					"$(SRCROOT)/Printer-Installer/",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.9;
