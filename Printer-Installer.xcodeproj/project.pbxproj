@@ -32,8 +32,8 @@
 		BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
 		BE88D35418DB88F900A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
 		BE88D35518DB88F900A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
-		BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
-		BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8EC6FB1858C6C5005F4E6D /* Server.framework */; };
+		BE8B9F9A191690D9005F8EA6 /* AHServers.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8B9F93191690C8005F8EA6 /* AHServers.framework */; };
+		BE8B9F9D19169188005F8EA6 /* AHServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8B9F93191690C8005F8EA6 /* AHServers.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
 		BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE93C98417BEC88400625DE2 /* Cocoa.framework */; };
@@ -162,6 +162,41 @@
 			remoteGlobalIDString = BE76C6F018A19369003C94A0;
 			remoteInfo = AHLaunchCtl;
 		};
+		BE8B9F92191690C8005F8EA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE0209E91900AF040080311E;
+			remoteInfo = AHServers;
+		};
+		BE8B9F94191690C8005F8EA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE020A1B1900AF270080311E;
+			remoteInfo = AHServersOSX;
+		};
+		BE8B9F96191690C8005F8EA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE020A001900AF040080311E;
+			remoteInfo = AHServersTests;
+		};
+		BE8B9F98191690C8005F8EA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE020A271900AF270080311E;
+			remoteInfo = AHServersOSXTests;
+		};
+		BE8B9F9B191690DE005F8EA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BE0209E81900AF040080311E;
+			remoteInfo = AHServers;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -171,8 +206,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BE8B9F9A191690D9005F8EA6 /* AHServers.framework in Copy Files */,
 				BE88D34918DB883E00A82F08 /* CDEvents.framework in Copy Files */,
-				BE8EC6FD1858C80F005F4E6D /* Server.framework in Copy Files */,
 				BE88D34818DB883400A82F08 /* Sparkle.framework in Copy Files */,
 			);
 			name = "Copy Files";
@@ -213,7 +248,7 @@
 		BE7F16031870C35100362EA5 /* PIAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAlert.h; path = "Printer-Installer/PIAlert.h"; sourceTree = "<group>"; };
 		BE7F16041870C35100362EA5 /* PIAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAlert.m; path = "Printer-Installer/PIAlert.m"; sourceTree = "<group>"; };
 		BE88D34618DB87F200A82F08 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Printer-Installer/Sparkle.framework"; sourceTree = "<group>"; };
-		BE8EC6FB1858C6C5005F4E6D /* Server.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Server.framework; path = "Printer-Installer/Server.framework"; sourceTree = "<group>"; };
+		BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AHServers.xcodeproj; path = "Printer-Installer/AHServers/AHServers.xcodeproj"; sourceTree = "<group>"; };
 		BE8EC6FE1858CD68005F4E6D /* StatusBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBar.png; sourceTree = "<group>"; };
 		BE8FD68717CE547F00452FD4 /* PINSXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINSXPC.h; sourceTree = "<group>"; };
 		BE8FD68817CE547F00452FD4 /* PINSXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINSXPC.m; sourceTree = "<group>"; };
@@ -264,12 +299,12 @@
 			files = (
 				BE88D34A18DB885100A82F08 /* libAHLaunchCtl.a in Frameworks */,
 				BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */,
+				BE8B9F9D19169188005F8EA6 /* AHServers.framework in Frameworks */,
 				BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */,
 				BE5D201818886C13001A542A /* libz.dylib in Frameworks */,
-				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
-				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
 				BE93C98517BEC88400625DE2 /* Cocoa.framework in Frameworks */,
-				BE8EC6FC1858C6C5005F4E6D /* Server.framework in Frameworks */,
+				BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */,
+				BE69529D18492F080008CFAA /* SystemConfiguration.framework in Frameworks */,
 				BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */,
 				BE88D34718DB87F200A82F08 /* Sparkle.framework in Frameworks */,
 			);
@@ -347,6 +382,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BE8B9F8C191690C8005F8EA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE8B9F93191690C8005F8EA6 /* AHServers.framework */,
+				BE8B9F95191690C8005F8EA6 /* libAHServersOSX.a */,
+				BE8B9F97191690C8005F8EA6 /* AHServersTests.xctest */,
+				BE8B9F99191690C8005F8EA6 /* AHServersOSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BE93C97817BEC88400625DE2 = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +405,7 @@
 				BE93C98217BEC88400625DE2 /* Products */,
 				BEAE79BF18DB3AC6004ADE82 /* Objective-CUPS.xcodeproj */,
 				BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */,
+				BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */,
 				BEAE79B618DB3AAB004ADE82 /* CDEvents.xcodeproj */,
 			);
 			sourceTree = "<group>";
@@ -378,7 +425,6 @@
 				BE5D201518886BE9001A542A /* libz.dylib */,
 				BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */,
 				BE88D34618DB87F200A82F08 /* Sparkle.framework */,
-				BE8EC6FB1858C6C5005F4E6D /* Server.framework */,
 				BE69529C18492F080008CFAA /* SystemConfiguration.framework */,
 				BE1266CB18297F5700D6A05F /* Security.framework */,
 				BEAB4CD7181AE97300585C03 /* CoreServices.framework */,
@@ -491,6 +537,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE8B9F9C191690DE005F8EA6 /* PBXTargetDependency */,
 				BE88D34D18DB885D00A82F08 /* PBXTargetDependency */,
 				BE88D34F18DB885D00A82F08 /* PBXTargetDependency */,
 				BE0CCCE318BDA89F00ABD105 /* PBXTargetDependency */,
@@ -542,6 +589,10 @@
 				{
 					ProductGroup = BE88D32E18DB83C100A82F08 /* Products */;
 					ProjectRef = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
+				},
+				{
+					ProductGroup = BE8B9F8C191690C8005F8EA6 /* Products */;
+					ProjectRef = BE8B9F8B191690C8005F8EA6 /* AHServers.xcodeproj */;
 				},
 				{
 					ProductGroup = BE88D33C18DB83D300A82F08 /* Products */;
@@ -629,6 +680,34 @@
 			fileType = wrapper.application;
 			path = CDEventsTestApp.app;
 			remoteRef = BE88D34218DB83D300A82F08 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BE8B9F93191690C8005F8EA6 /* AHServers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AHServers.framework;
+			remoteRef = BE8B9F92191690C8005F8EA6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BE8B9F95191690C8005F8EA6 /* libAHServersOSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAHServersOSX.a;
+			remoteRef = BE8B9F94191690C8005F8EA6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BE8B9F97191690C8005F8EA6 /* AHServersTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AHServersTests.xctest;
+			remoteRef = BE8B9F96191690C8005F8EA6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BE8B9F99191690C8005F8EA6 /* AHServersOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AHServersOSXTests.xctest;
+			remoteRef = BE8B9F98191690C8005F8EA6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -726,6 +805,11 @@
 			isa = PBXTargetDependency;
 			name = AHLaunchCtl;
 			targetProxy = BE88D35218DB88EF00A82F08 /* PBXContainerItemProxy */;
+		};
+		BE8B9F9C191690DE005F8EA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AHServers;
+			targetProxy = BE8B9F9B191690DE005F8EA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -842,7 +926,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx10.9;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -877,7 +961,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx10.9;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};

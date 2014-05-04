@@ -7,3 +7,6 @@
 [submodule "Printer-Installer/AHLaunchCtl"]
 	path = Printer-Installer/AHLaunchCtl
 	url = https://github.com/eahrold/AHLaunchCtl.git
+[submodule "Printer-Installer/AHServers"]
+	path = Printer-Installer/AHServers
+	url = https://eahrold@github.com/eahrold/AHServers.git
