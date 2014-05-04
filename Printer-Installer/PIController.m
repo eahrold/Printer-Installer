@@ -7,7 +7,7 @@
 //
 
 #import <Sparkle/SUUpdater.h>
-#import <Server/Server.h>
+#import <AHServers/AHServers.h>
 #import "PIController.h"
 #import "PIDelegate.h"
 #import "PINSXPC.h"
@@ -89,10 +89,10 @@
     id values = [[NSUserDefaultsController sharedUserDefaultsController] values];
     NSString* url = [values valueForKey:@"server" ];
     
-    Server* server = [[Server alloc]initWithQueue];
+    AHHttpManager* server = [[AHHttpManager alloc]initWithQueue];
     server.URL = [NSURL URLWithString:url];
     
-    [server getRequestReturningData:^(NSData *data, NSError *error) {
+    [server GET:^(NSData *data, NSError *error) {
         if(error){
             NSLog(@"%@",error.localizedDescription);
             if(_configView){
@@ -116,7 +116,7 @@
             // check if the Serever Provided us with a feedURL if so use that.
             // If not use the one provided int the App's Info.plist
             NSString* feedURL = settings[@"updateServer"];
-            [Server checkURL:feedURL status:^(BOOL avaliable) {
+            [AHHttpRequest checkURL:feedURL status:^(BOOL avaliable) {
                 if(avaliable){
                     [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
                 }else{

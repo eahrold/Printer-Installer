@@ -21,6 +21,8 @@ NSString* errorTextForCode(int code){
             break;
         case kPIErrorServerNotFound:codeText = @"We could not locate the Managed Printer Server.  Try again later or contact your system admin";
             break;
+        case kPIErrorCouldNotInstallHelper:codeText = @"The required helper tool could not be installed.  We must now quit.";
+            break;
         default: codeText = @"There was a unknown problem, sorry!";
             break;
     }
@@ -28,7 +30,7 @@ NSString* errorTextForCode(int code){
 }
 
 @implementation PIError
-
+#ifdef _COCOA_H
 +(void)presentErrorWithCode:(PIErrorCode)code delegate:(id)sender didPresentSelector:(SEL)selector
 {
     NSError* error;
@@ -42,7 +44,6 @@ NSString* errorTextForCode(int code){
 
 +(void)presentError:(NSError *)error delegate:(id)sender didPresentSelector:(SEL)selector
 {
-#ifdef _COCOA_H
     [[NSOperationQueue mainQueue]addOperationWithBlock:^{
         [NSApp presentError:error
              modalForWindow:NULL
@@ -50,9 +51,8 @@ NSString* errorTextForCode(int code){
          didPresentSelector:selector
                 contextInfo:NULL];
     }];
-#endif
 }
-
+#endif
 
 + (BOOL)errorWithCode:(PIErrorCode)code error:(NSError *__autoreleasing *)error
 {
