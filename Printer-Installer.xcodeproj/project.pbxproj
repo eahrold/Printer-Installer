@@ -46,6 +46,8 @@
 		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAB4CD7181AE97300585C03 /* CoreServices.framework */; };
+		BEAFFE2D1916A33A0095B005 /* CDEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D34118DB83D300A82F08 /* CDEvents.framework */; };
+		BEAFFE2F1916A3570095B005 /* PCClient.app in Resources */ = {isa = PBXBuildFile; fileRef = BEAFFE2E1916A3570095B005 /* PCClient.app */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEC420AA181A0947005F3AC7 /* Images.xcassets */; };
 		BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDA9EB4182F45230055B0B8 /* PIController.m */; };
@@ -197,6 +199,13 @@
 			remoteGlobalIDString = BE0209E81900AF040080311E;
 			remoteInfo = AHServers;
 		};
+		BEAFFE201916A32C0095B005 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAE79B618DB3AAB004ADE82 /* CDEvents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CDEvents;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -279,6 +288,7 @@
 		BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AHLaunchCtl.xcodeproj; path = "Printer-Installer/AHLaunchCtl/AHLaunchCtl.xcodeproj"; sourceTree = "<group>"; };
 		BEAE79B618DB3AAB004ADE82 /* CDEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CDEvents.xcodeproj; path = "Printer-Installer/CDEvents/CDEvents.xcodeproj"; sourceTree = "<group>"; };
 		BEAE79BF18DB3AC6004ADE82 /* Objective-CUPS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Objective-CUPS.xcodeproj"; path = "Printer-Installer/Objective-CUPS/Objective-CUPS.xcodeproj"; sourceTree = "<group>"; };
+		BEAFFE2E1916A3570095B005 /* PCClient.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = PCClient.app; sourceTree = "<group>"; };
 		BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcups.dylib; path = usr/lib/libcups.dylib; sourceTree = SDKROOT; };
 		BEC420AA181A0947005F3AC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC6CDFC18160AD800300121 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -298,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEAFFE2D1916A33A0095B005 /* CDEvents.framework in Frameworks */,
 				BE88D34A18DB885100A82F08 /* libAHLaunchCtl.a in Frameworks */,
 				BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */,
 				BE8B9F9D19169188005F8EA6 /* AHServers.framework in Frameworks */,
@@ -332,6 +343,7 @@
 		BE7F15FF186F2DCF00362EA5 /* Extra Items */ = {
 			isa = PBXGroup;
 			children = (
+				BEAFFE2E1916A3570095B005 /* PCClient.app */,
 			);
 			name = "Extra Items";
 			sourceTree = "<group>";
@@ -540,6 +552,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BEAFFE211916A32C0095B005 /* PBXTargetDependency */,
 				BE8B9F9C191690DE005F8EA6 /* PBXTargetDependency */,
 				BE88D34D18DB885D00A82F08 /* PBXTargetDependency */,
 				BE88D34F18DB885D00A82F08 /* PBXTargetDependency */,
@@ -726,6 +739,7 @@
 				BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */,
 				BEC420AB181A0947005F3AC7 /* Images.xcassets in Resources */,
 				BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */,
+				BEAFFE2F1916A3570095B005 /* PCClient.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +840,11 @@
 			isa = PBXTargetDependency;
 			name = AHServers;
 			targetProxy = BE8B9F9B191690DE005F8EA6 /* PBXContainerItemProxy */;
+		};
+		BEAFFE211916A32C0095B005 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CDEvents;
+			targetProxy = BEAFFE201916A32C0095B005 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
