@@ -232,6 +232,7 @@
 		BE1266CB18297F5700D6A05F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BE20370A183E7058000E33CE /* PILoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PILoginItem.h; sourceTree = "<group>"; };
 		BE20370B183E7058000E33CE /* PILoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PILoginItem.m; sourceTree = "<group>"; };
+		BE3837EC1916997F00D5B5F8 /* Resign_CodeSign_RunScript.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = Resign_CodeSign_RunScript.py; sourceTree = "<group>"; };
 		BE5D200D188706EE001A542A /* PIBonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIBonjourBrowser.h; sourceTree = "<group>"; };
 		BE5D200E188706EE001A542A /* PIBonjourBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIBonjourBrowser.m; sourceTree = "<group>"; };
 		BE5D201518886BE9001A542A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -396,6 +397,7 @@
 		BE93C97817BEC88400625DE2 = {
 			isa = PBXGroup;
 			children = (
+				BE3837EC1916997F00D5B5F8 /* Resign_CodeSign_RunScript.py */,
 				BE03EA0818BD568600C57101 /* HelperTool_CodeSign_RunScript.py */,
 				BE7F15FF186F2DCF00362EA5 /* Extra Items */,
 				BEBFB8E317C001F80023B26C /* Shared Items */,
@@ -533,6 +535,7 @@
 				BE93C97E17BEC88400625DE2 /* Frameworks */,
 				BE93C9B917BECBB300625DE2 /* CopyFiles */,
 				BE2F4481181F4804007E36B1 /* Copy Files */,
+				BE3837F8191699DC00D5B5F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -741,6 +744,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PROJECT_DIR}/HelperTool_CodeSign_RunScript.py\"";
+		};
+		BE3837F8191699DC00D5B5F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#\"${PROJECT_DIR}/Resign_CodeSign_RunScript.py\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
