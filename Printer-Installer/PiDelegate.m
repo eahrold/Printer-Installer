@@ -41,15 +41,17 @@ NSLog(@"%@", replyEvent);
     if(![AHLaunchCtl installHelper:kHelperName prompt:@"In order to add managed Printers" error:&error ])
     {
         if(error){
+            [PIError errorWithCode:kPIErrorCouldNotInstallHelper error:&error];
             [[NSApplication sharedApplication]activateIgnoringOtherApps:YES];
             [PIError presentError:error
                          delegate:self
                didPresentSelector:@selector(setupDidEndWithTerminalError:)];
         }
     }
-    
-    if([[SUUpdater sharedUpdater]feedURL]){
-         [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
+    else{
+        if([[SUUpdater sharedUpdater]feedURL]){
+            [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
+        }
     }
 }
 

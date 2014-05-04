@@ -14,25 +14,24 @@ extern NSString* const PIIncorrectURLAlt;
 
 typedef NS_ENUM(NSInteger, PIErrorCode){
     kPIErrorSuccess = 0,
-    kPIErrorServerNotFound = 1004,
-    kPIErrorCouldNotAddLoginItem = 1007,
+    kPIErrorServerNotFound = 1000,
+    kPIErrorCouldNotAddLoginItem,
+    kPIErrorCouldNotInstallHelper,
 };
 
 @interface PIError : NSObject
 +(BOOL) errorWithCode:(PIErrorCode)code error:(NSError **)error;
 
+#ifdef _COCOA_H
 +(void) presentError:(NSError*)error;
 
 +(void) presentErrorWithCode:(PIErrorCode)code
                     delegate:(id)sender
           didPresentSelector:(SEL)selector;
 
-
 +(void) presentError:(NSError *)error
             delegate:(id)sender
   didPresentSelector:(SEL)selector;
+#endif
 
 @end
-
-
-
