@@ -24,17 +24,12 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>None</string>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>edu.loyno.smc.printerinstaller</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>printerinstaller</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>None</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>printerinstallers</string>
 			</array>
 		</dict>
