@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, PIErrorCode){
 @interface PIError : NSObject
 +(BOOL) errorWithCode:(PIErrorCode)code error:(NSError **)error;
 
-#ifdef _COCOA_H
+#ifdef _APPKITDEFINES_H
 +(void) presentError:(NSError*)error;
 
 +(void) presentErrorWithCode:(PIErrorCode)code
