@@ -30,7 +30,7 @@ NSString* errorTextForCode(int code){
 }
 
 @implementation PIError
-#ifdef _COCOA_H
+#ifdef _APPKITDEFINES_H
 +(void)presentErrorWithCode:(PIErrorCode)code delegate:(id)sender didPresentSelector:(SEL)selector
 {
     NSError* error;
