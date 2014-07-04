@@ -4,11 +4,11 @@
 ---
 ---
 
-__T__here are a number of common issues when a large number of users need undetermined access to a large number printers. First of all, adding printers to unmanaged computers, such as student's personal machines, can be a pain.  Normally it requires either an elaborate walk through that talks about server IP addresses and protocols, or some sort of script which adds all the avalible printers for the instution, making much clutter in the users printer dialog.  
+__There__ are a number of common issues when a large number of users need undetermined access to a large number printers. First of all, adding printers to unmanaged computers, such as student's personal machines, can be a pain.  Normally it requires either an elaborate walk through that talks about server IP addresses and protocols, or some sort of script which adds all the avalible printers for the instution, making much clutter in the users printer dialog.  
  
-__P__rinter-Insaller trys to address these.  It lives quietly in the menu bar and provides a simple list of printers users may want to add/remove.  The administer configures the list on a web server, and the users automatically see which printers are avaliable to them.
+__Printer-Insaller__ trys to address these.  It lives quietly in the menu bar and provides a simple list of printers users may want to add/remove.  The administer configures the list on a web server, and the users automatically see which printers are avaliable to them.
 
-__I__n addition if you need to change the IP or protocol of any printer a user has previously added, just update the information on the server and Printer-Insatller checks for those changes and updates the installed printer's uri on the client accordingly.
+__In__ addition if you need to change the IP or protocol of any printer a user has previously added, just update the information on the server and Printer-Insatller checks for those changes and updates the installed printer's uri on the client accordingly.
 
 ![pi-menu]
 
