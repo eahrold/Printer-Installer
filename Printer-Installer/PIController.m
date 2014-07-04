@@ -14,6 +14,7 @@
 #import "PILoginItem.h"
 #import "PIMenuView.h"
 #import "Printer.h"
+#import "CUPSManager.h"
 
 @implementation PIController{
     PIMenuView   *_menuView;
@@ -24,11 +25,17 @@
     PIBonjourBrowser    *_bonjourBrowserDelegate;
 }
 
-@synthesize menu = _menu;
 @synthesize bonjourPrinterList = _bonjourPrinterList;
 @synthesize printerList = _printerList;
 
 #pragma mark - Setup / Tear Down
+- (void)dealloc
+{
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
+    [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
 -(void)awakeFromNib {
     // Setup Reachability
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
@@ -60,13 +67,6 @@
     }
     
     _statusItem.view = _menuView;
-}
-
-- (void)dealloc
-{
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
-    [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -108,6 +108,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:printerList forKey:@"PrinterList"];
                 _printerList = printerList;
                 [_menu updateMenuItems];
+                [self checkPrinterSettings];
                 [self cancelConfigView];
             }else{
                 _configView.panelMessage = PINoSharedGroups;
@@ -200,6 +201,24 @@
             else
                 [PIError presentError:error];
     }];
+}
+
+-(void)checkPrinterSettings{
+    for(NSDictionary *pDict in _printerList){
+        Printer *printer = [[Printer alloc]initWithDictionary:pDict];
+        for(Printer *installedPrinter in [CUPSManager installedPrinters]){
+            if([printer.name isEqualToString:installedPrinter.name]){
+                if(![printer.url isEqualToString:installedPrinter.url]){
+                    [PINSXPC changePrinterAvaliablily:printer
+                                                  add:YES
+                                                reply:^(NSError* error){
+                                                    if(error)
+                                                        [PIError presentError:error];
+                                                }];
+                }
+            }
+        }
+    }
 }
 
 -(void)manageBonjourPrinter:(NSMenuItem*)sender{

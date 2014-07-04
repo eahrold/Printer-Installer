@@ -127,7 +127,7 @@
         self.description =  dict[@"description"];
         self.host =         dict[@"host"];
         self.model =        dict[@"ty"];
-        self.protocol = @"dnssd";
+        self.protocol =     @"dnssd";
     }
     return self;
 }
