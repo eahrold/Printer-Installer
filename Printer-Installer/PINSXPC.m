@@ -7,7 +7,6 @@
 //
 
 #import "PINSXPC.h"
-#import "SMJobBlesser.h"
 #import "PIAlert.h"
 #import "Printer.h"
 
