@@ -11,7 +11,6 @@
 		BE1266CC18297F5700D6A05F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1266CB18297F5700D6A05F /* Security.framework */; };
 		BE1FCEAF17C5A7F400F3A3E6 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
 		BE20370C183E7058000E33CE /* PILoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE20370B183E7058000E33CE /* PILoginItem.m */; };
-		BE503DBB18BF9CBF00C84357 /* SMJobBlesser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* SMJobBlesser.m */; };
 		BE503DBC18BF9D4000C84357 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BE503DBD18BF9D4B00C84357 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1266CB18297F5700D6A05F /* Security.framework */; };
 		BE503DC518BFA5B700C84357 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE69529C18492F080008CFAA /* SystemConfiguration.framework */; };
@@ -55,7 +54,6 @@
 		BEDC5B3918252CBD003717BB /* PIError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDC5B3718252CBD003717BB /* PIError.m */; };
 		BEE113731815764000850EF6 /* PiMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE113721815764000850EF6 /* PiMenu.m */; };
 		BEED08EF181FD92B00F15F3F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = BEED08EE181FD92B00F15F3F /* dsa_pub.pem */; };
-		BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF145D317C306F0003897D3 /* SMJobBlesser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,20 +91,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = BE42458618C63EE300B527B9;
 			remoteInfo = "test-cli";
-		};
-		BE88D33418DB83C100A82F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE91DC4418A586D5000FD8D7;
-			remoteInfo = LaunchControl;
-		};
-		BE88D33618DB83C100A82F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE5B001B18A55BAA000D8603;
-			remoteInfo = com.eeaapps.launchctl.helper;
 		};
 		BE88D33818DB83C100A82F08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -299,8 +283,6 @@
 		BEE113711815764000850EF6 /* PIMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIMenu.h; sourceTree = "<group>"; };
 		BEE113721815764000850EF6 /* PiMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiMenu.m; sourceTree = "<group>"; };
 		BEED08EE181FD92B00F15F3F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		BEF145D217C306F0003897D3 /* SMJobBlesser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMJobBlesser.h; sourceTree = "<group>"; };
-		BEF145D317C306F0003897D3 /* SMJobBlesser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMJobBlesser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,8 +360,6 @@
 		BE88D32E18DB83C100A82F08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE88D33518DB83C100A82F08 /* LaunchControl.app */,
-				BE88D33718DB83C100A82F08 /* com.eeaapps.launchctl.helper */,
 				BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */,
 				BE88D33B18DB83C100A82F08 /* AHLaunchCtlTests.xctest */,
 			);
@@ -488,8 +468,6 @@
 				BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */,
 				BE69529918492B990008CFAA /* Reachability.h */,
 				BE69529A18492B990008CFAA /* Reachability.m */,
-				BEF145D217C306F0003897D3 /* SMJobBlesser.h */,
-				BEF145D317C306F0003897D3 /* SMJobBlesser.m */,
 				BE93C99217BEC88400625DE2 /* Printer-Installer-Prefix.pch */,
 				BE93C99317BEC88400625DE2 /* Credits.rtf */,
 				BE93C98D17BEC88400625DE2 /* InfoPlist.strings */,
@@ -587,7 +565,7 @@
 		BE93C97917BEC88400625DE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Eldon Ahrold";
 			};
 			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
@@ -654,20 +632,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = "test-cli";
 			remoteRef = BE88D32C18DB83AE00A82F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BE88D33518DB83C100A82F08 /* LaunchControl.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = LaunchControl.app;
-			remoteRef = BE88D33418DB83C100A82F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BE88D33718DB83C100A82F08 /* com.eeaapps.launchctl.helper */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = com.eeaapps.launchctl.helper;
-			remoteRef = BE88D33618DB83C100A82F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */ = {
@@ -786,7 +750,6 @@
 				BE793632188A2C8D00F0936F /* PIAlert.m in Sources */,
 				BE93C99817BEC88400625DE2 /* PiDelegate.m in Sources */,
 				BEDA9EB5182F45230055B0B8 /* PIController.m in Sources */,
-				BEF145D417C306F0003897D3 /* SMJobBlesser.m in Sources */,
 				BE5D200F188706EE001A542A /* PIBonjourBrowser.m in Sources */,
 				BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */,
 				BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */,
@@ -804,7 +767,6 @@
 				BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */,
 				BE93C9B717BEC96900625DE2 /* helper.m in Sources */,
 				BEDC5B3918252CBD003717BB /* PIError.m in Sources */,
-				BE503DBB18BF9CBF00C84357 /* SMJobBlesser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,7 +866,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -929,7 +891,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -958,7 +920,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -990,7 +952,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1031,7 +993,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Debug;
@@ -1072,7 +1034,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Release;

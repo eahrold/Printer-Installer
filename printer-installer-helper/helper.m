@@ -67,8 +67,10 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
 }
 
 -(void)uninstall:(void (^)(NSError *))reply{
-    reply(nil);
-    [AHLaunchCtl uninstallHelper:kHelperName error:nil];
+    NSError *error;
+    [AHLaunchCtl removeFilesForHelperWithLabel:kHelperName error:&error];
+    reply(error);
+    [AHLaunchCtl uninstallHelper:kHelperName prompt:@"" error:nil];
 }
 
 

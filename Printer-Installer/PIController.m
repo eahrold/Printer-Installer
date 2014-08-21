@@ -209,6 +209,7 @@
         for(Printer *installedPrinter in [CUPSManager installedPrinters]){
             if([printer.name isEqualToString:installedPrinter.name]){
                 if(![printer.url isEqualToString:installedPrinter.url]){
+                    NSLog(@"Updating uri for %@",printer);
                     [PINSXPC changePrinterAvaliablily:printer
                                                   add:YES
                                                 reply:^(NSError* error){
@@ -242,8 +243,18 @@
     // we register both printerinstaller and printerinstallers which
     // represent http and https respectively
     NSString* piurl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSString *url = [piurl stringByReplacingOccurrencesOfString:@"printerinstaller" withString:@"http"];
-    [[[NSUserDefaultsController sharedUserDefaultsController]values ]setValue:url forKey:@"server"];
+    NSURL* url = [NSURL URLWithString:piurl];
+    
+    NSString *scheme;
+    if([url.scheme isEqualToString:@"printerinstaller"]){
+        scheme = @"http";
+    }else if([url.scheme isEqualToString:@"printerinstallers"]){
+        scheme = @"https";
+    }
+    
+    NSString *newURL = [NSString stringWithFormat:@"%@://%@%@",scheme,url.host,url.path];
+    
+    [[[NSUserDefaultsController sharedUserDefaultsController]values ]setValue:newURL forKey:@"server"];
     [self refreshPrinterList];
 }
 
@@ -253,7 +264,8 @@
     return _printerList;
 }
 
--(void)uninstallHelper:(id)sender{
+-(void)uninstallHelper:(id)sender
+{
     [PINSXPC uninstallHelper];
 }
 
