@@ -90,20 +90,6 @@
 			remoteGlobalIDString = BE42458618C63EE300B527B9;
 			remoteInfo = "test-cli";
 		};
-		BE88D33418DB83C100A82F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE91DC4418A586D5000FD8D7;
-			remoteInfo = LaunchControl;
-		};
-		BE88D33618DB83C100A82F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE5B001B18A55BAA000D8603;
-			remoteInfo = com.eeaapps.launchctl.helper;
-		};
 		BE88D33818DB83C100A82F08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BEAE79A718DB3A94004ADE82 /* AHLaunchCtl.xcodeproj */;
@@ -362,8 +348,6 @@
 		BE88D32E18DB83C100A82F08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE88D33518DB83C100A82F08 /* LaunchControl.app */,
-				BE88D33718DB83C100A82F08 /* com.eeaapps.launchctl.helper */,
 				BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */,
 				BE88D33B18DB83C100A82F08 /* AHLaunchCtlTests.xctest */,
 			);
@@ -568,7 +552,7 @@
 		BE93C97917BEC88400625DE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Eldon Ahrold";
 			};
 			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
@@ -635,20 +619,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = "test-cli";
 			remoteRef = BE88D32C18DB83AE00A82F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BE88D33518DB83C100A82F08 /* LaunchControl.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = LaunchControl.app;
-			remoteRef = BE88D33418DB83C100A82F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BE88D33718DB83C100A82F08 /* com.eeaapps.launchctl.helper */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = com.eeaapps.launchctl.helper;
-			remoteRef = BE88D33618DB83C100A82F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */ = {
@@ -877,7 +847,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -902,7 +872,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -931,7 +901,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -963,7 +933,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1004,7 +974,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Debug;
@@ -1045,7 +1015,7 @@
 				);
 				PRODUCT_NAME = "edu.loyno.smc.Printer-Installer.helper";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/** $(BUILT_PRODUCTS_DIR)/** \"$(SRCROOT)/../../Frameworks/\"/**";
 			};
 			name = Release;
