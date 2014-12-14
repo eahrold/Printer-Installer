@@ -50,6 +50,7 @@ NSLog(@"%@", replyEvent);
     }
     else{
         if([[SUUpdater sharedUpdater]feedURL]){
+            NSLog(@"%@",[[SUUpdater sharedUpdater]feedURL]);
             [[SUUpdater sharedUpdater]checkForUpdatesInBackground];
         }
     }

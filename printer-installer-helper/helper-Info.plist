@@ -9,7 +9,7 @@
 	<key>CFBundleName</key>
 	<string>edu.loyno.smc.Printer-Installer.helper</string>
 	<key>CFBundleVersion</key>
-	<string>2.4.2</string>
+	<string>2.4.3</string>
 	<key>SMAuthorizedClients</key>
 	<array>
 		<string>identifier "edu.loyno.smc.Printer-Installer" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = BUN87F4W87</string>

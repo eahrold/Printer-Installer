@@ -15,7 +15,7 @@ static NSString * const kHelperName;
 @interface PINSXPC : NSXPCConnection
 
 -(id)initConnection;
-+(void)changePrinterAvaliablily:(Printer*)printer add:(BOOL)added reply:(void (^)(NSError *error))reply;
++(void)changePrinterAvaliablily:(OCPrinter*)printer add:(BOOL)added reply:(void (^)(NSError *error))reply;
 
 +(void)tellHelperToQuit;
 +(void)uninstallHelper;

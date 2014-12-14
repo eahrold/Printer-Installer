@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class  PIBonjourBrowser,Printer;
+@class  PIBonjourBrowser,OCPrinter;
 
 @protocol PIBonjourBrowserDelegate <NSObject>
--(void)addBonjourPrinter:(Printer*)printer;
--(void)updateBonjourPrinter:(Printer*)printer;
+-(void)addBonjourPrinter:(OCPrinter*)printer;
+-(void)updateBonjourPrinter:(OCPrinter*)printer;
 -(void)removeBonjourPrinter:(NSString*)printerName;
 @end
 

@@ -53,7 +53,7 @@
     return state;
 }
 
--(void)addBonjourPrinter:(Printer *)printer{
+-(void)addBonjourPrinter:(OCPrinter *)printer{
     if(!_bonjourMenu){
         if(![self displayBonjourMenu:YES])return;
     }
@@ -88,10 +88,10 @@
     if(printer.ppd_url)
         [details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",printer.ppd_url] action:nil keyEquivalent:@""];
     
-    if(printer.url)
-        [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
+    if(printer.uri)
+        [details addItemWithTitle:printer.uri action:nil keyEquivalent:@""];
     
-    if([[CUPSManager installedPrinters] containsObject:printer.name]){
+    if([[OCManager installedPrinters] containsObject:printer.name]){
         [bpmi setState:NSOnState];
     }else{
         [bpmi setState:NSOffState];
@@ -106,14 +106,14 @@
     
 }
 
--(void)updateBonjourPrinter:(Printer *)printer{
+-(void)updateBonjourPrinter:(OCPrinter *)printer{
 }
 
 -(void)removeBonjourPrinter:(NSString *)printerName{
     NSMenuItem* item =[_bonjourMenu itemWithTitle:printerName];
     if(item)[_bonjourMenu removeItem:item];
     
-    for(Printer* p in _delegate.bonjourPrinterList ){
+    for(OCPrinter* p in _delegate.bonjourPrinterList ){
         if([p.description isEqualToString:printerName]){
             [_delegate.bonjourPrinterList removeObject:p];
             break;
@@ -140,7 +140,7 @@
         setupDone = YES;
     }
     NSSet* set;
-    set = [CUPSManager installedPrinters];
+    set = [OCManager installedPrinters];
     NSMutableSet * cmp = [[NSMutableSet alloc]init];
     if(_delegate.printerList.count){
         for (NSMenuItem* i in currentManagedPrinters){
@@ -148,7 +148,7 @@
         }
         
         for ( NSDictionary* dict in [[_delegate.printerList reverseObjectEnumerator] allObjects]){
-            Printer* printer = [[Printer alloc]initWithDictionary:dict];
+            OCPrinter* printer = [[OCPrinter alloc]initWithDictionary:dict];
             
             if(printer){
                 NSMenuItem* smi;
@@ -169,7 +169,7 @@
                 if(![printer.model isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"model: %@",printer.model] action:nil keyEquivalent:@""];
                 if(![printer.ppd_url isEqualToString:@""])[details addItemWithTitle:[NSString stringWithFormat:@"ppd: %@",printer.ppd_url] action:nil keyEquivalent:@""];
                 
-                [details addItemWithTitle:printer.url action:nil keyEquivalent:@""];
+                [details addItemWithTitle:printer.uri action:nil keyEquivalent:@""];
                 
                 
                 [self setSubmenu:details forItem:smi];

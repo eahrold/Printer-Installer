@@ -13,8 +13,8 @@
 #import "PINSXPC.h"
 #import "PILoginItem.h"
 #import "PIMenuView.h"
-#import "Printer.h"
-#import "CUPSManager.h"
+#import "OCPrinter.h"
+#import "OCManager.h"
 
 @implementation PIController{
     PIMenuView   *_menuView;
@@ -44,7 +44,7 @@
     
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"ShowBonjourPrinters" options:NSKeyValueObservingOptionNew context:NULL];
     
-    _printerList = [[NSUserDefaults standardUserDefaults]objectForKey:@"PrinterList"];
+    _printerList = [[NSUserDefaults standardUserDefaults] objectForKey:@"PrinterList"];
     
     NSURL* serverURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"server"]];
     
@@ -194,7 +194,7 @@
 #pragma mark - internal methods
 -(void)managePrinter:(NSMenuItem*)sender{
     NSInteger pix = [_menu indexOfItem:sender]-3;
-    Printer* printer = [[Printer alloc]initWithDictionary:_printerList[pix]];
+    OCPrinter* printer = [[OCPrinter alloc]initWithDictionary:_printerList[pix]];
     [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
             if(!error)
                 sender.state = !sender.state;
@@ -205,10 +205,10 @@
 
 -(void)checkPrinterSettings{
     for(NSDictionary *pDict in _printerList){
-        Printer *printer = [[Printer alloc]initWithDictionary:pDict];
-        for(Printer *installedPrinter in [CUPSManager installedPrinters]){
+        OCPrinter *printer = [[OCPrinter alloc]initWithDictionary:pDict];
+        for(OCPrinter *installedPrinter in [OCManager installedPrinters]){
             if([printer.name isEqualToString:installedPrinter.name]){
-                if(![printer.url isEqualToString:installedPrinter.url]){
+                if(![printer.uri isEqualToString:installedPrinter.uri]){
                     NSLog(@"Updating uri for %@",printer);
                     [PINSXPC changePrinterAvaliablily:printer
                                                   add:YES
@@ -223,7 +223,7 @@
 }
 
 -(void)manageBonjourPrinter:(NSMenuItem*)sender{
-    for(Printer* printer in _bonjourPrinterList){
+    for(OCPrinter* printer in _bonjourPrinterList){
         if([printer.name isEqualToString:sender.title ]||
             [printer.description isEqualToString:sender.title ]){
             [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {

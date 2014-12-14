@@ -7,9 +7,9 @@
 //
 
 #import "PIBonjourBrowser.h"
-#import "Printer.h"
+#import "OCPrinter.h"
 
-@interface Printer (initWithServiceDiscovery)
+@interface OCPrinter (initWithServiceDiscovery)
 -(id)initWithServiceDiscovery:(NSNetService*)sender;
 @end
 
@@ -88,7 +88,7 @@
 -(void)netServiceDidResolveAddress:(NSNetService *)sender{
     NSDictionary *dict = [sender readableTXTRecord];
     if(dict){
-        Printer *printer = [[Printer alloc]initWithServiceDiscovery:sender];
+        OCPrinter *printer = [[OCPrinter alloc]initWithServiceDiscovery:sender];
         [_delegate addBonjourPrinter:printer];
         [sender stop];
     }
@@ -118,7 +118,7 @@
 @end
 
 #pragma mark Printer Extension for NSNetService
-@implementation Printer (initWithServiceDiscovery)
+@implementation OCPrinter (initWithServiceDiscovery)
 -(id)initWithServiceDiscovery:(NSNetService*)sender{
     NSDictionary* dict = [sender readableTXTRecord];
     self = [super init];

@@ -8,7 +8,7 @@
 
 #import "PINSXPC.h"
 #import "PIAlert.h"
-#import "Printer.h"
+#import "OCPrinter.h"
 
 @implementation PINSXPC
 
@@ -28,7 +28,7 @@
 }
 
 
--(void)addPrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
+-(void)addPrinter:(OCPrinter*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
         if(error)[PIError presentError:error];
     }] addPrinter:printer withReply:^(NSError *error) {
@@ -37,7 +37,7 @@
     }];
 }
 
--(void)removePrinter:(Printer*)printer reply:(void (^)(NSError* error))reply{
+-(void)removePrinter:(OCPrinter*)printer reply:(void (^)(NSError* error))reply{
     [[self remoteObjectProxyWithErrorHandler:^(NSError *error) {
         if(error)[PIError presentError:error];
     }] removePrinter:printer withReply:^(NSError *error) {
@@ -47,7 +47,7 @@
 }
 
 
-+(void)changePrinterAvaliablily:(Printer*)printer add:(BOOL)added reply:(void (^)(NSError *error))reply{
++(void)changePrinterAvaliablily:(OCPrinter*)printer add:(BOOL)added reply:(void (^)(NSError *error))reply{
     PINSXPC* connection = [[PINSXPC alloc]initConnection];
     if(added){
         [connection addPrinter:printer reply:^(NSError *error) {

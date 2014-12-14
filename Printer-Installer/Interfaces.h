@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import "PIError.h"
-@class Printer;
+@class OCPrinter;
 static NSString * const kHelperName = @"edu.loyno.smc.Printer-Installer.helper";
 
 @protocol HelperAgent <NSObject>
--(void)addPrinter:(Printer*)printer
+-(void)addPrinter:(OCPrinter*)printer
         withReply:(void (^)(NSError *error))reply;
 
--(void)removePrinter:(Printer*)printer
+-(void)removePrinter:(OCPrinter*)printer
         withReply:(void (^)(NSError *error))reply;
 
 -(void)quitHelper:(void (^)(BOOL success))reply;

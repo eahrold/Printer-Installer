@@ -45,16 +45,16 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
 }
 
 
--(void)addPrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
+-(void)addPrinter:(OCPrinter *)printer withReply:(void (^)(NSError *))reply{
     NSError *error;
-    [[CUPSManager sharedManager] addPrinter:printer error:&error];
+    [[OCManager sharedManager] addPrinter:printer error:&error];
     reply(error);
 }
 
 
--(void)removePrinter:(Printer *)printer withReply:(void (^)(NSError *))reply{
+-(void)removePrinter:(OCPrinter *)printer withReply:(void (^)(NSError *))reply{
     NSError *error;
-    [[CUPSManager sharedManager]removePrinter:printer.name error:&error];
+    [[OCManager sharedManager]removePrinter:printer.name error:&error];
     reply(error);
 }
 
