@@ -31,7 +31,8 @@
 #pragma mark - Setup / Tear Down
 - (void)dealloc
 {
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:nil];
+
     [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
@@ -194,7 +195,7 @@
 #pragma mark - internal methods
 -(void)managePrinter:(NSMenuItem*)sender{
     NSInteger pix = [_menu indexOfItem:sender]-3;
-    OCPrinter* printer = [[OCPrinter alloc]initWithDictionary:_printerList[pix]];
+    OCPrinter* printer = [[OCPrinter alloc] initWithDictionary:_printerList[pix]];
     [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
             if(!error)
                 sender.state = !sender.state;
@@ -235,6 +236,17 @@
             return;
         }
     }
+}
+
+- (void)manageSubscribedPrinters:(NSDictionary *)subnetDictionary{
+    NSString *currentSubnet = @"";
+    NSSet *installedPrinters = [OCManager installedPrinters];
+    for (OCPrinter *printer in installedPrinters){
+        if (![printer.location isEqualToString:[currentSubnet stringByAppendingPathExtension:@"pi-printer"]]) {
+            // remove printer
+        }
+    }
+
 }
 
 - (void)configureFromURLSheme:(NSAppleEventDescriptor*)event

@@ -19,6 +19,8 @@
     NSMenu*     _bonjourMenu;
 }
 
+@synthesize delegate = _delegate;
+
 -(void)awakeFromNib{
     // Setup About Panel As Alternate Key
     NSMenuItem* about = [[NSMenuItem alloc]initWithTitle:@"About..."
@@ -76,7 +78,7 @@
         return;
     }
     
-    [bpmi setTarget:_delegate];
+    [bpmi setTarget:self.delegate];
     NSMenu* details = [[NSMenu alloc]init];
     
     if(printer.location)
@@ -134,7 +136,7 @@
                                                           action:@selector(uninstallHelper:)
                                                    keyEquivalent:@""];
         [uninstall setKeyEquivalentModifierMask:NSAlternateKeyMask];
-        [uninstall setTarget:_delegate];
+        [uninstall setTarget:self.delegate];
         [uninstall setAlternate:YES];
         [self insertItem:uninstall atIndex:[self numberOfItems]];
         setupDone = YES;

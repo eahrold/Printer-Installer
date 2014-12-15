@@ -24,7 +24,7 @@
 - (BOOL)canBecomeKeyWindow
 {
     if([self class]==NSClassFromString(@"NSStatusBarWindow")){
-        if([[NSApp delegate] popupIsActive]){
+        if([(PIDelegate *)[[NSApplication sharedApplication] delegate] popupIsActive]){
             return YES;
         }
     }

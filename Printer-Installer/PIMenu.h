@@ -21,6 +21,7 @@
 @interface PIMenu : NSMenu <PIBonjourBrowserDelegate>
 
 @property (weak) id<PIMenuDelegate>delegate;
+
 -(void)updateMenuItems;
 -(BOOL)displayBonjourMenu:(BOOL)display;
 @end

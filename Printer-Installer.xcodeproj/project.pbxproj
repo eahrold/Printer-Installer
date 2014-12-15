@@ -25,13 +25,13 @@
 		BE6A73881857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A73871857B47900A4DA71 /* NSWindow+canBecomeKeyWindow.m */; };
 		BE793632188A2C8D00F0936F /* PIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7F16041870C35100362EA5 /* PIAlert.m */; };
 		BE88D34718DB87F200A82F08 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D34618DB87F200A82F08 /* Sparkle.framework */; };
-		BE88D34818DB883400A82F08 /* Sparkle.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34618DB87F200A82F08 /* Sparkle.framework */; };
-		BE88D34918DB883E00A82F08 /* CDEvents.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34118DB83D300A82F08 /* CDEvents.framework */; };
+		BE88D34818DB883400A82F08 /* Sparkle.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34618DB87F200A82F08 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BE88D34918DB883E00A82F08 /* CDEvents.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE88D34118DB83D300A82F08 /* CDEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BE88D34A18DB885100A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
 		BE88D34B18DB885100A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
 		BE88D35418DB88F900A82F08 /* libAHLaunchCtl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D33918DB83C100A82F08 /* libAHLaunchCtl.a */; };
 		BE88D35518DB88F900A82F08 /* libObjective_CUPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D32918DB83AE00A82F08 /* libObjective_CUPS.a */; };
-		BE8B9F9A191690D9005F8EA6 /* AHServers.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8B9F93191690C8005F8EA6 /* AHServers.framework */; };
+		BE8B9F9A191690D9005F8EA6 /* AHServers.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BE8B9F93191690C8005F8EA6 /* AHServers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BE8B9F9D19169188005F8EA6 /* AHServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8B9F93191690C8005F8EA6 /* AHServers.framework */; };
 		BE8EC6FF1858CD68005F4E6D /* StatusBar.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8EC6FE1858CD68005F4E6D /* StatusBar.png */; };
 		BE8FD68917CE547F00452FD4 /* PINSXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8FD68817CE547F00452FD4 /* PINSXPC.m */; };
@@ -42,7 +42,7 @@
 		BE93C99B17BEC88400625DE2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE93C99917BEC88400625DE2 /* MainMenu.xib */; };
 		BE93C9AA17BEC8CB00625DE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C9A917BEC8CB00625DE2 /* main.m */; };
 		BE93C9B717BEC96900625DE2 /* helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93C9B617BEC96900625DE2 /* helper.m */; };
-		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; };
+		BEA65D1E17C65A6400421893 /* edu.loyno.smc.Printer-Installer.helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE93C9A517BEC8CB00625DE2 /* edu.loyno.smc.Printer-Installer.helper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BEAA87F617BECCC600D2BCAE /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAA87F517BECCC600D2BCAE /* ServiceManagement.framework */; };
 		BEAB4CD8181AE97300585C03 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAB4CD7181AE97300585C03 /* CoreServices.framework */; };
 		BEBCEF0217BF1FA8004DC7F9 /* libcups.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBCEF0117BF1FA8004DC7F9 /* libcups.dylib */; };
@@ -552,7 +552,7 @@
 		BE93C97917BEC88400625DE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Eldon Ahrold";
 			};
 			buildConfigurationList = BE93C97C17BEC88400625DE2 /* Build configuration list for PBXProject "Printer-Installer" */;
@@ -880,7 +880,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MainApp;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -911,7 +911,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MainApp;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Loyola University New Orleans School of Mass Comm (BUN87F4W87)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
