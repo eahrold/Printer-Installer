@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AHLaunchCtl" "${PODS_ROOT}/Headers/Public/CDEvents" "${PODS_ROOT}/Headers/Public/Objective-CUPS" "${PODS_ROOT}/Headers/Public/Sparkle" "${PODS_ROOT}/Headers/Public/XMLDictionary"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/AHLaunchCtl" -isystem "${PODS_ROOT}/Headers/Public/CDEvents" -isystem "${PODS_ROOT}/Headers/Public/Objective-CUPS" -isystem "${PODS_ROOT}/Headers/Public/Sparkle" -isystem "${PODS_ROOT}/Headers/Public/XMLDictionary"
+OTHER_LDFLAGS = -ObjC -l"Pods-edu.loyno.smc.Printer-Installer.helper-AHLaunchCtl" -l"Pods-edu.loyno.smc.Printer-Installer.helper-Objective-CUPS" -l"cups" -l"z" -framework "Security" -framework "ServiceManagement" -framework "SystemConfiguration"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+PODS_ROOT = ${SRCROOT}/Pods

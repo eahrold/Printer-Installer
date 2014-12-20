@@ -8,7 +8,7 @@
 
 #import <Sparkle/SUUpdater.h>
 #import "PIMenu.h"
-#import "Objective-CUPS.h"
+#import <Objective-CUPS/Objective-CUPS.h>
 
 #define PRINTER_MENU_INDEX 3
 

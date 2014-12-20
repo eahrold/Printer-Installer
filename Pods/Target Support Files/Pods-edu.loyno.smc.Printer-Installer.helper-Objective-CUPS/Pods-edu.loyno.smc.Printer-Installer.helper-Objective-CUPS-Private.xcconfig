@@ -1,0 +1,5 @@
+#include "Pods-edu.loyno.smc.Printer-Installer.helper-Objective-CUPS.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/Objective-CUPS" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AHLaunchCtl" "${PODS_ROOT}/Headers/Public/CDEvents" "${PODS_ROOT}/Headers/Public/Objective-CUPS" "${PODS_ROOT}/Headers/Public/Sparkle" "${PODS_ROOT}/Headers/Public/XMLDictionary"
+OTHER_LDFLAGS = ${PODS_EDU_LOYNO_SMC_PRINTER_INSTALLER_HELPER_OBJECTIVE_CUPS_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}

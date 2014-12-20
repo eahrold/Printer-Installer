@@ -1,0 +1,42 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AHLaunchCtl (0.3)
+  - CDEvents (1.2.2)
+  - Objective-CUPS (0.2.1)
+  - Sparkle (1.8.0)
+  - XMLDictionary (1.4)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.4.1)
+  - AHLaunchCtl (~> 0.3)
+  - CDEvents (~> 1.2.2)
+  - Objective-CUPS (~> 0.2.1)
+  - Sparkle (~> 1.8)
+  - XMLDictionary (~> 1.4)
+
+SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  AHLaunchCtl: c0d55ba401602dd38e43edfcb757ff3919d71914
+  CDEvents: 5f1ad4c85acee39795c42eb25da3b8e995624525
+  Objective-CUPS: eae8818794eeb573f5d9e939cc73e89970d427a5
+  Sparkle: 5eb20bb37ca21e471dab8417dee880198d905327
+  XMLDictionary: 735e81b9a043e220b0d24e9d4f16719606f2e0fc
+
+COCOAPODS: 0.35.0

@@ -13,8 +13,8 @@
 #import "helper.h"
 #import <cups/cups.h>
 #import <cups/ppd.h>
-#import "Objective-CUPS.h"
-#import "AHLaunchCtl.h"
+#import <Objective-CUPS/Objective-CUPS.h>
+#import <AHLaunchCtl/AHLaunchCtl.h>
 #import <syslog.h>
 
 static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check whether to quit
@@ -54,7 +54,7 @@ static const NSTimeInterval kHelperCheckInterval = 1.0; // how often to check wh
 
 -(void)removePrinter:(OCPrinter *)printer withReply:(void (^)(NSError *))reply{
     NSError *error;
-    [[OCManager sharedManager]removePrinter:printer.name error:&error];
+    [[OCManager sharedManager] removePrinter:printer.name error:&error];
     reply(error);
 }
 

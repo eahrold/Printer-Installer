@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Printer.h"
 #import "PIError.h"
 #import "PIBonjourBrowser.h"
 @class PIMenu,PIController;

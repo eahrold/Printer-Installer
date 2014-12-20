@@ -6,23 +6,24 @@
 //  Copyright (c) 2013 Eldon Ahrold. All rights reserved.
 //
 
-#import <Sparkle/SUUpdater.h>
-#import <AHServers/AHServers.h>
 #import "PIController.h"
 #import "PIDelegate.h"
 #import "PINSXPC.h"
 #import "PILoginItem.h"
 #import "PIMenuView.h"
-#import "OCPrinter.h"
-#import "OCManager.h"
 
-@implementation PIController{
-    PIMenuView   *_menuView;
+#import <AFNetworking/AFNetworking.h>
+#import <Objective-CUPS/Objective-CUPS.h>
+#import <Sparkle/SUUpdater.h>
+#import <XMLDictionary/XMLDictionary.h>
+
+@implementation PIController {
+    PIMenuView *_menuView;
     PIConfigView *_configView;
     NSStatusItem *_statusItem;
-    NSPopover    *_popover;
+    NSPopover *_popover;
     NSNetServiceBrowser *_bonjourBrowser;
-    PIBonjourBrowser    *_bonjourBrowserDelegate;
+    PIBonjourBrowser *_bonjourBrowserDelegate;
 }
 
 @synthesize bonjourPrinterList = _bonjourPrinterList;
@@ -33,67 +34,118 @@
 {
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:nil];
 
-    [[NSStatusBar systemStatusBar]removeStatusItem:_statusItem];
+    [[NSStatusBar systemStatusBar] removeStatusItem:_statusItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib
+{
     // Setup Reachability
-    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(configureFromURLSheme:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"ShowBonjourPrinters" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    _printerList = [[NSUserDefaults standardUserDefaults] objectForKey:@"PrinterList"];
-    
-    NSURL* serverURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"server"]];
-    
-    if(serverURL){
+
+    NSURL *serverURL = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"server"]];
+
+    if (serverURL) {
         self.internet = [Reachability reachabilityWithHostName:serverURL.host];
-    }else{
+    } else {
         self.internet = [Reachability reachabilityForInternetConnection];
     }
-    
+
     [self.internet startNotifier];
 
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
+                                                       andSelector:@selector(configureFromURLSheme:)
+                                                     forEventClass:kInternetEventClass
+                                                        andEventID:kAEGetURL];
+
+    // Setup Observers
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:@"ShowBonjourPrinters"
+                                               options:NSKeyValueObservingOptionNew
+                                               context:NULL];
+
     // Setup Status Item
-    _statusItem = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [_statusItem setMenu:_menu];
     [_statusItem setHighlightMode:YES];
     [_menu setDelegate:self];
-    
-    if(!_menuView){
-        _menuView = [[PIMenuView alloc]initWithStatusItem:_statusItem andMenu:_menu];
+
+    if (!_menuView) {
+        _menuView = [[PIMenuView alloc] initWithStatusItem:_statusItem andMenu:_menu];
     }
-    
     _statusItem.view = _menuView;
+
+    // Add items into the menu
+    _printerList = [[NSUserDefaults standardUserDefaults] objectForKey:@"PrinterList"];
+    [_menu updateMenuItems];
+    [self checkPrinterSettings];
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if([keyPath isEqualToString:@"ShowBonjourPrinters"]){
+#pragma mark - Observing
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"ShowBonjourPrinters"]) {
         [self enableBonjourPrinters:[[change valueForKey:@"new"] boolValue]];
     }
 }
 
-- (void) reachabilityChanged:(NSNotification *)note
+#pragma mark - Reachability
+- (void)reachabilityChanged:(NSNotification *)note
 {
-	self.internet = [note object];
-	NSParameterAssert([self.internet isKindOfClass:[Reachability class]]);
+    self.internet = [note object];
+    NSParameterAssert([self.internet isKindOfClass:[Reachability class]]);
 
-    if([self.internet currentReachabilityStatus]){
+    if ([self.internet currentReachabilityStatus]) {
         [self refreshPrinterList];
     }
 }
 
--(void)refreshPrinterList{
-    id values = [[NSUserDefaultsController sharedUserDefaultsController] values];
-    NSString* url = [values valueForKey:@"server" ];
-    
-    AHHttpManager* server = [[AHHttpManager alloc]initWithQueue];
-    server.URL = [NSURL URLWithString:url];
-    
-    [server GET:^(NSData *data, NSError *error) {
+- (void)refreshPrinterList
+{
+    NSController *values = [[NSUserDefaultsController sharedUserDefaultsController] values];
+
+    NSString *url = [[values valueForKey:@"server"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        NSDictionary *settings = [self dataToDictionary:responseObject];
+        NSArray* printerList = settings[@"printerList"];
+        
+        if(printerList.count){
+            [[NSUserDefaults standardUserDefaults] setObject:printerList forKey:@"PrinterList"];
+            _printerList = printerList;
+            [_menu updateMenuItems];
+            [self checkPrinterSettings];
+            [self cancelConfigView];
+        }else{
+            _configView.panelMessage = PINoSharedGroups;
+        }
+
+        // If we get a server repsonse with the appcast url
+        // check to see if the server is actually responding
+        // at that address, and if not set it to the default
+        NSString* appCastURL = settings[@"updateServer"];
+        if (appCastURL) {
+            [manager GET:appCastURL parameters:nil
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:appCastURL]];
+
+                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSString *feedURL = [[NSBundle mainBundle] infoDictionary][@"SUFeedURL"];
+                     if(feedURL){
+                         [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
+                     }
+                 }];
+        };
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(error){
             NSLog(@"%@",error.localizedDescription);
             if(_configView){
@@ -102,51 +154,26 @@
             }else if(_printerList){
                 [_menu updateMenuItems];
             }
-        }else if (data){
-            NSDictionary *settings =[NSDictionary dictionaryFromData:data];
-            NSArray* printerList = settings[@"printerList"];
-            if(printerList.count){
-                [[NSUserDefaults standardUserDefaults]setObject:printerList forKey:@"PrinterList"];
-                _printerList = printerList;
-                [_menu updateMenuItems];
-                [self checkPrinterSettings];
-                [self cancelConfigView];
-            }else{
-                _configView.panelMessage = PINoSharedGroups;
-            }
-            
-            // check if the Serever Provided us with a feedURL if so use that.
-            // If not use the one provided int the App's Info.plist
-            NSString* feedURL = settings[@"updateServer"];
-            [AHHttpRequest checkURL:feedURL status:^(BOOL avaliable) {
-                if(avaliable){
-                    [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
-                }else{
-                    NSString *feedURL = [[NSBundle mainBundle] infoDictionary][@"SUFeedURL"];
-                    if(feedURL){
-                        [[SUUpdater sharedUpdater]setFeedURL:[NSURL URLWithString:feedURL]];
-                    }
-                }
-            }];
         }
     }];
 }
 
--(void)enableBonjourPrinters:(BOOL)enable{
+- (void)enableBonjourPrinters:(BOOL)enable
+{
     [_menu displayBonjourMenu:enable];
-    if(enable){
-        if(!_bonjourBrowserDelegate){
-            _bonjourBrowserDelegate = [[PIBonjourBrowser alloc]initWithDelegate:_menu];
+    if (enable) {
+        if (!_bonjourBrowserDelegate) {
+            _bonjourBrowserDelegate = [[PIBonjourBrowser alloc] initWithDelegate:_menu];
         }
-        
-        if(!_bonjourBrowser){
-            _bonjourBrowser = [[NSNetServiceBrowser alloc]init];
+
+        if (!_bonjourBrowser) {
+            _bonjourBrowser = [[NSNetServiceBrowser alloc] init];
             _bonjourBrowser.delegate = _bonjourBrowserDelegate;
         }
-        
+
         [_bonjourBrowser searchForServicesOfType:@"_printer._tcp." inDomain:@"local"];
-    }else{
-        for(NSNetService* service in _bonjourBrowserDelegate.services){
+    } else {
+        for (NSNetService *service in _bonjourBrowserDelegate.services) {
             [service stopMonitoring];
         }
         _bonjourBrowserDelegate = nil;
@@ -155,27 +182,31 @@
 }
 
 #pragma mark - PIConfigSheet delegate methods
--(void)cancelConfigView{
+- (void)cancelConfigView
+{
     if (_popover != nil && _popover.isShown) {
         [_popover close];
     }
-    
-    ((PIDelegate*)[NSApp delegate]).popupIsActive = NO;
+
+    ((PIDelegate *)[NSApp delegate]).popupIsActive = NO;
     _configView = nil;
 }
 
--(BOOL)installLoginItem:(BOOL)state{
-    return([PILoginItem installLoginItem:state]);
+- (BOOL)installLoginItem:(BOOL)state
+{
+    return ([PILoginItem installLoginItem:state]);
 }
 
 #pragma mark - IBActions
--(IBAction)quitNow:(id)sender{
+- (IBAction)quitNow:(id)sender
+{
     [NSApp terminate:self];
 }
 
--(IBAction)configure:(id)sender{
-    if(!_configView){
-        _configView = [[PIConfigView alloc]initWithNibName:@"PIConfigView" bundle:nil];
+- (IBAction)configure:(id)sender
+{
+    if (!_configView) {
+        _configView = [[PIConfigView alloc] initWithNibName:@"PIConfigView" bundle:nil];
     }
     [_configView setDelegate:self];
 
@@ -189,14 +220,15 @@
                               ofView:_menuView
                        preferredEdge:NSMinYEdge];
     }
-    ((PIDelegate*)[NSApp delegate]).popupIsActive = _popover.isShown;
+    ((PIDelegate *)[NSApp delegate]).popupIsActive = _popover.isShown;
 }
 
 #pragma mark - internal methods
--(void)managePrinter:(NSMenuItem*)sender{
-    NSInteger pix = [_menu indexOfItem:sender]-3;
-    OCPrinter* printer = [[OCPrinter alloc] initWithDictionary:_printerList[pix]];
-    [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
+- (void)managePrinter:(NSMenuItem *)sender
+{
+    NSInteger pix = [_menu indexOfItem:sender] - 3;
+    OCPrinter *printer = [[OCPrinter alloc] initWithDictionary:_printerList[pix]];
+    [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError *error) {
             if(!error)
                 sender.state = !sender.state;
             else
@@ -204,16 +236,17 @@
     }];
 }
 
--(void)checkPrinterSettings{
-    for(NSDictionary *pDict in _printerList){
-        OCPrinter *printer = [[OCPrinter alloc]initWithDictionary:pDict];
-        for(OCPrinter *installedPrinter in [OCManager installedPrinters]){
-            if([printer.name isEqualToString:installedPrinter.name]){
-                if(![printer.uri isEqualToString:installedPrinter.uri]){
-                    NSLog(@"Updating uri for %@",printer);
+- (void)checkPrinterSettings
+{
+    for (NSDictionary *pDict in _printerList) {
+        OCPrinter *printer = [[OCPrinter alloc] initWithDictionary:pDict];
+        for (OCPrinter *installedPrinter in [OCManager installedPrinters]) {
+            if ([printer.name isEqualToString:installedPrinter.name]) {
+                if (![printer.uri isEqualToString:installedPrinter.uri]) {
+                    NSLog(@"Updating uri for %@", printer);
                     [PINSXPC changePrinterAvaliablily:printer
                                                   add:YES
-                                                reply:^(NSError* error){
+                                                reply:^(NSError *error) {
                                                     if(error)
                                                         [PIError presentError:error];
                                                 }];
@@ -223,11 +256,12 @@
     }
 }
 
--(void)manageBonjourPrinter:(NSMenuItem*)sender{
-    for(OCPrinter* printer in _bonjourPrinterList){
-        if([printer.name isEqualToString:sender.title ]||
-            [printer.description isEqualToString:sender.title ]){
-            [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError* error) {
+- (void)manageBonjourPrinter:(NSMenuItem *)sender
+{
+    for (OCPrinter *printer in _bonjourPrinterList) {
+        if ([printer.name isEqualToString:sender.title] ||
+            [printer.description isEqualToString:sender.title]) {
+            [PINSXPC changePrinterAvaliablily:printer add:!sender.state reply:^(NSError *error) {
                     if(!error)
                         sender.state = !sender.state;
                     else
@@ -238,45 +272,39 @@
     }
 }
 
-- (void)manageSubscribedPrinters:(NSDictionary *)subnetDictionary{
+- (void)manageSubscribedPrinters:(NSDictionary *)subnetDictionary
+{
     NSString *currentSubnet = @"";
     NSSet *installedPrinters = [OCManager installedPrinters];
-    for (OCPrinter *printer in installedPrinters){
+    for (OCPrinter *printer in installedPrinters) {
         if (![printer.location isEqualToString:[currentSubnet stringByAppendingPathExtension:@"pi-printer"]]) {
             // remove printer
         }
     }
-
 }
 
-- (void)configureFromURLSheme:(NSAppleEventDescriptor*)event
+- (void)configureFromURLSheme:(NSAppleEventDescriptor *)event
 {
     // get the URL from the Event and change it to an actual web url
     // we register both printerinstaller and printerinstallers which
     // represent http and https respectively
-    NSString* piurl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSURL* url = [NSURL URLWithString:piurl];
-    
-    NSString *scheme;
-    if([url.scheme isEqualToString:@"printerinstaller"]){
-        scheme = @"http";
-    }else if([url.scheme isEqualToString:@"printerinstallers"]){
-        scheme = @"https";
-    }
-    
-    NSString *newURL = [NSString stringWithFormat:@"%@://%@%@",scheme,url.host,url.path];
-    
-    [[[NSUserDefaultsController sharedUserDefaultsController]values ]setValue:newURL forKey:@"server"];
+    NSString *piurl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+
+    NSString *rebuiltURL = [piurl stringByReplacingOccurrencesOfString:@"printerinstaller" withString:@"http"];
+
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:rebuiltURL
+                                                                        forKey:@"server"];
+
     [self refreshPrinterList];
 }
 
-
 #pragma mark - PIMenu delegate methods
--(NSArray*)printersInPrinterList:(PIMenu *)piMenu{
+- (NSArray *)printersInPrinterList:(PIMenu *)piMenu
+{
     return _printerList;
 }
 
--(void)uninstallHelper:(id)sender
+- (void)uninstallHelper:(id)sender
 {
     [PINSXPC uninstallHelper];
 }
@@ -287,7 +315,19 @@
     [_menuView setActive:NO];
 }
 
+#pragma mark - Utility
+- (NSDictionary *)dataToDictionary:(id)data;
+{
+    NSMutableData *md = [NSMutableData dataWithCapacity:1024];
+    [md appendData:data];
 
-
+    NSPropertyListFormat plist;
+    NSDictionary *dict = (NSDictionary *)[NSPropertyListSerialization
+        propertyListWithData:md
+                     options:NSPropertyListMutableContainersAndLeaves
+                      format:&plist
+                       error:nil];
+    return dict;
+}
 
 @end
